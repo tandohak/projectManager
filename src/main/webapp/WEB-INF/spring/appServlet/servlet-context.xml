@@ -21,6 +21,23 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<beans:bean id="loginInterceptor" class="com.dgit.interceptor.LoginInterceptor"/>
+	<beans:bean id="authInterceptor" class="com.dgit.interceptor.AuthInterceptor"/>
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/loginPost"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/sboard/readPage"/>
+			<mapping path="/sboard/modifyPage"/>
+			<mapping path="/sboard/register"/>
+			<mapping path="/sboard/removePage"/>
+			<beans:ref bean="authInterceptor"/> 
+		</interceptor>
+	</interceptors>
+	
 	<context:component-scan base-package="com.dgit.controller" />
 	
 	

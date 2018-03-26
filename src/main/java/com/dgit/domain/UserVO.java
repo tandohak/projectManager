@@ -9,6 +9,7 @@ public class UserVO {
 	private String lastName;
 	private String phone;
 	private String addr;
+	private String password;
 	private Date birthday;
 	private int grade;
 	private Date joinDate;
@@ -73,11 +74,18 @@ public class UserVO {
 	public void setPhotoPath(String photoPath) {
 		this.photoPath = photoPath;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	@Override
 	public String toString() {
 		return "UserVO [uno=" + uno + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", phone=" + phone + ", addr=" + addr + ", birthday=" + birthday + ", grade=" + grade + ", joinDate="
-				+ joinDate + ", photoPath=" + photoPath + "]";
+				+ ", phone=" + phone + ", addr=" + addr + ", password=" + password + ", birthday=" + birthday
+				+ ", grade=" + grade + ", joinDate=" + joinDate + ", photoPath=" + photoPath + "]";
 	}
 
 }
