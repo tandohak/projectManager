@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mapper.WorkspaceMapper">
+	<sql id="selectSql">
+		select * from workspace
+	</sql>
+	
+	<sql id="whereSql">
+		where wno = #{wno}
+	</sql>
+	
+	<select id="select" resultType="WorkspaceVO">
+		<include refid="selectSql" />
+		<include refid="whereSql" />
+	</select>
+	
+	<select id="selectList" resultType="WorkspaceVO">
+		<include refid="selectSql" />
+	</select>
+	
+	<insert id="insert">
+		insert into workspace
+		(uno,name,maker)
+		values(#{uno},#{name},#{maker})
+	</insert>
+
+	<delete id="delete">
+	    delete from workspace
+		<include refid="whereSql" />
+	</delete>
+	
+</mapper>

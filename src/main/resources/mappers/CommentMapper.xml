@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mapper.CommentMapper">
+	<sql id="selectSql">
+		select * from comment
+	</sql>
+	
+	<sql id="whereSql">
+		where cno = #{cno}
+	</sql>
+	
+	<select id="select" resultType="CommentVO">
+		<include refid="selectSql" />
+		<include refid="whereSql" />
+	</select>
+	
+	<select id="selectList" resultType="CommentVO">
+		<include refid="selectSql" />
+	</select>
+	
+	<insert id="insert">
+		insert into comment
+		(taskno,uno,writer,content)
+		values(#{taskno},#{uno},#{writer},#{content})
+	</insert>
+
+	<delete id="delete">
+	    delete from comment
+		<include refid="whereSql" />
+	</delete>
+	
+	<update id="update">	    
+	    update comment set    
+	    taskno = #{taskno},
+	    uno# = {uno},
+	    writer = #{writer},
+	    content = #{content}	    
+		<include refid="whereSql" />
+	</update>
+</mapper>

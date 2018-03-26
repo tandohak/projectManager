@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mapper.ProjectMapper">
+	<sql id="selectSql">
+		select * from project
+	</sql>
+	
+	<sql id="whereSql">
+		where pno = #{pno}
+	</sql>
+	
+	<select id="select" resultType="ProjectVO">
+		<include refid="selectSql" />
+		<include refid="whereSql" />
+	</select>
+	
+	<select id="selectList" resultType="ProjectVO">
+		<include refid="selectSql" />
+	</select>
+	
+	<insert id="insert">
+		insert into project
+		(wno,title,explanation,visibility,startDate,endDate,finishDate,status,authority,locker)
+		values(#{wno},#{title},#{explanation},#{visibility},#{startDate},#{endDate},#{finishDate},#{status},#{authority},#{locker})
+	</insert>
+
+	<delete id="delete">
+	    delete from project
+		<include refid="whereSql" />
+	</delete>
+	
+	<update id="update">	    
+	    update project set    
+	  	title = #{title},
+	  	explanation = #{explanation},
+	  	visibility = #{visibility},
+	  	startDate = #{startDate},
+	  	endDate = #{endDate},
+	  	finishDate = #{finishDate},
+	  	status = #{status},
+	  	authority = #{authority},
+	  	locker = #{locker}
+		<include refid="whereSql" />
+	</update>
+</mapper>

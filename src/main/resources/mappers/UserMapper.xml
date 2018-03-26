@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mapper.UserMapper">
+	<sql id="selectSql">
+		select * from user
+	</sql>
+	<sql id="whereSql">
+		where uno = #{uno}
+	</sql>
+	
+	<select id="selectOne" resultType="UserVO">
+		<include refid="selectSql" />
+		<include refid="whereSql" />
+	</select>
+	
+	<select id="selectList" resultType="UserVO">
+		<include refid="selectSql" />
+	</select>
+	
+	<insert id="insert">
+		insert into user
+		(email,firstName,lastName,phone,addr,birthday,grade,joinDate,photoPath)
+		values(#{email},#{firstName},#{lastName},#{phone},#{addr},#{birthday},#{grade},#{joinDate},#{photoPath})
+	</insert>
+
+	<delete id="delete">
+	    delete from user
+		<include refid="whereSql" />
+	</delete>
+	
+	<update id="update">	    
+	    update user set    
+	    email = #{email},
+	    firstName = #{firstName},
+	    lastName = #{lastName},
+	    phone = #{phone},
+	    addr = #{addr},
+	    birthday = #{birthday},
+	    grade = #{grade},
+	    joinDate = #{joinDate},
+	    photoPath = #{photoPath}    
+		<include refid="whereSql" />
+	</update>
+</mapper>

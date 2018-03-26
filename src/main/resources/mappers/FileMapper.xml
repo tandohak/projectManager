@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mapper.FileMapper">
+	<sql id="selectSql">
+		select * from file
+	</sql>
+	
+	<sql id="whereSql">
+		where fno = #{fno}
+	</sql>
+	
+	<select id="select" resultType="FileVO">
+		<include refid="selectSql" />
+		<include refid="whereSql" />
+	</select>
+	
+	<select id="selectList" resultType="FileVO">
+		<include refid="selectSql" />
+	</select>
+	
+	<insert id="insert">
+		insert into file
+		(uno,uploader,taskno,filepath,uploadTime,fix,type)
+		values(#{uno},#{uploader},#{taskno},#{filepath},#{uploadTime},#{fix},#{type})
+	</insert>
+
+	<delete id="delete">
+	    delete from file
+		<include refid="whereSql" />
+	</delete>
+	
+	<update id="update">	    
+	    update file set    
+	    uno = #{uno},
+	    uploader = #{uploader},
+	    taskno = #{taskno},
+	    filepath = #{filepath},
+	    uploadTime = #{uploadTime},
+	    fix = #{fix},
+	    type = #{type}    
+		<include refid="whereSql" />
+	</update>
+</mapper>

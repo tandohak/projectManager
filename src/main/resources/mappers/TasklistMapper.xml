@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mapper.TasklistMapper">
+	<sql id="selectSql">
+		select * from tasklist
+	</sql>
+	
+	<sql id="whereSql">
+		where tlno = #{tlno}
+	</sql>
+	
+	<select id="select" resultType="TaskListVO">
+		<include refid="selectSql" />
+		<include refid="whereSql" />
+	</select>
+	
+	<select id="selectList" resultType="TaskListVO">
+		<include refid="selectSql" />
+	</select>
+	
+	<insert id="insert">
+		insert into tasklist
+		(pno,name,list_order)
+		values(#{pno},#{name},#{list_order})
+	</insert>
+
+	<delete id="delete">
+	    delete from tasklist
+		<include refid="whereSql" />
+	</delete>
+	
+	<update id="update">	    
+	    update tasklist set
+	    pno = #{pno},
+	  	name = #{name}
+		<include refid="whereSql" />
+	</update>
+	
+	<update id="changeOrder">	    
+	    update tasklist set
+	  	list_order = #{list_order},
+		<include refid="whereSql" />
+	</update>
+</mapper>

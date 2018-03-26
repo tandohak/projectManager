@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mapper.TaskMapper">
+	<sql id="selectSql">
+		select * from task
+	</sql>
+	
+	<sql id="whereSql">
+		where taskno = #{taskno}
+	</sql>
+	
+	<sql id="whereSqlTasklist">
+		where tlno = #{tlno}
+	</sql>
+	
+	<select id="select" resultType="TaskVO">
+		<include refid="selectSql" />
+		<include refid="whereSql" />
+	</select>
+	
+	<select id="selectWithTlno" resultType="TaskVO">
+		<include refid="selectSql" />
+		<include refid="whereSqlTasklist" />
+	</select>
+	<select id="selectList" resultType="TaskVO">
+		<include refid="selectSql" />
+	</select>
+	
+	<insert id="insert">
+		insert into task
+		(tlno,explanation,taskname,startDate,endDate,workingtime,cycle)
+		values(#{tlno},#{explanation},#{taskname},#{startDate},#{endDate},#{workingtime},#{cycle})
+	</insert>
+
+	<delete id="delete">
+	    delete from task
+		<include refid="whereSql" />
+	</delete>
+	
+	<update id="update">	    
+	    update task set
+	    tlno = #{tlno},
+	    explanation = #{explanation},
+	    taskname = #{taskname},
+	    startDate = #{startDate},
+	    endDate = #{endDate},
+	    workingtime = #{workingtime},
+	    cycle = #{cycle}
+		<include refid="whereSql" />
+	</update>
+	
+</mapper>
