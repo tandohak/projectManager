@@ -22,8 +22,8 @@
 	
 	<insert id="insert">
 		insert into file
-		(uno,uploader,taskno,filepath,uploadTime,fix,type)
-		values(#{uno},#{uploader},#{taskno},#{filepath},#{uploadTime},#{fix},#{type})
+		(uno,uploader,taskno,filepath,uploadTime,fix,type,fileSize)
+		values(#{uno},#{uploader},#{taskno},#{filepath},#{uploadTime},#{fix},#{type},#{fileSize})
 	</insert>
 
 	<delete id="delete">
@@ -39,7 +39,8 @@
 	    filepath = #{filepath},
 	    uploadTime = #{uploadTime},
 	    fix = #{fix},
-	    type = #{type}    
+	    type = #{type},
+	    fileSize = #{fileSize}
 		<include refid="whereSql" />
 	</update>
 </mapper>

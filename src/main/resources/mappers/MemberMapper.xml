@@ -22,8 +22,8 @@
 	
 	<insert id="insert">
 		insert into member
-		(uno,wno,permission)
-		values(#{uno},#{wno},#{permission})
+		(uno,wno,memGrade)
+		values(#{uno},#{wno},#{memGrade})
 	</insert>
 
 	<delete id="delete">
@@ -33,7 +33,7 @@
 	
 	<update id="update">	    
 	    update member set    
-	    permission = #{permission}
+	    memGrade = #{memGrade}
 		<include refid="whereSql" />
 	</update>
 </mapper>

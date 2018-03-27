@@ -4,35 +4,42 @@ public class MemberVO {
 	private int mno;
 	private int uno;
 	private int wno;
-	private Boolean permission;
-	
+	private int memGrade;
+
 	public int getMno() {
 		return mno;
 	}
+
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
+
 	public int getUno() {
 		return uno;
 	}
+
 	public void setUno(int uno) {
 		this.uno = uno;
 	}
+
 	public int getWno() {
 		return wno;
 	}
+
 	public void setWno(int wno) {
 		this.wno = wno;
 	}
-	public Boolean getPermission() {
-		return permission;
+
+	public int getMemGrade() {
+		return memGrade;
 	}
-	public void setPermission(Boolean permission) {
-		this.permission = permission;
+
+	public void setMemGrade(int memGrade) {
+		this.memGrade = memGrade;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "MemberVO [mno=" + mno + ", uno=" + uno + ", wno=" + wno + ", permission=" + permission + "]";
+		return "MemberVO [mno=" + mno + ", uno=" + uno + ", wno=" + wno + ", memGrade=" + memGrade + "]";
 	}
 }

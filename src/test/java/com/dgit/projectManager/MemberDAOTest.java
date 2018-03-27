@@ -21,7 +21,6 @@ public class MemberDAOTest {
 		MemberVO vo = new MemberVO();
 		vo.setUno(1);
 		vo.setWno(1);
-		vo.setPermission(false);
 		System.out.println(vo);
 		dao.insert(vo);
 	}  

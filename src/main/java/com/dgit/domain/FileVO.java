@@ -11,6 +11,7 @@ public class FileVO {
 	private Date uplaodTime;
 	private boolean fix;
 	private int type;
+	private String fileSize;
 
 	public int getFno() {
 		return fno;
@@ -76,10 +77,19 @@ public class FileVO {
 		this.type = type;
 	}
 
+	public String getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
+
 	@Override
 	public String toString() {
 		return "FileVO [fno=" + fno + ", taskno=" + taskno + ", uno=" + uno + ", uploader=" + uploader + ", filepath="
-				+ filepath + ", uplaodTime=" + uplaodTime + ", fix=" + fix + ", type=" + type + "]";
+				+ filepath + ", uplaodTime=" + uplaodTime + ", fix=" + fix + ", type=" + type + ", fileSize=" + fileSize
+				+ "]";
 	}
-
+	
 }

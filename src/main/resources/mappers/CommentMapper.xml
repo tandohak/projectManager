@@ -22,8 +22,8 @@
 	
 	<insert id="insert">
 		insert into comment
-		(taskno,uno,writer,content)
-		values(#{taskno},#{uno},#{writer},#{content})
+		(taskno,uno,writer,writeDate,content)
+		values(#{taskno},#{uno},#{writer},#{writeDate},#{content})
 	</insert>
 
 	<delete id="delete">
@@ -36,6 +36,7 @@
 	    taskno = #{taskno},
 	    uno# = {uno},
 	    writer = #{writer},
+	    modiDate = #{modiDate},
 	    content = #{content}	    
 		<include refid="whereSql" />
 	</update>

@@ -30,8 +30,8 @@
 	
 	<insert id="insert">
 		insert into task
-		(tlno,explanation,taskname,startDate,endDate,workingtime,cycle)
-		values(#{tlno},#{explanation},#{taskname},#{startDate},#{endDate},#{workingtime},#{cycle})
+		(tlno,explanation,taskname,startDate,endDate,cycle)
+		values(#{tlno},#{explanation},#{taskname},#{startDate},#{endDate}#{cycle})
 	</insert>
 
 	<delete id="delete">
@@ -47,6 +47,8 @@
 	    startDate = #{startDate},
 	    endDate = #{endDate},
 	    workingtime = #{workingtime},
+	    finishDate = #{finishDate},
+	    status = #{status},
 	    cycle = #{cycle}
 		<include refid="whereSql" />
 	</update>

@@ -1,11 +1,15 @@
 package com.dgit.domain;
 
+import java.util.Date;
+
 public class CommentVO {
 	private int cno;
 	private int taskno;
 	private int uno;
 	private String writer;
 	private String content;
+	private Date writeDate;
+	private Date modiDate;
 
 	public int getCno() {
 		return cno;
@@ -47,10 +51,26 @@ public class CommentVO {
 		this.content = content;
 	}
 
+	public Date getWriteDate() {
+		return writeDate;
+	}
+
+	public void setWriteDate(Date writeDate) {
+		this.writeDate = writeDate;
+	}
+
+	public Date getModiDate() {
+		return modiDate;
+	}
+
+	public void setModiDate(Date modiDate) {
+		this.modiDate = modiDate;
+	}
+	
 	@Override
 	public String toString() {
 		return "CommentVO [cno=" + cno + ", taskno=" + taskno + ", uno=" + uno + ", writer=" + writer + ", content="
-				+ content + "]";
+				+ content + ", writeDate=" + writeDate + ", modiDate=" + modiDate + "]";
 	}
 
 }

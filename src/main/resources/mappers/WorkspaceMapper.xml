@@ -22,8 +22,8 @@
 	
 	<insert id="insert">
 		insert into workspace
-		(uno,name,maker)
-		values(#{uno},#{name},#{maker})
+		(uno,name,maker,regDate)
+		values(#{uno},#{name},#{maker},#{regDate})
 	</insert>
 
 	<delete id="delete">
