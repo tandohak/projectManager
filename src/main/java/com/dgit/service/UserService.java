@@ -10,5 +10,4 @@ public interface UserService {
 	public int insert(UserVO vo) throws Exception;
 	public int delete(int uno) throws Exception;
 	public int update(UserVO vo) throws Exception;
-
 }

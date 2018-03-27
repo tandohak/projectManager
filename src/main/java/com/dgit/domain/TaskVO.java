@@ -14,8 +14,9 @@ public class TaskVO {
 	private Date workingtime;
 	private int cycle;
 	private String writer;
+	private String colorLabel;
 	private int status;
-	
+
 	public String getWriter() {
 		return writer;
 	}
@@ -110,6 +111,14 @@ public class TaskVO {
 
 	public void setStatus(int status) {
 		this.status = status;
+	}
+
+	public String getColorLabel() {
+		return colorLabel;
+	}
+
+	public void setColorLabel(String colorLabel) {
+		this.colorLabel = colorLabel;
 	}
 
 	@Override
