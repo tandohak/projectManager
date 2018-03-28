@@ -59,11 +59,13 @@
 	<bean id="googleConnectionFactory"
 		class="org.springframework.social.google.connect.GoogleConnectionFactory">
 		<constructor-arg value="141501242517-c6pe1khepdp7tl4fcf03bifkk382s1s1.apps.googleusercontent.com" />
-		<constructor-arg value="ukyP6EbPDu5edULZvPX5aM2c" />
+		<constructor-arg value="ukyP6EbPDu5edULZvPX5aM2c" />  
 	</bean>
+	
 	<bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
-		<property name="scope" value="https://www.googleapis.com/auth/plus.login" />   
+		<!-- <property name="scope" value="https://www.googleapis.com/auth/plus.login" />    -->
+		<property name="scope" value="https://www.googleapis.com/auth/userinfo.email" />    
 		<!-- <property name="scope" value="https://www.googleapis.com/auth/plus.me"/> -->
-		<property name="redirectUri" value="http://localhost:8080/projectManager/member/googleSignInCallback" />
+		<property name="redirectUri" value="http://localhost:8080/projectManager/user/googleSignInCallback" />
 	</bean>
 </beans>
