@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mapper.EmailAuthMapper">
+	<sql id="selectSql">
+		select * from emailAuth
+	</sql>
+	<sql id="whereSql">
+		where email = #{email} and authKey = #{authKey}
+	</sql>
+	
+	<select id="selectOne" resultType="EmailAuthVO">
+		select * from emailAuth
+		where email = #{email} and authKey = #{authKey}
+	</select>
+	  
+	<insert id="insert">
+		insert into emailAuth (email,authKey)
+		values(#{email},#{authKey})
+	</insert>
+
+	<delete id="delete">
+		delete from emailAuth
+		<include refid="whereSql" />
+	</delete>
+</mapper>  

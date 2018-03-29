@@ -68,4 +68,22 @@
 		<!-- <property name="scope" value="https://www.googleapis.com/auth/plus.me"/> -->
 		<property name="redirectUri" value="http://localhost:8080/projectManager/user/googleSignInCallback" />
 	</bean>
+	
+	<!-- 메일 보내기 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="taskmanager0909" />
+		<property name="password" value="tasktest123" />
+    
+	<!-- email 요청시는 SMTP -->
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>   
+				<prop key="mail.smtp.auth">true</prop> 
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property> 
+	</bean>
 </beans>

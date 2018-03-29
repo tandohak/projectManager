@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService {
 		return dao.update(vo);
 	}
 
+	@Override
+	public UserVO selectOneByEmail(String email) throws Exception {
+		return dao.selectOneByEmail(email);
+	}
+
 }

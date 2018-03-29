@@ -10,13 +10,21 @@
 		where uno = #{uno}
 	</sql>
 	
+	<sql id="whereSqlByEmail">
+		where email = #{email}
+	</sql>
 	<select id="selectOne" resultType="UserVO">
 		<include refid="selectSql" />
 		<include refid="whereSql" />
 	</select>
 	
-	<select id="selectList" resultType="UserVO">
+	<select id="selectOneByEmail" resultType="UserVO">
 		<include refid="selectSql" />
+		<include refid="whereSqlByEmail" />
+	</select>
+	
+	<select id="selectList" resultType="UserVO">
+		<include refid="selectSql" /> 
 	</select>
 	
 	<insert id="insert">

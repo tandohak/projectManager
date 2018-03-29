@@ -13,24 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class HomeController {
+@RequestMapping("/taskManagement")
+public class TaskController {
 	@Autowired
 	private GoogleConnectionFactory googleConnectionFactory;
 
 	@Autowired
 	private OAuth2Parameters googleOAuth2Parameters;
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model) {
-		/*구글 로그인 인증을 위한 코드*/
-		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
-		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
-		/* 구글 로그인 인증 url 주소를 받아 넘겨준다.*/
-		System.out.println("/, url : " + url);  
-		model.addAttribute("googleSignIn",url);
-		return "index";
-	}
+	private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
+	
+	@RequestMapping(value = "/project", method = RequestMethod.GET)
+	public String project(Model model) {
+		
+		return "project";
+	}  
 	
 }

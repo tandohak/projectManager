@@ -10,8 +10,8 @@
 	href="${pageContext.request.contextPath}/resources/css/index.css">
 </head>
 <body>
-	<div class="container">
-		
+	<div class="container-fluid">
+		<a href="https://accounts.google.com/logout">로그아웃</a>
 	</div>
 </body>
 </html>

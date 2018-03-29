@@ -40,4 +40,9 @@ public class UserDAOImpl implements UserDAO {
 		return session.update(namespace+"update",vo);
 	}
 
+	@Override
+	public UserVO selectOneByEmail(String email) throws Exception {
+		return session.selectOne(namespace+"selectOneByEmail",email);
+	}
+
 }

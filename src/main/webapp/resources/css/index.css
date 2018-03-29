@@ -1,63 +1,18 @@
 @CHARSET "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
 
 body {
+	font-family: 'Noto Sans KR', sans-serif;
 	background-color: #eee !important;
 }
-
-#loginBox {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -190px;
-	margin-left: -240px;
-	width: 480px;
-	height: 380px;
-	padding: 15px;
-	background: #fff;
-	border-radius: 5px;
-}
-
-#bar {
-	margin: 15px 0;
-}
-
-#bar span {
-	float: left;
-}
-
-input {
-	display:block;
-	border: 1px solid #ddd;  
-	border-radius: 5px;
-	height: 35px;
-	width: 90%;
-	font-size: 14px;
-	box-sizing: border-box;
-	margin: 0 auto;
-	margin-bottom: 15px;
-}
-
-.tit_h2{
-	text-align: center;
-}
-
-input[type="submit"], input[type="button"], .btn {
-	display: block;
-	border: none;
-	border-radius: 5px;
-	height: 35px;  
-	width: 90%;
+a{
 	text-decoration: none;
-	color: #fff; 
-	background-color: #eee;
-	text-align: center;
-	line-height: 35px;
-	font-size: 14px;
-	margin: 0 auto;
-	margin-bottom: 15px;
-}  
-
-#loginformWrap {
-	margin:0 auto;
-	width: 390px;  
+	color:black;
 }
+.cFont{
+	font-weight: normal;
+	font-size: 12px;
+	color:#00BCD4;
+}
+  
