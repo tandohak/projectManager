@@ -19,7 +19,7 @@
 		insert into emailAuth (email,authKey)
 		values(#{email},#{authKey})
 	</insert>
-
+	
 	<delete id="delete">
 		delete from emailAuth
 		<include refid="whereSql" />

@@ -141,13 +141,12 @@ public class UserController {
 		 * System.out.println("eTag"+person.getEtag()); 
 		 * System.out.println("이름 :"+person.getGivenName()); 
 		 * System.out.println("성 :"+person.getFamilyName());
-		 * System.out.println("성별 :"+person.getGender());
+		 * System.out.println("성별 :"+person.getGender()); 
 		 */
 	}
 	@RequestMapping("/join/step1")
 	public String joinStep1(String user_email,String key,UserVO user,Model model) throws Exception{  
 
-		
 		if(!key.equals("")){
 			UserVO userTemp = new UserVO();
 			EmailAuthVO vo = new EmailAuthVO(user_email, key);
@@ -159,6 +158,7 @@ public class UserController {
 			
 			userTemp.setEmail(user_email);
 			model.addAttribute("user",userTemp);
+			model.addAttribute("key",key);
 		}else{
 			model.addAttribute("user",user);
 		}
