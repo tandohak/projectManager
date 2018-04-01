@@ -9,7 +9,7 @@ import com.dgit.domain.FileVO;
 
 public class FileDAOImpl implements FileDAO {
 
-private static final String namespace = "com.dgit.mapper.FileDAOImpl.";
+	private static final String namespace = "com.dgit.mapper.FileMapper.";
 	
 	@Autowired
 	private SqlSession session;

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mapper.InviteMapper">
+	<sql id="selectSql">
+		select * from invite
+	</sql>
+	
+	<sql id="whereSql">
+		where ino = #{ino}
+	</sql>
+	
+	<sql id="whereSqlByWno">
+		where wno = #{wno}
+	</sql>
+
+	<select id="selectListByWno" resultType="EmailAuthVO">
+		select * from invite
+		<include refid="whereSqlByWno" />
+	</select>
+
+	<insert id="insert">
+		insert into invite (wno,inviteDate,inviter,invitee)
+		values(#{wno},#{inviteDate},#{inviter},#{invitee})
+	</insert>
+	
+	<delete id="delete">
+		delete from invite
+		<include refid="whereSql" />
+	</delete>
+	
+	<update id="update">	    
+	    update invite set   
+	    wno = #{wno},
+	    inviteDate = #{inviteDate},
+	    inviter = #{inviter},
+	    invitee = #{invitee}	 
+	    <include refid="whereSql" />   
+	 </update>
+</mapper>  

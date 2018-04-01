@@ -1,6 +1,5 @@
 package com.dgit.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -18,10 +17,8 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dgit.domain.EmailAuthVO;
 import com.dgit.domain.LoginDTO;
@@ -30,7 +27,7 @@ import com.dgit.persistence.EmailAuthDAO;
 import com.dgit.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user/*")
 public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -95,7 +92,7 @@ public class UserController {
 		System.out.println("/, url : " + url);
 		model.addAttribute("googleSignIn", url);
 		return "user/join";
-	} 
+	}
 	
 	
 	@RequestMapping("/googleSignInCallback")
@@ -131,7 +128,7 @@ public class UserController {
 			user.setLastName(person.getGivenName());
 			model.addAttribute("user", user);
 			
-			return "user/join/step1";
+			return "user/join/signUp";
 		}
 		
 		/*
@@ -144,7 +141,7 @@ public class UserController {
 		 * System.out.println("성별 :"+person.getGender()); 
 		 */
 	}
-	@RequestMapping("/join/step1")
+	@RequestMapping("/join/signUp")
 	public String joinStep1(String user_email,String key,UserVO user,Model model) throws Exception{  
 
 		if(!key.equals("")){
@@ -154,7 +151,7 @@ public class UserController {
 			
 			if(temp==null){
 				return "redirect:/user/join";
-			} 
+			}
 			
 			userTemp.setEmail(user_email);
 			model.addAttribute("user",userTemp);
@@ -163,7 +160,7 @@ public class UserController {
 			model.addAttribute("user",user);
 		}
 		
-		return "user/join/step1";
+		return "user/join/signUp"; 
 	}
 
 }

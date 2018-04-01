@@ -11,23 +11,29 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login.css">
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.js"
+  integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
+  crossorigin="anonymous"></script>
 <body>
 	<div class="container-fluid">
-		<div id="loginBox">
+		<div id="contentsWrap" class="joinBox">
 			<div id="loginWrap">
 				<h2 class="tit_h2">${email}</h2> 
-				<h3 class="tit_h2"> 주소로 이메일을 보냈습니다.</h2> 
+				<h3 class="tit_h2"> 주소로 이메일을 보냈습니다.</h3> 
 				<form action="${pageContext.request.contextPath}/emailAuth" method="post" id="f1">
-					<p style="text-align: center;">이메일이 도착하지 않았습니까? <a href="join" class="link_a" id="retransmission">다시 보내기</a></p>
+					<p style="text-align: center;">이메일이 도착하지 않았습니까? 
+					<a href="" class="link_a" id="retransmission">다시 보내기</a></p>
 					<input type="hidden" class="input" name="email" id="email" value="${email}">
 				</form> 
 			</div>  
-		</div>  
-	</div>
+		</div>   
+	</div>  
 	<script>
-		$("#retransmission").click(function(){
+		$("#retransmission").click(function(e){
+			e.preventDefault();
 			$("#f1").submit();
-		})
-	</script>
+		});
+	</script>  
 </body>
 </html>

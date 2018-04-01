@@ -3,18 +3,37 @@ package com.dgit.domain;
 import java.util.Date;
 
 public class WorkspaceVO {
-	private int wno;
+	private String wcode;
 	private String name;
 	private String maker;
 	private int uno;
 	private Date regDate;
 
-	public int getWno() {
-		return wno;
+	public WorkspaceVO() {}
+
+	public WorkspaceVO(String wcode, String name, String maker, int uno) {
+		super();
+		this.wcode = wcode;
+		this.name = name;
+		this.maker = maker;
+		this.uno = uno;
 	}
 
-	public void setWno(int wno) {
-		this.wno = wno;
+	public WorkspaceVO(String wcode, String name, String maker, int uno, Date regDate) {
+		super();
+		this.wcode = wcode;
+		this.name = name;
+		this.maker = maker;
+		this.uno = uno;
+		this.regDate = regDate;
+	}
+
+	public String getWcode() {
+		return wcode;
+	}
+
+	public void setWcode(String wcode) {
+		this.wcode = wcode;
 	}
 
 	public String getName() {
@@ -51,8 +70,8 @@ public class WorkspaceVO {
 
 	@Override
 	public String toString() {
-		return "WorkspaceVO [wno=" + wno + ", name=" + name + ", maker=" + maker + ", uno=" + uno + ", regDate="
+		return "WorkspaceVO [wcode=" + wcode + ", name=" + name + ", maker=" + maker + ", uno=" + uno + ", regDate="
 				+ regDate + "]";
 	}
-	
+
 }

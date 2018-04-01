@@ -8,10 +8,10 @@
 	</sql>
 	
 	<sql id="whereSql">
-		where wno = #{wno}
+		where wcode = #{wcode}
 	</sql>
 	
-	<select id="select" resultType="WorkspaceVO">
+	<select id="selectOne" resultType="WorkspaceVO">
 		<include refid="selectSql" />
 		<include refid="whereSql" />
 	</select>
@@ -20,10 +20,10 @@
 		<include refid="selectSql" />
 	</select>
 	
-	<insert id="insert">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="wcode">
 		insert into workspace
-		(uno,name,maker,regDate)
-		values(#{uno},#{name},#{maker},#{regDate})
+		(wcode,uno,name,maker,regDate)
+		values(#{wcode},#{uno},#{name},#{maker},now())
 	</insert>
 
 	<delete id="delete">

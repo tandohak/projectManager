@@ -15,8 +15,8 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
 	private SqlSession session;
 
 	@Override
-	public WorkspaceVO selectOne(int wno) throws Exception {
-		return session.selectOne(namespace+"selectOne",wno);
+	public WorkspaceVO selectOne(String wcode) throws Exception {
+		return session.selectOne(namespace+"selectOne",wcode);
 	}
 
 	@Override
@@ -30,8 +30,8 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
 	}
 
 	@Override
-	public int delete(int wno) throws Exception {
-		return session.delete(namespace+"delete",wno);
+	public int delete(String wcode) throws Exception {
+		return session.delete(namespace+"delete",wcode);
 	}
 
 

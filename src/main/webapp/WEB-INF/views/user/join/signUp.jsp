@@ -11,12 +11,9 @@
 	href="${pageContext.request.contextPath}/resources/css/index.css?a=3">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login.css?a=3"> 
-<script
-  src="https://code.jquery.com/jquery-3.3.1.slim.js"
-  integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
-  crossorigin="anonymous"></script> 
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
  <script src="${pageContext.request.contextPath}/resources/js/join.js"></script>
-</head>
+</head>  
 <body>
 	<div class="container">
 		<div id="contentsWrap" class="profileBox">
@@ -34,8 +31,8 @@
 
 					<div class="row">
 						<span class="sTit half">성</span> <span class="sTit half">이름</span>
-						<input type="text" class="input half" name="firstName" placeholder="성" value="${user.firstName}"> 
-						<input type="text" class="input half" name="lastName" placeholder="이름" value="${user.lastName}">
+						<input type="text" class="input half" name="firstName" id="firstName" placeholder="성" value="${user.firstName}"> 
+						<input type="text" class="input half" name="lastName" id="lastName" placeholder="이름" value="${user.lastName}">
 					</div>
   					
   					<c:if test="${key != null}">
@@ -45,7 +42,7 @@
 							<input	type="password" class="input full" name="rePassword" id="rePassword" placeholder="비밀번호 확인">
 						</div>
 					</c:if>  
-					<input type="button" value="다음 : 워크스페이스 만들기  >" class="btn pro_btn">
+					<input type="button" value="다음 : 워크스페이스 만들기  >" class="btn" onclick="${key!=null ? 'proBtnEmail()' : 'proBtnGoogle()'}">
 					
 					<div class="row txtCenter">  
 						<a  href="${pageContext.request.contextPath}/user/login" class="txt_Btn">뒤로 가기</a> 
@@ -64,7 +61,7 @@
   
 					<div class="row">
 						<span class="sTit">워크스페이스 이름</span> 
-						<input	type="text" class="input full" name="workspaceName" placeholder="예 ) ABC 주식회사, 개발 팀..">
+						<input	type="text" class="input full" name="workspaceName"  id="workspaceName" placeholder="예 ) ABC 주식회사, 개발 팀..">
 					</div>
   
 					<input type="button" value="다음 : 팀원 초대하기  >" class="btn work_btn">
@@ -72,7 +69,7 @@
 					<div class="row txtCenter">  
 						<a  href="#" class="txt_Btn">뒤로 가기</a> 
 					</div>  
-			</div>
+			</div> 
 		</div> 
 
 		<div id="contentsWrap" class="inviteBox">
@@ -80,20 +77,21 @@
 				<h2 class="tit_h2" >팀원을 초대하세요.</h2>
 
 				<div class="row">
-					<p class="cFont" style="margin:0; margin-bottom: 5px; color:rgba(0,0,0,0.6);">링크를 공유하여 {workspace 명}에 팀원을 초대하세요.</p>
-					<input type="text"	class="input full" name="inviteLink" placeholder="inviteLink 생성">
+					<p class="cFont" style="margin:0; margin-bottom: 5px; color:rgba(0,0,0,0.6);">링크를 공유하여 <span id="wname"></span>에 팀원을 초대하세요.</p>
+					<input type="text"	class="input full" name="inviteLink" id="inviteLink" placeholder="inviteLink 생성" readonly="readonly">
 				</div>
 				
 				<div id="bar" class="row"> 
-					<span class="bar"><i></i></span> <span class="txt">또는</span> <span
-						class="bar"><i></i></span>
+					<span class="bar"><i></i></span> 
+					<span class="txt">또는</span> 
+					<span class="bar"><i></i></span>
 				</div>
 				<div class="row txtCenter" >
 					<a  href="#" class="txt_Btn">이메일로 초대하기</a> 
 				</div>
-
-				<input type="button" value="appName 시작하기  >" class="btn">
-			</div>
+				
+				<a href="#" type="button" class="btn">TaskManagement 시작하기  ></a>
+			</div>  
 		</div> 
 
 	</div>

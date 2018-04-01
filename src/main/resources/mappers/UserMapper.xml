@@ -27,10 +27,10 @@
 		<include refid="selectSql" /> 
 	</select>
 	
-	<insert id="insert">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="uno">
 		insert into user
-		(email,firstName,lastName,phone,addr,birthday,grade,joinDate,photoPath)
-		values(#{email},#{firstName},#{lastName},#{phone},#{addr},#{birthday},#{grade},#{joinDate},#{photoPath})
+		(email,firstName,lastName,phone,addr,birthday,grade,joinDate,photoPath,password)
+		values(#{email},#{firstName},#{lastName},#{phone},#{addr},#{birthday},#{grade},#{joinDate},#{photoPath},password(#{password}))
 	</insert>
 
 	<delete id="delete">

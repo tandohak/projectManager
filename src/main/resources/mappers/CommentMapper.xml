@@ -34,7 +34,7 @@
 	<update id="update">	    
 	    update comment set    
 	    taskno = #{taskno},
-	    uno# = {uno},
+	    uno = #{uno},
 	    writer = #{writer},
 	    modiDate = #{modiDate},
 	    content = #{content}	    
