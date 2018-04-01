@@ -8,14 +8,15 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/index.css?a=3">
+	href="${pageContext.request.contextPath}/resources/css/index.css?a=4">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login.css?a=3"> 
+	href="${pageContext.request.contextPath}/resources/css/login.css?a=4"> 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
  <script src="${pageContext.request.contextPath}/resources/js/join.js"></script>
 </head>  
 <body>
 	<div class="container">
+		<input type="file" id="img_input" style="display: none;">
 		<div id="contentsWrap" class="profileBox">
 			<div id="content_innerBox">
 				<h2 class="tit_h2">프로필을 등록해 주세요.</h2>
@@ -25,7 +26,6 @@
 						<img src="#" id="photo"> <span>사진 업데이트</span>
 					</div>
 				</div>
-
 					<input type="email" class="input" name="email" id="email"
 						value="${user.email}" readonly="readonly">  
 
@@ -49,7 +49,7 @@
 					</div>  
 			</div>
 		</div>  
-		  
+		
 		<div id="contentsWrap" class="workspaceBox">
 			<div id="content_innerBox">
 				<h2 class="tit_h2" style="margin-bottom: 10px;">워크 스페이스 생성하세요.</h2>
@@ -67,7 +67,7 @@
 					<input type="button" value="다음 : 팀원 초대하기  >" class="btn work_btn">
 					 
 					<div class="row txtCenter">  
-						<a  href="#" class="txt_Btn">뒤로 가기</a> 
+						<a  href="#" class="txt_Btn  work_backBtn">뒤로 가기</a> 
 					</div>  
 			</div> 
 		</div> 
@@ -90,10 +90,9 @@
 					<a  href="#" class="txt_Btn">이메일로 초대하기</a> 
 				</div>
 				
-				<a href="#" type="button" class="btn">TaskManagement 시작하기  ></a>
+				<a href="${pageContext.request.contextPath}/taskManagement/project" type="button" class="btn">TaskManager 시작하기  ></a>
 			</div>  
 		</div> 
-
 	</div>
 </body>
 </html>

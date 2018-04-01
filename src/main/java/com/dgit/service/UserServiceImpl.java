@@ -42,7 +42,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserVO selectOneByEmail(String email) throws Exception {
-		return dao.selectOneByEmail(email);
+		System.out.println("서비스"+email);
+		return dao.selectOneByEmail(email);  
 	}
 
 }

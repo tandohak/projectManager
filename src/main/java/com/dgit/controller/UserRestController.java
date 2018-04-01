@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dgit.domain.UserVO;
@@ -65,5 +66,26 @@ public class UserRestController {
 		
 		return entity; 
 	}
- 
-}
+	
+	@RequestMapping(value = "/exists", method =RequestMethod.POST)
+	public ResponseEntity<String> userSelectOne(@RequestBody String email) {
+		ResponseEntity<String> entity = null;
+		
+		try{
+			System.out.println("============="+email);
+			UserVO vo= userService.selectOneByEmail(email);
+			System.out.println("============="+vo);
+			if(vo !=null){ 
+				entity = new ResponseEntity<>("exists",HttpStatus.OK);
+			}else{
+				entity = new ResponseEntity<>("notExists",HttpStatus.OK);
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity; 
+	}
+}  

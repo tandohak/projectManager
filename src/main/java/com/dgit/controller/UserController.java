@@ -142,8 +142,14 @@ public class UserController {
 		 */
 	}
 	@RequestMapping("/join/signUp")
-	public String joinStep1(String user_email,String key,UserVO user,Model model) throws Exception{  
-
+	public String joinStep1(String user_email,String key,UserVO user,Model model,HttpSession session) throws Exception{ 
+		//email에 회원가입된 유저가 존재하는지 파악
+		UserVO voTemp =service.selectOneByEmail(user_email);  
+		if(voTemp != null){
+			session.setAttribute("user", voTemp);
+			return "redirect:/taskManagement/project";
+		}
+		    
 		if(!key.equals("")){
 			UserVO userTemp = new UserVO();
 			EmailAuthVO vo = new EmailAuthVO(user_email, key);
