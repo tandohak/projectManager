@@ -1,5 +1,6 @@
 package com.dgit.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -17,14 +18,19 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dgit.domain.EmailAuthVO;
 import com.dgit.domain.LoginDTO;
+import com.dgit.domain.MemberVO;
 import com.dgit.domain.UserVO;
 import com.dgit.persistence.EmailAuthDAO;
+import com.dgit.service.MemberService;
 import com.dgit.service.UserService;
+import com.dgit.service.WorkspaceService;
 
 @Controller
 @RequestMapping("/user/*")
@@ -41,33 +47,49 @@ public class UserController {
 	private UserService service;
 	@Autowired
 	private EmailAuthDAO emailDao;
+	@Autowired
+	private WorkspaceService wrokService;
+	@Autowired
+	private MemberService memService;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginGet(Model model) {
-		/* 구글 로그인 인증을 위한 코드 */
+	public String loginGet(Model model,@ModelAttribute("res") String res) {
+		/* 구글 로그인 인증을 위한 코드 */ 
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
 		/* 구글 로그인 인증 url 주소를 받아 넘겨준다. */
 		System.out.println("/, url : " + url);
 		model.addAttribute("googleSignIn", url);
+		
 		return "user/login";
-	} 
+	}
 
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
 	public void loginPost(LoginDTO dto, Model model) throws Exception {
 		logger.info("[loginPOST] ---------------- ");
 		logger.info(dto.toString());
+		UserVO idCheck =service.selectOneByEmail(dto.getEmail());
+	
+		if(idCheck == null){
+			logger.info("user 없음........");
+			model.addAttribute("res","notExtistId");
+			return;
+		}
+		
+		UserVO vo = service.readWithPw(dto.getEmail(), dto.getPassword());
 
-		/*
-		 * MemberVO vo = service.readWithPw(dto.getUserid(), dto.getUserpw());
-		 * 
-		 * if(vo == null){ logger.info("user 없음........"); logger.info(
-		 * "loginPOST return........"); return; }
-		 * 
-		 * dto.setUsername(vo.getUsername()); dto.setUserpw("");
-		 * 
-		 * model.addAttribute("loginDto",dto);
-		 */
+		if (vo == null) {
+			logger.info("비밀 번호 틀림........");
+			logger.info("loginPOST return........");
+			model.addAttribute("res","wrongPass");
+			return;
+		}  
+
+		dto.setUsername(vo.getFirstName() + " " + vo.getLastName());
+		dto.setUno(vo.getUno());
+		dto.setPassword("");
+
+		model.addAttribute("loginDto", dto); 
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -92,11 +114,10 @@ public class UserController {
 		System.out.println("/, url : " + url);
 		model.addAttribute("googleSignIn", url);
 		return "user/join";
-	}
-	
-	
+	}  
+
 	@RequestMapping("/googleSignInCallback")
-	public String doSessionAssignActionPage(HttpSession session, String code,Model model) throws Exception {
+	public String doSessionAssignActionPage(HttpServletRequest request,HttpSession session, String code, Model model) throws Exception {
 		System.out.println("/member/googleSignInCallback");
 		System.out.println(code);
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
@@ -116,13 +137,21 @@ public class UserController {
 		Person person = plusOperations.getGoogleProfile();
 
 		UserVO tempUser = service.selectOneByEmail(person.getAccountEmail());
-		
+
 		if (tempUser != null) {
-			session.setAttribute("user", tempUser);
+			LoginDTO dto = new LoginDTO();
+			dto.setEmail(tempUser.getEmail());
+			dto.setUsername(tempUser.getFirstName()+ " " + tempUser.getLastName());
+			session.setAttribute("login", dto);
 			
-			return "redirect:/taskManagement/project";
+			MemberVO memVo = memService.selectOneByUno(tempUser.getUno());
+			String wcode = memVo.getWcode();
+			Object dest = session.getAttribute("dest");
+			String path = (dest != null) ? (String) dest : request.getContextPath()+"/task/" + wcode;
+			session.removeAttribute("dest");
+			return "redirect:"+path;
 		} else {
-			UserVO user = new UserVO();
+			UserVO user = new UserVO();  
 			user.setEmail(person.getAccountEmail());
 			user.setFirstName(person.getFamilyName());
 			user.setLastName(person.getGivenName());
@@ -130,43 +159,45 @@ public class UserController {
 			
 			return "user/join/signUp";
 		}
-		
+
 		/*
 		 * System.out.println("디스플레이 이름"+person.getDisplayName());
 		 * System.out.println("어카운트 이메일"+person.getAccountEmail());
 		 * System.out.println("??"+person.getAboutMe());
-		 * System.out.println("eTag"+person.getEtag()); 
-		 * System.out.println("이름 :"+person.getGivenName()); 
-		 * System.out.println("성 :"+person.getFamilyName());
-		 * System.out.println("성별 :"+person.getGender()); 
+		 * System.out.println("eTag"+person.getEtag()); System.out.println(
+		 * "이름 :"+person.getGivenName()); System.out.println("성 :"
+		 * +person.getFamilyName()); System.out.println("성별 :"
+		 * +person.getGender());
 		 */
 	}
+
 	@RequestMapping("/join/signUp")
-	public String joinStep1(String user_email,String key,UserVO user,Model model,HttpSession session) throws Exception{ 
-		//email에 회원가입된 유저가 존재하는지 파악
-		UserVO voTemp =service.selectOneByEmail(user_email);  
-		if(voTemp != null){
+	public String joinStep1(String user_email, String key, UserVO user, Model model, HttpSession session)
+			throws Exception {
+		// email에 회원가입된 유저가 존재하는지 파악
+		UserVO voTemp = service.selectOneByEmail(user_email);
+		if (voTemp != null) {
 			session.setAttribute("user", voTemp);
-			return "redirect:/taskManagement/project";
+			return "redirect:/user/login";
 		}
-		    
-		if(!key.equals("")){
+
+		if (!key.equals("")) {
 			UserVO userTemp = new UserVO();
 			EmailAuthVO vo = new EmailAuthVO(user_email, key);
 			EmailAuthVO temp = emailDao.selectOne(vo);
-			
-			if(temp==null){
+
+			if (temp == null) {
 				return "redirect:/user/join";
 			}
-			
+
 			userTemp.setEmail(user_email);
-			model.addAttribute("user",userTemp);
-			model.addAttribute("key",key);
-		}else{
-			model.addAttribute("user",user);
+			model.addAttribute("user", userTemp);
+			model.addAttribute("key", key);
+		} else {
+			model.addAttribute("user", user);
 		}
-		
-		return "user/join/signUp"; 
+
+		return "user/join/signUp";
 	}
 
 }

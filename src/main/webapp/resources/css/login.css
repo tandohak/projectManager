@@ -24,12 +24,13 @@
 
 .profileBox{
 	margin-top: -301px; 
+	display: block;
 }
 .workspaceBox{
 	margin-top: -165px;
 	display: none;
 }
-  
+   
 .inviteBox{
 	margin-top: -155px;
 	display: none;
@@ -94,10 +95,10 @@
 }
   
 .half {
-	width: 45%;
-	margin: 0;
-	margin-right: 10%;
-	float: left;
+	width: 45% !important;
+	margin: 0 !important; 
+	margin-right: 10% !important;
+	float: left !important;
 }
  
 .full{
@@ -106,14 +107,14 @@
 	float: left;
 	margin-top: 10px; 
 }  
-.row> .full:nth-child(2){
+/* .row> .full:nth-child(2){
 	margin-top: 0px;
-} 
+}  */
 .row> .full:FIRST-CHILD{
 	margin-top: 0px;
 }
 .half:nth-child(2n) {
-	margin-right: 0;
+	margin-right: 0 !important;
 }
 
 .sTit {
@@ -199,4 +200,30 @@
 	left: 0;
 	font-size: 14px; 
 	line-height: 30px; 
+}
+
+/*초대*/
+#inviteEmailBox{ 
+	display:none; 
+	border:1px solid #EEEEEE;	
+	padding-top:15px;
+	height: 270px;
+}  
+#inviteInputWrap{
+	height: 198px;	
+	overflow: auto;
+}
+.invite_item{
+	overflow: hidden;
+	position: relative;
+}
+.delBtn{
+	display:block;
+	width: 25px; 
+	height: 42px;  
+	color: #ddd;  
+	position:absolute; 
+	right: 0;
+	top:10px; 
+	line-height: 42px; 
 }

@@ -1,5 +1,6 @@
 package com.dgit.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -43,6 +44,14 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public UserVO selectOneByEmail(String email) throws Exception {
 		return session.selectOne(namespace+"selectOneByEmail",email);
+	}
+
+	@Override
+	public UserVO readWithPw(String email, String password) throws Exception {
+		HashMap<String,String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("password", password);
+		return session.selectOne(namespace+"readWithPw",map);
 	}
 
 }

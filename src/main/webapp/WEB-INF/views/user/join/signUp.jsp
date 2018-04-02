@@ -7,18 +7,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"  
+	href="${pageContext.request.contextPath}/resources/css/index.css?a=5">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/index.css?a=4">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login.css?a=4"> 
+	href="${pageContext.request.contextPath}/resources/css/login.css?a=5"> 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
- <script src="${pageContext.request.contextPath}/resources/js/join.js"></script>
+ <script src="${pageContext.request.contextPath}/resources/js/join.js?a=4"></script>
 </head>  
 <body>
 	<div class="container">
 		<input type="file" id="img_input" style="display: none;">
 		<div id="contentsWrap" class="profileBox">
-			<div id="content_innerBox">
+			<div id="content_innerBox">  
 				<h2 class="tit_h2">프로필을 등록해 주세요.</h2>
 
 				<div id="row">
@@ -86,13 +86,27 @@
 					<span class="txt">또는</span> 
 					<span class="bar"><i></i></span>
 				</div>
+				
 				<div class="row txtCenter" >
-					<a  href="#" class="txt_Btn">이메일로 초대하기</a> 
+					<a  href="#" class="txt_Btn" onclick="inviteEmailBtn()">이메일로 초대하기</a> 
 				</div>
 				
-				<a href="${pageContext.request.contextPath}/taskManagement/project" type="button" class="btn">TaskManager 시작하기  ></a>
+				<div class="row" id="inviteEmailBox">
+					<div class="row" id="inviteInputWrap">
+						<div class="invite_item">
+							<input type="email" class="input full" placeholder="초대할 이메일을 입력해주세요.">
+						</div>
+						
+					</div>
+					<div class="row">  
+						<a href="#" class="btn half" onclick="addInput()">추가</a>  
+						<a href="#" class="btn half" onclick="inviteEamilTrans()">전송</a>    
+					</div>   
+				</div>
+				
+				<a href="#" type="button" class="btn" id="startTask">TaskManager 시작하기  ></a>
 			</div>  
-		</div> 
+		</div>   
 	</div>
 </body>
 </html>

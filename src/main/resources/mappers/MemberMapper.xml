@@ -11,19 +11,35 @@
 		where mno = #{mno}
 	</sql>
 	
-	<select id="select" resultType="MemberVO">
+	<sql id="whereSqlWcode">
+		where wcode = #{wcode}
+	</sql>
+	<sql id="whereSqlUno">
+		where uno = #{uno}
+	</sql>
+	<select id="selectOne" resultType="MemberVO">
 		<include refid="selectSql" />
 		<include refid="whereSql" />
+	</select>
+	
+	<select id="selectOneByUno" resultType="MemberVO">
+		<include refid="selectSql" />
+		<include refid="whereSqlUno" />
 	</select>
 	
 	<select id="selectList" resultType="MemberVO">
 		<include refid="selectSql" />
 	</select>
 	
+	<select id="selectListByWcode" resultType="MemberVO">
+		<include refid="selectSql" />
+		<include refid="whereSqlWcode" />
+	</select>
+	
 	<insert id="insert">
 		insert into member
-		(uno,wno,memGrade)
-		values(#{uno},#{wno},#{memGrade})
+		(uno,wcode,memGrade)
+		values(#{uno},#{wcode},#{memGrade})
 	</insert>
 
 	<delete id="delete">
@@ -32,7 +48,7 @@
 	</delete>
 	
 	<update id="update">	    
-	    update member set    
+	    update member set
 	    memGrade = #{memGrade}
 		<include refid="whereSql" />
 	</update>

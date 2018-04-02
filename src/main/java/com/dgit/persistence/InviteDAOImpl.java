@@ -16,8 +16,8 @@ public class InviteDAOImpl implements InviteDAO {
 	private SqlSession session;
 
 	@Override
-	public List<InviteVO> selectListByWno(int wno) throws Exception {
-		return session.selectList(namespace+"selectListByWno",wno);
+	public List<InviteVO> selectListByWno(String wcode) throws Exception {
+		return session.selectList(namespace+"selectListByWno",wcode);
 	}
 	
 	@Override

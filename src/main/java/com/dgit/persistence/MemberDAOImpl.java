@@ -42,4 +42,14 @@ public class MemberDAOImpl implements MemberDAO {
 		return session.update(namespace+"update",vo);
 	}
 
+	@Override
+	public List<MemberVO> selectListByWcode(String wcode) throws Exception {
+		return session.selectList(namespace+"selectListByWcode",wcode);
+	}
+
+	@Override
+	public MemberVO selectOneByUno(int uno) throws Exception {
+		return session.selectOne(namespace+"selectOneByUno",uno);
+	}
+	
 }

@@ -4,7 +4,7 @@ var regPw = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,20}$/;
 var regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 var existId = false;
 var formData = null;
-
+var wvo = null;
 $(function() {
 	$(".work_btn").click(function(e) {
 		$(".workspaceBox input[type]").each(function(i, obj) {
@@ -29,6 +29,7 @@ $(function() {
 			type:"put",
 			headers:{"Content-Type":"application/json"},
 			dataType:"json",  
+			async:false,
 			data : JSON.stringify({
 				"email" : email,
 				"password" : password,
@@ -38,14 +39,16 @@ $(function() {
 			}), 
 			success:function(res) {
 				console.log(res);   
+				wvo = res.wvo;
 				if(res != "fail"){
 					$("#inviteLink").val("http://localhost:8080/projectManager/user/invite/"+res.wvo.wcode);
 					$("#wname").val(res.wvo.name);
+					$("#startTask").attr("href","http://localhost:8080/projectManager/task/"+res.wvo.wcode);
 				}else{
 					alert("워크스페이스 생성에 실패하였습니다.");
 					return;
 				}
-			} 
+			}
 		})
 				
 		$(".workspaceBox").css("display", "none");
@@ -110,11 +113,86 @@ $(function() {
 		$(".profileBox").css("display", "block");
 		$(".workspaceBox").css("display", "none");
 	 })
-});  
+	 
+	 $("#inviteInputWrap").on("click",".delBtn",function(){
+		 $(this).parent(".invite_item").remove(); 
+	 })  
+});   
 
+function inviteEmailBtn(){
+	$("#inviteEmailBox").toggle(); 
+	var display= $("#inviteEmailBox").css("display");
+	
+	if(display == "block")
+		$(".inviteBox").css("margin-top","-311px");
+	else
+		$(".inviteBox").css("margin-top","-155px");
+}  
+
+function inviteEamilTrans(){
+	var emails = [];
+	//이메일 초대 검사
+	$("#inviteInputWrap input[type='email']").each(function(i,obj){
+		if(!checkFrom($(this))){ 
+			return false;
+		}   
+		
+		var email =  $(this).val();
+		if (!regEmail.test(email)) {
+			alert("이메일 형식에 맞춰주세요.");
+			$("#email").focus();
+			return false;  
+		}
+		
+		emails.push(email); 	
+	});
+	
+	var datas = {
+			"emails":emails,//이메일배열
+			"inviter":$("#email").val(),//초대자
+			"wcode":wvo.wcode,//초대 워크스페이스
+			"maker":wvo.maker
+	}
+	
+	$.ajax({
+		url : "/projectManager/invite/inviteTeam",
+		data : JSON.stringify(datas),
+		contextType:"application/json",
+		headers:{"Content-Type":"application/json"},
+		type : "post",
+		dataType : "text",
+		async:false,
+		success : function(result) {
+			console.log(result);
+			if(result=="fail"){
+				alert("실패하였습니다.");
+			}else{
+				location.replace("/projectManager/task/"+wvo.wcode);
+			}
+		}  
+	});
+}
+
+function addInput(){   
+	var $input = $("<input type='email'>");
+	$input.attr("placeholder","초대할 이메일을 입력해주세요.");
+	$input.addClass("input");
+	$input.addClass("full");
+	
+	var $delBtn = $("<a href='#'>");
+	$delBtn.addClass("delBtn");
+	$delBtn.text("X");
+	
+	var $divWrap = $("<div>");
+	$divWrap.addClass("invite_item");
+	$divWrap.append($input);
+	$divWrap.append($delBtn);
+	
+	$("#inviteInputWrap").append($divWrap);
+}
 
 function imgUpload(){
-	var path;
+	var path;  
 	$.ajax({
 		url : "/projectManager/uploadDrag",
 		data : formData,

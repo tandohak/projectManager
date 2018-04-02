@@ -18,6 +18,12 @@
 		<include refid="whereSql" />
 	</select>
 	
+	<select id="readWithPw" resultType="UserVO">
+		<include refid="selectSql" />
+		<include refid="whereSqlByEmail" />
+		and password =password(#{password})
+	</select>
+	
 	<select id="selectOneByEmail" resultType="UserVO">
 		<include refid="selectSql" />
 		<include refid="whereSqlByEmail" />
@@ -29,8 +35,8 @@
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="uno">
 		insert into user
-		(email,firstName,lastName,phone,addr,birthday,grade,joinDate,photoPath,password)
-		values(#{email},#{firstName},#{lastName},#{phone},#{addr},#{birthday},#{grade},#{joinDate},#{photoPath},password(#{password}))
+		(email,firstName,lastName,phone,addr,birthday,joinDate,photoPath,password)
+		values(#{email},#{firstName},#{lastName},#{phone},#{addr},#{birthday},#{joinDate},#{photoPath},password(#{password}))
 	</insert>
 
 	<delete id="delete">
@@ -48,7 +54,8 @@
 	    birthday = #{birthday},
 	    grade = #{grade},
 	    joinDate = #{joinDate},
-	    photoPath = #{photoPath}    
+	    photoPath = #{photoPath},
+	    password =password(#{password})  
 		<include refid="whereSql" />
 	</update>
 </mapper>

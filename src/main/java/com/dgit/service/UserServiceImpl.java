@@ -46,4 +46,9 @@ public class UserServiceImpl implements UserService {
 		return dao.selectOneByEmail(email);  
 	}
 
+	@Override
+	public UserVO readWithPw(String email, String password) throws Exception {
+		return dao.readWithPw(email, password);
+	}
+
 }

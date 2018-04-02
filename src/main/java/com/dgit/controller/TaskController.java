@@ -9,11 +9,12 @@ import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/taskManagement/*")
+@RequestMapping("/task/*")
 public class TaskController {
 	@Autowired
 	private GoogleConnectionFactory googleConnectionFactory;
@@ -23,10 +24,16 @@ public class TaskController {
 
 	private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
 	
-	@RequestMapping(value = "/project", method = RequestMethod.GET)
-	public String project(Model model) {
+	@RequestMapping(value = "/{wcode}", method = RequestMethod.GET)
+	public String project(Model model,@PathVariable("wcode") String wcode) {
 		
 		return "project";
-	}  
+	}
+	
+	@RequestMapping(value = "/{wcode}/join", method = RequestMethod.GET)
+	public String joinProject(Model model,@PathVariable("wcode") String wcode) {
+		
+		return "project";
+	}
 	
 }

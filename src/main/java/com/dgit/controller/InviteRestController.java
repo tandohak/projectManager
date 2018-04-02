@@ -1,5 +1,8 @@
 package com.dgit.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -9,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dgit.domain.EmailAuthVO;
 import com.dgit.domain.InviteVO;
 import com.dgit.persistence.EmailAuthDAO;
+import com.dgit.service.InviteService;
 import com.dgit.util.MailHandler;
 import com.dgit.util.TempKey;
 
@@ -27,6 +32,10 @@ public class InviteRestController {
 
 	@Autowired
 	private EmailAuthDAO dao;
+
+	@Autowired
+	private InviteService inviteService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(InviteRestController.class);
 
 	@RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
@@ -57,20 +66,42 @@ public class InviteRestController {
 		return entity;
 	}
 	
-	@RequestMapping(value = "/inviteTeam", method = RequestMethod.GET)
-	public ResponseEntity<String> inviteTeam(Model model, String email) {
+	@RequestMapping(value = "/inviteTeam", method = RequestMethod.POST)
+	public ResponseEntity<String> inviteTeam(@RequestBody HashMap<String, Object> map) {
 		ResponseEntity<String> entity = null;
+		
+		List<String> emails = (List<String>) map.get("emails");
+		String inviter = (String) map.get("inviter");
+		String wcode = (String) map.get("wcode");
+		String maker = (String) map.get("maker");
 		
 		try {
 			InviteVO vo = new InviteVO();
+			vo.setInviter(inviter);
+			vo.setWcode(wcode);
 			
-			entity = new ResponseEntity<>(email,HttpStatus.OK);
+			for (String email : emails) {
+				vo.setInvitee(email);
+				inviteService.insert(vo);
+			}
+			
+			for (String email : emails) {
+				MailHandler sendMail = new MailHandler(mailSender);
+				sendMail.setSubject("[초대 : TASK MANAGER]"+ maker +"님의 워크스페이스에 가입하세요.");
+				sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
+						.append("<a href='http://localhost:8080/projectManager/user/invite/"+wcode)
+						.append("' target='_blenk'>이메일 인증 확인</a>").toString());
+				sendMail.setFrom("taskmanager0909", "테스트");
+				sendMail.setTo(email);
+				sendMail.send();
+			}
+			entity = new ResponseEntity<>("success",HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
 		} 
 		
-		return entity;
+		return entity; 
 	}
 
 }

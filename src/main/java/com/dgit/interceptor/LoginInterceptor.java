@@ -1,33 +1,58 @@
 package com.dgit.interceptor;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.dgit.domain.LoginDTO;
+import com.dgit.domain.MemberVO;
+import com.dgit.domain.UserVO;
+import com.dgit.service.MemberService;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
+
+	@Autowired
+	private MemberService memService;
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		logger.info("postHandle=======================");
+
+		HttpSession session = request.getSession();  
+		String res = (String) modelAndView.getModel().get("res");
+		if(res!=null){
+			if(res.equals("notExtistId")){
+				request.setAttribute("res", res);
+				response.sendRedirect("login?res="+res);
+				return ;
+			}else if(res.equals("wrongPass")){
+				request.setAttribute("res", res);
+				response.sendRedirect("login?res="+res);
+				return ;  
+			}    
+		}
+		
 		Object object = modelAndView.getModel().get("loginDto");
-		HttpSession session = request.getSession();
 		
 		if(object != null){
 			LoginDTO dto = (LoginDTO)object;
-			logger.info("userid : " + dto.getUserid()); 
+			logger.info("useremail : " + dto.getEmail()); 
+			logger.info("userename : " + dto.getUsername()); 
 			session.setAttribute("login", dto); 
+			MemberVO mem = memService.selectOneByUno(dto.getUno());
+			String wcode = mem.getWcode();
 			
 			Object dest = session.getAttribute("dest");
-			String path = (dest != null) ? (String) dest : request.getContextPath();
+			String path = (dest != null) ? (String) dest : request.getContextPath()+"/task/" + wcode;
 			session.removeAttribute("dest");
 			logger.info("dest : " + path);
 			response.sendRedirect(path);//home controller

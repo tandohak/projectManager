@@ -11,4 +11,5 @@ public interface UserService {
 	public int delete(int uno) throws Exception;
 	public int update(UserVO vo) throws Exception;
 	public UserVO selectOneByEmail(String email) throws Exception;
+	public UserVO readWithPw(String email, String password) throws Exception;
 }

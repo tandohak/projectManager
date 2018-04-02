@@ -16,8 +16,8 @@ public class InviteServiceImpl implements InviteService {
 	private InviteDAO dao;
 	
 	@Override
-	public List<InviteVO> selectListByWno(int wno) throws Exception {
-		return dao.selectListByWno(wno);
+	public List<InviteVO> selectListByWno(String wcode) throws Exception {
+		return dao.selectListByWno(wcode);
 	}
 
 	@Override

@@ -11,18 +11,18 @@
 		where ino = #{ino}
 	</sql>
 	
-	<sql id="whereSqlByWno">
-		where wno = #{wno}
+	<sql id="whereSqlBywcode">
+		where wcode = #{wcode}
 	</sql>
 
-	<select id="selectListByWno" resultType="EmailAuthVO">
+	<select id="selectListBywcode" resultType="EmailAuthVO">
 		select * from invite
-		<include refid="whereSqlByWno" />
+		<include refid="whereSqlBywcode" />
 	</select>
 
 	<insert id="insert">
-		insert into invite (wno,inviteDate,inviter,invitee)
-		values(#{wno},#{inviteDate},#{inviter},#{invitee})
+		insert into invite (wcode,inviteDate,inviter,invitee)
+		values(#{wcode},now(),#{inviter},#{invitee})
 	</insert>
 	
 	<delete id="delete">
@@ -32,7 +32,7 @@
 	
 	<update id="update">	    
 	    update invite set   
-	    wno = #{wno},
+	    wcode = #{wcode},
 	    inviteDate = #{inviteDate},
 	    inviter = #{inviter},
 	    invitee = #{invitee}	 
