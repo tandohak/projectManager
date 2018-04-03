@@ -1,5 +1,7 @@
 package com.dgit.interceptor;
 
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,7 +50,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			logger.info("useremail : " + dto.getEmail()); 
 			logger.info("userename : " + dto.getUsername()); 
 			session.setAttribute("login", dto); 
-			MemberVO mem = memService.selectOneByUno(dto.getUno());
+			List<MemberVO> memList = memService.selectListByUno(dto.getUno());
+			MemberVO mem = memList.get(0);
 			String wcode = mem.getWcode();
 			
 			Object dest = session.getAttribute("dest");

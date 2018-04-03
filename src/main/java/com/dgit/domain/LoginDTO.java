@@ -5,7 +5,7 @@ public class LoginDTO {
 	private String email;
 	private String password;
 	private String username;
-
+	private String photoPath;
 	public int getUno() {
 		return uno;
 	}
@@ -37,10 +37,20 @@ public class LoginDTO {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	public String getPhotoPath() {
+		return photoPath;
+	}
+
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
 
 	@Override
 	public String toString() {
-		return "LoginDTO [email=" + email + ", password=" + password + ", username=" + username + "]";
+		return "LoginDTO [uno=" + uno + ", email=" + email + ", password=" + password + ", username=" + username
+				+ ", photoPath=" + photoPath + "]";
 	}
+
 
 }

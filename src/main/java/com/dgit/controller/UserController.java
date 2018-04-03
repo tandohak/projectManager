@@ -1,5 +1,7 @@
 package com.dgit.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -100,7 +102,7 @@ public class UserController {
 			logger.info("user 없음........");
 			logger.info("loginPOST return........");
 			session.invalidate();
-		}
+		} 
 
 		return "redirect:/";
 	}
@@ -139,16 +141,20 @@ public class UserController {
 		UserVO tempUser = service.selectOneByEmail(person.getAccountEmail());
 
 		if (tempUser != null) {
-			LoginDTO dto = new LoginDTO();
+			LoginDTO dto = new LoginDTO();   
+			dto.setUno(tempUser.getUno());  
 			dto.setEmail(tempUser.getEmail());
 			dto.setUsername(tempUser.getFirstName()+ " " + tempUser.getLastName());
-			session.setAttribute("login", dto);
+			dto.setPhotoPath(tempUser.getPhotoPath());
+			session.setAttribute("login", dto);  
 			
-			MemberVO memVo = memService.selectOneByUno(tempUser.getUno());
+			List<MemberVO> memList = memService.selectListByUno(tempUser.getUno());
+			MemberVO memVo = memList.get(0);
 			String wcode = memVo.getWcode();
 			Object dest = session.getAttribute("dest");
-			String path = (dest != null) ? (String) dest : request.getContextPath()+"/task/" + wcode;
-			session.removeAttribute("dest");
+			String path = (dest != null) ? ((String) dest).substring(15) : "/task/" + wcode;
+			System.out.println(path);
+			session.removeAttribute("dest"); 
 			return "redirect:"+path;
 		} else {
 			UserVO user = new UserVO();  

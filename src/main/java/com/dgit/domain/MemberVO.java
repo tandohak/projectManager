@@ -5,6 +5,10 @@ public class MemberVO {
 	private int uno;
 	private String wcode;
 	private int memGrade;
+	
+	//join을 위한 필드
+	private String name;
+	
 	public int getMno() {
 		return mno;
 	}
@@ -29,6 +33,14 @@ public class MemberVO {
 	public void setMemGrade(int memGrade) {
 		this.memGrade = memGrade;
 	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	@Override
 	public String toString() {
 		return "MemberVO [mno=" + mno + ", uno=" + uno + ", wcode=" + wcode + ", memGrade=" + memGrade + "]";

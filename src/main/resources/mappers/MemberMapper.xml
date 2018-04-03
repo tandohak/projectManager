@@ -22,9 +22,17 @@
 		<include refid="whereSql" />
 	</select>
 	
-	<select id="selectOneByUno" resultType="MemberVO">
+	<select id="selectListByUno" resultType="MemberVO">
 		<include refid="selectSql" />
 		<include refid="whereSqlUno" />
+	</select>
+	
+	<select id="selectListByUnoJoinWorkspace" resultType="MemberVO">
+		select mno, member.uno ,member.wcode, name
+		from member join workspace 
+		where member.uno = workspace.uno 
+		and member.uno = #{uno}
+		group by member.uno;
 	</select>
 	
 	<select id="selectList" resultType="MemberVO">

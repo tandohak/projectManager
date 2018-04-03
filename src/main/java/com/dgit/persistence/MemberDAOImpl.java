@@ -48,8 +48,13 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public MemberVO selectOneByUno(int uno) throws Exception {
-		return session.selectOne(namespace+"selectOneByUno",uno);
+	public  List<MemberVO> selectListByUno(int uno) throws Exception {
+		return session.selectList(namespace+"selectListByUno",uno);
+	}
+
+	@Override
+	public List<MemberVO> selectListByUnoJoinWorkspace(int uno) throws Exception {
+		return session.selectList(namespace+"selectListByUnoJoinWorkspace",uno);
 	}
 	
 }
