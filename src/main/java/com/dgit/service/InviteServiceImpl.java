@@ -34,5 +34,9 @@ public class InviteServiceImpl implements InviteService {
 	public int update(InviteVO vo) throws Exception {
 		return dao.update(vo);
 	}
-	
+
+	@Override
+	public List<InviteVO> selectListBywcode(InviteVO vo) throws Exception {
+		return dao.selectListBywcode(vo);
+	}
 }

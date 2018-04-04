@@ -23,6 +23,10 @@ $(function() {
 		
 		var photoPath = imgUpload();
 		console.log(photoPath);
+		 
+		if(photoPath=="" || photoPath == null){
+			photoPath = "";
+		}
 		
 		$.ajax({
 			url : "/projectManager/register/create/"+workspaceName,

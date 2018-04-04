@@ -12,5 +12,10 @@ public class ErrorPageController {
 	@RequestMapping("/404")
 	public String err404() {
 		return "error/404";
+	} 
+	
+	@RequestMapping("/unauthorizedPage")
+	public String errUnauthorizedPage() {
+		return "error/unauthorizedPage";
 	}
 }

@@ -12,12 +12,13 @@
 	</sql>
 	
 	<sql id="whereSqlBywcode">
-		where wcode = #{wcode}
+		where wcode = #{wcode} 
 	</sql>
 
 	<select id="selectListBywcode" resultType="EmailAuthVO">
 		select * from invite
-		<include refid="whereSqlBywcode" />
+		where wcode = #{wcode} 
+		and invitee = #{invitee}  
 	</select>
 
 	<insert id="insert">

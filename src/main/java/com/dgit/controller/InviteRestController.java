@@ -84,12 +84,13 @@ public class InviteRestController {
 				vo.setInvitee(email);
 				inviteService.insert(vo);
 			}
-			
+			  
 			for (String email : emails) {
 				MailHandler sendMail = new MailHandler(mailSender);
 				sendMail.setSubject("[초대 : TASK MANAGER]"+ maker +"님의 워크스페이스에 가입하세요.");
 				sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
-						.append("<a href='http://localhost:8080/projectManager/user/invite/"+wcode)
+						.append("<a href='http://localhost:8080/projectManager/task/"+wcode)
+						.append("/join?email="+email)
 						.append("' target='_blenk'>이메일 인증 확인</a>").toString());
 				sendMail.setFrom("taskmanager0909", "테스트");
 				sendMail.setTo(email);

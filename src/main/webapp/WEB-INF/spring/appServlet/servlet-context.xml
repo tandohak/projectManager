@@ -32,11 +32,14 @@
 		<beans:constructor-arg value="c:/zzz/upload"/>
 	</beans:bean>
 	
-	<beans:bean id="loginInterceptor" class="com.dgit.interceptor.LoginInterceptor"/>
+	<beans:bean id="loginInterceptor" class="com.dgit.interceptor.LoginInterceptor"/>  
 	<beans:bean id="authInterceptor" class="com.dgit.interceptor.AuthInterceptor"/>
+	<beans:bean id="taskAuthInterceptor" class="com.dgit.interceptor.TaskAuthInterceptor"/>
+	<beans:bean id="taskJoinInterceptor" class="com.dgit.interceptor.TaskJoinInterceptor"/>
+	 
 	<interceptors>
 		<interceptor>
-			<mapping path="/user/loginPost"/>
+			<mapping path="/user/loginPost"/> 
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 		
@@ -44,7 +47,17 @@
 			<mapping path="/task/*"/>
 			<beans:ref bean="authInterceptor"/> 
 		</interceptor>
-	</interceptors>
+		
+		<interceptor>
+			<mapping path="/task/{wcode}/join"/> 
+			<beans:ref bean="taskJoinInterceptor"/> 
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/task/{wcode}"/> 
+			<beans:ref bean="taskAuthInterceptor"/>
+		</interceptor>
+	</interceptors> 
 	
 	<context:component-scan base-package="com.dgit.controller" />
 	

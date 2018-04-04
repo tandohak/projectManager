@@ -117,7 +117,7 @@ public class UserController {
 		model.addAttribute("googleSignIn", url);
 		return "user/join";
 	}  
-
+	
 	@RequestMapping("/googleSignInCallback")
 	public String doSessionAssignActionPage(HttpServletRequest request,HttpSession session, String code, Model model) throws Exception {
 		System.out.println("/member/googleSignInCallback");
@@ -205,5 +205,5 @@ public class UserController {
 
 		return "user/join/signUp";
 	}
-
+	
 }

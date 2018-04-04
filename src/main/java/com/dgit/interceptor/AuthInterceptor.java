@@ -35,10 +35,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		
 		if(query == null || query.equals("null")){
 			query = "";
-		}else{
-			query = "?" + query;
+		}else{  
+			query = "?" + query;  
 		}
-		
+		  
 		if(req.getMethod().equals("GET")){
 			logger.info("dest : " + (uri+query));
 			req.getSession().setAttribute("dest", uri+query); 
@@ -50,5 +50,5 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			ModelAndView modelAndView) throws Exception {
 		logger.info("[AuthInterceptor] postHandle=======================");
 	}
-
+	
 }

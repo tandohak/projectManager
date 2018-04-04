@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dgit.domain.MemberVO;
 import com.dgit.domain.WorkspaceVO;
+import com.dgit.grade.MemberGrade;
 import com.dgit.persistence.MemberDAO;
 import com.dgit.persistence.WorkspaceDAO;
 import com.dgit.util.TempKey;

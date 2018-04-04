@@ -53,5 +53,10 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> selectListByUnoJoinWorkspace(int uno) throws Exception {
 		return dao.selectListByUnoJoinWorkspace(uno);
 	}
+
+	@Override
+	public MemberVO selectOneUnoAndwcode(MemberVO vo) throws Exception {
+		return dao.selectOneUnoAndwcode(vo);
+	}
 	
 }

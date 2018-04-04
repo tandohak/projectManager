@@ -56,7 +56,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			
 			Object dest = session.getAttribute("dest");
 			String path = (dest != null) ? (String) dest : request.getContextPath()+"/task/" + wcode;
-			session.removeAttribute("dest");
+			session.removeAttribute("dest"); 
 			logger.info("dest : " + path);
 			response.sendRedirect(path);//home controller
 		}				

@@ -13,5 +13,6 @@ public interface MemberService {
 	public int delete(int mno) throws Exception;
 	public int update(MemberVO vo) throws Exception;
 	public List<MemberVO> selectListByWcode(String wcode) throws Exception;
+	public MemberVO selectOneUnoAndwcode(MemberVO vo) throws Exception;
 	
 }

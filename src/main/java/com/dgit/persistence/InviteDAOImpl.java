@@ -35,4 +35,9 @@ public class InviteDAOImpl implements InviteDAO {
 		return session.update(namespace+"update",vo);
 	}
 
+	@Override
+	public List<InviteVO> selectListBywcode(InviteVO vo) throws Exception {
+		return session.selectList(namespace+"selectListBywcode",vo);
+	}
+
 }
