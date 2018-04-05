@@ -15,12 +15,16 @@
 		where wcode = #{wcode} 
 	</sql>
 
-	<select id="selectListBywcode" resultType="EmailAuthVO">
+	<select id="selectListBywcodeAndInvitee" resultType="InviteVO">
 		select * from invite
 		where wcode = #{wcode} 
-		and invitee = #{invitee}  
+		and invitee = #{invitee}   
 	</select>
-
+	<select id="selectListBywcode" resultType="InviteVO">
+		select * from invite
+		where wcode = #{wcode} 
+		 group by invitee;
+	</select>
 	<insert id="insert">
 		insert into invite (wcode,inviteDate,inviter,invitee)
 		values(#{wcode},now(),#{inviter},#{invitee})

@@ -46,45 +46,26 @@ public class TaskAuthInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		LoginDTO login = (LoginDTO)session.getAttribute("login");
 
+		Object object = session.getAttribute("login");
+		
 		List<MemberVO> memList = memService.selectListByUnoJoinWorkspace(login.getUno());
 
-		// 주소로 접속한 wcode와 로그인한 아이디의 wcode를 비교하여
-		// 자기자신의 워크스페이스인지 확인하기 위한 코드  
-		Boolean chckWcode = false;   
-		logger.info("memlist - " + memList.size());  
-		for (MemberVO mvo : memList) {
-			if (mvo.getWcode().equals(wcode)) {  
-				chckWcode = true;  
-				break;  
-			} 
-			logger.info("chckwcode"+chckWcode);
-		} 
-		
-		logger.info("chckwcode- chck"+chckWcode);
-		// chckWcode가 false 일경우 에러페이지로 이동
-		if (!chckWcode) {
+		MemberVO tempVO = new MemberVO();
+		tempVO.setUno(login.getUno());
+		tempVO.setWcode(wcode);
+		MemberVO memVo = memService.selectOneUnoAndwcode(tempVO);
+		// memVo가 없을경우 에러페이지로 이동
+		if(memVo == null){
 			response.sendRedirect(request.getContextPath()+"/err/unauthorizedPage");
 		}
-    
+		
+		request.setAttribute("workVO", vo);
+		request.setAttribute("memList",memList); 
+		request.setAttribute("memVo",memVo); 
+		
 		return true;// controller로 이동 o
 	}
-
-	private void saveDest(HttpServletRequest req) {
-		String uri = req.getRequestURI();
-		String query = req.getQueryString();
-
-		if (query == null || query.equals("null")) {
-			query = "";
-		} else {
-			query = "?" + query;
-		}
-
-		if (req.getMethod().equals("GET")) {
-			logger.info("dest : " + (uri + query));
-			req.getSession().setAttribute("dest", uri + query);
-		}
-	}
-
+	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {

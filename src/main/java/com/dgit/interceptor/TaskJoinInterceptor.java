@@ -61,7 +61,7 @@ public class TaskJoinInterceptor extends HandlerInterceptorAdapter {
 				return false;
 			}
 			
-			List<InviteVO> list= inviteService.selectListBywcode(vo);
+			List<InviteVO> list= inviteService.selectListBywcodeAndInvitee(vo);
 			
 			MemberVO memVO = new MemberVO();
 			memVO.setWcode(wcode);

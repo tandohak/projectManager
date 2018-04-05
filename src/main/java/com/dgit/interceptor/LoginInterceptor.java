@@ -31,6 +31,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
 		HttpSession session = request.getSession();  
 		String res = (String) modelAndView.getModel().get("res");
+		//로그인 에러 확인
 		if(res!=null){
 			if(res.equals("notExtistId")){
 				request.setAttribute("res", res);

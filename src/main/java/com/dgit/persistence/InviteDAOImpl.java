@@ -36,8 +36,13 @@ public class InviteDAOImpl implements InviteDAO {
 	}
 
 	@Override
-	public List<InviteVO> selectListBywcode(InviteVO vo) throws Exception {
-		return session.selectList(namespace+"selectListBywcode",vo);
+	public List<InviteVO> selectListBywcodeAndInvitee(InviteVO vo) throws Exception {
+		return session.selectList(namespace+"selectListBywcodeAndInvitee",vo);
+	}
+
+	@Override
+	public List<InviteVO> selectListBywcode(String wcode) throws Exception {
+		return session.selectList(namespace+"selectListBywcode",wcode);
 	}
 
 }

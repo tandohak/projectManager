@@ -1,0 +1,317 @@
+@CHARSET "UTF-8";
+.contentBox{
+	width: 1000px;
+	margin: 0 auto;
+}
+/*타이틀*/
+.sub_tit{
+	font-size: 30px;
+	font-weight: bold;
+	color:#444;
+	margin-bottom: 30px;
+} 
+
+/*탭 컨텐츠*/
+.tabContent{
+	min-height: 250px;
+	border: 1px solid #ddd;
+	border-top:none; 
+	overflow: hidden;
+	padding:25px;
+}
+/*컨텐트 타이틀*/
+.sub_cnt_tit{  
+	margin-top: 0px;
+	font-size: 16px;
+	font-weight: bold;   
+	color:#444;
+	margin-bottom: 30px;
+}
+ 
+/*btn*/
+.btn_cst {
+	color: #fff;
+	background-color: #00BCD4;
+}
+
+.btnCtm {
+	display: block;
+	border: none;
+	border-radius: 5px;
+	height: 42px !important;
+	width: 90%;
+	text-decoration: none;
+	color: #fff;
+	background-color: #00BCD4;
+	text-align: center;
+	line-height: 42px;
+	font-size: 14px;
+	margin: 0 auto;
+	margin-bottom: 15px;
+}
+
+.btnCtm:HOVER { 
+	color:#fff;
+	background: #00ACC1;
+	text-decoration: none !important;
+}
+
+.input {
+	display: block;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	height: 42px;
+	padding: 3.5px 10px;
+	box-sizing: border-box;
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+.half {
+	width: 45% !important;
+	margin: 0 !important; 
+	margin-right: 10% !important;
+	float: left !important;
+} 
+
+.half:nth-child(2n) {
+	margin-right: 0 !important;
+}
+ 
+.full{
+	width: 100%;
+	margin: 0;
+	float: left;
+	margin-top: 10px; 
+}  
+
+.btn_cst:HOVER {
+	color:#fff;
+	background: #00ACC1 !important;
+}
+
+.nav_tab_inner{
+	color:#fff;
+	background-color: #337ab7 !important;
+}
+.nav_tab_inner li a{
+	color:#fff; 
+	border: 0px !important;
+}
+.nav_tab_inner li.active{
+	border: 0px; 
+	margin-bottom: 0px;  
+	border-bottom: 2px solid #FFCC7A; 
+} 
+.nav_tab_inner li.active a{
+	border: 0px !important;
+	border-radius:0px;    
+}
+.nav_tab_inner li:hover a{
+	border: 0px !important; 
+	border-radius:0px; 
+}
+
+.mList{
+	list-style: none;
+	padding: 0px;  
+}
+.mList>li{
+	overflow: hidden; 
+	position: relative;
+}
+#memberList  .mList>li>strong{
+	color:#757575;
+	text-align: center;
+	display: inline-block;
+	float:left;
+	height:35px; 
+	line-height:35px;
+	width: 90px;  
+	padding:10px 0px; 
+} 
+#memberList  .mList>li>a>img{	
+	width: 35px; 
+}
+#memberList  .mList>li>a{
+	padding:10px 0px; 
+	display:block;  
+	width:858px;
+	color:#333; 
+	height:35px;  
+	line-height:35px;
+	font-size:14px;
+	float:left;
+	overflow: hidden;
+	box-sizing:unset;  
+}
+#memberList  .mList>li>a:HOVER{
+	font-style: normal;
+	text-decoration: none;  
+	background: #eee;  
+	border-radius:8px;  
+} 
+#memberList  .mList>li>a>span{
+	margin:0px 20px;  
+}
+#memberList  .mList>li>a>span:last-child {
+	float:right; 
+}
+
+.inviteList .mList .invitePic{
+	color:#fff; 
+	background: #bbb;  
+	border-radius:50%; 
+	font-size: 15px; 
+	padding: 10px; 
+}
+.inviteList .mList>li{ 
+	overflow: hidden;
+} 
+.inviteList .mList>li:HOVER>div:LAST-CHILD{ 
+	display:inline-block;
+} 
+.inviteList .mList>li>div{
+	display:inline-block; 
+	height:55px; 
+	float: left;  
+}
+.inviteList .mList>li>div:LAST-CHILD{
+	float: right; 
+	padding:0px 20px; 
+	display: none;
+}
+.inviteList .mList>li>div:FIRST-CHILD>span{
+	margin: 10px;
+} 
+.inviteList .mList>li>div:LAST-CHILD>a{
+	color:#BDBDBD;  
+}    
+.inviteList .mList>li>div:LAST-CHILD>a:HOVER{
+	color:#333;
+	text-decoration: none; 
+}  
+.inviteList .mList>li>div:LAST-CHILD>a{ 
+	line-height: 55px; 
+}        
+.mList>li:hover a.mem_setting{
+	display: block!important;
+}   
+
+.mem_setting{
+	position:absolute;  
+	right:3px;  
+	top:18px;  
+	padding:0px !important; 
+	display: block !important;
+	width: 14px !important;
+	height: 14px !important; 
+	z-index: 999;
+	display:none !important; 
+	color:#BDBDBD !important;   
+} 
+.mem_setting span{ 
+	padding: 0px !important;
+	margin: 0px !important;
+}
+.mem_setting:HOVER{ 
+	font-style: normal;
+	text-decoration: none;  
+	background: none !important;  
+	border-radius: 0px !important;  
+	color:#333 !important;    
+}
+#inner_tab_wrap{
+	position: relative;
+} 
+#inviteMemDialog{
+	font-size:12px;
+	border: 0px;
+	height: 25px; 
+	padding:0px 20px; 
+	background: #13426A;  
+	color:#fff; 
+	position: absolute;
+	right: 15px;
+	top:9px;
+	border-radius:4px;    
+}
+
+.modal_inner_box{
+	width: 680px;
+	min-height:300px;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 2px; 
+	position: absolute;
+	top:50%; 
+	left:50%;
+	margin-left: -340px;
+	margin-top: -301.5px; 
+}
+
+.tit_h2{
+	margin-bottom: 20px; 
+	font-weight: bold;
+}
+
+#bar {
+	height: 16px;
+}
+
+#bar span {
+	float: left;
+}
+
+.bar {
+	display: block;
+	width: 40%;
+	height: 16px;
+}  
+
+.bar i {
+	display: block;
+	width: 100%;
+	height: 1px;
+	background: #e0e0e0;
+	margin-top: 7.5px;
+}
+
+#bar .txt {
+	display: block;
+	width: 20%;
+	font-size: 12px;
+	text-align: center;
+}
+ 
+.inn_row {
+	width: 90%;
+	overflow: hidden;
+	margin: 0 auto;
+	margin-bottom: 15px;
+}
+
+/*초대*/
+#inviteEmailBox{  
+	overflow:hidden; 
+	border:1px solid #EEEEEE;	
+	padding-top:15px;
+	height: 285px;
+}   
+#inviteInputWrap{
+	height: 198px;	
+	overflow: auto;
+}
+.invite_item{
+	overflow: hidden;
+	position: relative;
+}
+.delBtn{
+	display:block;
+	width: 25px; 
+	height: 42px;  
+	color: #ddd;  
+	position:absolute; 
+	right: 0;
+	top:10px; 
+	line-height: 42px; 
+} 

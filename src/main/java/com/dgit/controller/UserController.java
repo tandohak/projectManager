@@ -1,6 +1,7 @@
 package com.dgit.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -141,7 +142,8 @@ public class UserController {
 		UserVO tempUser = service.selectOneByEmail(person.getAccountEmail());
 
 		if (tempUser != null) {
-			LoginDTO dto = new LoginDTO();   
+			LoginDTO dto = new LoginDTO();  
+			
 			dto.setUno(tempUser.getUno());  
 			dto.setEmail(tempUser.getEmail());
 			dto.setUsername(tempUser.getFirstName()+ " " + tempUser.getLastName());
@@ -200,6 +202,7 @@ public class UserController {
 			model.addAttribute("user", userTemp);
 			model.addAttribute("key", key);
 		} else {
+			user.setPassword("fkdlsmi2m!3m4jh5h!");
 			model.addAttribute("user", user);
 		}
 

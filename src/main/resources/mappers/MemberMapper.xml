@@ -45,15 +45,18 @@
 	</select>
 	
 	<select id="selectListByWcode" resultType="MemberVO">
-		<include refid="selectSql" />
-		<include refid="whereSqlWcode" />
+		select mno, member.uno ,member.wcode, user.firstName, user.lastName,memGrade,user.photoPath,user.email 
+		from member join user 
+		on member.uno = user.uno 
+		where member.wcode = #{wcode}
+		group by uno 
 	</select>
 	
 	<insert id="insert">
 		insert into member
 		(uno,wcode,memGrade)
 		values(#{uno},#{wcode},#{memGrade})
-	</insert>
+	</insert> 
 
 	<delete id="delete">
 	    delete from member

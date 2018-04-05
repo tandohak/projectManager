@@ -44,7 +44,8 @@
 		</interceptor>
 		
 		<interceptor>
-			<mapping path="/task/*"/>
+			<mapping path="/task/*"/> 
+			<mapping path="/task/{wcode}/workspace"/> 
 			<beans:ref bean="authInterceptor"/> 
 		</interceptor>
 		
@@ -55,6 +56,7 @@
 		
 		<interceptor>
 			<mapping path="/task/{wcode}"/> 
+			<mapping path="/task/{wcode}/workspace"/> 
 			<beans:ref bean="taskAuthInterceptor"/>
 		</interceptor>
 	</interceptors> 

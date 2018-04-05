@@ -15,12 +15,13 @@
 	 
 }
 #header{ 
-	background:#00BCD4;
+	background:#337ab7; 
 	font-size: 12px; 
 	padding:0;
 	margin: 0px; 
 	border-radius:0px; 
 	border: none; 
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.6); 
 }    
    
 #header .nav>li>a{
@@ -73,8 +74,9 @@
  }
  #header .nav_addBtn{
  	width: 50px; 
-	background-color: #4DD0E1 !important;  
-	text-align: center;  
+ 	z-index:111;
+	background-color: #5097D3 !important;  
+	text-align: center;    
  }  	 
  
  #header ul.nav_inner_resList{
@@ -117,9 +119,10 @@
     z-index: 100;
     padding: 0;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-    background: #00BCD4; 
+    background: #337ab7;  
+	box-shadow: 0px 5px 5px rgba(0,0,0,0.6); 
 }
- 
+  
 .sidebar  .sidebar-sticky {
     position: -webkit-sticky;
     position: sticky;
@@ -138,7 +141,7 @@
 	top:11.5px;      
 	left:60px; 
 	width:auto;
-	right:0px;
+	right:0px; 
 	font-size:12px; 
   	text-align: center;
 	padding: 5px 7px;     

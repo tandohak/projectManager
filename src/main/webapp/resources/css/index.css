@@ -12,6 +12,19 @@ a{
 	color:black;
 	color:#333;
 }
+.margin_auto{
+	margin: 0 auto !important; 
+}
+.tit_h2 {
+	text-align: center;  
+	color: #0097A7;
+}
+.margin_bottom_15{
+	margin-bottom: 15px !important;
+}
+.bgcolor_fff{
+	background: #fff;
+}
 .txtCenter{
 	text-align: center;
 } 
@@ -31,6 +44,7 @@ a{
 	color: #E91E63;
 	text-align: center;
 }
+
  .border_left{
  	border-left: 1px solid; 
  	border-color: #B2EBF2;  

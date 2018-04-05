@@ -7,8 +7,39 @@ public class MemberVO {
 	private int memGrade;
 	
 	//join을 위한 필드
-	private String name;
+	private String name; // 워크스페이스 이름
+	private String firstName; // 멤버 성
+	private String lastName; // 멤버 이름
+	private String photoPath;
+	private String email;
 	
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public String getPhotoPath() {
+		return photoPath;
+	}
+	public void setPhotoPath(String photoPath) {
+		this.photoPath = photoPath;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	public int getMno() {
 		return mno;
 	}
