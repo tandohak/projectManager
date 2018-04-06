@@ -157,9 +157,9 @@
 /*content wrap*/
 #contentWrap{ 
 	position: absolute; 
-	top: 51px; 
+	top: 51px;  
 	left: 50px;
 	width: calc(100vw - 50px);
 	height: calc(100vh - 51px);
-	padding:20px;  
+	/* padding:20px;   */
 }

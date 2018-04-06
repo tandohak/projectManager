@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.contentBox{
+	width: 1000px;
+	margin: 0 auto;
+}
+/*타이틀*/
+.sub_tit{
+	font-size: 30px;
+	font-weight: bold;
+	color:#444;
+	margin-bottom: 30px;
+} 
