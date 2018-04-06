@@ -32,7 +32,7 @@
 	
 	<delete id="delete">
 		delete from invite
-		<include refid="whereSql" />
+		where invitee = #{invitee}
 	</delete>
 	
 	<update id="update">	    

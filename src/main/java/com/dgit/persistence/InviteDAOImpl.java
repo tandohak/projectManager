@@ -26,8 +26,8 @@ public class InviteDAOImpl implements InviteDAO {
 	}
 
 	@Override
-	public int delete(int ino) throws Exception {
-		return session.delete(namespace+"delete",ino);
+	public int delete(String invitee) throws Exception {
+		return session.delete(namespace+"delete",invitee);
 	}
 
 	@Override

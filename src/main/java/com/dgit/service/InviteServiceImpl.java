@@ -26,8 +26,8 @@ public class InviteServiceImpl implements InviteService {
 	}
 
 	@Override
-	public int delete(int ino) throws Exception {
-		return dao.delete(ino);
+	public int delete(String invitee) throws Exception {
+		return dao.delete(invitee);
 	}
 
 	@Override

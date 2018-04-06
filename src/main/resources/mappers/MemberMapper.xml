@@ -56,7 +56,7 @@
 		insert into member
 		(uno,wcode,memGrade)
 		values(#{uno},#{wcode},#{memGrade})
-	</insert> 
+	</insert>  
 
 	<delete id="delete">
 	    delete from member

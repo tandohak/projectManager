@@ -2,17 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header.jsp" %>
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_workspace.css?a=6"> 
-<script src="${pageContext.request.contextPath}/resources/js/taskProject.js?a=4"></script>
-<script src="${pageContext.request.contextPath}/resources/js/util.js?a=4"></script>
-<%@ include file="include/sideBar.jsp" %> 
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_workspace.css?a=7"> 
+<script src="${pageContext.request.contextPath}/resources/js/taskProject.js?a=7"></script>
+<script src="${pageContext.request.contextPath}/resources/js/util.js?a=5"></script>
+<%@ include file="include/sideBar.jsp" %>  
 		<script> 
 			var memType = ${memType};  
 		</script>   
 			<div id="contentWrap"> 
 				<div class="contentBox">  
 					<h1 class="sub_tit">${workVO.name} 워크스페이스</h1>
-						<ul class="nav nav-tabs"> 
+						<ul class="nav nav-tabs">  
 					    <li class="active"><a data-toggle="tab" href="#setting">워크스페이스 설정</a></li>
 					    <li><a data-toggle="tab" href="#member">워크스페이스 멤버</a></li>
 					  </ul>
@@ -36,9 +36,9 @@
 								<button id='inviteMemDialog' data-toggle="modal" data-target="#inviteModal">멤버 초대하기</button> 
 							</div> 
 							  
-							<div class="tab-content">
+							<div class="tab-content"> 
 							  <div id="memberList" class="tab-pane fade in active"> 
-							    <ul class="mList">
+							    <ul class="mList" id="adminList">
 							    	<c:forEach var="mem" items="${workMembers}">
 								    	<c:if test="${mem.memGrade == 99}">
 								    	<li>							    		
@@ -71,18 +71,25 @@
 								    			</c:if>  
 								    			<span>${mem.firstName} ${mem.lastName }</span>
 								    			<span>관리자</span>   
-								    		</a>
-								    		<c:if test="${memVo.memGrade == 99 }"> 
-								    			<a href="#" class="mem_setting"><span class="glyphicon glyphicon-cog"></span></a>
+								    		</a>    
+								    		<c:if test="${memVo.memGrade == 99 || memVo.memGrade == 3}">   
+								    			<div class="mem_settingWrap">
+								    				<a href="#" class="mem_setting"><span class="glyphicon glyphicon-cog"></span></a>
+								    				<ul class="dropdown_menu_setting">
+								    					<li><a href="#"  class="memGrade_normal" data-mno="${mem.mno }">멤버로 변경</a></li> 
+								    					<li><a href="#" class="memGrade_delete"   data-mno="${mem.mno }" data-email="${mem.email }" data-inviter="${login.email}" data-wcode="${workVO.wcode}" data-maker="${workVO.maker}">워크스페이스에서 제거</a></li>    
+								    				</ul>  
+								    			</div> 
 								    		</c:if>
-								    	</li>  
-								    	</c:if>
-							    	</c:forEach>  
-							    	<% int i = 0; %> 
-							    	
+								    	</li>   
+								    	</c:if>   
+							    	</c:forEach> 
+							     </ul>
+							     <ul class="mList" id="normalList">  
+							    	<% int i = 0; %>  
 							    	<c:forEach var="mem" items="${workMembers}">
-							    	<c:set var="i" value="<%=i %>"></c:set>
-								    	<c:if test="${mem.memGrade == 2}">
+							    		<c:set var="i" value="<%=i %>"></c:set> 
+								    	<c:if test="${mem.memGrade == 1}">
 								    	<li>
 								    		<strong><c:if test="${i == 0}"> 멤버 </c:if> </strong>
 								    		<% i++; %>
@@ -94,14 +101,52 @@
 													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}"/>
 								    			</c:if> 
 								    			<span>${mem.firstName} ${mem.lastName }</span>
-								    			<span>멤버</span>   
-								    		</a> 
-								    		
-								    		<c:if test="${memVo.memGrade == 99 }"> 
-								    			<a href="#" class="mem_setting"><span class="glyphicon glyphicon-cog"></span></a>
+								    			<span> 멤버 </span>   
+								    		</a>   
+								    		 
+								    		<c:if test="${memVo.memGrade == 99 || memVo.memGrade == 3}"> 
+								    			<div class="mem_settingWrap">
+								    				<a href="#" class="mem_setting" data-mno=""><span class="glyphicon glyphicon-cog"></span></a>
+								    				<ul class="dropdown_menu_setting">
+								    					<li><a href="#"  class="memGrade_admin" data-mno="${mem.mno }">관리자로 변경</a></li> 
+								    					<li><a href="#" class="memGrade_delete" data-mno="${mem.mno }" data-email="${mem.email }">워크스페이스에서 제거</a></li>   
+								    				</ul>
+								    			</div>
 								    		</c:if>
 								    	</li>    
-								    	</c:if>
+								    	</c:if>  
+							    	</c:forEach>
+							     </ul>
+							     <ul class="mList" id="standByList"> 
+							    	<% i = 0; %>  
+							    	<c:forEach var="mem" items="${workMembers}">
+							    		<c:set var="i" value="<%=i %>"></c:set> 
+								    	<c:if test="${mem.memGrade == 2}">
+								    	<li> 
+								    		<strong><c:if test="${i == 0}"> 가입대기 </c:if> </strong>
+								    		<% i++; %> 
+								    		<a href="#" class="memItem">
+								    			<c:if test="${mem.photoPath==''}">
+								    				<img src="/projectManager/resources/img/user_icon_b.png"/>
+								    			</c:if>
+								    			<c:if test="${mem.photoPath!=''}">
+													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}"/>
+								    			</c:if> 
+								    			<span>${mem.firstName} ${mem.lastName }</span>
+								    			<span> 가입대기 </span>   
+								    		</a>   
+								    		  
+								    		<c:if test="${memVo.memGrade == 99 || memVo.memGrade == 3 }"> 
+								    			<div class="mem_settingWrap">
+								    				<a href="#" class="mem_setting" data-mno=""><span class="glyphicon glyphicon-cog"></span></a>
+								    				<ul class="dropdown_menu_setting">
+								    					<li><a href="#" class="memGrade_normal" data-mno="${mem.mno }">가입 승인</a></li> 
+								    					<li><a href="#" class="memGrade_delete" data-mno="${mem.mno }"  data-email="${mem.email }">워크스페이스에서 제거</a></li>    
+								    				</ul>
+								    			</div> 
+								    		</c:if>
+								    	</li>    
+								    	</c:if> 
 							    	</c:forEach>
 							    </ul> 
 							  </div>
@@ -110,13 +155,13 @@
 							    	<c:if test="${inviteMembers != null}">
 							    	<c:forEach var="mem" items="${inviteMembers}">
 							    	<li>		
-							    		<div> 
+							    		<div>   
 							    			<span class="glyphicon glyphicon-refresh invitePic"></span>
-							    			<span>${mem.invitee}</span>
+							    			<span>${mem.invitee}</span> 
 							    		</div>
-							    		<div>
-							    			<a href="#" class="reinvite" data-email='${mem.invitee}'>  
-								    			<span class="glyphicon glyphicon-refresh" style="font-size: 12px"></span> &nbsp;다시 초대하기
+							    		<div> 
+							    			<a href="#" class="reinvite" data-target-email="${mem.invitee}" data-inviter="${login.email}" data-wcode="${workVO.wcode}" data-maker="${workVO.maker}">  
+								    			<span class="glyphicon glyphicon-refresh" style="font-size: 12px"></span> &nbsp;다시 초대하기 
 								    		</a> 
 								    		&nbsp; 
 								    		<a href="#" class="delInvite" data-email='${mem.invitee}'> 
@@ -139,13 +184,13 @@
 							    			<span>${mem.email}</span>
 							    		</div>    
 							    		<div>
-							    			<a href="#" class="reinvite" data-email='${mem.email}'>  
+							    			<a href="#" class="reinvite" data-target-email='${mem.email}' data-inviter="${login.email}" data-wcode="${workVO.wcode}" data-maker="${workVO.maker}">  
 								    			<span class="glyphicon glyphicon-refresh" style="font-size: 12px"></span> &nbsp;다시 초대하기
-								    		</a>  
+								    		</a>   
 							    		</div>    
 							    	</li>
 							    	</c:if>
-							    	</c:forEach> 
+							    	</c:forEach>  
 							    </ul> 
 							  </div>
 							</div>
@@ -188,9 +233,10 @@
 					    
 				</div>      
 				<div class="inn_row">
-					<a href="#" class="btnCtm" style="width: 25%;" onclick="inviteEamilTrans()" data-inviter="${login.email}" data-wcode="${workVO.wcode}" data-maker="${workVO.maker}">전송</a>    
+					<a href="#" class="btnCtm" style="width: 25%;" onclick="inviteEamilTrans()" id="inviteEamilTransBtn" data-inviter="${login.email}" data-wcode="${workVO.wcode}" data-maker="${workVO.maker}">전송</a>    
 				</div>   
     </div>  
   </div>  
+  
 </body>  
 </html>     

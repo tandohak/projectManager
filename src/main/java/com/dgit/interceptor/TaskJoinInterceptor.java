@@ -19,6 +19,7 @@ import com.dgit.grade.MemberGrade;
 import com.dgit.service.InviteService;
 import com.dgit.service.MemberService;
 import com.dgit.service.WorkspaceService;
+import com.mysql.fabric.xmlrpc.base.Member;
 
 public class TaskJoinInterceptor extends HandlerInterceptorAdapter {
 
@@ -54,15 +55,24 @@ public class TaskJoinInterceptor extends HandlerInterceptorAdapter {
 			tempVO.setUno(login.getUno());
 			tempVO.setWcode(wcode);
 			MemberVO memVo = memService.selectOneUnoAndwcode(tempVO);
-			
+
+			List<InviteVO> list= inviteService.selectListBywcodeAndInvitee(vo);
 			//로그인 한 아이디가 이미 멤버로 등록 되어있으면 해당 워크스페이스로 이동.
 			if(memVo != null){
+				//멤버가 삭제멤버일 경우
+				if(memVo.getMemGrade() == 4){
+					if(list.size() > 0){
+						memVo.setMemGrade(1); 
+					}else{
+						memVo.setMemGrade(2);
+					}
+					memService.update(memVo);
+				}
 				response.sendRedirect(request.getContextPath()+"/task/"+wcode); 
 				return false;
 			}
 			
-			List<InviteVO> list= inviteService.selectListBywcodeAndInvitee(vo);
-			
+			// 새로운 vo 생성
 			MemberVO memVO = new MemberVO();
 			memVO.setWcode(wcode);
 			memVO.setUno(login.getUno());

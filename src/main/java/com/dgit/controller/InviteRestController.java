@@ -104,5 +104,18 @@ public class InviteRestController {
 		
 		return entity; 
 	}
-
+	
+	@RequestMapping(value="delete", method = RequestMethod.DELETE)
+	public ResponseEntity<String> delInvite(String invitee){
+		ResponseEntity<String> entity = null;
+		logger.info("invitee-" + invitee);
+		try {  
+			inviteService.delete(invitee);
+			entity = new ResponseEntity<>("success",HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+		} 
+		return entity;
+	}
 }
