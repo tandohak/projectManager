@@ -63,7 +63,12 @@ public class TaskController {
 	}
 	
 	@RequestMapping(value = "/{wcode}", method = RequestMethod.GET)
-	public String project(Model model) throws Exception {
+	public String project(Model model,@PathVariable("wcode") String wcode) throws Exception {
+		 
+		List<MemberVO> workMembers = memService.selectListByWcode(wcode);
+		 
+		model.addAttribute("workMembers",workMembers);
+		
 		return "task/project";  
 	}
 	
@@ -75,12 +80,12 @@ public class TaskController {
 		/* 구글 로그인 인증 url 주소를 받아 넘겨준다. */
 		System.out.println("/, url : " + url);
 		model.addAttribute("googleSignIn", url);
-		  
+		
 		WorkspaceVO vo = workService.selectOne(wcode);
 		model.addAttribute("wvo", vo); 
 		 
-		return "user/taskJoin";  
-	}
+		return "user/taskJoin";   
+	} 
 	
 	@RequestMapping(value = "/{wcode}/workspace", method = RequestMethod.GET)
 	public String workspaceManager(Model model,@ModelAttribute("memType") int memType,@PathVariable String wcode) throws Exception{

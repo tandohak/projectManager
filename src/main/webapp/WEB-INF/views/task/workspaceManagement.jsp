@@ -2,9 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header.jsp" %>
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_workspace.css?a=7"> 
-<script src="${pageContext.request.contextPath}/resources/js/taskProject.js?a=7"></script>
-<script src="${pageContext.request.contextPath}/resources/js/util.js?a=5"></script>
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_workspace.css?a=8"> 
+<script src="${pageContext.request.contextPath}/resources/js/task_workspace.js?a=8"></script>
+<script src="${pageContext.request.contextPath}/resources/js/util.js?a=8"></script>
 <%@ include file="include/sideBar.jsp" %>  
 		<script> 
 			var memType = ${memType};  
@@ -35,7 +35,7 @@
 								</ul>
 								<button id='inviteMemDialog' data-toggle="modal" data-target="#inviteModal">멤버 초대하기</button> 
 							</div> 
-							  
+							   
 							<div class="tab-content"> 
 							  <div id="memberList" class="tab-pane fade in active"> 
 							    <ul class="mList" id="adminList">
@@ -49,7 +49,7 @@
 								    				<img src="/projectManager/resources/img/user_icon_b.png"/>
 								    			</c:if> 
 								    			<c:if test="${mem.photoPath!=''}"> 
-													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}"/>
+													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${mem.photoPath}"/>
 								    			</c:if>  
 								    			<span>${mem.firstName} ${mem.lastName }</span>
 								    			<span>관리자</span>   
@@ -67,7 +67,7 @@
 								    				<img src="/projectManager/resources/img/user_icon_b.png"/>
 								    			</c:if> 
 								    			<c:if test="${mem.photoPath!=''}">  
-													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}"/>
+													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${mem.photoPath}"/>
 								    			</c:if>  
 								    			<span>${mem.firstName} ${mem.lastName }</span>
 								    			<span>관리자</span>   
@@ -79,10 +79,10 @@
 								    					<li><a href="#"  class="memGrade_normal" data-mno="${mem.mno }">멤버로 변경</a></li> 
 								    					<li><a href="#" class="memGrade_delete"   data-mno="${mem.mno }" data-email="${mem.email }" data-inviter="${login.email}" data-wcode="${workVO.wcode}" data-maker="${workVO.maker}">워크스페이스에서 제거</a></li>    
 								    				</ul>  
-								    			</div> 
+								    			</div>
 								    		</c:if>
 								    	</li>   
-								    	</c:if>   
+								    	</c:if>
 							    	</c:forEach> 
 							     </ul>
 							     <ul class="mList" id="normalList">  
@@ -98,7 +98,7 @@
 								    				<img src="/projectManager/resources/img/user_icon_b.png"/>
 								    			</c:if>
 								    			<c:if test="${mem.photoPath!=''}">
-													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}"/>
+													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${mem.photoPath}"/>
 								    			</c:if> 
 								    			<span>${mem.firstName} ${mem.lastName }</span>
 								    			<span> 멤버 </span>   
@@ -130,7 +130,7 @@
 								    				<img src="/projectManager/resources/img/user_icon_b.png"/>
 								    			</c:if>
 								    			<c:if test="${mem.photoPath!=''}">
-													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}"/>
+													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${mem.photoPath}"/>
 								    			</c:if> 
 								    			<span>${mem.firstName} ${mem.lastName }</span>
 								    			<span> 가입대기 </span>   
@@ -145,10 +145,11 @@
 								    				</ul>
 								    			</div> 
 								    		</c:if>
-								    	</li>    
-								    	</c:if> 
-							    	</c:forEach>
-							    </ul> 
+								    	</li>
+								    	</c:if>  
+							    	</c:forEach> 
+							    </ul>
+							    
 							  </div>
 							  <div id="inviteMember" class="tab-pane fade inviteList">
 							  	<ul class="mList">  

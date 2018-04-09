@@ -75,7 +75,7 @@
 .half:nth-child(2n) {
 	margin-right: 0 !important;
 }
- 
+
 .full{
 	width: 100%;
 	margin: 0;
@@ -243,6 +243,7 @@
 	left:50%;
 	margin-left: -340px;
 	margin-top: -301.5px; 
+	padding:15px; 
 }
 
 .tit_h2{
