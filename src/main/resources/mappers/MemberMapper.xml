@@ -23,10 +23,12 @@
 	</select>
 	
 	<select id="selectOneUnoAndwcode" resultType="MemberVO">
-		<include refid="selectSql" />
-		where uno = #{uno} and wcode = #{wcode}
-	</select>
-	
+		select mno, member.uno ,member.wcode, user.firstName, user.lastName,memGrade,user.photoPath,user.email 
+		from member join user 
+		on member.uno = user.uno 
+		where member.uno = #{uno} and member.wcode = #{wcode}
+	</select>  
+	 
 	<select id="selectListByUno" resultType="MemberVO">
 		<include refid="selectSql" />
 		<include refid="whereSqlUno" />
@@ -52,7 +54,15 @@
 		group by uno 
 	</select>
 	
-	<insert id="insert">
+	<select id="searchMemberByName" resultType="MemberVO">
+		select  mno, member.uno ,member.wcode, user.firstName, user.lastName,memGrade,user.photoPath,user.email 
+		from member join user 
+		on member.uno = user.uno 
+		where concat(user.firstName, " ", user.lastName) like concat('%',#{name},'%')
+		and member.wcode = #{wcode}
+	</select>
+	
+	<insert id="insert"> 	
 		insert into member
 		(uno,wcode,memGrade)
 		values(#{uno},#{wcode},#{memGrade})

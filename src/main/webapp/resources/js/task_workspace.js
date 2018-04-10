@@ -151,7 +151,7 @@ $(function(){
 		$("#normalList>li:eq(0)").find("strong").text("멤버"); 
 		$("#standByList>li:eq(0)").find("strong").text("가입대기"); 	
 	})
-})    
+})
 
 function updateMember(datas){
 	$.ajax({
@@ -165,9 +165,9 @@ function updateMember(datas){
 		success : function(result) {
 			console.log(result);
 		}
-	});  
+	});   
 }
-
+ 
 function inviteEamilTrans(){
 	var emails = [];
 	var chck = true; 

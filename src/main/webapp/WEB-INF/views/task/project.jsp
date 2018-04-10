@@ -2,10 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header.jsp" %>
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project.css?a=9"> 
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=9">  
-<%@ include file="include/sideBar.jsp" %>
-			<div id="contentWrap">   
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project.css?a=13"> 
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=13">  
+<script src="${pageContext.request.contextPath}/resources/js/task_project.js?a=3"></script> 
+<script> 
+	var wcode = "${wcode}"; 
+	var loginMem = { 
+			 mno : ${loginMem.mno },
+			 firstName : "${loginMem.firstName}" ,
+			 lastName :  "${loginMem.lastName }" ,
+			 photoPath : "${loginMem.photoPath}" 
+	};    
+	  
+</script>
+<%@ include file="include/sideBar.jsp" %>   
+			<div id="contentWrap">
 			<nav class="navbar navbar-default" style="border-radius:0px;">  
 			  <div class="container-fluid" style="padding:0px;"> 
 			  <ul class="nav navbar-nav sticky-top"> 
@@ -71,100 +82,138 @@
 			</div>   
 		</div>   
  	</div>    
- 	 
+ 	  
  	<!-- Modal -->  
   <div class="modal fade" id="addProjectModal" role="dialog">
-    <div class="modal_inner_box" style="">
-    	<h2 class="tit_h2" >새 프로젝트</h2>
-		<div class="inn_row"> 
-			<span class="sTit">제목</span>
-			<input type="text"	class="input full" name="name" style="margin-top: 0px" placeholder="예)웹사이트 디자인">
-		</div>
-		
-		<div class="inn_row">  
-			<span class="sTit">설명<span class="cFont_light_gray">(선택사항)</span></span>
-			<input type="text"	class="input full" name="name" style="margin-top: 0px">
-		</div>
-		 
-		 <div class="inn_row">   
-			<span class="sTit">공개 범위 설정</span>
-			<div class="visibility">
-				<div class="radioWrap">
-					<input type="radio" name="visibility" class="visi_radio">
-					<div class="txtWrap">
-						<span><i></i>비공개</span><br> 
-						<span>추가된 멤버만 엑세스 가능</span>
+    <div class="modal_inner_box">
+    	<ul class="dropdown_menu_setting">
+			<li><span class="dropTit">멤버</span> <a href="#" class="closeDropDownBtn"><span class="glyphicon glyphicon-remove"></span></a></li> 
+			<li>  
+				<div class="input-group">  
+					<input type="text" class="form-control" placeholder="Search">
+					<div class="input-group-btn">
+						<button class="btn btn-default" type="submit">  
+							<i class="glyphicon glyphicon-search"></i>  
+						</button>
 					</div>
-				</div>   
-				<div class="radioWrap"> 
-					<input type="radio" name="visibility" class="visi_radio">
-					<div class="txtWrap"> 
-						<span><i></i>공개</span><br>
-						<span>모든 워크스페이스 멤버 엑세스 가능</span>
-					</div>   
-				</div> 
-			</div> 
-		</div>
-		
-		<div class="inn_row" id="addMemberWrap">   
-			<span class="sTit">프로젝트 멤버</span>  
-			<div class="mem_add_btn"> 
-				<a href="#" class="btnCtm">+</a>
-				<ul class="dropdown_menu_setting">
-					<li><span class="dropTit">멤버</span> <a href="#" class="closeDropDownBtn"><span class="glyphicon glyphicon-remove"></span></a></li> 
-					<li>  
-						<div class="input-group">  
-						    <input type="text" class="form-control" placeholder="Search">
-						    <div class="input-group-btn">
-						      <button class="btn btn-default" type="submit">  
-						        <i class="glyphicon glyphicon-search"></i>  
-						      </button>
-						    </div>
-						  </div>  
-					</li>  
-					<li>  
-						<ul id="memList"> 
-							<c:forEach var="mem" items="${workMembers}">
-							<li>  
-								<a href="#" class="mem_li" data-uno="${mem.uno }"> 
-									<c:if test="${mem.photoPath=='' || mem.photoPath == null}"> 
-										<img id="userPic" class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon_b.png" style="width: 25px; height: 25px;"/>
-									</c:if>      
-									<c:if test="${mem.photoPath!=''}">  
-										<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}" style="width: 25px; height: 25px;"/>
-									</c:if> 
-									${mem.firstName} ${mem.lastName }  
-									<span class="glyphicon glyphicon-ok" <c:if test="${mem.uno == login.uno}">style="display:inline-block;"</c:if> ></span>
-								</a> 
-							</li>   
-							 </c:forEach>
-						</ul>
-					</li> 
+				</div>  
+			</li>  
+			<li>  
+				<ul id="memList"> 
+					
 				</ul>  
+			</li>      
+		</ul>  
+		<div class='modalWrap'>
+    	<div class="boxWrap"> 
+		   <div class="boxInnerWrap">   	 
+		    	<h2 class="tit_h2" >새 프로젝트</h2>
+				<div class="inn_row"> 
+					<span class="sTit">제목</span>
+					<input type="text"	class="input full" name="name" style="margin-top: 0px" placeholder="예)웹사이트 디자인">
+				</div>
+				
+				<div class="inn_row">  
+					<span class="sTit">설명<span class="cFont_light_gray">(선택사항)</span></span>
+					<input type="text"	class="input full" name="name" style="margin-top: 0px">
+				</div>
+				 
+				 <div class="inn_row">   
+					<span class="sTit">공개 범위 설정</span>
+					<div class="visibility">
+						<div class="radioWrap">
+							<input type="radio" name="visibility" class="visi_radio" checked="checked">
+							<div class="txtWrap"> 
+								<span><i></i>비공개</span><br> 
+								<span>추가된 멤버만 엑세스 가능</span>
+							</div>
+						</div>   
+						<div class="radioWrap"> 
+							<input type="radio" name="visibility" class="visi_radio">
+							<div class="txtWrap"> 
+								<span><i></i>공개</span><br>
+								<span>모든 워크스페이스 멤버 엑세스 가능</span>
+							</div>   
+						</div> 
+					</div> 
+				</div>
+				
+				<div class="inn_row" id="addMemberWrap">   
+					<span class="sTit">프로젝트 멤버</span>  
+					<div class="mem_add_btn"> 
+						<a href="#" class="btnCtm">+</a>
+					</div> 
+					<div class="addMemberBox">     
+						<%-- <div class="addMem_item" data-mno="${loginMem.mno }">${loginMem.firstName} ${loginMem.lastName }  
+							<c:if test="${login.photoPath=='' || login.photoPath == null}"> 
+								<img id="userPic" class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon_b.png" style="width: 25px; height: 25px;"/>
+							</c:if>      
+							<c:if test="${login.photoPath!=''}"> 
+								<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}" style="width: 25px; height: 25px;"/>
+							</c:if> 
+							<a href="#" class="delMem">x</a>
+						</div> --%>
+					</div>
 			</div>
-			<div class="addMemberBox"> 
-				<div class="addMem_item" data-uno="${login.uno }">${login.username }
-					<c:if test="${login.photoPath=='' || login.photoPath == null}"> 
-						<img id="userPic" class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon_b.png" style="width: 25px; height: 25px;"/>
-					</c:if>      
-					<c:if test="${login.photoPath!=''}"> 
-						<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}" style="width: 25px; height: 25px;"/>
-					</c:if> 
+			<script id="template" type="text/x-handlerbars-template">
+				{{#each.}}
+				<li>  
+					<a href="#" class="mem_li" data-mno="{{mno}}"  data-firstName="{{firstName }}" data-lastName="{{lastName }}" data-photoPath="{{photoPath }}"> 
+						<img id="userPic" class="pic" src="${pageContext.request.contextPath}/{{checkPhotoPath photoPath}}" style="width: 25px; height: 25px;"/>
+						{{firstName}} {{lastName}}   
+						<span class="glyphicon glyphicon-ok" style="{{checkSelectMember mno}}"></span>
+					</a>  
+				</li> 
+				{{/each}}   
+			</script>       
+			<script id="addMemTemplate" type="text/x-handlerbars-template">
+				<div class="addMem_item" data-mno="{{mno }}" data-firstName="{{firstName }}" data-lastName="{{lastName }}" data-photoPath="{{photoPath }}">{{firstName}} {{lastName }}  
+					<img id="userPic" class="pic" src="${pageContext.request.contextPath}/{{checkPhotoPath photoPath}}" style="width: 25px; height: 25px;"/>
 					<a href="#" class="delMem">x</a>
 				</div> 
+			</script>
+			<div class="inn_row"> 
+				<a href="#" class="btnCtm" id="addPjNextBtn" style="width: 25%;">다음:템플릿 선택 →</a> 
 			</div> 
-		</div>        
-		       
-		<script>   
-			$(".mem_add_btn").click(function(e){
-				e.preventDefault();    
-				$(this).siblings(".dropdown_menu_setting").toggle();  
-			}) 
-		</script>
-		<div class="inn_row"> 
-			<a href="#" class="btnCtm" style="width: 25%;">다음:템플릿 선택 →</a> 
-		</div>   
-    </div>  
-  </div>  
+		</div>  
+		<div class="boxInnerWrap">
+			 	<h2 class="tit_h2" >프로젝트 템플릿 선택</h2>
+			 	
+				<div class="inn_row">  
+					<div class="choose_box">
+						<div class="choose_img_box selected"><img src='${pageContext.request.contextPath}/resources/img/empty_b.png'/></div>
+						<span class="sTit">없음</span> 
+					</div>   
+					<div class="choose_box"> 
+						<div class="choose_img_box"><img src='${pageContext.request.contextPath}/resources/img/day.png'/></div>
+						<span class="sTit">평일</span> 
+					</div>
+					<div class="choose_box"> 
+						<div class="choose_img_box"><img src='${pageContext.request.contextPath}/resources/img/person.png'/></div>
+						<span class="sTit">개인</span>
+					</div> 
+					<div class="choose_box"> 
+						<div class="choose_img_box"><img src='${pageContext.request.contextPath}/resources/img/department.png'/></div>
+						<span class="sTit">부서</span> 
+					</div> 
+					<div class="choose_box"> 
+						<div class="choose_img_box"><img src='${pageContext.request.contextPath}/resources/img/kanban.png'/></div>
+						<span class="sTit">칸반(Kanban)</span>
+					</div> 
+				</div>
+				
+				<div class="inn_row">
+					<img id="prvImg" src='${pageContext.request.contextPath}/resources/img/preview-blank-f9e6c665.png' style="width: 583.188px;">
+				</div>  
+				<div class="inn_row modal_btn_wrap">  
+					<a href="#" id="addPjPrevBtn">← 뒤로</a>
+					<a href="#" class="btnCtm" style="width: 25%;">프로젝트 만들기</a> 
+				</div>  
+		</div>    
+		<div style="clear:both;"></div> 
+		</div>
+   		</div>  
+    </div>
+  </div>   
 </body>  
 </html>       

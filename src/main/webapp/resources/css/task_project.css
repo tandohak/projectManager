@@ -75,7 +75,7 @@
 	position: absolute;
 	right: -10px;
 	top: -10px;
-	z-index: 999;
+	z-index: 20;
 }
 
 .pj_item_setting a {
@@ -149,7 +149,7 @@
 }
 
 #addMemberWrap { 
-	overflow: inherit; 
+	min-height: 50px; 
 }
 
 #addMemberWrap .btnCtm {
@@ -157,56 +157,120 @@
 	width: 25px;
 	height: 25px !important;
 	margin: 0px;
-	line-height: 25px; 
+	line-height: 25px;
+}
+
+#addProjectModal .modalWrap {
+	width: 648px; 
+	height: 469.5px;
+	overflow: hidden; 
+}  
+
+.boxWrap {
+	height: 469.5px;
+	width: 1296px;
+}
+
+.boxInnerWrap {
+	width: 648px;
+	height: 469.5px;
+	float: left;
+}
+
+/*모달 프로젝트 템플릭 선택 css*/
+.modal_btn_wrap{
+	position: relative; 
+	margin-top: 57px  !important; 
+}   
+#addPjPrevBtn{
+	position: absolute;
+	left:0px;
+	top:11px; 
+	color:#00BCD4 !important; 
+}  
+.choose_box{
+	width: 20%;
+	float: left; 
+	text-align: center;
+}
+.choose_box:hover .choose_img_box{
+	border: 2px solid #00BCD4;
+	background: #EEEEEE; 
+} 
+.selected{
+	border: 2px solid #00BCD4 !important; 
+}
+.choose_img_box{
+	padding:10px;
+	border: 2px solid #ddd;
+	display: inline-block;
+	margin-bottom: 10px;
+}  
+.choose_img_box img{
+	width: 30px;
+	height: 30px;
 }
 /* 모달 공개 여부 */
-.visibilityWrap{
+.visibilityWrap {
 	overflow: hidden;
-} 
+}
+ 
 .visi_radio {
-	margin:5px !important;
-	width: 15px;  
-	height: 15px; 
-	float: left;    
-} 
-.radioWrap{
-	width:48%; 
-	border: 1px solid #ddd;
-	padding:10px; 
-	box-sizing:border-box;  
+	margin: 5px !important;
+	width: 15px;
+	height: 15px;
 	float: left;
-	margin-right: 2%;  
-	overflow: hidden; 
+}
+
+.radioWrap { 
+	width: 49%;
+	border: 1px solid #ddd;
+	padding: 10px;
+	box-sizing: border-box;
+	float: left;
+	overflow: hidden;
 	cursor: pointer;
 }
-.radioWrap:hover{
-	background: #eee; 
-}  
-.txtWrap{   
-	float: left;   
-	color:#333;   
-} 
-.txtWrap span:FIRST-CHILD{
-	font-weight: bold; 
+
+.radioWrap:FIRST-CHILD {
+	margin-right: 2%;
 }
-.txtWrap span:Last-CHILD{
-	font-size:12px;  
-	color:#9e9e9e;     
+
+.radioWrap:hover {
+	background: #eee;
+}
+
+.txtWrap {
+	float: left;
+	color: #333;
+}
+
+.txtWrap span:FIRST-CHILD {
+	font-weight: bold;
+}
+
+.txtWrap span:Last-CHILD {
+	font-size: 12px;
+	color: #9e9e9e;
 }
 
 /*모달 멤버 추가*/
 .addMemberBox {
 	float: left;
-	height: 25px;
+	min-height: 25px;
+	min-width: 142px;
+	max-width: 550px;
 	text-align: center;
 	line-height: 25px; 
 }
- 
+
 .addMemberBox .addMem_item {
-	padding: 0px 5px 0px 0px;  
+	float: left;
+	padding: 0px 5px 0px 0px;
 	border-radius: 12.5px;
 	background: #EEEEEE;
 	margin-left: 5px;
+	margin-bottom: 5px;
 	color: #333;
 }
 
@@ -216,88 +280,100 @@
 	height: 20px;
 	margin-top: 2.5px;
 	line-height: 20px;
-	border-radius: 20px; 
-	color: #333 !important; 
-	text-align: center;  
+	border-radius: 20px;
+	color: #333 !important;
+	text-align: center;
 }
 
 .addMemberBox .addMem_item .delMem:hover {
 	background-color: #E0E0E0;
-} 
- 
-/*드롭 다운 메뉴*/ 
-.mem_add_btn{
-	width:350px; 
-	position: relative; 
-}     
-.dropTit{
+}
+
+
+/*드롭 다운 메뉴*/
+.mem_add_btn {
+	position: relative;
 	float: left;
 }
-.closeDropDownBtn{
-	display:block !important; 
-	width: 25px !important; 
-	height: 25px !important; 
-	line-height: 25px !important; 
-	margin: 0px !important;  
-	padding:0px !important; 
-	float: right; 
-	font-size: 15px; 
-	text-align:  center;  
-} 
-.dropdown_menu_setting{
-	display: block;
-	position: absolute;  
-	top:35px;           
-	left:0px;   
-	background:#fff;  
+
+.dropTit {
+	float: left;
+}
+
+.closeDropDownBtn {
+	display: block !important;
+	width: 25px !important;
+	height: 25px !important;
+	line-height: 25px !important;
+	margin: 0px !important;
+	padding: 0px !important;
+	float: right;
+	font-size: 15px;
+	text-align: center;
+}
+
+.dropdown_menu_setting {
+	width: 350px;
+	display: none;
+	position: absolute;
+	top: 395px; 
+	left: 45px;
+	background: #fff;
 	list-style: none;
-	border-radius: 0px 0px 5px 5px;    
-	padding: 0px; 
-	margin: 0px;  
-	z-index: 999;
-	box-sizing:border-box;   
-	border:1px solid rgba(0, 0, 0, 0.15); 
-	box-shadow: 0px 2px 5px rgba(0,0,0,0.176);
-}         
-.dropdown_menu_setting>li{
-	padding: 10px;  
-	margin: 0px;  
-    border-bottom: 1px solid;
-	min-width: 155px;  
-    border-color: #E0E0E0; 
-	min-height: 20px;  
-	overflow: hidden;  
-}
-.dropdown_menu_setting>li>a{
-	color:#757575 !important; 
-	font-size:12px; 
-	text-decoration: none; 
- 	display:block;    
-    padding: 10px 15px; 
-} 
-#memList{
+	border-radius: 0px 0px 5px 5px;
 	padding: 0px;
-	height:185px;  
-	overflow:auto; 
-	list-style: none;  
+	margin: 0px;
+	z-index: 999;
+	box-sizing: border-box;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.176);
 }
-#memList a{
-	display:block;
-	width:100%;
-	padding:10px 0px;  
-	color: #333; 
-	line-height: 25px; 
+
+.dropdown_menu_setting>li {
+	padding: 10px;
+	margin: 0px;
+	border-bottom: 1px solid;
+	min-width: 155px;
+	border-color: #E0E0E0;
+	min-height: 20px;
+	overflow: hidden;
 }
-#memList a:hover{
-	border-radius:3px;
-	color: #333;  
-	background:#E0E0E0;  
+
+.dropdown_menu_setting>li>a {
+	color: #757575 !important;
+	font-size: 12px;
+	text-decoration: none;
+	display: block;
+	padding: 10px 15px;
 }
-.mem_li{
-	overflow: hidden; 
+
+#memList {
+	padding: 0px;
+	height: 185px;
+	overflow: auto;
+	list-style: none;
 }
-.mem_li span{
-	float: right !important;  
-	margin-right: 10px; 
+
+#memList a {
+	display: block;
+	width: 100%;
+	padding: 10px 0px;
+	color: #333;
+	line-height: 25px;
+}
+
+#memList a:hover {
+	border-radius: 3px;
+	color: #333;
+	background: #E0E0E0;
+}
+
+.mem_li {
+	overflow: hidden;
+}
+
+.mem_li span {
+	float: right !important;
+	margin-right: 10px;
 	display: none;
 }

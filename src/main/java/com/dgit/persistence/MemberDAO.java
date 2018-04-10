@@ -14,5 +14,6 @@ public interface MemberDAO {
 	public int insert(MemberVO vo) throws Exception;
 	public int delete(int mno) throws Exception;
 	public int update(MemberVO vo) throws Exception;
+	public List<MemberVO> searchMemberByName(String name,String wcode) throws Exception;
 	public List<MemberVO> selectListByWcode(String wcode) throws Exception;
 }

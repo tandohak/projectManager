@@ -63,12 +63,17 @@ public class TaskController {
 	}
 	
 	@RequestMapping(value = "/{wcode}", method = RequestMethod.GET)
-	public String project(Model model,@PathVariable("wcode") String wcode) throws Exception {
-		 
+	public String project(Model model,HttpSession session,@PathVariable("wcode") String wcode) throws Exception {
+		Object object = session.getAttribute("login");
+		LoginDTO login = (LoginDTO)object;
+		MemberVO vo = new MemberVO();
+		vo.setUno(login.getUno());
+		vo.setWcode(wcode);
+		MemberVO loginMem = memService.selectOneUnoAndwcode(vo);
 		List<MemberVO> workMembers = memService.selectListByWcode(wcode);
-		 
+		model.addAttribute("wcode",wcode); 
 		model.addAttribute("workMembers",workMembers);
-		
+		model.addAttribute("loginMem",loginMem); 
 		return "task/project";  
 	}
 	

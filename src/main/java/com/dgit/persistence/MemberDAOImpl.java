@@ -1,5 +1,6 @@
 package com.dgit.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -56,10 +57,19 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<MemberVO> selectListByUnoJoinWorkspace(int uno) throws Exception {
 		return session.selectList(namespace+"selectListByUnoJoinWorkspace",uno);
 	}
-
-	@Override
+	
+	@Override 
 	public MemberVO selectOneUnoAndwcode(MemberVO vo) throws Exception {
 		return  session.selectOne(namespace+"selectOneUnoAndwcode",vo);
+	}
+	
+	@Override
+	public List<MemberVO> searchMemberByName(String name,String wcode) throws Exception {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("name", name);
+		map.put("wcode", wcode);
+		 
+		return session.selectList(namespace+"searchMemberByName",map);
 	}
 	
 }

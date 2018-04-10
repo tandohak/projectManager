@@ -115,7 +115,7 @@ public class InviteRestController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
-		} 
+		}
 		return entity;
 	}
 }
