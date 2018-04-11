@@ -8,19 +8,19 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"  
-	href="${pageContext.request.contextPath}/resources/css/index.css?a=5">
+	href="${pageContext.request.contextPath}/resources/css/index.css?a=6">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login.css?a=5"> 
+	href="${pageContext.request.contextPath}/resources/css/login.css?a=6"> 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
- <script src="${pageContext.request.contextPath}/resources/js/join.js?a=4"></script>
+ <script src="${pageContext.request.contextPath}/resources/js/join.js?a=6"></script>
 </head>  
 <body>
 	<div class="container">
 		<input type="file" id="img_input" style="display: none;">
-		<div id="contentsWrap" class="profileBox">
+		<div id="contentsWrap" class="profileBox"> 
 			<div id="content_innerBox">  
 				<h2 class="tit_h2">프로필을 등록해 주세요.</h2>
-
+				
 				<div id="row">
 					<div id="photoBox">
 						<img src="#" id="photo"> <span>사진 업데이트</span>

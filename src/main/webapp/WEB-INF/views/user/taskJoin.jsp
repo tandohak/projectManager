@@ -25,8 +25,8 @@
 				<form action="${pageContext.request.contextPath}/emailAuth" method="post" id="emailPost">
 					<input type="email" class="input" name="email" id="email" placeholder="이메일 주소 입력">
 					<input type="submit" value="가입하기" class="btn">
-				</form>   
- 
+				</form>
+ 				
 				<div id="bar" class="row">  
 					<span class="bar"><i></i></span> <span class="txt">또는</span> <span
 						class="bar"><i></i></span>

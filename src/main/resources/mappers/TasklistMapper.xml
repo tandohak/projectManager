@@ -20,12 +20,26 @@
 		<include refid="selectSql" />
 	</select>
 	
+	<select id="countTaskAllByPno" resultType="int">
+		select count(pno) 
+		from tasklist join task
+		on tasklist.tlno = task.tlno
+		where pno = #{pno};
+	</select>
+	
+	<select id="countTaskFinishByPno" resultType="int">
+		select count(pno) 
+		from tasklist join task
+		on tasklist.tlno = task.tlno
+		where pno = #{pno} and status = 2;
+	</select> 
+	
 	<insert id="insert">
 		insert into tasklist
 		(pno,name,list_order)
 		values(#{pno},#{name},#{list_order})
 	</insert>
-
+	
 	<delete id="delete">
 	    delete from tasklist
 		<include refid="whereSql" />

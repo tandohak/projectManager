@@ -8,44 +8,49 @@
 	</sql>
 
 	<sql id="whereSql">
-		where jno = #{jno}
+		where pno = #{pno}
 	</sql>
 
 	<sql id="whereSqlTaskNo">
 		where taskno = #{taskno}
 	</sql>
-
-	<select id="select" resultType="TaskVO">
+	
+	<sql id="whereSqlSelectOne">
+		where pno = #{pno}
+		and mno = #{mno}
+		and taskno = #{taskno}
+	</sql>
+	
+	
+	<select id="selectOne" resultType="JobAssignmentVO">
 		<include refid="selectSql" />
-		<include refid="whereSql" />
+		<include refid="whereSqlSelectOne" />
 	</select>
 
-	<select id="selectTaskNo" resultType="TaskVO">
+	<select id="selectTaskNo" resultType="JobAssignmentVO">
 		<include refid="selectSql" />
 		<include refid="whereSqlTaskNo" />
 	</select>
 
-	<select id="selectList" resultType="TaskVO">
+	<select id="selectList" resultType="JobAssignmentVO">
 		<include refid="selectSql" />
 	</select>
 
 	<insert id="insert">
 		insert into jobassignment
-		(taskno,mno,grade)
-		values(#{taskno},#{mno},#{grade})
+		(pno,mno,taskno)
+		values(#{pno},#{mno},#{taskno})
 	</insert>
-
+ 
 	<delete id="delete">
 		delete from jobassignment
-		<include refid="whereSql" />
+		<include refid="whereSqlSelectOne" />
 	</delete>
-
+ 
 	<update id="update">
 		update jobassignment set
 		taskno=#{taskno},
-		mno=#{mno},
-		grade=#{grade}
-		<include refid="whereSql" />
+		<include refid="whereSqlSelectOne" />
 	</update>
 
 </mapper>

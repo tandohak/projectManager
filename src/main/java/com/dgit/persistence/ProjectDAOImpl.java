@@ -38,4 +38,9 @@ public class ProjectDAOImpl implements ProjectDAO {
 	public int update(ProjectVO vo) throws Exception {
 		return session.update(namespace + "update", vo);
 	}
+
+	@Override
+	public List<ProjectVO> selectListByWcode(String wcode) throws Exception {
+		return session.selectList(namespace + "selectListByWcode",wcode);
+	}
 }

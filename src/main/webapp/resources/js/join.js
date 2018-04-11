@@ -45,7 +45,7 @@ $(function() {
 				console.log(res);   
 				wvo = res.wvo;
 				if(res != "fail"){
-					$("#inviteLink").val("http://localhost:8080/projectManager/user/invite/"+res.wvo.wcode);
+					$("#inviteLink").val("http://localhost:8080/projectManager/task/"+res.wvo.wcode+"/join");
 					$("#wname").val(res.wvo.name);
 					$("#startTask").attr("href","http://localhost:8080/projectManager/task/"+res.wvo.wcode);
 				}else{

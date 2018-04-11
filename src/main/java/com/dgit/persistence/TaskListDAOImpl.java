@@ -43,4 +43,14 @@ public class TaskListDAOImpl implements TasklistDAO{
 	public int changeOrder(TaskListVO vo) throws Exception {
 		return session.update(namespace + "changeOrder", vo);
 	}
+
+	@Override
+	public int countTaskAllByPno(int pno) throws Exception {
+		return session.selectOne(namespace + "countTaskAllByPno", pno);
+	}
+
+	@Override
+	public int countTaskFinishByPno(int pno) throws Exception {
+		return session.selectOne(namespace + "countTaskFinishByPno", pno);
+	}
 }

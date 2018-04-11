@@ -18,7 +18,9 @@
 		where uno = #{uno}
 	</sql>
 	<select id="selectOne" resultType="MemberVO">
-		<include refid="selectSql" />
+		select mno, member.uno ,member.wcode, user.firstName, user.lastName,memGrade,user.photoPath,user.email 
+		from member join user 
+		on member.uno = user.uno 
 		<include refid="whereSql" />
 	</select>
 	

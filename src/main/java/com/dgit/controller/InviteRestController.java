@@ -82,7 +82,7 @@ public class InviteRestController {
 			
 			for (String email : emails) {
 				vo.setInvitee(email);
-				inviteService.insert(vo);
+				inviteService.insert(vo); 
 			}
 			  
 			for (String email : emails) {

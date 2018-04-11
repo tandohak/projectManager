@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.dgit.domain.JobAssignmentVO;
-
+@Repository
 public class JobAssignmentDAOImpl implements JobAssignmentDAO {
 	private static final String namespace = "com.dgit.mapper.JobAssignmentMapper.";
 
@@ -15,8 +16,8 @@ public class JobAssignmentDAOImpl implements JobAssignmentDAO {
 	
 	
 	@Override
-	public JobAssignmentVO selectOne(int jno) throws Exception {
-		return session.selectOne(namespace+"selectOne",jno);
+	public JobAssignmentVO selectOne(JobAssignmentVO vo) throws Exception {
+		return session.selectOne(namespace+"selectOne",vo);
 	}
 
 	@Override
@@ -30,8 +31,8 @@ public class JobAssignmentDAOImpl implements JobAssignmentDAO {
 	}
 
 	@Override
-	public int delete(int jno) throws Exception {
-		return session.delete(namespace+"delete",jno);
+	public int delete(JobAssignmentVO vo) throws Exception {
+		return session.delete(namespace+"delete",vo);
 	}
 
 	@Override

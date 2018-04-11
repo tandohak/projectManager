@@ -1,5 +1,7 @@
 package com.dgit.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -21,10 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.dgit.domain.InviteVO;
 import com.dgit.domain.LoginDTO;
 import com.dgit.domain.MemberVO;
+import com.dgit.domain.ProjectVO;
 import com.dgit.domain.WorkspaceVO;
-import com.dgit.persistence.InviteDAO;
 import com.dgit.service.InviteService;
 import com.dgit.service.MemberService;
+import com.dgit.service.ProjectService;
+import com.dgit.service.TaskListService;
 import com.dgit.service.WorkspaceService;
 
 @Controller
@@ -44,6 +48,12 @@ public class TaskController {
 	
 	@Autowired
 	private InviteService inviteService;
+	
+	@Autowired
+	private ProjectService projectService;
+
+	@Autowired
+	private TaskListService taskListService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
   
@@ -71,9 +81,26 @@ public class TaskController {
 		vo.setWcode(wcode);
 		MemberVO loginMem = memService.selectOneUnoAndwcode(vo);
 		List<MemberVO> workMembers = memService.selectListByWcode(wcode);
+		
+		List<ProjectVO> projectList = projectService.selectListByWcode(wcode);
+		
+		List<HashMap<String,Object>> pjlist= new ArrayList<>();
+		
+		for(ProjectVO pj : projectList){
+			HashMap<String,Object> map = new HashMap();
+			int countAll = taskListService.countTaskAllByPno(pj.getPno());
+			int countFinish = taskListService.countTaskFinishByPno(pj.getPno());
+			map.put("pj", pj);
+			map.put("countAll", countAll);
+			map.put("countFinish", countFinish);
+			pjlist.add(map);
+		}
+		
 		model.addAttribute("wcode",wcode); 
 		model.addAttribute("workMembers",workMembers);
 		model.addAttribute("loginMem",loginMem); 
+		model.addAttribute("projectList",pjlist);
+		
 		return "task/project";  
 	}
 	

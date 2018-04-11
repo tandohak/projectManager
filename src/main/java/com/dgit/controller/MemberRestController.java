@@ -29,7 +29,7 @@ public class MemberRestController {
 		}catch(Exception e) {
 			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
-		} 
+		}
 		
 		return entity;
 	}
@@ -38,13 +38,13 @@ public class MemberRestController {
 	public ResponseEntity<List<MemberVO>> memberListByWcode(String wcode){
 		ResponseEntity<List<MemberVO>> entity = null; 
 		
-		try{ 
+		try{
 			List<MemberVO> memList= memService.selectListByWcode(wcode);
 			entity = new ResponseEntity<>(memList,HttpStatus.OK);
 		}catch(Exception e) {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
-		}    
+		}
 		
 		return entity; 
 	}

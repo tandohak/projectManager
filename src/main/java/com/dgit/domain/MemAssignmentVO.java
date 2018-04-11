@@ -1,31 +1,37 @@
 package com.dgit.domain;
 
-public class JobAssignmentVO {
+public class MemAssignmentVO {
 	private int pno;
 	private int mno;
-	private int taskno;
+	private int grade;
+
 	public int getPno() {
 		return pno;
 	}
+
 	public void setPno(int pno) {
 		this.pno = pno;
 	}
+
 	public int getMno() {
 		return mno;
 	}
+
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
-	public int getTaskno() {
-		return taskno;
-	}
-	public void setTaskno(int taskno) {
-		this.taskno = taskno;
-	}
-	@Override
-	public String toString() {
-		return "JobAssignmentVO [pno=" + pno + ", mno=" + mno + ", taskno=" + taskno + "]";
+
+	public int getGrade() {
+		return grade;
 	}
 
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	@Override
+	public String toString() {
+		return "MemAssignmentVO [pno=" + pno + ", mno=" + mno + ", grade=" + grade + "]";
+	}
 
 }

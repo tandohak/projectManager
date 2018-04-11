@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dgit.mapper.MemAssignmentMapper">
+	 <sql id="selectSql">
+		select * from memassignment
+	</sql>
+ 
+	<sql id="whereSqlSelectList">
+		where pno = #{pno}
+	</sql>
+
+	<sql id="whereSqlSelectOne">
+		where pno = #{pno}
+		and mno = #{mno}
+	</sql>
+
+	<select id="selectOne" resultType="MemAssignmentVO">
+		<include refid="selectSql" />
+		<include refid="whereSqlSelectOne" />
+	</select>
+ 
+	<select id="selectList" resultType="MemAssignmentVO">
+		<include refid="selectSql" />
+		<include refid="whereSqlSelectList" />
+	</select>
+ 
+	<insert id="insert">
+		insert into memassignment 
+		(pno,mno,grade) 
+		values(#{pno},#{mno},#{grade})
+	</insert>
+
+	<delete id="delete">
+		delete from memassignment
+		<include refid="whereSqlSelectOne" />
+	</delete> 
+	
+	<update id="update"> 
+		update memassignment set
+		grade=#{grade}, 
+		<include refid="whereSqlSelectOne" />
+	</update>
+</mapper>

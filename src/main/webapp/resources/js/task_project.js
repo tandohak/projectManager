@@ -16,7 +16,7 @@ $(function() {
 				var t_fn = Handlebars.compile(source);
 				$("#memList").html(t_fn(res));
 			}
-		})
+		}) 
 		$(".dropdown_menu_setting input").val("");
 		$(".dropdown_menu_setting").toggle();
 	})
@@ -70,8 +70,8 @@ $(function() {
 
 	$("#addProjectBtn").click(
 			function(e) {
-				e.preventDefault();
-				$(".modal_inner_box input").val("");
+				e.preventDefault(); 
+				$(".modal_inner_box input").not("input[type='radio']").val("");
 				$(".modal_inner_box input[name='visibility']").removeAttr(
 						"checked");
 				$(".modal_inner_box input[name='visibility']").eq(0).attr(
@@ -123,6 +123,11 @@ $(function() {
 	})
 
 	$("#addPjNextBtn").click(function() {
+
+		if (!checkFrom($("#project_title"))) {
+			return false;
+		}
+
 		$(".boxWrap").animate({
 			marginLeft : '-=648',
 		}, 400);
@@ -130,7 +135,7 @@ $(function() {
 	$("#addPjPrevBtn").click(function() {
 		$(".boxWrap").animate({
 			marginLeft : '0',
-		}, 400);  
+		}, 400);
 	})
 	$(".choose_img_box").click(
 			function() {
@@ -150,6 +155,48 @@ $(function() {
 						"/projectManager/resources/img/" + imgPath[idx]);
 				$(this).find("img").attr("src", imgSrc);
 			})
+
+	$("#makeProject").click(function(){
+		var title = $("#project_title").val();
+		var explanation = $("#project_explan").val(); 
+		var visibility = $(".visibility input:checked").val();
+		var mnolist = new Array();   
+		 
+		$(".addMem_item").each(function(i,obj){
+			mnolist.push(Number($(this).attr("data-mno")));
+		})
+		var template = $(".selected").parents(".choose_box").index();
+		
+		var datas = {
+				"title":title,//타이틀
+				"explanation":explanation,//초대자
+				"visibility":visibility,//초대 워크스페이스
+				"wcode":wcode,
+				"memList":mnolist,
+				"template":Number(template),
+				"makerMno":loginMem.mno
+		}
+		 
+		$.ajax({
+			url:"/projectManager/project/make",
+			data : JSON.stringify(datas),
+			contextType:"application/json",
+			headers:{"Content-Type":"application/json"},
+			type : "post",
+			dataType : "json",   
+			success : function(result) {
+				console.log(result);
+				
+				var source = $("#pj_item_template").html();
+				var t_fn = Handlebars.compile(source);
+				var length = $(".pj_item").length-1;
+				$(".pj_item").eq(length).before(t_fn(result));
+				  
+				$("#addProjectModal").trigger("click");  
+			}  
+		}) 
+		 
+	});
 })
 
 Handlebars.registerHelper('checkPhotoPath', function(options) {

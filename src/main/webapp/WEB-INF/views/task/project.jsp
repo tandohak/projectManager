@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header.jsp" %>
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project.css?a=13"> 
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=13">  
-<script src="${pageContext.request.contextPath}/resources/js/task_project.js?a=3"></script> 
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project.css?a=16"> 
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=16">  
+<script src="${pageContext.request.contextPath}/resources/js/task_project.js?a=6"></script> 
 <script> 
-	var wcode = "${wcode}"; 
+	var wcode = "${wcode}";  
 	var loginMem = { 
 			 mno : ${loginMem.mno },
 			 firstName : "${loginMem.firstName}" ,
@@ -51,38 +51,107 @@
 							<a href="#"><span class="glyphicon glyphicon-menu-down"></span> 내 프로젝트 (<span class="pjCnt">0</span>)</a>
 						</div> 
 						<div class="pjList"> 
-							<div class="pj_item">
-								<div class="pj_item_header">
-									<p><i></i>프로젝트명</p>
-									<div class="pj_item_setting">
-										<a href="#"><span class="glyphicon glyphicon-cog"></span></a>
-									</div>
-								</div> 
-								<div class='pj_item_footer'>
-									<p class="pj_item_state">상태 없음</p>
-									<div class="pj_item_progress">
-										<div class="pj_item_taskState">
-											<span class="percent">0% 완료</span>
-											<span class="taskCnt">0/0개 업무</span>
+							<c:if test="${projectList != null }">
+								<c:forEach var="item" items="${projectList }">
+									<div class="pj_item">
+										<div class="pj_item_header">
+											<p><i></i>${item.pj.title }</p> 
+											<div class="pj_item_setting"> 
+												<a href="#" class="setting_pj_btn" data-pno="${item.pj.pno }"><span class="glyphicon glyphicon-cog"></span></a>
+											</div>  
 										</div>
-										<div class="percentbar">
-											<div class="progressBar"></div>
-										</div>
+										<div class='pj_item_footer'>
+											<p class="pj_item_state">상태 없음</p>
+											<div class="pj_item_progress">
+												<div class="pj_item_taskState">
+													<span class="percent">0% 완료</span>
+													<span class="taskCnt">${item.countFinish}/${item.countAll}개 업무</span>
+												</div> 
+												<div class="percentbar"> 
+													<div class="progressBar" style="width: ${(item.countFinish/item.countAll)*100}%;"></div>
+												</div>
+											</div>
+										</div>   
 									</div>
-								</div>
-							</div> 
+								</c:forEach>  
+							</c:if>
 							<div class="pj_item" id="addProjectBtn" data-toggle="modal" data-target="#addProjectModal">
 								<p> 
 									<span class="glyphicon glyphicon-plus"></span> 새 프로젝트
 								</p>  
 							</div> 
+							<script id="pj_item_template" type="text/x-handlerbars-template">
+								<div class="pj_item">
+									<div class="pj_item_header">
+										<p><i></i>{{title}}</p> 
+										<div class="pj_item_setting"> 
+											<a href="#" class="setting_pj_btn" data-pno="{{pno}}"><span class="glyphicon glyphicon-cog"></span></a>
+										</div>  
+									</div>  
+									<div class='pj_item_footer'>
+										<p class="pj_item_state">상태 없음</p>
+										<div class="pj_item_progress">
+											<div class="pj_item_taskState">
+												<span class="percent">0% 완료</span>
+												<span class="taskCnt">0/0개 업무</span>
+											</div> 
+											<div class="percentbar"> 
+												<div class="progressBar"></div> 
+											</div>
+										</div>
+									</div>  
+								</div>
+							</script> 
 						</div>  
 					</div>
 				</div> 
+				
+				<!-- 프로젝트 설정 -->
+			 	<div class="sideSetting">
+			 		<a href="#" class="sideSettingClose"><span  class="glyphicon glyphicon-remove"></span></a>
+			 		 
+			 			<div class="settingHeader"> 
+			 				<div class="set_title inputText">
+			 					<input type="text" value="프로젝트명" readonly="readonly">
+			 					<span class="glyphicon glyphicon-pencil"></span>
+			 					<p>
+				 					#7 작성자 TE ST • 작성일 4월 11일 • 몇 초 전에 업데이트됨
+				 				</p> 
+			 				</div>  
+			 				 
+			 				  
+			 				<ul class="toggleWrap">
+			 					<li class="selectSetting"><a href="#">설정</a></li>
+			 					<li><a href="#">모든 활동</a></li>
+			 				</ul>
+			 			</div> 
+			 			<div class="settingBody">
+			 				<div class="settingContent"> 
+			 					<div class="settingBlock">   
+				 					<p><span class="glyphicon glyphicon-text-size" style="font-size: 10px;"></span> 설명 </p> 
+				 					<div class="inputText">
+					 					<input type="text" value="프로젝트명" readonly="readonly">
+					 					<span class="glyphicon glyphicon-pencil"></span>
+					 				</div>    
+			 					</div>
+			 					<div class="settingBlock">   
+				 					<div class="left_block_tit">
+				 						<p>프로젝트 상태</p>
+				 					</div>
+				 					<div class="right_block_con">
+				 						<select>
+				 						</select>
+				 					</div>
+			 					</div>
+			 				</div>
+			 			</div>
+			 	</div>
 			</div>   
-		</div>   
+		</div>   		
  	</div>    
  	  
+ 	
+ 	 
  	<!-- Modal -->  
   <div class="modal fade" id="addProjectModal" role="dialog">
     <div class="modal_inner_box">
@@ -110,33 +179,33 @@
 		    	<h2 class="tit_h2" >새 프로젝트</h2>
 				<div class="inn_row"> 
 					<span class="sTit">제목</span>
-					<input type="text"	class="input full" name="name" style="margin-top: 0px" placeholder="예)웹사이트 디자인">
+					<input type="text"	class="input full" id="project_title" style="margin-top: 0px" placeholder="예)웹사이트 디자인">
 				</div>
 				
 				<div class="inn_row">  
 					<span class="sTit">설명<span class="cFont_light_gray">(선택사항)</span></span>
-					<input type="text"	class="input full" name="name" style="margin-top: 0px">
+					<input type="text"	class="input full" id="project_explan" style="margin-top: 0px">
 				</div>
 				 
 				 <div class="inn_row">   
 					<span class="sTit">공개 범위 설정</span>
 					<div class="visibility">
 						<div class="radioWrap">
-							<input type="radio" name="visibility" class="visi_radio" checked="checked">
+							<input type="radio" name="visibility" class="visi_radio" checked="checked" value="0">
 							<div class="txtWrap"> 
 								<span><i></i>비공개</span><br> 
 								<span>추가된 멤버만 엑세스 가능</span>
 							</div>
 						</div>   
-						<div class="radioWrap"> 
-							<input type="radio" name="visibility" class="visi_radio">
+						<div class="radioWrap">   
+							<input type="radio" name="visibility" class="visi_radio" value="1">
 							<div class="txtWrap"> 
 								<span><i></i>공개</span><br>
 								<span>모든 워크스페이스 멤버 엑세스 가능</span>
 							</div>   
-						</div> 
+						</div>
 					</div> 
-				</div>
+				</div> 
 				
 				<div class="inn_row" id="addMemberWrap">   
 					<span class="sTit">프로젝트 멤버</span>  
@@ -207,7 +276,7 @@
 				</div>  
 				<div class="inn_row modal_btn_wrap">  
 					<a href="#" id="addPjPrevBtn">← 뒤로</a>
-					<a href="#" class="btnCtm" style="width: 25%;">프로젝트 만들기</a> 
+					<a href="#" class="btnCtm"  id="makeProject" style="width: 25%;">프로젝트 만들기</a> 
 				</div>  
 		</div>    
 		<div style="clear:both;"></div> 

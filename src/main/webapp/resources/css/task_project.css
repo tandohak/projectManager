@@ -42,8 +42,7 @@
 
 .pjList {
 	width: 100%;
-	margin-top: 10px;
-	padding: 10px;
+	margin-top: 10px; 
 	overflow: hidden;
 }
 
@@ -209,7 +208,7 @@
 .choose_img_box img{
 	width: 30px;
 	height: 30px;
-}
+} 
 /* 모달 공개 여부 */
 .visibilityWrap {
 	overflow: hidden;
@@ -376,4 +375,116 @@
 	float: right !important;
 	margin-right: 10px;
 	display: none;
+}
+
+/*세팅메뉴 css*/
+.sideSetting{
+	width: 575px;
+	height: 100%;
+	background: #eee; 	
+	position: absolute; 
+	right:0px; 
+	top:0px; 
+	z-index: 999;  
+	box-shadow: 0px 0px 10px gray; 
+}
+
+.sideSettingClose{
+	position: absolute;
+	width: 30px;
+	height:48px;
+	background: #fff; 	 
+	top:0px;
+	left: -30px;  
+	border-radius:4px 0px 0px 4px;
+	color:#bbb;   
+} 
+.sideSettingClose span{
+	margin-top: 16px;
+	margin-left: 8px;
+}
+.settingHeader{ 
+	background: #fff; 
+	border-bottom: 1px solid #ddd; 
+	overflow: hidden;
+} 
+ 
+.set_title{
+	margin:20px;
+	margin-bottom:0px;  
+	position: relative;
+}
+.inputText{
+	position: relative; 
+}
+.inputText p{
+	color:#9E9E9E;   
+}
+.inputText input[type='text']{ 
+	width: 100%;
+	border: none; 
+	font-weight: bold; 
+	color:#757575; 
+	background:rgba(0,0,0,0); 
+	font-size:15px; 
+}  
+.set_title input[type='text']:hover{
+	background-color: #eee !important;  
+	border-radius:3px;     
+}    
+.inputText input[type='text']:hover{
+	background-color: #ddd;  
+	border-radius:3px;   
+}   
+.inputText input[type='text']:hover+span{
+	display: block; 	
+}
+.inputText span{
+	position: absolute !important; 
+	top:4px;  
+	right: 10px;  
+	color:#757575;  
+	display: none;
+} 
+.toggleWrap{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	overflow: hidden; 
+}  
+.toggleWrap li{
+	float: left; 
+	width: 50%; 
+}
+.toggleWrap li a{
+	display: block;
+	width: 100%; 
+	height: 40px; 
+	text-align: center;  
+	line-height: 40px;
+	margin-top:20px; 
+	color:#696f7a;
+	font-size: 14px;  
+	text-decoration: none !important; 
+	box-sizing:border-box;  
+}  
+  
+.toggleWrap li a:HOVER {
+	text-decoration: none !important;
+} 
+  
+.toggleWrap .selectSetting{ 
+	border-bottom: 2px solid #337ab7; 
+}
+.settingBlock{
+	margin: 20px 20px 10px 20px;
+	padding-bottom: 10px; 
+	border-bottom: 1px solid #ddd;  
+}  
+.settingBlock p{
+	color:#616161;  
+}
+.settingBlock .inputText input[type='text']{
+	font-weight: normal; 
+	font-size: 14px;  
 }

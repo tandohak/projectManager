@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class ProjectVO {
 	private int pno;
-	private int wno;
+	private String wcode;
 	private String title;
 	private String explanation;
-	private String visibility;
+	private boolean visibility;
 	private Date regDate;
 	private Date startDate;
 	private Date endDate;
@@ -24,12 +24,13 @@ public class ProjectVO {
 		this.pno = pno;
 	}
 
-	public int getWno() {
-		return wno;
+
+	public String getWcode() {
+		return wcode;
 	}
 
-	public void setWno(int wno) {
-		this.wno = wno;
+	public void setWcode(String wcode) {
+		this.wcode = wcode;
 	}
 
 	public String getTitle() {
@@ -48,11 +49,11 @@ public class ProjectVO {
 		this.explanation = explanation;
 	}
 
-	public String getVisibility() {
+	public boolean getVisibility() {
 		return visibility;
 	}
 
-	public void setVisibility(String visibility) {
+	public void setVisibility(boolean visibility) {
 		this.visibility = visibility;
 	}
 
@@ -114,10 +115,11 @@ public class ProjectVO {
 
 	@Override
 	public String toString() {
-		return "ProjectVO [pno=" + pno + ", wno=" + wno + ", title=" + title + ", explanation=" + explanation
+		return "ProjectVO [pno=" + pno + ", wcode=" + wcode + ", title=" + title + ", explanation=" + explanation
 				+ ", visibility=" + visibility + ", regDate=" + regDate + ", startDate=" + startDate + ", endDate="
 				+ endDate + ", finishDate=" + finishDate + ", status=" + status + ", authority=" + authority
 				+ ", locker=" + locker + "]";
 	}
+
 
 }

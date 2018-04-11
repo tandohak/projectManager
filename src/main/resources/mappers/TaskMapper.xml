@@ -38,7 +38,7 @@
 	    delete from task
 		<include refid="whereSql" />
 	</delete>
-	
+	 
 	<update id="update">	    
 	    update task set
 	    tlno = #{tlno},
