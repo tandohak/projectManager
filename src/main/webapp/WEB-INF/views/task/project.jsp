@@ -2,26 +2,28 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header.jsp" %>
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project.css?a=16"> 
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=16">  
-<script src="${pageContext.request.contextPath}/resources/js/task_project.js?a=6"></script> 
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project.css?a=23"> 
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=23">   
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=23">  
+<script src="${pageContext.request.contextPath}/resources/js/task_project.js?a=13"></script> 
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=13"></script> 
 <script> 
-	var wcode = "${wcode}";  
+	var wcode = "${wcode}";   
 	var loginMem = { 
-			 mno : ${loginMem.mno },
+			 mno : ${loginMem.mno },   
 			 firstName : "${loginMem.firstName}" ,
 			 lastName :  "${loginMem.lastName }" ,
-			 photoPath : "${loginMem.photoPath}" 
-	};    
-	  
-</script>
-<%@ include file="include/sideBar.jsp" %>   
-			<div id="contentWrap">
-			<nav class="navbar navbar-default" style="border-radius:0px;">  
-			  <div class="container-fluid" style="padding:0px;"> 
+			 photoPath : "${loginMem.photoPath}"  
+	};       
+	   
+</script>    
+<%@ include file="include/sideBar.jsp" %>      
+			<div id="contentWrap"> 
+			<nav class="navbar navbar-default" style="border-radius:0px; margin-bottom: 0px;">  
+			  <div class="container-fluid" style="padding:0px;">     
 			  <ul class="nav navbar-nav sticky-top"> 
 					<li>  
-						 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 						 	전체 프로젝트(0) <span class="glyphicon glyphicon-menu-down"></span> 
 						 </a>    
 						<ul class="dropdown-menu">
@@ -39,12 +41,13 @@
 				    <div class="input-group-btn">
 				      <button class="btn btn-default" type="submit">  
 				        <i class="glyphicon glyphicon-search"></i>  
-				      </button>
+				      </button>  
 				    </div>
 				  </div>
 				</form>
-			  </div> 
+			  </div>  
 			</nav>
+			<!-- <div class="contentBody"> -->
 				<div class="contentBox">
 					<div class="projectBox"> 
 						<div class="pjToggleBtn"> 
@@ -60,17 +63,17 @@
 												<a href="#" class="setting_pj_btn" data-pno="${item.pj.pno }"><span class="glyphicon glyphicon-cog"></span></a>
 											</div>  
 										</div>
-										<div class='pj_item_footer'>
-											<p class="pj_item_state">상태 없음</p>
-											<div class="pj_item_progress">
-												<div class="pj_item_taskState">
+										<div class='pj_item_footer'> 
+											<p class="pj_item_state" data-pno="${item.pj.pno }">상태 없음</p>
+											<div class="pj_item_progress">    
+												<div class="pj_item_taskState">  
 													<span class="percent">0% 완료</span>
 													<span class="taskCnt">${item.countFinish}/${item.countAll}개 업무</span>
-												</div> 
+												</div>
 												<div class="percentbar"> 
 													<div class="progressBar" style="width: ${(item.countFinish/item.countAll)*100}%;"></div>
-												</div>
-											</div>
+												</div> 
+											</div>  
 										</div>   
 									</div>
 								</c:forEach>  
@@ -102,60 +105,219 @@
 									</div>  
 								</div>
 							</script> 
-						</div>  
+						</div>   
 					</div>
 				</div> 
 				
-				<!-- 프로젝트 설정 -->
-			 	<div class="sideSetting">
+				<!-- 프로젝트 설정 -->  
+			 	<div class="sideSetting" style="display:none;">
 			 		<a href="#" class="sideSettingClose"><span  class="glyphicon glyphicon-remove"></span></a>
 			 		 
 			 			<div class="settingHeader"> 
-			 				<div class="set_title inputText">
-			 					<input type="text" value="프로젝트명" readonly="readonly">
-			 					<span class="glyphicon glyphicon-pencil"></span>
+			 				<div class="set_title inputText"> 
+			 					<input type="text" value="프로젝트명" readonly="readonly" id="project_name_InputText">
+			 					<span class="glyphicon glyphicon-pencil"></span>   
 			 					<p>
 				 					#7 작성자 TE ST • 작성일 4월 11일 • 몇 초 전에 업데이트됨
-				 				</p> 
-			 				</div>  
-			 				 
-			 				  
+				 				</p>    
+			 				</div>   
+			 				    
+			 				           
 			 				<ul class="toggleWrap">
 			 					<li class="selectSetting"><a href="#">설정</a></li>
 			 					<li><a href="#">모든 활동</a></li>
 			 				</ul>
 			 			</div> 
-			 			<div class="settingBody">
-			 				<div class="settingContent"> 
+			 			<div class="settingBody"> 
+			 				<div class="settingContent">   	
 			 					<div class="settingBlock">   
 				 					<p><span class="glyphicon glyphicon-text-size" style="font-size: 10px;"></span> 설명 </p> 
-				 					<div class="inputText">
-					 					<input type="text" value="프로젝트명" readonly="readonly">
-					 					<span class="glyphicon glyphicon-pencil"></span>
-					 				</div>    
-			 					</div>
+				 					<div class="inputText" >   
+					 					<input type="text" readonly="readonly" id="explanation_InputText"  placeholder="설명 추가하기">
+					 					<span class="glyphicon glyphicon-pencil"></span> 
+					 				</div>     
+			 					</div>  
 			 					<div class="settingBlock">   
 				 					<div class="left_block_tit">
 				 						<p>프로젝트 상태</p>
-				 					</div>
-				 					<div class="right_block_con">
-				 						<select>
-				 						</select>
-				 					</div>
+				 					</div>  
+				 					<div class="right_block_con">  
+				 						<button class="custom_select_btn" id="project_state" data-value="0">  
+				 							<span class="custom_selected_value">상태없음<i class="color_pic"></i></span>  
+				 							<span class="glyphicon glyphicon-menu-down"></span> 
+				 						</button> 
+				 					</div> 
+			 					</div>     
+			 					<div class="settingBlock"> 
+			 						<div class="settingInnerBox">  
+					 					<div class="left_block_tit">
+					 						<p>시작일</p>
+					 					</div>
+					 					<div class="right_block_con">  
+					 						<div class="date" id="startDate">
+											  <input type="text" readonly="readonly">
+											  <button class="setting_btn input-group-addon">+</button>   
+											 </div>  
+					 					</div>     
+				 					</div> 
+				 					<div class="settingInnerBox">  
+					 					<div class="left_block_tit">
+					 						<p>마감일</p>  
+					 					</div>
+					 					<div class="right_block_con" >   
+					 						<div class="date" id="endDate">
+											  <input type="text" readonly="readonly"/> 
+											  <button class="setting_btn input-group-addon">+</button>    
+											 </div> 
+										</div>    
+				 					</div>       
+				 					<div class="settingInnerBox">   
+					 					<div class="left_block_tit">   
+					 						<p>실제 완료일</p>      
+					 					</div>     
+					 					<div class="right_block_con">  
+					 						<div class="date" id="finishDate">
+											  <input type="text" readonly="readonly"/>  
+											  <button class="setting_btn input-group-addon">+</button>   
+					 						</div>     
+					 					</div> 
+				 					</div>   
 			 					</div>
+			 					<div class="settingBlock">
+									<div class="settingInnerBox">
+					 					<div class="left_block_tit">
+					 						<p>프로젝트 관리자</p> 
+					 					</div> 
+					 					<div class="right_block_con">
+					 						<button class="setting_btn"  onclick="dropMenuOpen('admin')">+</button>    
+					 						<div class="addMemberBox" id="setting_addmember_admin"> 
+												<div class="addMem_item" data-mno="${loginMem.mno }">${loginMem.firstName} ${loginMem.lastName }  
+													<img id="userPic" class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon_b.png" style="width: 25px; height: 25px;"/>
+													<a href="#" class="delMem">x</a>
+												</div>
+											</div> 
+					 					</div>
+				 					</div>   
+			 					</div> 
+			 					<div class="settingBlock">
+									<div class="settingInnerBox">  
+					 					<div class="left_block_tit"> 
+					 						<p>프로젝트 팀원</p>
+					 					</div>   
+					 					<div class="right_block_con">
+					 						<button class="setting_btn" onclick="dropMenuOpen('member')">+</button> 
+					 						<div class="addMemberBox" id="setting_addmember_member"> 
+												<div class="addMem_item" data-mno="${loginMem.mno }">${loginMem.firstName} ${loginMem.lastName }  
+													<img id="userPic" class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon_b.png" style="width: 25px; height: 25px;"/>
+													<a href="#" class="delMem">x</a> 
+												</div>  
+											</div>  
+					 					</div>   
+				 					</div>  
+			 					</div>  
+			 					<div class="settingBlock">
+					 				<div class="left_block_tit">
+					 					<p>공개 프로젝트</p>
+					 				</div> 
+					 				<div class="right_block_con">
+					 					<button class="setting_switch_btn">
+					 						<div class="handler"></div> 
+					 						<div class="on-label">켬</div>
+					 						<div class="off-label">끔</div>
+					 					</button> 
+					 					<p>오직 추가된 팀원만이  이 프로젝트를 볼 수 있습니다.</p> 
+					 				</div> 
+			 					</div>      
+			 					<div class="settingBlock">         
+				 					<div class="left_block_tit">     
+				 						<p>권한 설정</p>
+				 					</div>  
+				 					<div class="right_block_con">  
+				 						<button class="custom_select_btn" id="project_access_authority" data-value="1">  
+				 							<span class="custom_selected_value">프로젝트 팀원은 전체 엑세스 권한을 가집니다.</span>    
+				 							<span class="glyphicon glyphicon-menu-down"></span>
+				 						</button>    
+				 						
+				 						<p><strong>전체 엑세스</strong>: 모든 프로젝트 팀원은 프로젝트 안에 있는 모든 업무 보기, 수정이 가능합니다.</p>
+				 					</div>   
+			 					</div> 
+			 					<div class="settingBlock">   
+				 					<div class="left_block_tit"> 
+				 						<p>프로젝트 보관</p>
+				 					</div>  
+				 					<div class="right_block_con">
+				 						<button class="setting_btn">            
+				 							프로젝트 보관
+				 						</button>  
+				 						
+				 						<p>완료 혹은 더 이상 사용하지 않는 프로젝트를 보관함으로 옮깁니다.</p>
+				 					</div>
+			 					</div>  
 			 				</div>
-			 			</div>
-			 	</div>
-			</div>   
-		</div>   		
+			 			</div> 
+			 			<ul class="custom_select" id="selectStated"> 
+				 				<li class="custom_select_item" data-value="1">계획됨<span class='color_pic state_color_planed'></span></li>
+				 				<li class="custom_select_item" data-value="2">진행중<span class='color_pic state_color_proceeding'></span></li>
+				 				<li class="custom_select_item" data-value="3">완료됨<span class='color_pic state_color_completed'></span></li>
+				 				<li class="custom_select_item" data-value="4">보류</li> 
+				 				<li class="custom_select_item" data-value="5">취소</li>    
+				 				<li class="custom_select_item" data-value="0">상태 없음</li> 
+				 			</ul>          
+				 			 
+				 			<ul class="custom_select" id="select_project_authority"> 
+				 				<li class="custom_select_item " data-value="1">프로젝트 팀원은 전체 엑세스 권한을 가집니다.</li>
+				 				<li class="custom_select_item " data-value="2">프로젝트 팀원은 제한 엑세스 권한을 가집니다.</li>
+				 				<li class="custom_select_item " data-value="3">프로젝트 팀원은 통제 엑세스 권한을 가집니다.</li>
+				 			</ul> 
+				 			<ul class="dropdown_menu_setting" id="setting_drop_menu_admin">
+								<li><span class="dropTit">멤버</span> <a href="#" class="closeDropDownBtn"><span class="glyphicon glyphicon-remove"></span></a></li> 
+								<li>  
+									<div class="input-group">  
+										<input type="text" class="form-control" placeholder="Search">
+										<div class="input-group-btn">
+											<button class="btn btn-default" type="submit">  
+												<i class="glyphicon glyphicon-search"></i>  
+											</button> 
+										</div>
+									</div>   
+								</li>  
+								<li>   
+									<ul class="memList">  
+										
+									</ul>    
+								</li>      
+							</ul>  
+							
+							<ul class="dropdown_menu_setting" id="setting_drop_menu_member">
+								<li><span class="dropTit">멤버</span> <a href="#" class="closeDropDownBtn"><span class="glyphicon glyphicon-remove"></span></a></li> 
+								<li>  
+									<div class="input-group">  
+										<input type="text" class="form-control" placeholder="Search">
+										<div class="input-group-btn">
+											<button class="btn btn-default" type="submit">  
+												<i class="glyphicon glyphicon-search"></i>  
+											</button> 
+										</div>
+									</div>   
+								</li>  
+								<li>   
+									<ul class="memList">  
+										
+									</ul>  
+								</li>      
+							</ul>
+			 	</div>   
+			 	<!-- </div> --> 
+			</div>        
+		</div>   		   
  	</div>    
- 	  
+ 	    
  	
- 	 
+ 	   
  	<!-- Modal -->  
-  <div class="modal fade" id="addProjectModal" role="dialog">
+  <div class="modal fade" id="addProjectModal" role="dialog">  
     <div class="modal_inner_box">
-    	<ul class="dropdown_menu_setting">
+    	<ul class="dropdown_menu_setting" id="newProject_drop_menu">
 			<li><span class="dropTit">멤버</span> <a href="#" class="closeDropDownBtn"><span class="glyphicon glyphicon-remove"></span></a></li> 
 			<li>  
 				<div class="input-group">  
@@ -163,12 +325,12 @@
 					<div class="input-group-btn">
 						<button class="btn btn-default" type="submit">  
 							<i class="glyphicon glyphicon-search"></i>  
-						</button>
+						</button> 
 					</div>
-				</div>  
+				</div>   
 			</li>  
-			<li>  
-				<ul id="memList"> 
+			<li>     
+				<ul class="memList" id="memList"> 
 					
 				</ul>  
 			</li>      
@@ -212,7 +374,7 @@
 					<div class="mem_add_btn"> 
 						<a href="#" class="btnCtm">+</a>
 					</div> 
-					<div class="addMemberBox">     
+					<div class="addMemberBox" id="newProjectMemBox">     
 						<%-- <div class="addMem_item" data-mno="${loginMem.mno }">${loginMem.firstName} ${loginMem.lastName }  
 							<c:if test="${login.photoPath=='' || login.photoPath == null}"> 
 								<img id="userPic" class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon_b.png" style="width: 25px; height: 25px;"/>

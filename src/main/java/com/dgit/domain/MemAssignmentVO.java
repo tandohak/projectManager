@@ -1,6 +1,7 @@
 package com.dgit.domain;
 
 public class MemAssignmentVO {
+	private int massno;
 	private int pno;
 	private int mno;
 	private int grade;
@@ -17,12 +18,20 @@ public class MemAssignmentVO {
 		return mno;
 	}
 
+	public int getMassno() {
+		return massno;
+	}
+
+	public void setMassno(int massno) {
+		this.massno = massno;
+	}
+
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
 
 	public int getGrade() {
-		return grade;
+		return grade; 
 	}
 
 	public void setGrade(int grade) {

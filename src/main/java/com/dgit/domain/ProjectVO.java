@@ -6,6 +6,7 @@ public class ProjectVO {
 	private int pno;
 	private String wcode;
 	private String title;
+	private int maker;
 	private String explanation;
 	private boolean visibility;
 	private Date regDate;
@@ -24,6 +25,13 @@ public class ProjectVO {
 		this.pno = pno;
 	}
 
+	public int getMaker() {
+		return maker;
+	}
+
+	public void setMaker(int maker) {
+		this.maker = maker;
+	}
 
 	public String getWcode() {
 		return wcode;

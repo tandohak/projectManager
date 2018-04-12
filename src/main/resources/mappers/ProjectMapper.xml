@@ -10,15 +10,15 @@
 	<sql id="whereSql">
 		where pno = #{pno}
 	</sql>
-	
-	<select id="select" resultType="ProjectVO">
+	  
+	<select id="selectOne" resultType="ProjectVO">
 		<include refid="selectSql" />
 		<include refid="whereSql" />
 	</select>
 	
 	<select id="selectList" resultType="ProjectVO">
 		<include refid="selectSql" />
-	</select>
+	</select>  
 	
 	<select id="selectListByWcode" resultType="ProjectVO">
 		<include refid="selectSql" />
@@ -27,10 +27,10 @@
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="pno">
 		insert into project
-		(wcode,title,explanation,visibility,regDate,startDate,endDate,finishDate,status,authority,locker)
-		values(#{wcode},#{title},#{explanation},#{visibility},now(),#{startDate},#{endDate},#{finishDate},#{status},#{authority},#{locker})
-	</insert>
-
+		(wcode,title,maker,explanation,visibility,regDate,startDate,endDate,finishDate,status,authority,locker)
+		values(#{wcode},#{maker},#{title},#{explanation},#{visibility},now(),#{startDate},#{endDate},#{finishDate},#{status},#{authority},#{locker})
+	</insert> 
+ 
 	<delete id="delete">
 	    delete from project
 		<include refid="whereSql" />
