@@ -35,7 +35,7 @@
 		<include refid="selectSql" />
 		<include refid="whereSqlUno" />
 	</select>
-	
+	 
 	<select id="selectListByUnoJoinWorkspace" resultType="MemberVO">
 		select mno, member.uno ,member.wcode, workspace.name
 		from member join workspace 
