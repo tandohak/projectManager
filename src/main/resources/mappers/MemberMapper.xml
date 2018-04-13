@@ -63,7 +63,14 @@
 		where concat(user.firstName, " ", user.lastName) like concat('%',#{name},'%')
 		and member.wcode = #{wcode}
 	</select>
-	
+	 
+	<select id="selectListByPno" resultType="MemberVO">
+		select distinct(member.mno), member.uno ,member.wcode, user.firstName, user.lastName,memGrade,user.photoPath,user.email, memassignment.grade  as memAssGrade
+		from member join user join memassignment
+		on member.uno = user.uno and member.mno = memassignment.mno
+		where  memassignment.pno = #{pno}		 
+	</select>  
+	  
 	<insert id="insert"> 	
 		insert into member
 		(uno,wcode,memGrade)

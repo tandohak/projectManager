@@ -37,14 +37,14 @@ public class UserRestController {
 		ResponseEntity<HashMap<String, Object>> entity = null;
 		logger.info("[user create]");   
 		logger.info("[user create]" + vo.toString()); 
-		logger.info("[user create]" + wname); 
+		logger.info("[user create]" + wname);      
 		     
-		try {
+		try {    
 			userService.insert(vo);
-			  
+			    
 			WorkspaceVO wvo = new WorkspaceVO();
 			wvo.setName(wname);  
-			wvo.setUno(vo.getUno());
+			wvo.setUno(vo.getUno()); 
 			wvo.setMaker(vo.getFirstName() + " " + vo.getLastName());
 			
 			String res = WorkService.insert(wvo);
