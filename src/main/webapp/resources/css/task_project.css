@@ -92,10 +92,16 @@
 
 .pj_item_state {
 	display: inline-block;
-	padding: 2px 10px;
+	/* padding: 2px 10px; */ 
+	width:70px;  
+	height:25px;
+	line-height:25px;  
+	text-align:center;  
 	border: 1px dashed #E0E0E0;
+	border-radius:3px;  
 	margin-bottom: 10px;
 	font-size: 12px;
+	box-sizing:border-box; 
 }
 
 .pj_item_progress .pj_item_taskState {
@@ -653,6 +659,17 @@
 	line-height: 20px;
 	text-align: left; 
 }  
+/*프로젝트 잠금 버튼*/
+#project_locker .setting_btn{
+	width: 150px !important;
+	height: 30px;  
+	line-height: 30px;  
+} 
+      
+#project_locker .active{
+	background-color: #00BCD4 !important; 
+	color:#fff !important; 
+}  
 /*셀렉트 폼*/
 .custom_select{
 	position: absolute;
@@ -676,8 +693,7 @@
 	min-width:135px; 
 	padding: 10px; 
 	margin: 0px; 
-	cursor: pointer; 
-	color:#
+	cursor: pointer;  
 }     
 .settingContent{
 	overflow: auto; 

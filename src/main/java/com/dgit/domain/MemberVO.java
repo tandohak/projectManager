@@ -12,8 +12,7 @@ public class MemberVO {
 	private String lastName; // 멤버 이름
 	private String photoPath;
 	private String email;
-	
-	
+	private int memAssGrade;
 	
 	public String getEmail() {
 		return email;
@@ -72,6 +71,12 @@ public class MemberVO {
 		this.name = name;
 	}
 	
+	public int getMemAssGrade() {
+		return memAssGrade;
+	}
+	public void setMemAssGrade(int memAssGrade) {
+		this.memAssGrade = memAssGrade;
+	}
 	@Override
 	public String toString() {
 		return "MemberVO [mno=" + mno + ", uno=" + uno + ", wcode=" + wcode + ", memGrade=" + memGrade + "]";

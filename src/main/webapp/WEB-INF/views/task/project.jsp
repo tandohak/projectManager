@@ -2,20 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header.jsp" %>
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project.css?a=23"> 
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=23">   
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=23">  
-<script src="${pageContext.request.contextPath}/resources/js/task_project.js?a=13"></script> 
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=13"></script> 
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project.css?a=26"> 
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=26">   
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=26">  
+<script src="${pageContext.request.contextPath}/resources/js/task_project.js?a=17"></script> 
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=16"></script>   
+<script src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script> 
 <script> 
 	var wcode = "${wcode}";   
-	var loginMem = { 
+	var loginMem = {         
 			 mno : ${loginMem.mno },   
-			 firstName : "${loginMem.firstName}" ,
-			 lastName :  "${loginMem.lastName }" ,
-			 photoPath : "${loginMem.photoPath}"  
+			 firstName : "${loginMem.firstName}" ,  
+			 lastName :  "${loginMem.lastName }" , 
+			 photoPath : "${loginMem.photoPath}"    
 	};       
-	   
+	      
 </script>    
 <%@ include file="include/sideBar.jsp" %>      
 			<div id="contentWrap"> 
@@ -27,7 +28,7 @@
 						 	전체 프로젝트(0) <span class="glyphicon glyphicon-menu-down"></span> 
 						 </a>    
 						<ul class="dropdown-menu">
-					       <li><a href="#">전체 프로젝트(0)</a></li>  
+					       <li><a href="#">전체 프로젝트(0)</a></li>    
 					       <li><a href="#">계획됨(0)</a></li>   
 					       <li><a href="#">진행중(0)</a></li>
 					       <li><a href="#">완료됨(0)</a></li> 
@@ -56,15 +57,32 @@
 						<div class="pjList"> 
 							<c:if test="${projectList != null }">
 								<c:forEach var="item" items="${projectList }">
-									<div class="pj_item">
+									<div class="pj_item"  data-pno="${item.pj.pno }">
 										<div class="pj_item_header">
-											<p><i></i>${item.pj.title }</p> 
+											<p><i></i><span class='pj_title'>${item.pj.title }</span></p> 
 											<div class="pj_item_setting"> 
 												<a href="#" class="setting_pj_btn" data-pno="${item.pj.pno }"><span class="glyphicon glyphicon-cog"></span></a>
 											</div>  
-										</div>
-										<div class='pj_item_footer'> 
-											<p class="pj_item_state" data-pno="${item.pj.pno }">상태 없음</p>
+										</div>  
+										<div class='pj_item_footer'>     
+											<c:if test="${item.pj.status == 0 }"> 
+												<p class="pj_item_state" data-pno="${item.pj.pno }">상태 없음</p>
+											</c:if> 
+											<c:if test="${item.pj.status == 1 }"> 
+												<p class="pj_item_state" data-pno="${item.pj.pno }" style="background-color: #ffb024; color:#fff; border:none;">계획됨</p>
+											</c:if> 
+											<c:if test="${item.pj.status == 2 }"> 
+												<p class="pj_item_state" data-pno="${item.pj.pno }" style="background-color: #62c276; color:#fff; border:none;">진행중</p>
+											</c:if> 
+											<c:if test="${item.pj.status == 3 }"> 
+												<p class="pj_item_state" data-pno="${item.pj.pno }" style="background-color: #27b6ba; color:#fff; border:none;">완료됨</p>
+											</c:if>  
+											<c:if test="${item.pj.status == 4 }">   
+												<p class="pj_item_state" data-pno="${item.pj.pno }" style="background-color: #E0E0E0; color:#9E9E9E; border:none;">보류</p>
+											</c:if> 
+											<c:if test="${item.pj.status == 5 }">    
+												<p class="pj_item_state" data-pno="${item.pj.pno }" style="background-color: #E0E0E0; color:#9E9E9E; border:none;">취소</p>
+											</c:if> 
 											<div class="pj_item_progress">    
 												<div class="pj_item_taskState">  
 													<span class="percent">0% 완료</span>
@@ -76,7 +94,7 @@
 											</div>  
 										</div>   
 									</div>
-								</c:forEach>  
+								</c:forEach>
 							</c:if>
 							<div class="pj_item" id="addProjectBtn" data-toggle="modal" data-target="#addProjectModal">
 								<p> 
@@ -110,23 +128,22 @@
 				</div> 
 				
 				<!-- 프로젝트 설정 -->  
-			 	<div class="sideSetting" style="display:none;">
+			 	<div class="sideSetting" id="side_project_setting" style="display:none;">
 			 		<a href="#" class="sideSettingClose"><span  class="glyphicon glyphicon-remove"></span></a>
 			 		 
 			 			<div class="settingHeader"> 
 			 				<div class="set_title inputText"> 
 			 					<input type="text" value="프로젝트명" readonly="readonly" id="project_name_InputText">
 			 					<span class="glyphicon glyphicon-pencil"></span>   
-			 					<p>
+			 					<p class="head_cnt">
 				 					#7 작성자 TE ST • 작성일 4월 11일 • 몇 초 전에 업데이트됨
 				 				</p>    
-			 				</div>   
-			 				    
-			 				           
-			 				<ul class="toggleWrap">
+			 				</div>
+			 				
+			 				<ul class="toggleWrap"> 
 			 					<li class="selectSetting"><a href="#">설정</a></li>
-			 					<li><a href="#">모든 활동</a></li>
-			 				</ul>
+			 					<li><a href="#">모든 활동</a></li>    
+			 				</ul> 
 			 			</div> 
 			 			<div class="settingBody"> 
 			 				<div class="settingContent">   	
@@ -137,8 +154,8 @@
 					 					<span class="glyphicon glyphicon-pencil"></span> 
 					 				</div>     
 			 					</div>  
-			 					<div class="settingBlock">   
-				 					<div class="left_block_tit">
+			 					<div class="settingBlock">    
+				 					<div class="left_block_tit">  
 				 						<p>프로젝트 상태</p>
 				 					</div>  
 				 					<div class="right_block_con">  
@@ -146,7 +163,7 @@
 				 							<span class="custom_selected_value">상태없음<i class="color_pic"></i></span>  
 				 							<span class="glyphicon glyphicon-menu-down"></span> 
 				 						</button> 
-				 					</div> 
+				 					</div>  
 			 					</div>     
 			 					<div class="settingBlock"> 
 			 						<div class="settingInnerBox">  
@@ -158,7 +175,7 @@
 											  <input type="text" readonly="readonly">
 											  <button class="setting_btn input-group-addon">+</button>   
 											 </div>  
-					 					</div>     
+					 					</div>       
 				 					</div> 
 				 					<div class="settingInnerBox">  
 					 					<div class="left_block_tit">
@@ -191,13 +208,13 @@
 					 					<div class="right_block_con">
 					 						<button class="setting_btn"  onclick="dropMenuOpen('admin')">+</button>    
 					 						<div class="addMemberBox" id="setting_addmember_admin"> 
-												<div class="addMem_item" data-mno="${loginMem.mno }">${loginMem.firstName} ${loginMem.lastName }  
+												<%-- <div class="addMem_item" data-mno="${loginMem.mno }">${loginMem.firstName} ${loginMem.lastName }  
 													<img id="userPic" class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon_b.png" style="width: 25px; height: 25px;"/>
 													<a href="#" class="delMem">x</a>
-												</div>
+												</div> --%>
 											</div> 
 					 					</div>
-				 					</div>   
+				 					</div>     
 			 					</div> 
 			 					<div class="settingBlock">
 									<div class="settingInnerBox">  
@@ -207,10 +224,10 @@
 					 					<div class="right_block_con">
 					 						<button class="setting_btn" onclick="dropMenuOpen('member')">+</button> 
 					 						<div class="addMemberBox" id="setting_addmember_member"> 
-												<div class="addMem_item" data-mno="${loginMem.mno }">${loginMem.firstName} ${loginMem.lastName }  
+												<%-- <div class="addMem_item" data-mno="${loginMem.mno }">${loginMem.firstName} ${loginMem.lastName }  
 													<img id="userPic" class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon_b.png" style="width: 25px; height: 25px;"/>
 													<a href="#" class="delMem">x</a> 
-												</div>  
+												</div>   --%>
 											</div>  
 					 					</div>   
 				 					</div>  
@@ -245,12 +262,12 @@
 				 					<div class="left_block_tit"> 
 				 						<p>프로젝트 보관</p>
 				 					</div>  
-				 					<div class="right_block_con">
-				 						<button class="setting_btn">            
+				 					<div class="right_block_con" id="project_locker">
+				 						<button class="setting_btn" data-value="0">            
 				 							프로젝트 보관
 				 						</button>  
-				 						
-				 						<p>완료 혹은 더 이상 사용하지 않는 프로젝트를 보관함으로 옮깁니다.</p>
+				 						<br> 
+				 						<p>완료 혹은 더 이상 사용하지 않는 프로젝트를 보관함으로 옮깁니다.</p> 
 				 					</div>
 			 					</div>  
 			 				</div>
@@ -262,13 +279,13 @@
 				 				<li class="custom_select_item" data-value="4">보류</li> 
 				 				<li class="custom_select_item" data-value="5">취소</li>    
 				 				<li class="custom_select_item" data-value="0">상태 없음</li> 
-				 			</ul>          
+				 			</ul>            
 				 			 
 				 			<ul class="custom_select" id="select_project_authority"> 
-				 				<li class="custom_select_item " data-value="1">프로젝트 팀원은 전체 엑세스 권한을 가집니다.</li>
-				 				<li class="custom_select_item " data-value="2">프로젝트 팀원은 제한 엑세스 권한을 가집니다.</li>
-				 				<li class="custom_select_item " data-value="3">프로젝트 팀원은 통제 엑세스 권한을 가집니다.</li>
-				 			</ul> 
+				 				<li class="custom_select_item " data-value="0">프로젝트 팀원은 전체 엑세스 권한을 가집니다.</li>
+				 				<li class="custom_select_item " data-value="1">프로젝트 팀원은 제한 엑세스 권한을 가집니다.</li>
+				 				<li class="custom_select_item " data-value="2">프로젝트 팀원은 통제 엑세스 권한을 가집니다.</li>
+				 			</ul>  
 				 			<ul class="dropdown_menu_setting" id="setting_drop_menu_admin">
 								<li><span class="dropTit">멤버</span> <a href="#" class="closeDropDownBtn"><span class="glyphicon glyphicon-remove"></span></a></li> 
 								<li>  
@@ -279,7 +296,7 @@
 												<i class="glyphicon glyphicon-search"></i>  
 											</button> 
 										</div>
-									</div>   
+									</div>     
 								</li>  
 								<li>   
 									<ul class="memList">  
@@ -329,8 +346,8 @@
 					</div>
 				</div>   
 			</li>  
-			<li>     
-				<ul class="memList" id="memList"> 
+			<li>      
+				<ul class="memList"> 
 					
 				</ul>  
 			</li>      
@@ -396,18 +413,49 @@
 					</a>  
 				</li> 
 				{{/each}}   
-			</script>       
+			</script>      
+			   
+			<script id="setting_admin_template" type="text/x-handlerbars-template">
+				{{#each.}}
+				<li>  
+					<a href="#" class="mem_li" data-mno="{{mno}}"  data-firstName="{{firstName }}" data-lastName="{{lastName }}" data-photoPath="{{photoPath }}"> 
+						<img id="userPic" class="pic" src="${pageContext.request.contextPath}/{{checkPhotoPath photoPath}}" style="width: 25px; height: 25px;"/>
+						{{firstName}} {{lastName}}   
+						<span class="glyphicon glyphicon-ok" style="{{check_setting_admin mno}}"></span>
+					</a>  
+				</li> 
+				{{/each}}   
+			</script> 
+			
+			<script id="setting_member_template" type="text/x-handlerbars-template">
+				{{#each.}}
+				<li>  
+					<a href="#" class="mem_li" data-mno="{{mno}}"  data-firstName="{{firstName }}" data-lastName="{{lastName }}" data-photoPath="{{photoPath }}"> 
+						<img id="userPic" class="pic" src="${pageContext.request.contextPath}/{{checkPhotoPath photoPath}}" style="width: 25px; height: 25px;"/>
+						{{firstName}} {{lastName}}   
+						<span class="glyphicon glyphicon-ok" style="{{check_setting_member mno}}"></span>
+					</a>  
+				</li> 
+				{{/each}}    
+			</script>     
 			<script id="addMemTemplate" type="text/x-handlerbars-template">
 				<div class="addMem_item" data-mno="{{mno }}" data-firstName="{{firstName }}" data-lastName="{{lastName }}" data-photoPath="{{photoPath }}">{{firstName}} {{lastName }}  
 					<img id="userPic" class="pic" src="${pageContext.request.contextPath}/{{checkPhotoPath photoPath}}" style="width: 25px; height: 25px;"/>
 					<a href="#" class="delMem">x</a>
 				</div> 
 			</script>
-			<div class="inn_row"> 
+			
+			<script id="addMemTemplate_projectSetting" type="text/x-handlerbars-template">
+				<div class="addMem_item" data-mno="{{mno }}" data-firstName="{{firstName }}" data-memAssGrade="{{memAssGrade }}"data-lastName="{{lastName }}" data-photoPath="{{photoPath }}">{{firstName}} {{lastName }}  
+					<img id="userPic" class="pic" src="${pageContext.request.contextPath}/{{checkPhotoPath photoPath}}" style="width: 25px; height: 25px;"/>
+					<a href="#" class="delMem" style="{{checkMemAssGrade memAssGrade}}">x</a>
+				</div>         
+			</script>      
+			<div class="inn_row">     
 				<a href="#" class="btnCtm" id="addPjNextBtn" style="width: 25%;">다음:템플릿 선택 →</a> 
 			</div> 
 		</div>  
-		<div class="boxInnerWrap">
+		<div class="boxInnerWrap">   
 			 	<h2 class="tit_h2" >프로젝트 템플릿 선택</h2>
 			 	
 				<div class="inn_row">  

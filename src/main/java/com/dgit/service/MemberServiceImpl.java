@@ -63,5 +63,11 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> searchMemberByName(String name,String wcode) throws Exception {
 		return dao.searchMemberByName(name,wcode);
 	}
+
+	@Override
+	public List<MemberVO> selectListByPno(int pno) throws Exception {
+		return dao.selectListByPno(pno);
+	}
 	
 }
+  

@@ -24,11 +24,11 @@
 		<include refid="selectSql" />
 			where wcode = #{wcode}
 	</select>
-	
+	  
 	<insert id="insert" useGeneratedKeys="true" keyProperty="pno">
 		insert into project
 		(wcode,title,maker,explanation,visibility,regDate,startDate,endDate,finishDate,status,authority,locker)
-		values(#{wcode},#{maker},#{title},#{explanation},#{visibility},now(),#{startDate},#{endDate},#{finishDate},#{status},#{authority},#{locker})
+		values(#{wcode},#{title},#{maker},#{explanation},#{visibility},now(),#{startDate},#{endDate},#{finishDate},#{status},#{authority},#{locker})
 	</insert> 
  
 	<delete id="delete">

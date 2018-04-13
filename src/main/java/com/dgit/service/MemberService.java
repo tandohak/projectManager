@@ -15,4 +15,5 @@ public interface MemberService {
 	public List<MemberVO> selectListByWcode(String wcode) throws Exception;
 	public MemberVO selectOneUnoAndwcode(MemberVO vo) throws Exception;
 	public List<MemberVO> searchMemberByName(String name,String wcode) throws Exception;
+	public List<MemberVO> selectListByPno(int pno) throws Exception; 
 } 

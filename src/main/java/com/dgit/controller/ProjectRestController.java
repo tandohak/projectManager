@@ -1,5 +1,7 @@
 package com.dgit.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -51,13 +53,14 @@ public class ProjectRestController {
 			vo.setTitle((String) map.get("title"));
 			vo.setExplanation((String) map.get("explanation"));
 			vo.setWcode((String) map.get("wcode"));
-
+			vo.setMaker(makerMno);   
+			//1 = 공개 0 = 비공개
 			if (((String) map.get("visibility")).equals("1")) {
-				vo.setVisibility(true);
+				vo.setVisibility(true); 
 			} else {
 				vo.setVisibility(false);
 			}
-
+  
 			List<Integer> memList = (List<Integer>) map.get("memList");
 			int res = projectService.insert(vo, memList, makerMno);
 
@@ -65,7 +68,7 @@ public class ProjectRestController {
 				throw new Exception("project 생성 실패");
 			}
 			int template = (Integer) map.get("template");
-
+  
 			// template : 0 - 없음 , 1 - 평일 , 2 - 개인 , 3 - 부서 , 4 - 칸반
 			// taskList 생성
 			switch (template) {
@@ -128,12 +131,11 @@ public class ProjectRestController {
 	public ResponseEntity<HashMap<String,Object>> selectProject(@PathVariable int pno) {
 		ResponseEntity<HashMap<String,Object>> entity = null;
 		try { 
-			ProjectVO vo = projectService.selectOne(pno); 
-			List<MemAssignmentVO> member = memAssService.selectList(pno);
-			
+			ProjectVO vo = projectService.selectOne(pno); ;
+			List<MemberVO> member = memService.selectListByPno(pno);
 			HashMap<String,Object> map = new HashMap<>();
 			map.put("project", vo);
-			map.put("member",member);   
+			map.put("member",member);    
 			entity = new ResponseEntity<>(map, HttpStatus.OK);
 		} catch (Exception e) {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -141,5 +143,144 @@ public class ProjectRestController {
 		}
 		return entity;  
 	}
-
-}
+	 
+	@RequestMapping(value = "/update/title/{pno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateTitle(@PathVariable int pno,@RequestBody String title) {
+		ResponseEntity<String> entity = null;
+		try {  
+			ProjectVO vo =projectService.selectOne(pno); ;
+			vo.setTitle(title);     
+			System.out.println("타이틀"+title);
+			projectService.update(vo);
+			
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}
+	
+	@RequestMapping(value = "/update/explanation/{pno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateExplanation(@PathVariable int pno,@RequestBody String explanation) {
+		ResponseEntity<String> entity = null;
+		try {  
+			ProjectVO vo =projectService.selectOne(pno); ;
+			vo.setExplanation(explanation);
+			projectService.update(vo); 
+			
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}      
+	  
+	@RequestMapping(value = "/update/status/{pno}/{status}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateStatus(@PathVariable int pno,@PathVariable int status) {
+		ResponseEntity<String> entity = null;
+		try {  
+			ProjectVO vo =projectService.selectOne(pno); ;
+			vo.setStatus(status);
+			projectService.update(vo); 
+			
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;         
+	}     
+	                            
+	@RequestMapping(value = "/update/startDate/{pno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateStartDate(@PathVariable int pno,@RequestBody String startDate) {
+		ResponseEntity<String> entity = null;    
+		try {      
+			ProjectVO vo =projectService.selectOne(pno); 
+			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = formater.parse(startDate);
+			vo.setStartDate(date);
+ 			
+			projectService.update(vo);            
+			 
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}  
+	
+	@RequestMapping(value = "/update/endDate/{pno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateEndDate(@PathVariable int pno,@RequestBody String endDate) {
+		ResponseEntity<String> entity = null;
+		try {  
+			ProjectVO vo =projectService.selectOne(pno);
+			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = formater.parse(endDate);
+ 			 
+			vo.setEndDate(date);
+			projectService.update(vo); 
+			 
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}
+	
+	@RequestMapping(value = "/update/finishDate/{pno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateFinishDate(@PathVariable int pno,@RequestBody String finishDate) {
+		ResponseEntity<String> entity = null;
+		try {    
+			ProjectVO vo =projectService.selectOne(pno); ;
+			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = formater.parse(finishDate);
+			vo.setFinishDate(date);
+			projectService.update(vo); 
+			
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}
+	
+	@RequestMapping(value = "/update/memAssGrade/{pno}/{mno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateMemAssGrade(@PathVariable int pno,@PathVariable int mno,@RequestBody int memAssGrade) {
+		ResponseEntity<String> entity = null;
+		try {  
+			MemAssignmentVO vo = new MemAssignmentVO();
+			vo.setPno(pno);
+			vo.setMno(mno); 
+			vo.setGrade(memAssGrade);
+			memAssService.update(vo);
+			
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}
+	   
+	@RequestMapping(value = "/delete/memAssGrade/{pno}/{mno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateMemAssGrade(@PathVariable int pno,@PathVariable int mno) {
+		ResponseEntity<String> entity = null;
+		try {  
+			MemAssignmentVO vo = new MemAssignmentVO();
+			vo.setPno(pno);
+			vo.setMno(mno);  
+			memAssService.delete(vo);
+			
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}
+} 

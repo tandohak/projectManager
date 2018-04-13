@@ -71,5 +71,10 @@ public class MemberDAOImpl implements MemberDAO {
 		 
 		return session.selectList(namespace+"searchMemberByName",map);
 	}
-	
+
+	@Override
+	public List<MemberVO> selectListByPno(int pno) throws Exception {
+		return session.selectList(namespace+"selectListByPno",pno);
+	} 
+	 
 }
