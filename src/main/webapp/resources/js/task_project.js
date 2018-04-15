@@ -82,11 +82,11 @@ $(function() {
 		}
 	});
 	
-	/*세팅 드랍 메뉴*/
+	/* 세팅 드랍 메뉴 */
 	$("#setting_drop_menu_admin .memList").on("click", ".mem_li", function(e) {
 		e.preventDefault();
 		var spanDisplay = $(this).find("span").css("display");
-		console.log(spanDisplay);
+		var pno = $("#side_project_setting").attr("data-pno");
 		
 		if (spanDisplay == "none") {
 			$(this).find("span").css("display", "block");
@@ -100,8 +100,23 @@ $(function() {
 			var source = $("#addMemTemplate_projectSetting").html();
 			var t_fn = Handlebars.compile(source);
 			$("#setting_addmember_admin").append(t_fn(mem));
-			 
 			
+			$("#setting_addmember_member .addMem_item").each(function(i,obj){
+				var mno = $(this).attr("data-mno");
+				
+				if (mno == mem.mno) {
+					$(this).remove();
+				}  
+			}) 
+			  
+			$.ajax({ 
+				url:"/projectManager/project/update/memAssGrade/"+pno+"/"+mem.mno+"/"+3,
+				type:"patch",
+				dataType:"text",
+				success:function(res){
+					console.log(res);
+				}				
+			})
 		} else {    
 			var chckCreater = false;
 			var delmno = $(this).attr("data-mno");  
@@ -117,7 +132,16 @@ $(function() {
 						return false;  
 					}  
 					
-					$(this).remove();
+					$.ajax({ 
+						url:"/projectManager/project/update/memAssGrade/"+pno+"/"+mno+"/"+1,
+						type:"patch",
+						dataType:"text",
+						success:function(res){
+							console.log(res);
+						}				
+					})
+					
+					$(this).remove();  
 				} 
 			});
 			   
@@ -125,16 +149,33 @@ $(function() {
 				return false;
 			}
 			
+			var mem = {
+					mno : $(this).attr("data-mno"),
+					firstName : $(this).attr("data-firstName"),
+					lastName : $(this).attr("data-lastName"),
+					photoPath : $(this).attr("data-photoPath")
+				};
+			
+			var source = $("#addMemTemplate_projectSetting").html();
+			var t_fn = Handlebars.compile(source);
+			$("#setting_addmember_member").append(t_fn(mem));
+			
 			$(this).find("span").css("display", "none"); 
-			$(this).parent(".addMem_item").remove();
+			$(this).parent(".addMem_item").remove(); 
 		}
 	});  
 	
 	$("#setting_drop_menu_member .memList").on("click", ".mem_li", function(e) {
 		e.preventDefault();
 		var spanDisplay = $(this).find("span").css("display");
-		console.log(spanDisplay);
+		var pno = $("#side_project_setting").attr("data-pno");
+		
 		if (spanDisplay == "none") {
+			var maker = $("#side_project_setting").attr("data-maker"); 
+			  
+			if($(this).attr("data-mno") == maker)
+				return false;
+			
 			$(this).find("span").css("display", "block");
 			
 			var mem = {
@@ -143,6 +184,24 @@ $(function() {
 				lastName : $(this).attr("data-lastName"),
 				photoPath : $(this).attr("data-photoPath")
 			};   
+			
+			$("#setting_addmember_admin .addMem_item").each(function(i,obj){
+				var mno = $(this).attr("data-mno");
+				
+				if (mno == mem.mno) { 
+					$(this).remove();
+				} 
+			})  
+			 
+			$.ajax({ 
+				url:"/projectManager/project/update/memAssGrade/"+pno+"/"+mem.mno+"/"+1,
+				type:"patch",
+				dataType:"text",
+				success:function(res){
+				console.log(res);
+				}				
+			}) 
+					
 			var source = $("#addMemTemplate_projectSetting").html();
 			var t_fn = Handlebars.compile(source);
 			$("#setting_addmember_member").append(t_fn(mem));     
@@ -155,12 +214,68 @@ $(function() {
 				if (mno == delmno) {
 					$(this).remove();
 				}
-			});
+			}); 
+			
+			$.ajax({  
+				url:"/projectManager/project/delete/memAssGrade/"+pno+"/"+delmno,
+				type:"patch",
+				dataType:"text",
+				success:function(res){
+				console.log(res);
+				}				
+			})
  
 			$(this).parent(".addMem_item").remove();
 		}
 	}); 
-	/*세팅 드랍 메뉴 끝*/
+	 
+	$("#setting_addmember_admin").on("click", ".delMem", function(e) {
+		e.preventDefault();
+		var delmno = $(this).parent(".addMem_item").attr("data-mno");
+		var pno = $("#side_project_setting").attr("data-pno");
+		$(".memList li").each(function(i, obj) {
+			var mno = $(this).find(".mem_li").attr("data-mno");
+			if (mno == delmno) {
+				$(this).find("span").css("display", "none");
+			}
+		});
+
+		$("#setting_addmember_member").append($(this).parent(".addMem_item"));
+		 
+		$.ajax({ 
+			url:"/projectManager/project/update/memAssGrade/"+pno+"/"+delmno+"/"+1,
+			type:"patch",
+			dataType:"text",
+			success:function(res){
+				console.log(res);
+			}				
+		})
+	})
+	
+	$("#setting_addmember_member").on("click", ".delMem", function(e) {
+		e.preventDefault();
+		var delmno = $(this).parent(".addMem_item").attr("data-mno");
+		var pno = $("#side_project_setting").attr("data-pno");
+		
+		$(".memList li").each(function(i, obj) {
+			var mno = $(this).find(".mem_li").attr("data-mno");
+			if (mno == delmno) {
+				$(this).find("span").css("display", "none");
+			}
+		});
+
+		$(this).parent(".addMem_item").remove();
+		
+		$.ajax({  
+			url:"/projectManager/project/delete/memAssGrade/"+pno+"/"+delmno,
+			type:"patch",
+			dataType:"text",
+			success:function(res){
+			console.log(res);
+			}				
+		})
+	})
+	/* 세팅 드랍 메뉴 끝 */
 	
 	$("#addProjectBtn").click(
 			function(e) {
@@ -313,23 +428,43 @@ $(function() {
 		  
 	});
 	
-	/*공개 여부 설정 스위치*/    
+	/* 공개 여부 설정 스위치 */    
 	$("#contentWrap").on("click",".setting_switch_btn",function(){
 		var float= $(".setting_switch_btn .handler").css("float");
+		var pno = $("#side_project_setting").attr("data-pno");
+		 
 		if(float=="right"){
 			$(".setting_switch_btn .handler").css("float","left"); 
 			$(".on-label").toggle();
 			$(".off-label").toggle();
-			$(this).removeClass("on_switch");
-		}   
+			$(this).removeClass("on_switch"); 
+			$.ajax({       
+				url:"/projectManager/project/update/visibility/"+pno+"/false",
+				type:"put",
+				dataType : "text",   
+				success:function(res){
+					console.log(res); 
+					
+				}     
+			}) 
+		}    
 		if(float=="left"){ 
 			$(".setting_switch_btn .handler").css("float","right"); 
 			$(".on-label").toggle();
 			$(".off-label").toggle();
 			$(this).addClass("on_switch");
-		} 
-	})
-	 
+			$.ajax({       
+				url:"/projectManager/project/update/visibility/"+pno+"/true",
+				type:"put",
+				dataType : "text",     
+				success:function(res){
+					console.log(res); 
+					
+				}     
+			}) 
+		}  
+	}) 
+	
 	/* 프로젝트 상태 */
 	$("#project_state").click(function(){
 		var obj = $(this).offset();
@@ -354,7 +489,7 @@ $(function() {
 		$("#select_project_authority").css("top",top+"px");
 		$("#select_project_authority").toggle(); 
 	})   
-	/* 프로젝트 상태 샐렉트 리스트*/
+	/* 프로젝트 상태 샐렉트 리스트 */
 	$("#selectStated .custom_select_item").click(function(){
 		var status = Number($(this).attr("data-value"));
 		$("#project_state").removeAttr("data-value");
@@ -380,17 +515,28 @@ $(function() {
 		   
 	})
 	  
-	/* 프로젝트 권한 샐렉트 리스트*/
+	/* 프로젝트 권한 샐렉트 리스트 */
 	$("#select_project_authority .custom_select_item").click(function(){
 		var val = $(this).attr("data-value");
 		var text = $(this).text();        
-		
+
+		var pno = $("#side_project_setting").attr("data-pno");
+
 		$("#project_access_authority").siblings("p").html(tipArr[val]);  
 		$("#project_access_authority .custom_selected_value").html(text);
-   
 		$("#project_access_authority").removeAttr("data-value");
 		$("#project_access_authority").attr("data-value",val);   
 		$("#select_project_authority").toggle();  
+		   
+		$.ajax({       
+			url:"/projectManager/project/update/authority/"+pno+"/"+val,
+			type:"put",
+			dataType : "text",   
+			success:function(res){
+				console.log(res); 
+				
+			}   
+		}) 
 	}) 
 	 
 	/* 데이트 피커 */ 
@@ -466,7 +612,7 @@ $(function() {
 		})
 	}) 
 	
-	/*프로젝트 타이틀 설정*/
+	/* 프로젝트 타이틀 설정 */
 	$("#project_name_InputText").click(function(){
 		$(this).removeAttr("readonly");  
 		$(this).focus();  
@@ -498,7 +644,7 @@ $(function() {
 		} 
 	});
 
-	/*프로젝트 설명 설정*/
+	/* 프로젝트 설명 설정 */
 	$("#explanation_InputText").click(function(){
 		$(this).removeAttr("readonly");  
 		$(this).focus();  
@@ -511,10 +657,13 @@ $(function() {
 	});
 	
 	$("#explanation_InputText").focusout(function(){
-		$(this).attr("readonly","readonly");  
-		var explanation = $(this).val(); 
+		$(this).attr("readonly","readonly"); 
+		var explanation = $(this).val();  
+		if( $(this).val() == "" ||  $(this).val() == null){
+			explanation = " "; 
+		}   
 		var pno = $("#side_project_setting").attr("data-pno"); 
-		 
+		   
 		$.ajax({
 			url:"/projectManager/project/update/explanation/"+pno,
 			type:"put",
@@ -526,22 +675,41 @@ $(function() {
 		})  
 	})  
 	
-	/*프로젝트 설정 : 보관 버튼*/
+	/* 프로젝트 설정 : 보관 버튼 */
 	$("#project_locker .setting_btn").click(function(){
 		var locker = $(this).attr("data-value");
+		var pno = $("#side_project_setting").attr("data-pno");  
+		
 		if(locker == 0){
 			$("#project_locker .setting_btn").attr("data-value","1");
 			$("#project_locker .setting_btn").addClass("active");
 			$("#project_locker .setting_btn").html(locker_btn_text[1]); 
 			$("#project_locker p").html(locker_text[1]);
+			$.ajax({       
+				url:"/projectManager/project/update/locker/"+pno+"/true",
+				type:"put",
+				dataType : "text",   
+				success:function(res){
+					console.log(res); 
+				}     
+			})   
 		}else if(locker == 1){  
-			$("#project_locker .setting_btn").attr("data-value","0");
+			$("#project_locker .setting_btn").attr("data-value","0");  
 			$("#project_locker .setting_btn").removeClass("active");
 			$("#project_locker .setting_btn").html(locker_btn_text[0]); 
 			$("#project_locker p").html(locker_text[0]);
+			$.ajax({       
+				url:"/projectManager/project/update/locker/"+pno+"/false",
+				type:"put",  
+				dataType : "text",   
+				success:function(res){ 
+					console.log(res); 
+					
+				}   
+			}) 
 		}    
 	})     
-	/*프로젝트 설정 버튼 클릭 : 설정 토글*/
+	/* 프로젝트 설정 버튼 클릭 : 설정 토글 */
 	$(".pjList").on("click",".setting_pj_btn",function(){
 		var pno = $(this).attr("data-pno");
 		$.ajax({   
@@ -588,8 +756,8 @@ $(function() {
 				p += " • 작성일 " + (regDate.getMonth()+1) + "월 " + regDate.getDate();
 				
 				$(".head_cnt").html(p);   
-				  
-				$("#explanation_InputText").val(project.explanation);
+				var explanation = project.explanation;  
+				$("#explanation_InputText").val(explanation.trim());
 				
 				var status = selval[0][project.status]+"<i class='color_pic "+selval[1][project.status]+"'></i>";
 				$("#project_state .custom_selected_value").html(status);
@@ -601,7 +769,7 @@ $(function() {
 				if(project.startDate!=null){  
 					$("#startDate input").val(mySimpleDateFormatter.format(new Date(project.startDate)));
 					$("#startDate input").css("display","block");
-				}  
+				} 
 				
 				if(project.endDate!=null){ 
 					$("#endDate input").val(mySimpleDateFormatter.format(new Date(project.endDate)));
@@ -612,12 +780,20 @@ $(function() {
 					$("#finishDate input").val(mySimpleDateFormatter.format(new Date(project.finishDate)));
 					$("#finishDate input").css("display","block");
 				}  
-				   
+				     
 				if(project.visibility){
-					$(".setting_switch_btn").trigger("click");
-				}
-				
-				switch (project.authority) {
+					$("#side_project_setting .setting_switch_btn .handler").css("float","right"); 
+					$("#side_project_setting .on-label").css("display","block");
+					$("#side_project_setting .off-label").css("display","none");
+					$("#side_project_setting .setting_switch_btn").addClass("on_switch");
+				}else{
+					$("#side_project_setting .setting_switch_btn .handler").css("float","left"); 
+					$("#side_project_setting .on-label").css("display","none");
+					$("#side_project_setting .off-label").css("display","block");
+					$("#side_project_setting .setting_switch_btn").removeClass("on_switch");     
+				}        
+				      
+				switch (project.authority) {  
 					case 0:
 						$("#project_access_authority").siblings("p").html(tipArr[0]);  
 						var text = $("#select_project_authority .custom_select_item").eq(0).text();
@@ -639,15 +815,20 @@ $(function() {
 						$("#project_access_authority").removeAttr("data-value");
 						$("#project_access_authority").attr("data-value",2);   
 						break;
-				} 
+				}  
 				
 				if(project.locker){
 					$("#project_locker .setting_btn").attr("data-value","1");
 					$("#project_locker .setting_btn").addClass("active");
 					$("#project_locker .setting_btn").html(locker_btn_text[1]); 
 					$("#project_locker p").html(locker_text[1])
-				}   
-			}       
+				}else{
+					$("#project_locker .setting_btn").attr("data-value","0");
+					$("#project_locker .setting_btn").removeClass("active");
+					$("#project_locker .setting_btn").html(locker_btn_text[0]); 
+					$("#project_locker p").html(locker_text[0])  
+				} 
+			}        
 		})     
 	})    
 	
@@ -656,7 +837,7 @@ $(function() {
 	/*-- 프로젝트 세팅 관련   스크립트 끝 --*/
 });// 제이쿼리 끝
 
-/*세팅 드랍 매뉴 오픈*/
+/* 세팅 드랍 매뉴 오픈 */
 var dropMenuOpen = function(type) {
 		$.ajax({
 			url : "/projectManager/member/memList?wcode=" + wcode,
@@ -676,7 +857,7 @@ var dropMenuOpen = function(type) {
 		})           
 		
 		$(".dropdown_menu_setting input").val("");
-		//위치 조정 
+		// 위치 조정
 		if(type=="admin"){   
 			var obj = $("#setting_addmember_admin").prev(".setting_btn").offset();
 			console.log("left: " + obj.left + "px, top: " + obj.top + "px");
@@ -697,7 +878,7 @@ var dropMenuOpen = function(type) {
 	}       
  
 
-/*세팅 관련 끝*/
+/* 세팅 관련 끝 */
    
 Handlebars.registerHelper('checkMemAssGrade', function(options) {
 	console.log(options); 
