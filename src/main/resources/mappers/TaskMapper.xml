@@ -15,7 +15,7 @@
 		where tlno = #{tlno}
 	</sql>
 	
-	<select id="select" resultType="TaskVO">
+	<select id="selectOne" resultType="TaskVO">
 		<include refid="selectSql" />
 		<include refid="whereSql" />
 	</select>
@@ -24,10 +24,15 @@
 		<include refid="selectSql" />
 		<include refid="whereSqlTasklist" />
 	</select>
+	
 	<select id="selectList" resultType="TaskVO">
 		<include refid="selectSql" />
 	</select>
 	
+	<select id="selectListByPno" resultType="TaskVO">
+		select * from task
+		where task.tlno in (select tasklist.tlno from tasklist where pno = #{pno});
+	</select>
 	<insert id="insert">
 		insert into task
 		(tlno,explanation,regDate,taskname,startDate,endDate,colorLabel,cycle)
@@ -37,7 +42,7 @@
 	<delete id="delete">
 	    delete from task
 		<include refid="whereSql" />
-	</delete>
+	</delete>  
 	 
 	<update id="update">	    
 	    update task set

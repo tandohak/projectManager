@@ -34,7 +34,7 @@
                 </a> 
                 <span class="nav_btn_balloon"><i class="arr">◀</i>전체 개요</span> 
               </li>
-              <li class="nav-item"> 
+              <li class="nav-item">   
                 <a class="nav-link active" href="#">
 					 <span class="glyphicon glyphicon-folder-open"></span>
                 </a>

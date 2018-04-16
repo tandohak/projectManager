@@ -24,11 +24,14 @@ import com.dgit.domain.InviteVO;
 import com.dgit.domain.LoginDTO;
 import com.dgit.domain.MemberVO;
 import com.dgit.domain.ProjectVO;
+import com.dgit.domain.TaskListVO;
+import com.dgit.domain.TaskVO;
 import com.dgit.domain.WorkspaceVO;
 import com.dgit.service.InviteService;
 import com.dgit.service.MemberService;
 import com.dgit.service.ProjectService;
 import com.dgit.service.TaskListService;
+import com.dgit.service.TaskService;
 import com.dgit.service.WorkspaceService;
 
 @Controller
@@ -54,6 +57,9 @@ public class TaskController {
 
 	@Autowired
 	private TaskListService taskListService;
+	 
+	@Autowired
+	private TaskService taskService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
   
@@ -70,7 +76,7 @@ public class TaskController {
 		String wcode = mem.getWcode();
 		  
 		return "redirect:/task/"+wcode;
-	}
+	} 
 	
 	@RequestMapping(value = "/{wcode}", method = RequestMethod.GET)
 	public String project(Model model,HttpSession session,@PathVariable("wcode") String wcode) throws Exception {
@@ -135,17 +141,22 @@ public class TaskController {
 	public String project(HttpSession session,Model model,@PathVariable("pno") int pno,@PathVariable("wcode") String wcode) throws Exception{
 		Object object = session.getAttribute("login");
 		LoginDTO login = (LoginDTO)object;  
-		MemberVO vo = new MemberVO();
-		vo.setUno(login.getUno());
-		vo.setWcode(wcode);
-		 
+		
+		int uno = login.getUno();    
+		  
 		List<MemberVO> workMembers = memService.selectListByWcode(wcode);
-		MemberVO loginMem = memService.selectOneUnoAndwcode(vo);
-		 
+		MemberVO loginMem = memService.selectOneByPnoAndUno(uno, pno);
+		ProjectVO projectVO= projectService.selectOne(pno); 
+		List<TaskListVO> taskList =  taskListService.selectList(pno);
+		List<TaskVO> tasks = taskService.selectListByPno(pno);
+		    
 		model.addAttribute("workMembers",workMembers);
 		model.addAttribute("loginMem",loginMem); 
-		 
+		model.addAttribute("projectVO",projectVO);     
+		model.addAttribute("taskList",taskList);      
+		model.addAttribute("tasks",tasks);    
+		  
 		return "task/project_task_management"; 
-	}
-	 
+	} 
+	
 }  

@@ -68,6 +68,11 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> selectListByPno(int pno) throws Exception {
 		return dao.selectListByPno(pno);
 	}
+
+	@Override
+	public MemberVO selectOneByPnoAndUno(int uno, int pno) throws Exception {
+		return dao.selectOneByPnoAndUno(uno, pno); 
+	}
 	
 }
   

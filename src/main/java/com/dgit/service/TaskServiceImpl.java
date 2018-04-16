@@ -36,10 +36,15 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public int delete(int taskno) throws Exception {
 		return dao.delete(taskno);
-	}
+	}  
 
 	@Override
 	public int update(TaskVO vo) throws Exception {
 		return dao.update(vo);
+	}
+
+	@Override
+	public List<TaskVO> selectListByPno(int pno) throws Exception {
+		return dao.selectListByPno(pno); 
 	}
 }

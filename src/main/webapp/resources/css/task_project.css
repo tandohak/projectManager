@@ -3,6 +3,13 @@
 	max-width: 1180px;
 	margin: 0 auto;
 }
+#container { 
+	position: absolute;
+    top: 51px;
+    left: 0;
+    width: calc(100vw - 50px);
+    height: calc(100vh - 102px);
+}     
 
 /*타이틀*/
 .sub_tit {

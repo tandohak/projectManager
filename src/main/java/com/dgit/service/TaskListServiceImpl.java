@@ -19,8 +19,8 @@ public class TaskListServiceImpl implements TaskListService {
 	}
 
 	@Override
-	public List<TaskListVO> selectList() throws Exception {
-		return dao.selectList();
+	public List<TaskListVO> selectList(int pno) throws Exception {
+		return dao.selectList(pno);
 	}
  
 	@Override

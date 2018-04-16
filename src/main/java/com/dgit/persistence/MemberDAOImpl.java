@@ -75,6 +75,14 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<MemberVO> selectListByPno(int pno) throws Exception {
 		return session.selectList(namespace+"selectListByPno",pno);
+	}
+
+	@Override
+	public MemberVO selectOneByPnoAndUno(int uno, int pno) throws Exception {
+		HashMap<String,Integer> map = new HashMap<>();
+		map.put("uno",uno);
+		map.put("pno",pno); 
+		return  session.selectOne(namespace+"selectOneByPnoAndUno",map);
 	} 
-	 
+	  
 }

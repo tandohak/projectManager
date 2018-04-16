@@ -1,21 +1,4 @@
 $(function() {
-	var imgPath = [ "preview-blank-f9e6c665.png",
-			"preview-weekly-ko-f26d30dd.png", "preview-people-ko-60882c1d.png",
-			"preview-department-ko-8f933e90.png",
-			"preview-todo-ko-d07476ee.png" ];
-	var tipArr = ["<strong>전체 엑세스</strong>: 모든 프로젝트 팀원은 프로젝트 안에 있는 모든 업무 보기, 수정이 가능합니다.",
-		          "<strong>제한 엑세스</strong>: 프로젝트 팀원은 업무, 제목, 설명, 위치, 시작일, 마감일, 배정에 대해 추가/수정을 할 수 없습니다.",
-		          "<strong>통제 엑세스</strong>: 프로젝트 팀원은 자신이 배정되어있거나 팔로워인 업무만 볼 수 있습니다."];
-	var selval = [["상태 없음","계획됨","진행중","완료됨","보류","취소"],
-	               [" ","state_color_planed","state_color_proceeding","state_color_completed"," "," "],
-	               [" "
-	                ,"background-color: #ffb024; color:#fff; border:none;"
-	                ,"background-color: #62c276; color:#fff; border:none;"
-	                ,"background-color: #27b6ba; color:#fff; border:none;"
-	                ,"background-color:#E0E0E0; color:#9E9E9E; border:none;"
-	                ,"background-color:#E0E0E0; color:#9E9E9E; border:none;"]];
-	var locker_btn_text = ["프로젝트 보관","프로젝트 보관 해제"]  
-	var locker_text = ["완료 혹은 더 이상 사용하지 않는 프로젝트를 보관함으로 옮깁니다.","이 프로젝트를 보관에서 해제합니다."]
 	var login_mem_pj_grade = 1;
 	
 	$(".mem_add_btn a").click(function(e) {  
@@ -114,12 +97,7 @@ $(function() {
 				$(".choose_img_box").removeClass("selected");
 				$(".choose_img_box").eq(0).addClass("selected");
 			})
-
-	$(".closeDropDownBtn").click(function(e) {
-		e.preventDefault();
-		$(this).parents(".dropdown_menu_setting").toggle();
-	})  
-
+  
 	$(".radioWrap").click(function(e) {
 		$("input[name='visibility']").removeAttr("checked");
 		$(this).find("input[name='visibility']").attr("checked", "checked");
@@ -138,12 +116,12 @@ $(function() {
 
 		$(this).parent(".addMem_item").remove();
 	})
-
+ 
 	$("#addPjNextBtn").click(function() {
 
 		if (!checkFrom($("#project_title"))) {
 			return false;
-		}
+		} 
 
 		$(".boxWrap").animate({
 			marginLeft : '-=648',
@@ -215,6 +193,131 @@ $(function() {
 		 
 	});
 	  
+	/* 프로젝트 설정 버튼 클릭 : 설정 토글 */
+	$(".pjList").on("click",".setting_pj_btn",function(){
+		var pno = $(this).attr("data-pno");
+		$.ajax({   
+			url: "/projectManager/project/select/"+pno,
+			type:"get",
+			dataType:"json",
+			success: function(res){ 
+				var project = res.project;
+				var member = res.member;     
+				console.log(project);   
+				console.log(member);
+				var sideDisplay= $("#side_project_setting").css("display");
+				
+				if(sideDisplay=="none"){
+					$("#side_project_setting").css("display","block");
+				}else{   
+					if(Number($("#side_project_setting").attr("data-pno"))==project.pno){
+						$("#side_project_setting").css("display","none");
+					} 
+				}  
+				       
+				$("#side_project_setting").attr("data-pno",project.pno);  
+				$("#side_project_setting").attr("data-maker",project.maker); 
+				$("#project_name_InputText").val(project.title); 
+				
+				var regDate = new Date(project.regDate);
+				var maker = project.maker;
+				var p = "# 작성자 ";
+				$("#setting_addmember_admin").empty();  
+				$("#setting_addmember_member").empty();    
+				for(var i=0; i<member.length; i++){
+					if(maker == member[i].mno){ 
+						p += member[i].firstName + " " + member[i].lastName;
+					}
+					
+					var source = $("#addMemTemplate_projectSetting").html(); 
+					var t_fn = Handlebars.compile(source); 
+					if(member[i].memAssGrade==99 || member[i].memAssGrade == 3)
+						$("#setting_addmember_admin").append(t_fn(member[i]));
+					else
+						$("#setting_addmember_member").append(t_fn(member[i])); 
+					
+				} 
+				
+				p += " • 작성일 " + (regDate.getMonth()+1) + "월 " + regDate.getDate();
+				
+				$(".head_cnt").html(p);   
+
+				var explanation = project.explanation;  
+				$("#explanation_InputText").val(explanation.trim());
+				
+				var status = selval[0][project.status]+"<i class='color_pic "+selval[1][project.status]+"'></i>";
+				$("#project_state .custom_selected_value").html(status);
+				
+				var mySimpleDateFormatter = new simpleDateFormat('yyyy-MM-dd');
+				$(".date input").val("");
+				$(".date input").css("display","none");    
+				
+				if(project.startDate!=null){  
+					$("#startDate input").val(mySimpleDateFormatter.format(new Date(project.startDate)));
+					$("#startDate input").css("display","block");
+				} 
+				
+				if(project.endDate!=null){ 
+					$("#endDate input").val(mySimpleDateFormatter.format(new Date(project.endDate)));
+					$("#endDate input").css("display","block");
+				} 
+				   
+				if(project.finishDate!=null){ 
+					$("#finishDate input").val(mySimpleDateFormatter.format(new Date(project.finishDate)));
+					$("#finishDate input").css("display","block");
+				}  
+				     
+				if(project.visibility){
+					$("#side_project_setting .setting_switch_btn .handler").css("float","right"); 
+					$("#side_project_setting .on-label").css("display","block");
+					$("#side_project_setting .off-label").css("display","none");
+					$("#side_project_setting .setting_switch_btn").addClass("on_switch");
+				}else{
+					$("#side_project_setting .setting_switch_btn .handler").css("float","left"); 
+					$("#side_project_setting .on-label").css("display","none");
+					$("#side_project_setting .off-label").css("display","block");
+					$("#side_project_setting .setting_switch_btn").removeClass("on_switch");     
+				}        
+				      
+				switch (project.authority) {  
+					case 0:
+						$("#project_access_authority").siblings("p").html(tipArr[0]);  
+						var text = $("#select_project_authority .custom_select_item").eq(0).text();
+						$("#project_access_authority .custom_selected_value").html(text);
+						$("#project_access_authority").removeAttr("data-value");
+						$("#project_access_authority").attr("data-value",0);   
+						break;
+					case 1: 
+						$("#project_access_authority").siblings("p").html(tipArr[1]);  
+						var text = $("#select_project_authority .custom_select_item").eq(1).text();
+						$("#project_access_authority .custom_selected_value").html(text);
+						$("#project_access_authority").removeAttr("data-value");
+						$("#project_access_authority").attr("data-value",1);   			
+						break;   
+					case 2:    
+						$("#project_access_authority").siblings("p").html(tipArr[2]);
+						var text = $("#select_project_authority .custom_select_item").eq(2).text(); 
+						$("#project_access_authority .custom_selected_value").html(text);
+						$("#project_access_authority").removeAttr("data-value");
+						$("#project_access_authority").attr("data-value",2);   
+						break;
+				}  
+				
+				if(project.locker){
+					$("#project_locker .setting_btn").attr("data-value","1");
+					$("#project_locker .setting_btn").addClass("active");
+					$("#project_locker .setting_btn").html(locker_btn_text[1]); 
+					$("#project_locker p").html(locker_text[1])
+				}else{
+					$("#project_locker .setting_btn").attr("data-value","0");
+					$("#project_locker .setting_btn").removeClass("active");
+					$("#project_locker .setting_btn").html(locker_btn_text[0]); 
+					$("#project_locker p").html(locker_text[0])  
+				} 
+			}        
+		})     
+	})
+	
 	var click_setting = false;
 	$(".pjList").on("click",".setting_pj_btn",function(){  
 		click_setting = true;
@@ -237,4 +340,5 @@ $(function() {
 		var pno = $(this).attr("data-pno");  
 		location.href = "/projectManager/task/"+wcode+"/project/"+pno; 
 	});
+	
 });// 제이쿼리 끝

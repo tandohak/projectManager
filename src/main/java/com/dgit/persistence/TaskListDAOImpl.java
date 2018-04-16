@@ -20,8 +20,8 @@ public class TaskListDAOImpl implements TasklistDAO{
 	}
 
 	@Override
-	public List<TaskListVO> selectList() throws Exception {
-		return session.selectList(namespace + "selectList");
+	public List<TaskListVO> selectList(int pno) throws Exception {
+		return session.selectList(namespace + "selectList",pno);
 	}
 
 	@Override
