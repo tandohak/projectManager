@@ -208,7 +208,7 @@ function imgUpload(){
 		success : function(result) {
 			console.log(result);
 			if(result == null){
-				alert("전송 실패");
+				alert("전송 실패");  
 			}else{
 				path = result[0];
 				formData = null;

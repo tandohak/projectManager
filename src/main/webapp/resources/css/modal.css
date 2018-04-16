@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
-
-/*프로젝트 생성*/
+ 
+/*모달 기본 css*/
 .tit_h2{
 	margin-bottom: 20px; 
 	font-weight: bold;
@@ -129,3 +129,39 @@
 	float: left;
 	margin-top: 10px; 
 }  
+
+
+/*모달 멤버 추가*/
+.addMemberBox {
+	float: left;
+	min-height: 25px;
+	min-width: 142px;
+	max-width: 550px;
+	text-align: center;
+	line-height: 25px; 
+}
+
+.addMemberBox .addMem_item {
+	float: left;
+	padding: 0px 5px 0px 0px;
+	border-radius: 12.5px;
+	background: #E0E0E0;
+	margin-left: 5px; 
+	margin-bottom: 5px;
+	color: #333; 
+}
+
+.addMemberBox .addMem_item .delMem {  
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin-top: 2.5px;
+	line-height: 20px;
+	border-radius: 20px;
+	color: #333 !important;
+	text-align: center;
+}
+
+.addMemberBox .addMem_item .delMem:hover {
+	background-color: #E0E0E0;
+}

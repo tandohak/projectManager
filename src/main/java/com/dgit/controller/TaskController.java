@@ -101,7 +101,7 @@ public class TaskController {
 		model.addAttribute("loginMem",loginMem); 
 		model.addAttribute("projectList",pjlist);
 		
-		return "task/project";  
+		return "task/project_list";  
 	}
 	
 	@RequestMapping(value = "/{wcode}/join", method = RequestMethod.GET)
@@ -130,5 +130,22 @@ public class TaskController {
 		
 		return "task/workspaceManagement";
 	}
-
-}
+	
+	@RequestMapping(value = "/{wcode}/project/{pno}", method = RequestMethod.GET)
+	public String project(HttpSession session,Model model,@PathVariable("pno") int pno,@PathVariable("wcode") String wcode) throws Exception{
+		Object object = session.getAttribute("login");
+		LoginDTO login = (LoginDTO)object;  
+		MemberVO vo = new MemberVO();
+		vo.setUno(login.getUno());
+		vo.setWcode(wcode);
+		 
+		List<MemberVO> workMembers = memService.selectListByWcode(wcode);
+		MemberVO loginMem = memService.selectOneUnoAndwcode(vo);
+		 
+		model.addAttribute("workMembers",workMembers);
+		model.addAttribute("loginMem",loginMem); 
+		 
+		return "task/project_task_management"; 
+	}
+	 
+}  

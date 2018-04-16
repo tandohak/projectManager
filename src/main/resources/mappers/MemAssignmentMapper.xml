@@ -39,7 +39,7 @@
 	
 	<update id="update"> 
 		update memassignment set
-		grade=#{grade}, 
-		<include refid="whereSqlSelectOne" />
+		grade=#{grade}
+		where pno = #{pno} and mno = #{mno}
 	</update>
-</mapper>
+</mapper> 

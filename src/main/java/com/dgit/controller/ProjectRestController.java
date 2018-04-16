@@ -50,8 +50,9 @@ public class ProjectRestController {
 		try {
 			int makerMno = (Integer) map.get("makerMno");
 			ProjectVO vo = new ProjectVO();
-			vo.setTitle((String) map.get("title"));
+			vo.setTitle((String) map.get("title"));   
 			vo.setExplanation((String) map.get("explanation"));
+			    
 			vo.setWcode((String) map.get("wcode"));
 			vo.setMaker(makerMno);   
 			//1 = 공개 0 = 비공개
@@ -65,7 +66,7 @@ public class ProjectRestController {
 			int res = projectService.insert(vo, memList, makerMno);
 
 			if (res < 0) {
-				throw new Exception("project 생성 실패");
+	 			throw new Exception("project 생성 실패");
 			}
 			int template = (Integer) map.get("template");
   
@@ -92,7 +93,7 @@ public class ProjectRestController {
 					MemberVO memVO = memService.selectOne(memList.get(i));
 					listVo.setName(memVO.getFirstName() + memVO.getLastName());
 					tasklistService.insert(listVo);
-				}
+				}  
 				break;
 			case 3:
 				String[] dayArr2 = { "기획팀", "개발팀", "디자인팀" };
@@ -249,15 +250,22 @@ public class ProjectRestController {
 		return entity;  
 	}
 	
-	@RequestMapping(value = "/update/memAssGrade/{pno}/{mno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
-	public ResponseEntity<String> updateMemAssGrade(@PathVariable int pno,@PathVariable int mno,@RequestBody int memAssGrade) {
+	@RequestMapping(value = "/update/memAssGrade/{pno}/{mno}/{memAssGrade}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateMemAssGrade(@PathVariable int pno,@PathVariable int mno,@PathVariable int memAssGrade) {
 		ResponseEntity<String> entity = null;
 		try {  
+			
 			MemAssignmentVO vo = new MemAssignmentVO();
 			vo.setPno(pno);
 			vo.setMno(mno); 
 			vo.setGrade(memAssGrade);
-			memAssService.update(vo);
+			
+			MemAssignmentVO tempVo= memAssService.selectOne(vo);
+			if(tempVo==null){
+				memAssService.insert(vo);
+			}else{
+				memAssService.update(vo);
+			}
 			
 			entity = new ResponseEntity<>("success", HttpStatus.OK);
 		} catch (Exception e) { 
@@ -283,4 +291,53 @@ public class ProjectRestController {
 		}
 		return entity;  
 	}
+	
+	@RequestMapping(value = "/update/visibility/{pno}/{visibility}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateVisibility(@PathVariable int pno,@PathVariable boolean visibility) {
+		ResponseEntity<String> entity = null;
+		try {    
+			ProjectVO vo =projectService.selectOne(pno);
+			vo.setVisibility(visibility);;
+			projectService.update(vo); 
+			
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}
+	
+	@RequestMapping(value = "/update/authority/{pno}/{authority}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateAuthority(@PathVariable int pno,@PathVariable int authority) {
+		ResponseEntity<String> entity = null;
+		try {  
+			ProjectVO vo =projectService.selectOne(pno); ;
+			vo.setAuthority(authority);
+			projectService.update(vo);   
+			
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;         
+	}  
+	  
+	@RequestMapping(value = "/update/locker/{pno}/{locker}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateLocker(@PathVariable int pno,@PathVariable boolean locker) {
+		ResponseEntity<String> entity = null; 
+		try {    
+			ProjectVO vo =projectService.selectOne(pno);
+			vo.setLocker(locker);   
+			System.out.println(locker+"라커");
+			projectService.update(vo); 
+			
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	} 
 } 
