@@ -37,16 +37,16 @@
 	</delete>
 	
 	<update id="update">	    
-	    update project set    
+	    update project set      
 	  	title = #{title},
-	  	explanation = #{explanation},
+	  	explanation = #{explanation},  
 	  	visibility = #{visibility},
-	  	startDate = #{startDate},
-	  	endDate = #{endDate},
-	  	finishDate = #{finishDate}, 
-	  	status = #{status},
-	  	authority = #{authority},
-	  	locker = #{locker}
+	  	startDate = #{startDate, jdbcType=TIMESTAMP},
+	  	endDate = #{endDate, jdbcType=TIMESTAMP},
+	  	finishDate = #{finishDate, jdbcType=TIMESTAMP}, 
+	  	status = #{status},  
+	  	authority = #{authority},  
+	  	locker = #{locker}   
 		<include refid="whereSql" />
 	</update>
 </mapper>

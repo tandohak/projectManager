@@ -1,128 +1,206 @@
 @CHARSET "UTF-8";
-.contentBox {    
-	max-width: 99%; 
-	margin: 15px auto;   
-}          
-      
-#container { 
+
+.contentBox {
+	max-width: 99%;
+	margin: 15px auto;
+}
+
+#container {
 	position: absolute;
-    top: 51px;
-    left: 0;
-    width: calc(100vw - 50px);
-    height: calc(100vh - 102px);
-}     
-    
-#nav_task_tabs .open a{
-	background-color: rgba(0,0,0,0) !important; 
-}         
- 
-#nav_task_tabs .tab_active a{
-	background-color: rgba(0,0,0,0) !important; 
-	border-bottom: 2px solid #337ab7;  
-	height: 50px !important;  
-}    
+	top: 51px;
+	left: 0;
+	width: calc(100vw - 50px);
+	height: calc(100vh - 102px);
+}
+
+#nav_task_tabs .open a {
+	background-color: rgba(0, 0, 0, 0) !important;
+}
+
+#nav_task_tabs .tab_active a {
+	background-color: rgba(0, 0, 0, 0) !important;
+	border-bottom: 2px solid #337ab7;
+	height: 50px !important;
+}
 
 /*테스크 리스트 css*/
-.taskBox_wrap{  
-    width: 100%;    
-	white-space: nowrap;/* 가로스크롤시 중요한 속성 */
-    overflow-x: auto; 
-    overflow-y: hidden;
+.taskBox_wrap {
+	width: 100%;
+	white-space: nowrap; /* 가로스크롤시 중요한 속성 */
+	overflow-x: auto;
+	overflow-y: hidden;
 }
-.taskBox{
-	display:inline-block; 
+
+.taskBox {
+	display: inline-block;
 	margin-right: 5px;
-	overflow: auto;   
+	overflow: auto;
 	height: 780px;
-}      
-      
+}
+
 .taskBox_header {
 	width: 300px;
-	height:43px; 
-	background: #337ab7;  
-	border-radius:4px;  
-	color:#fff; 
-	padding-top: 7.5px; 
-	padding-left:7.5px;
-	padding-right:7.5px; 
-}      
-.taskBox_add button{  
-	display:block; 
+	background: #337ab7;
+	border-radius: 4px;
+	color: #fff;
+	padding-top: 7.5px;
+	padding-left: 7.5px;
+	padding-right: 7.5px;
+	min-height: 43px;
+}
+
+.taskBox_add button {
+	display: block;
 	width: 300px;
-	height:43px;   
-	background: #ddd;       
-	border-radius:4px;  
-	color:#333;    
-	padding: 7.5px; 
-	line-height:28px;  
-	padding-right:7.5px;
-	cursor: pointer;  
-	margin-bottom: auto; 
-	border: none; 
-}           
-.taskBox_add button:hover{   
+	height: 43px;
+	background: #ddd;
+	border-radius: 4px;
+	color: #333;
+	padding: 7.5px;
+	line-height: 28px;
+	padding-right: 7.5px;
+	cursor: pointer;
+	margin-bottom: auto;
+	border: none;
+}
+
+.taskBox_add button:hover {
 	background-color: #5097D3;
-	color:#fff;  
-}        
+	color: #fff;
+}
+
 .taskBox_body {
 	width: 300px;
 	overflow: hidden;
-}     
-.taskBox_footer{
-	width: 300px;
-	height:32px; 
-	color:#777;
-	padding:7.5px;    
-	background-color:#f7f7f7;
-	border-radius: 0px 0px 4px 4px;    
-	margin-top: 4px;   
-}    
+}
 
-.taskBox_header input.taskList_name{
-	background: rgba(0,0,0,0); 
-	border-radius:4px;
+.taskBox_footer {
+	width: 300px;
+	height: 32px;
+	color: #777;
+	padding: 7.5px;
+	background-color: #f7f7f7;
+	border-radius: 0px 0px 4px 4px;
+	margin-top: 4px;
+}
+
+.taskBox_header input.taskList_name {
+	background: rgba(0, 0, 0, 0);
+	border-radius: 4px;
 	border: none;
 	width: 221.5px;
 	height: 28px;
-	float: left;   
-	padding:0px 5px;  
-}        
-.taskBox_header input.taskList_name:hover{
-	background: #5097D3 !important;  
+	float: left;
+	padding: 0px 5px;
 }
-.taskBox_header .dropdown{
+
+.taskBox_header input.taskList_name:hover {
+	background: #5097D3 !important;
+}
+
+.taskBox_header .dropdown {
 	width: 28px;
 	height: 28px;
 	float: left;
-	line-height: 28px; 
-}    
-.taskBox_header a.add_task_btn{  
-	margin-left: 7.5px; 
-}   
-.taskBox_header a.dropdown-toggle,.taskBox_header a.add_task_btn{
-	color:#fff;
-	float: left; 
+	line-height: 28px;
+}
+
+.taskBox_header a.add_task_btn {
+	margin-left: 7.5px;
+}
+
+.taskBox_header a.dropdown-toggle, .taskBox_header a.add_task_btn {
+	color: #fff;
+	float: left;
 	width: 28px;
 	height: 28px;
 	line-height: 28px;
-	text-align: center; 
-	border-radius:4px;  
-}  
-
-.taskBox_header a.dropdown-toggle:hover,.taskBox_header a.add_task_btn:hover{
-	background: #5097D3 !important; 
+	text-align: center;
+	border-radius: 4px;
 }
 
-.taskBox_body .task_item{
-	width: 100%; 
-	min-height: 34px;    	
-	padding: 7.5px; 
-	background: #fff; 
-	margin-top: 4px;   
-	color:#333;   
-	cursor: pointer; 
+.taskBox_header a.dropdown-toggle:hover, .taskBox_header a.add_task_btn:hover
+	{
+	background: #5097D3 !important;
+}
+
+.taskBox_header .taskBox_header_addTask {
+	overflow: hidden;
+	background: #fff;
+	clear: both;
+	margin-bottom: 7.5px;
+}
+
+.taskBox_header .taskBox_header_addTask textarea {
+	border: 0px;
+	margin-left: 5px;
+	margin-top: 5px;
+	color: #333;
+}
+
+.taskBox_header .taskBox_header_addBtnWrap a {
+	color: #ccc;
+	padding: 5px 10px;
+}
+
+.taskBox_header .taskBox_header_addBtnWrap a.addMemberDropMenu {
+	position: relative;
+}
+
+.addMemberDropMenu .counter {
+	position: absolute;
+	background-color: red;
+	border-radius: 50%;
+	display: block;
+	font-size: 8px;
+	color: #fff;
+	width: 15px;
+	text-align: center; 
+	line-height: 13px;    
+	height: 15px; 
+	top:-11px;   
+	right: -11px;   
+	font-style:normal; 
+	display: none; 
 }  
 
-.taskBox_body  .task_item:hover{
-	background-color:#f7f7f7;  
+.taskBox_header  .addDatepickerOpen input {
+	width: 130px;
+	text-align: center;
+	color: #696f7a;
+	border-radius: 4px;
+	border: 0px;
+	background: #e6e8ec;
+	margin-left: 5px;
+	display: none;
+}
+
+.taskBox_header .taskBox_header_addBtnWrap button {
+	background: e6e8ec;
+	color: #696f7a;
+	padding: 0px 10px;
+	height: 28px;
+	border-radius: 4px;
+	font-size: 14px;
+	border: 0px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.taskBox_header .taskBox_header_addBtnWrap button:FIRST-CHILD {
+	margin-left: 165px;
+}
+
+.taskBox_body .task_item {
+	width: 100%;
+	min-height: 34px;
+	padding: 7.5px;
+	background: #fff;
+	margin-top: 4px;
+	color: #333;
+	cursor: pointer;
+}
+
+.taskBox_body  .task_item:hover {
+	background-color: #f7f7f7;
 }

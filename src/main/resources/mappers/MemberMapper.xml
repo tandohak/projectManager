@@ -70,13 +70,20 @@
 		on member.uno = user.uno and member.mno = memassignment.mno
 		where  memassignment.pno = #{pno}		 
 	</select>  
-	
+	    
 	<select id="selectOneByPnoAndUno" resultType="MemberVO">
-		select distinct(member.mno), member.uno ,member.wcode, user.firstName, user.lastName,memGrade,user.photoPath,user.email, memassignment.grade  as memAssGrade
+		select distinct(member.mno),massno, member.uno ,member.wcode, user.firstName, user.lastName,memGrade,user.photoPath,user.email, memassignment.grade  as memAssGrade
 		from member join user join memassignment
 		on member.uno = user.uno and member.mno = memassignment.mno
 		where  memassignment.pno = #{pno} and member.uno = #{uno};	 
 	</select> 
+	
+	<select id="selectListByPnoWithMemAssignment" resultType="MemberVO">
+		select distinct(member.mno),massno, member.uno ,member.wcode, user.firstName, user.lastName,memGrade,user.photoPath,user.email, memassignment.grade  as memAssGrade
+		from member join user join memassignment
+		on member.uno = user.uno and member.mno = memassignment.mno
+		where  memassignment.pno = #{pno}
+	</select>
 	
 	<insert id="insert"> 	
 		insert into member

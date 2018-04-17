@@ -12,6 +12,7 @@
 	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=27">
 <script
 	src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=17"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2219"></script>        	 
 <script
 	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>
 <script
@@ -21,12 +22,12 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=19"></script>
 <script>     
-	var wcode = "${wcode}";   
+	var wcode = "${wcode}";     
 	var loginMem = {         
 			 mno : ${loginMem.mno },   
 			 firstName : "${loginMem.firstName}" ,    
 			 lastName :  "${loginMem.lastName }" ,  
-			 photoPath : "${loginMem.photoPath}" , 
+			 photoPath : "${loginMem.photoPath}" ,  
 			 memGrade : "${loginMem.memGrade}"
 	};       
 </script>
@@ -510,7 +511,33 @@
 		</div>
 	</div>
 </div>
+<!-- div end --> 
 
+<!-- dateTimePicker -->    
+	<div id="sandbox-container" style="display: none;"> 
+			<div class="datepicker_title">   
+				<strong>일정 선택</strong> 
+				<a href="#" class="close_datepicker"><span class="glyphicon glyphicon-remove"></span></a>
+			</div> 
+			<div> 
+			 	<div class="datePicker_cst"></div>
+			 	<div class="dateTimePicker">
+			 		<div class="selectDate">
+			 			2018-04-17
+			 		</div>  
+			 		<div class="timePicker_wrap">      
+			 			<input type="text" class="minute selectTimeInput" value="00"/>  
+			 			 : 
+			 			<input type="text"class="hour selectTimeInput" value="00"/>
+			 		</div>
+ 			 		<div class="timePicker_btn_wrap">   
+			 			<button class="del_date">지우기</button>  
+			 			<button class="add_date">추가</button>
+			 		</div> 
+			 	</div>
+			 </div> 
+		</div>  
+<!-- handlerbars 템플릿 -->
 <script id="template" type="text/x-handlerbars-template">
 				{{#each.}}
 				<li>  

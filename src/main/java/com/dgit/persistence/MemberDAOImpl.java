@@ -83,6 +83,11 @@ public class MemberDAOImpl implements MemberDAO {
 		map.put("uno",uno);
 		map.put("pno",pno); 
 		return  session.selectOne(namespace+"selectOneByPnoAndUno",map);
+	}
+ 
+	@Override
+	public List<MemberVO> selectListByPnoWithMemAssignment(int pno) throws Exception {
+		return session.selectList(namespace+"selectListByPnoWithMemAssignment",pno);
 	} 
 	  
 }

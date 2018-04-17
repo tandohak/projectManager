@@ -26,9 +26,14 @@ public class MemAssignmentServiceImpl implements MemAssignmentService {
 
 	@Override
 	public int insert(MemAssignmentVO vo) throws Exception {
-		return dao.insert(vo);
+		MemAssignmentVO tempVO = dao.selectOne(vo);
+		int res = -1;
+		if(tempVO == null){
+			res = dao.insert(vo);
+		}    
+		return res;  
 	}
-
+  
 	@Override
 	public int delete(MemAssignmentVO vo) throws Exception {
 		return dao.delete(vo);

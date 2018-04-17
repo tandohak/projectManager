@@ -12,8 +12,15 @@ public class MemberVO {
 	private String lastName; // 멤버 이름
 	private String photoPath;
 	private String email;
-	private int memAssGrade;
+	private int massno; //멤버 배정번호
+	private int memAssGrade; //멤버 배정 등급
 	
+	public int getMassno() {
+		return massno;
+	}
+	public void setMassno(int massno) {
+		this.massno = massno;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -24,7 +31,7 @@ public class MemberVO {
 		return firstName;
 	}
 	public String getPhotoPath() {
-		return photoPath;
+		return photoPath; 
 	}
 	public void setPhotoPath(String photoPath) {
 		this.photoPath = photoPath;

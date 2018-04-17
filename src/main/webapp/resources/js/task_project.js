@@ -170,7 +170,7 @@ $(function() {
 				"memList":mnolist,
 				"template":Number(template),
 				"makerMno":loginMem.mno
-		} 
+		}
 		   
 		$.ajax({
 			url:"/projectManager/project/make",
@@ -247,25 +247,30 @@ $(function() {
 				
 				var status = selval[0][project.status]+"<i class='color_pic "+selval[1][project.status]+"'></i>";
 				$("#project_state .custom_selected_value").html(status);
-				
-				var mySimpleDateFormatter = new simpleDateFormat('yyyy-MM-dd');
-				$(".date input").val("");
-				$(".date input").css("display","none");    
-				
+				   
+				var mySimpleDateFormatter = new simpleDateFormat('yyyy-MM-dd kk:mm');
+				$("#side_project_setting  .date input").val("");
+				$("#side_project_setting  .date input").css("display","none");    
+				$("#side_project_setting  .date button").removeClass("insertDate");
+				     
 				if(project.startDate!=null){  
 					$("#startDate input").val(mySimpleDateFormatter.format(new Date(project.startDate)));
 					$("#startDate input").css("display","block");
-				} 
+					$("#startDate button").addClass("insertDate");
+				}
 				
 				if(project.endDate!=null){ 
 					$("#endDate input").val(mySimpleDateFormatter.format(new Date(project.endDate)));
 					$("#endDate input").css("display","block");
+					$("#endDate button").addClass("insertDate");
 				} 
-				   
+				      
 				if(project.finishDate!=null){ 
 					$("#finishDate input").val(mySimpleDateFormatter.format(new Date(project.finishDate)));
 					$("#finishDate input").css("display","block");
+					$("#finishDate button").addClass("insertDate");
 				}  
+ 
 				     
 				if(project.visibility){
 					$("#side_project_setting .setting_switch_btn .handler").css("float","right"); 

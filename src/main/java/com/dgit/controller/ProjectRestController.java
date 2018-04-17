@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -198,13 +199,20 @@ public class ProjectRestController {
 	public ResponseEntity<String> updateStartDate(@PathVariable int pno,@RequestBody String startDate) {
 		ResponseEntity<String> entity = null;    
 		try {      
-			ProjectVO vo =projectService.selectOne(pno); 
-			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = formater.parse(startDate);
-			vo.setStartDate(date);
- 			
-			projectService.update(vo);            
+			ProjectVO vo =projectService.selectOne(pno);  
+			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			Date date = null; 
 			 
+			System.out.println(startDate);
+			     
+			if(!startDate.equalsIgnoreCase("del")){
+				date = formater.parse(startDate); 
+			}    
+			 
+			vo.setStartDate(date);    
+ 			  
+			projectService.update(vo);            
+			   
 			entity = new ResponseEntity<>("success", HttpStatus.OK);
 		} catch (Exception e) { 
 			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
@@ -218,10 +226,16 @@ public class ProjectRestController {
 		ResponseEntity<String> entity = null;
 		try {  
 			ProjectVO vo =projectService.selectOne(pno);
-			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = formater.parse(endDate);
+			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			Date date = null; 
+			 
+			System.out.println(endDate);
+			     
+			if(!endDate.equalsIgnoreCase("del")){
+				date = formater.parse(endDate); 
+			}    
  			 
-			vo.setEndDate(date);
+			vo.setEndDate(date);  
 			projectService.update(vo); 
 			 
 			entity = new ResponseEntity<>("success", HttpStatus.OK);
@@ -235,11 +249,16 @@ public class ProjectRestController {
 	@RequestMapping(value = "/update/finishDate/{pno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
 	public ResponseEntity<String> updateFinishDate(@PathVariable int pno,@RequestBody String finishDate) {
 		ResponseEntity<String> entity = null;
-		try {    
+		try {     
 			ProjectVO vo =projectService.selectOne(pno); ;
-			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = formater.parse(finishDate);
-			vo.setFinishDate(date);
+			SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			Date date = null; 
+			System.out.println(finishDate);
+		     
+			if(!finishDate.equalsIgnoreCase("del")){
+				date = formater.parse(finishDate); 
+			}        
+			vo.setFinishDate(date); 
 			projectService.update(vo); 
 			
 			entity = new ResponseEntity<>("success", HttpStatus.OK);
@@ -340,4 +359,31 @@ public class ProjectRestController {
 		}
 		return entity;  
 	} 
+	 
+	/*@RequestMapping(value = "/update/memAssGrade/{pno}/{mno}/{memAssGrade}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateMemAssGrade(@PathVariable int pno,@PathVariable int mno,@PathVariable int memAssGrade) {
+		ResponseEntity<String> entity = null;
+		try {  
+			
+			MemAssignmentVO vo = new MemAssignmentVO();
+			vo.setPno(pno);
+			vo.setMno(mno); 
+			vo.setGrade(memAssGrade);
+			
+			MemAssignmentVO tempVo= memAssService.selectOne(vo);
+			if(tempVo==null){
+				memAssService.insert(vo);
+			}else{
+				memAssService.update(vo);
+			}
+			
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}*/
+	
+	
 } 

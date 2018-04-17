@@ -170,7 +170,7 @@
 } 
 
 /*세팅 드롭다운 메뉴*/
-#setting_drop_menu_admin{
+/* #setting_drop_menu_admin{
 	top:415px;    
 	left:27.8%;  
 } 
@@ -178,11 +178,110 @@
 #setting_drop_menu_member{
 	top:495px;    
 	left:27.8%;  
-} 
+}  */ 
 /*데이트피커*/  
+#sandbox-container{
+	position: absolute;
+	top:150px;  
+	background: #fff; 
+	width: 450px; 
+	overflow: hidden;
+	padding:10px;  
+	z-index: 9999;  
+	border-radius:4px;
+	box-shadow:0px 0px 7px rgba(0,0,0,0.25); 
+}     
+#sandbox-container .datepicker_title{
+	font-size:14px;   
+	color:#222;     
+	border-bottom: 1px solid #eee; 
+	overflow: hidden;
+	padding:5px; 
+}
+#sandbox-container .datepicker_title strong{
+	 
+	line-height: 30px; 
+}
+#sandbox-container .datepicker_title .close_datepicker{
+	display:block;
+	float:right;  
+	color: #333;  
+	width:30px;
+	text-align:center;
+	line-height:30px; 
+	height:30px; 
+	border-radius:4px;; 
+	padding: none;      
+}   
+#sandbox-container .datepicker_title .close_datepicker:hover{
+	backgroud:#eee; 
+	text-decoration: none;   
+}
+#sandbox-container .datePicker_cst{  
+	width: 220px; 
+	float: left; 
+}  
+    
+#sandbox-container .dateTimePicker{
+	width: 200px; 
+	float: left; 
+}      
+#sandbox-container .selectDate{ 
+	margin: 50.5px 0px 15px 0px;  
+	width: 100%;
+	height: 30px;
+	font-weight: bold;
+	font-size:18px;  
+	text-align:center; 
+	color:#00BCD4;    
+}
+#sandbox-container .timePicker_wrap{
+	padding: 0px 5px; 
+	border: 2px  solid #E0E0E0;
+	border-radius:4px;
+	 overflow: hidden;  
+}  
+
+#sandbox-container .timePicker_wrap .selectTimeInput{
+	width: 50px; 
+	 font-size: 15px;  
+	 color:#333;  
+	 border: none; 
+	 text-align: center; 
+} 
+#sandbox-container .timePicker_wrap  .minute{
+	float: right;
+	margin-right: 35px;
+}   
+#sandbox-container .timePicker_wrap  .hour{
+	float: left;    
+	margin-left: 45px; 
+}
+
+#sandbox-container .timePicker_btn_wrap{
+	width: 100%;
+	overflow: hidden;
+	margin-top: 20px; 
+}
+#sandbox-container .timePicker_btn_wrap button{
+	width: 45%;
+	float: left;
+	border: none;
+	background: #eee; 
+	height: 40px;
+	line-height: 40px; 
+	border-radius:4px;
+	font-weight: bold;  
+	color:#00BCD4; 
+}
+#sandbox-container .timePicker_btn_wrap button.add_date{
+	margin-left: 5%; 
+	background: #00BCD4;  
+	color:#fff;
+}
 .settingInnerBox .date input{
-	width: 100px;
-	height: 30px;   
+	width: 140px;
+	height: 30px;    
 	float: left;  
 	background-color: #E0E0E0;
 	margin-top:1px !important;   
@@ -195,7 +294,7 @@
 .settingInnerBox .date:HOVER .setting_btn{    
 	background-color: #00BCD4;    
 	color: #fff;   
-}   
+}    
          
 .settingInnerBox .date .setting_btn{
 	line-height:0px  !important;  
