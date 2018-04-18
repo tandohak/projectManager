@@ -40,16 +40,17 @@ Handlebars.registerHelper('check_setting_admin', function(value) {
 	}
 	return res;
 });
-
+  
 Handlebars.registerHelper('check_task_member', function(value) {
-	var res = "";
+	var res = "";    
 	var size = jobAssList.length;
 	for (var i = 0; i < size; i++) {
-		var massno = jobAssList;
-		if (massno == value) {
+		var massno = jobAssList[i];  
+		  
+		if (massno == value) { 
 			res = 'display:inline-block;';
 			break;
-		}
+		}  
 	}
 	return res;
 }); 

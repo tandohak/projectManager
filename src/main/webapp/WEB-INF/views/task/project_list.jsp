@@ -33,8 +33,8 @@
 </script>
 <%@ include file="include/sideBar.jsp"%>
 <div id="contentWrap"> 
-	<nav class="navbar navbar-default" 
-		style="border-radius: 0px; margin-bottom: 0px; z-index: 999;">
+	<nav class="navbar navbar-default"   
+		style="border-radius: 0px; margin-bottom: 0px; ">
 		<div class="container-fluid" style="padding: 0px;">
 			<ul class="nav navbar-nav sticky-top">
 				<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -43,9 +43,9 @@
 					<ul class="dropdown-menu">
 						<li><a href="#">전체 프로젝트(0)</a></li>
 						<li><a href="#">계획됨(0)</a></li>
-						<li><a href="#">진행중(0)</a></li>
+						<li><a href="#">진행중(0)</a></li>   
 						<li><a href="#">완료됨(0)</a></li>
-						<li><a href="#">보관됨(0)</a></li>
+						<li><a href="#">보관됨(0)</a></li> 
 					</ul></li>
 			</ul>
 			<form class="navbar-form navbar-left">

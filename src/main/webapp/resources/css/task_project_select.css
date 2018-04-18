@@ -63,8 +63,26 @@
 	margin-bottom: auto;
 	border: none;
 }
+.addTaskListWrap {
+	width: 300px;   
+	height:43px;
+	background:#5097D3;  
+	overflow: hidden;
+	display: none; 
+}    
+.taskBox_add .addTaskListWrap input{
+	width: 87%;
+	height: 30px;  
+	margin:6.5px 6.5px ;  
+	border: none; 
+	background: #fff;
+	border-radius:4px; 
+}
+.taskBox_add .addTaskListWrap  a{
+	color:#eee; 
+}  
 
-.taskBox_add button:hover {
+.taskBox_add button:hover {  
 	background-color: #5097D3;
 	color: #fff;
 }
@@ -82,6 +100,7 @@
 	background-color: #f7f7f7;
 	border-radius: 0px 0px 4px 4px;
 	margin-top: 4px;
+	display: none; 
 }
 
 .taskBox_header input.taskList_name {
@@ -158,8 +177,8 @@
 	text-align: center; 
 	line-height: 13px;    
 	height: 15px; 
-	top:-11px;   
-	right: -11px;   
+	top:-9px;     
+	right: -9px;     
 	font-style:normal; 
 	display: none; 
 }  
@@ -190,17 +209,30 @@
 .taskBox_header .taskBox_header_addBtnWrap button:FIRST-CHILD {
 	margin-left: 165px;
 }
-
+.taskBox_body .finished{ 
+	color: #777 !important;
+	background-color: #f7f7f7 !important;
+}          
+    
 .taskBox_body .task_item {
 	width: 100%;
 	min-height: 34px;
 	padding: 7.5px;
 	background: #fff;
 	margin-top: 4px;
-	color: #333;
+	color: #333;    
 	cursor: pointer;
+}  
+.taskBox_body .finish-title{
+	width: 100%;
+	min-height: 34px;
+	padding: 7.5px;
+	background: #5097D3 !important;
+	font-weight: bold !important;
+	margin-top: 4px;
+	color: #fff;      
+	display: none;
 }
-
 .taskBox_body  .task_item:hover {
 	background-color: #f7f7f7;
 }

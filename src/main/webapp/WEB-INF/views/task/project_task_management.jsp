@@ -2,19 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="include/header.jsp"%>  
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=a">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=a">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=a">   
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=a">  
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=a"></script>    
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=a"></script>        
-<script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>   
-<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?a=a"></script>       
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=a"></script>  
-<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=a2"></script>      
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=52a2">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=5a22">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=52a2">     
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=2aa25">  
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=52a2"></script>      
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=22a7"></script>          
+<script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>           
+<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?a=52a27"></script>       
+<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=522a7"></script>  
+<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=a272"></script>      
 <script>                
-	var wcode = "${wcode}";     
-	var loginMem = {                    
+	var wcode = "${wcode}";        
+	var loginMem = {                      
 			 mno : ${loginMem.mno },      
 			 firstName : "${loginMem.firstName}" ,       
 			 lastName :  "${loginMem.lastName }" ,     
@@ -26,8 +26,8 @@
 </script>  
 <%@ include file="include/sideBar.jsp"%>     
 <div id="contentWrap">     
-		<nav class="navbar navbar-default"  
-			style="border-radius: 0px; margin-bottom: 0px; z-index: 900;">
+		<nav class="navbar navbar-default"     
+			style="border-radius: 0px; margin-bottom: 0px;">
 			<div class="container-fluid" style="padding: 0px;">
 				<ul class="nav navbar-nav navbar-left">
 					<li><a href="#" data-toggle="dropdown"> <span
@@ -68,60 +68,85 @@
 				 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 				 					<span class="glyphicon glyphicon-option-vertical"></span>
 				 				</a>     
-							    <ul class="dropdown-menu" style="left:-132px;">
-							      <li><a href="#">이동... ></a></li>
-							      <li><a href="#">이메일로 업무 작성</a></li>
-							      <li><a href="#">리스트 삭제</a></li>
+							    <ul class="dropdown-menu" style="left:-132px;"> 
+							      <li><a href="#" class="deleteListBtn" data-tlno="${item.tlno}">리스트 삭제</a></li>
 							    </ul>    
 							 </div>  
-						 </div>       
-						 <div class="taskBox_header_addTask" style="display: none;">
+						 </div>        
+						 <div class="taskBox_header_addTask" style="display: none;"> 
 						 	<textarea rows="1" cols="36"></textarea>
-						 	<div class="taskBox_header_addBtnWrap">
-						 		<a href="#" class="addMemberDropMenu">     
+						 	<div class="taskBox_header_addBtnWrap"> 
+						 		<a href="#" class="addMemberDropMenu">       
 						 			<span class="glyphicon glyphicon-user">
 						 				<i class="counter">1</i> 
 						 			</span>    
-						 		</a>
+						 		</a>  
 						 		<a href="#" class="addDatepickerOpen">
-						 			<span class="glyphicon glyphicon-calendar"></span>
-						 			<input type="text" readonly="readonly">
+						 			<span class="glyphicon glyphicon-calendar"></span> 
+						 			<input type="text" readonly="readonly" class="task_endDate">
 						 		</a>    
 						 	</div>
 						 	<div class="taskBox_header_addBtnWrap">
-						 		 <button class="add_task_cancle">취소</button>
-						 		 <button class="add_task_make">만들기</button>
+						 		 <button class="add_task_cancle">취소</button>  
+						 		 <button class="add_task_make" data-tlno="${item.tlno}">만들기</button>
 						 	</div>
 						 </div>          
 			 		</div>
 			 		<c:if test="${tasks !=null}">        
-			 			<% int length = 0; %>   
-			 			<c:forEach items="${tasks }" var="task"> 
+			 			<% int length = 0; %>  
+			 			<% boolean finished = false; %> 
+			 			
+					 	<div class="taskBox_body">
+					 	<div class="processing_task_box">
+			 			<c:forEach items="${tasks }" var="task">   
 			 			<c:if test="${task.tlno == item.tlno }">
-			 				<% length++; %> 
-					 		<div class="taskBox_body">
-					 			<div class="task_item">
+			 				<c:if test='${task.status == 0}'>
+			 					<% length++; %> 
+					 			<div class="task_item" data-taskno="${task.taskno }">    
 					 				<input type="checkbox" class="finish_task">
 					 				<span class="task_name">${task.taskname }</span>
 					 			</div>
-					 		</div>  
-				 		</c:if>  
-				 		</c:forEach>  
-				 		    
-				 		<c:set var="length" value="<%= length %>"/>
-				 		<c:if test="${length > 0 }">
-					 		<div class="taskBox_footer"> 
-					 			<span>진행중인 업무 ${length}개</span>
-					 		</div>
-				 		</c:if>
+					 		</c:if>  
+					 		<c:if test="${task.status == 1 }">
+					 			<% finished = true; %> 
+					 		</c:if>
+				 		</c:if>     
+				 		</c:forEach>      
+				 		</div>       
+			 			<c:set var="finished" value="<%=finished %>"/>  
+				 		<div class="finish-title" data-taskno="${task.taskno }" 	<c:if test="${finished==true}"> style="display: block;"</c:if> >    
+					 		 	완료된 업무    	
+						</div>     
+				 		<div class="finished_task_box">
+					 		<c:forEach items="${tasks }" var="task">   
+				 			<c:if test="${task.tlno == item.tlno }">    
+				 				<c:if test='${task.status == 1}'>
+						 			<div class="task_item finished" data-taskno="${task.taskno }">    
+						 				<input type="checkbox" class="finish_task" checked="checked">  
+						 				<span class="task_name">${task.taskname }</span>
+						 			</div>     
+						 		</c:if>      
+					 		</c:if>    
+					 		</c:forEach>     
+						</div>
+				 		</div>          
+				 		
+				 		<c:set var="length" value="<%= length %>"/> 
+				 		<div class="taskBox_footer" <c:if test="${length > 0 }">style="display:block;"</c:if>> 
+					 		<span>진행중인 업무 <i style="font-style: normal;">${length}</i>개</span> 
+				 		</div> 
 			 		</c:if>
 			 	</div>
 			 	</c:forEach>
 			 	</c:if>
 			 	<!-- c:if 끝 -->
-			 	<div class="taskBox taskBox_add">   
-			 		<button type="button"><span class="glyphicon glyphicon-plus"></span> 업무 추가하기</button>
-			 	</div> 
+			 	<div class="taskBox taskBox_add">     
+			 		<button type="button" class="addTaskList_btn"><span class="glyphicon glyphicon-plus"></span> 업무 추가하기</button>
+			 		<div class="addTaskListWrap">
+				 		<input type="text" placeholder="업무이름" > 
+				 		<a href="#" class="cancle_addTaskList"><span class="glyphicon glyphicon-remove"></span></a>
+			 		</div>    
+			 	</div>
 		 	</div>
 		 	<ul class="dropdown_menu_setting" id="member_search_dropdown">
 				<li><span class="dropTit">멤버</span> <a href="#"
@@ -356,13 +381,134 @@
 				</li>
 				<li>
 					<ul class="memList">
+						
+					</ul>
+				</li>
+			</ul>  
+			 
+		</div> 
+		<!-- 프로젝트 설정 end -->
+		
+		<!-- 업무 설정  start-->
+		<!-- 프로젝트 설정 --> 
+		<div class="sideSetting" id="side_task_setting"	style="display: none;" data-pno="${projectVO.pno }">
+			<a href="#" class="sideSettingClose"><span
+				class="glyphicon glyphicon-remove"></span></a>
 	
+			<div class="settingHeader">
+				<div class="set_title inputText">
+					<input type="text" value="업무명" readonly="readonly" id="project_task_InputText"> 
+					<span class="glyphicon glyphicon-pencil"></span>
+					<p class="head_cnt">#7 작성자 TE ST • 작성일 4월 11일 • 몇 초 전에 업데이트됨</p>
+				</div>
+	    
+				<ul class="toggleWrap">
+					<li class="selectSetting" style="width: 33.3%;" ><a href="#">설정</a></li>
+					<li style="width: 33.3%;"><a href="#"  >코멘트</a></li>
+					<li style="width: 33.3%;"><a href="#"  >파일 & 링크</a></li>
+				</ul>  
+			</div>
+			<div class="settingBody"> 
+				<div class="settingContent">
+					<div class="settingBlock">
+						<p>
+							<span class="glyphicon glyphicon-text-size"
+								style="font-size: 10px;"></span> 설명
+						</p>
+						<div class="inputText">
+							<input type="text" readonly="readonly" id="task_explanation_InputText" placeholder="설명 추가하기"> 
+							<span class="glyphicon glyphicon-pencil"></span>
+						</div>
+					</div>  
+					<div class="settingBlock">
+						<div class="settingInnerBox">
+							<div class="left_block_tit">
+								<p>위치</p>
+							</div>  
+							<div class="right_block_con"> 
+							
+							</div> 
+						</div> 
+						<div class="settingInnerBox">
+							<div class="left_block_tit">
+								<p>시작일</p>
+							</div>  
+							<div class="right_block_con">  
+								<div class="date" id="task_startDate">  
+									<input type="text" readonly="readonly" >
+									<button class="setting_btn input-group-addon">+</button>
+								</div>  
+							</div> 
+						</div> 
+						<div class="settingInnerBox">
+							<div class="left_block_tit">
+								<p>마감일</p>
+							</div>
+							<div class="right_block_con">
+								<div class="date" id="task_endDate">
+									<input type="text" readonly="readonly" />
+									<button class="setting_btn input-group-addon">+</button>
+								</div>
+							</div>
+						</div>
+						<div class="settingInnerBox">
+							<div class="left_block_tit">
+								<p>실제 완료일</p>
+							</div>
+							<div class="right_block_con">
+								<div class="date" id="task_finishDate">
+									<input type="text" readonly="readonly" />
+									<button class="setting_btn input-group-addon">+</button>
+								</div>
+							</div>
+						</div>
+						<div class="settingInnerBox">
+							<div class="left_block_tit">
+								<p>배정된 멤버</p>
+							</div> 
+							<div class="right_block_con">
+								<button class="setting_btn">+</button>
+								<div class="addMemberBox" id="setting_addmember_member">
+								
+								</div>
+							</div>
+						</div>
+						<div class="settingInnerBox">
+							<div class="left_block_tit">
+								<p>작업 시간</p>
+							</div> 
+							<div class="right_block_con">
+								 <button class="setting_btn">+</button>  
+							</div>
+						</div>
+					</div>
+										
+			</div>
+			 
+			<ul class="dropdown_menu_setting" id="setting_drop_menu_member">
+				<li><span class="dropTit">멤버</span> <a href="#"
+					class="closeDropDownBtn"><span
+						class="glyphicon glyphicon-remove"></span></a></li>
+				<li>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search">
+						<div class="input-group-btn">  
+							<button class="btn btn-default" type="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div> 
+					</div>
+				</li>
+				<li>
+					<ul class="memList">  
+						
 					</ul>
 				</li>
 			</ul>  
 			
 		</div> 
-		<!-- 프로젝트 설정 end -->
+		<!-- 업무 설정 end -->
+		
 		
 	</div>  
 	</div>   
@@ -413,8 +559,58 @@
 			 	</div>
 			 </div>   
 		</div> 
-
-	<!-- handlerbars 템플릿 -->   
+  
+	<!-- handlerbars 템플릿 -->    
+	<script id="addTaskList_template" type="text/x-handlerbars-template">
+		<div class="taskBox">
+			 		<div class="taskBox_header"> 
+			 			<div class="taskBox_header_wrap">
+				 			<input type="text" readonly="readonly" value="{{name }}" class="taskList_name">	
+				 			<a href="#" class="add_task_btn"><span class="glyphicon glyphicon-plus"></span></a>  
+				 			<div class="dropdown">
+				 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				 					<span class="glyphicon glyphicon-option-vertical"></span>
+				 				</a>     
+							    <ul class="dropdown-menu" style="left:-132px;">
+							      <li><a href="#">이동... ></a></li>
+							      <li><a href="#">이메일로 업무 작성</a></li>
+							      <li><a href="#">리스트 삭제</a></li>
+							    </ul>    
+							 </div>  
+						 </div>       
+						 <div class="taskBox_header_addTask" style="display: none;">
+						 	<textarea rows="1" cols="36"></textarea>
+						 	<div class="taskBox_header_addBtnWrap">
+						 		<a href="#" class="addMemberDropMenu">     
+						 			<span class="glyphicon glyphicon-user">
+						 				<i class="counter">1</i> 
+						 			</span>    
+						 		</a>
+						 		<a href="#" class="addDatepickerOpen">
+						 			<span class="glyphicon glyphicon-calendar"></span> 
+						 			<input type="text" readonly="readonly" class="task_endDate">
+						 		</a>    
+						 	</div>
+						 	<div class="taskBox_header_addBtnWrap">
+						 		 <button class="add_task_cancle">취소</button>  
+						 		 <button class="add_task_make" data-tlno="{{tlno}}">만들기</button>
+						 	</div>
+						 </div>          
+			 		</div>
+				<div class="taskBox_body">  
+			 	</div>
+			 	<div class="taskBox_footer" >  
+					 <span>진행중인 업무 <i style="font-style: normal;">0</i>개</span> 
+				 </div> 
+		 	</div>        
+	</script>
+	
+	<script id="addTask_template" type="text/x-handlerbars-template">
+		<div class="task_item" data-taskno="{{taskno}}">  
+			<input type="checkbox" class="finish_task">  
+			<span class="task_name">{{taskname }}</span>
+		</div>         
+	</script>
 	<script id="addTask_member_member_template" type="text/x-handlerbars-template">
 		{{#each.}}
 		<li>  
@@ -424,7 +620,7 @@
 				<span class="glyphicon glyphicon-ok" style="{{check_task_member massno}}"></span>
 			</a>  
 		</li> 
-		{{/each}}        
+		{{/each}}          
 	</script>
 	
 	<script id="setting_admin_template" type="text/x-handlerbars-template">

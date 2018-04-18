@@ -671,9 +671,21 @@ $(function() {
 })// 제워키리 끝     
 var $target_set = null; 
 var dropDatePicker = function($target) { 
-	$("#sandbox-container div.datePicker_cst .clear").trigger("click"); 
+	$("#sandbox-container div.datePicker_cst .clear").trigger("click");
 	
 	$target_set = $target;
+	var targetId = $target.attr("id");
+	
+	if(targetId == "startDate")
+		$("#sandbox-container .datepicker_title strong").html("시작일 설정");
+	else if(targetId == "endDate")
+		$("#sandbox-container .datepicker_title strong").html("마감일 설정");
+	else if(targetId == "finishDate")
+		$("#sandbox-container .datepicker_title strong").html("실제 완료일 설정");
+	else if(targetId == undefined)
+		$("#sandbox-container .datepicker_title strong").html("마감일 설정");
+	    
+	
 	var obj = $target.offset();
 	// console.log("left: " + obj.left + "px, top: " + obj.top + "px");
 

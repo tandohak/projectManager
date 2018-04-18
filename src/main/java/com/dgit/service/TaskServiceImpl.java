@@ -26,8 +26,8 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public List<TaskVO> selectListWithTlno(int tlno) throws Exception {
 		return dao.selectListWithTlno(tlno);
-	}
-
+	} 
+  
 	@Override
 	public int insert(TaskVO vo) throws Exception {
 		return dao.insert(vo);

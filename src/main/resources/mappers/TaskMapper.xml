@@ -23,17 +23,17 @@
 	<select id="selectWithTlno" resultType="TaskVO">
 		<include refid="selectSql" />
 		<include refid="whereSqlTasklist" />
-	</select>
+	</select>  
 	
 	<select id="selectList" resultType="TaskVO">
-		<include refid="selectSql" />
+		<include refid="selectSql" /> 
 	</select>
 	
-	<select id="selectListByPno" resultType="TaskVO">
+	<select id="selectListByPno" resultType="TaskVO">  
 		select * from task
-		where task.tlno in (select tasklist.tlno from tasklist where pno = #{pno});
+		where task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})  
 	</select>
-	<insert id="insert">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="taskno">
 		insert into task
 		(tlno,explanation,regDate,taskname,startDate,endDate,colorLabel,cycle)
 		values(#{tlno},#{explanation},now(),#{taskname},#{startDate},#{endDate},#{colorLabel},#{cycle})

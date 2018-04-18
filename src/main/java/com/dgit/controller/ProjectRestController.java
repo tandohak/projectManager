@@ -359,31 +359,7 @@ public class ProjectRestController {
 		}
 		return entity;  
 	} 
-	 
-	/*@RequestMapping(value = "/update/memAssGrade/{pno}/{mno}/{memAssGrade}", method = {RequestMethod.PATCH,RequestMethod.PUT})
-	public ResponseEntity<String> updateMemAssGrade(@PathVariable int pno,@PathVariable int mno,@PathVariable int memAssGrade) {
-		ResponseEntity<String> entity = null;
-		try {  
-			
-			MemAssignmentVO vo = new MemAssignmentVO();
-			vo.setPno(pno);
-			vo.setMno(mno); 
-			vo.setGrade(memAssGrade);
-			
-			MemAssignmentVO tempVo= memAssService.selectOne(vo);
-			if(tempVo==null){
-				memAssService.insert(vo);
-			}else{
-				memAssService.update(vo);
-			}
-			
-			entity = new ResponseEntity<>("success", HttpStatus.OK);
-		} catch (Exception e) { 
-			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
-			e.printStackTrace();
-		}
-		return entity;  
-	}*/
+	  
 	
 	
 } 

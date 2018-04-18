@@ -34,7 +34,12 @@ public class JobAssignmentServiceImpl implements JobAssignmentService {
 
 	@Override
 	public int insert(JobAssignmentVO vo) throws Exception {
-		// TODO Auto-generated method stub
+		JobAssignmentVO tempVO = dao.selectOne(vo);
+		
+		if(tempVO != null){
+			return -1;
+		}
+		
 		return dao.insert(vo);
 	}
 

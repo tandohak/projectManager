@@ -153,13 +153,12 @@ public class UserController {
 			List<MemberVO> memList = memService.selectListByUno(tempUser.getUno());
 			MemberVO memVo = memList.get(0);
 			String wcode = memVo.getWcode();
-			Object dest = session.getAttribute("dest");
-			String path = (dest != null) ? ((String) dest).substring(15) : "/task/" + wcode;
-			System.out.println(path);
-			session.removeAttribute("dest"); 
+			Object dest = session.getAttribute("dest");    
+			String path = (dest != null) ? ((String) dest).substring(15) : "/task/" + wcode; 
+			session.removeAttribute("dest");   
 			return "redirect:"+path;
 		} else {
-			UserVO user = new UserVO();  
+			UserVO user = new UserVO();
 			user.setEmail(person.getAccountEmail());
 			user.setFirstName(person.getFamilyName());
 			user.setLastName(person.getGivenName());

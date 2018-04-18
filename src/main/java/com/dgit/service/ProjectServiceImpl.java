@@ -33,7 +33,11 @@ public class ProjectServiceImpl implements ProjectService {
 	@Transactional
 	public int insert(ProjectVO vo,List<Integer> memList,int makerMno) throws Exception {
 		int res =  dao.insert(vo);
-		 
+		
+		if(res < 0){
+			return -1;
+		}
+		  
 		if(memList!=null){
 			for(int mno : memList){
 				MemAssignmentVO memAssVO = new MemAssignmentVO();
@@ -44,6 +48,7 @@ public class ProjectServiceImpl implements ProjectService {
 				}else{
 					memAssVO.setGrade(1);
 				}
+				System.out.println("memAssignmentVO insert - " + memAssVO);
 				memAssDao.insert(memAssVO);
 			}
 		}

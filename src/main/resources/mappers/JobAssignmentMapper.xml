@@ -8,25 +8,23 @@
 	</sql>
 
 	<sql id="whereSql">
-		where pno = #{pno}
+		where massno in (select massno from memassignment where pno = #{pno})
 	</sql>
-
+ 
 	<sql id="whereSqlTaskNo">
 		where taskno = #{taskno}
 	</sql>
 	
-	<sql id="whereSqlSelectOne">
-		where pno = #{pno}
-		and mno = #{mno}
-		and taskno = #{taskno}
-	</sql>
-	
-	
+	<sql id="whereSqlSelectOne"> 
+		where massno = #{massno}
+		and taskno = #{taskno}  
+	</sql> 
+	 
 	<select id="selectOne" resultType="JobAssignmentVO">
 		<include refid="selectSql" />
 		<include refid="whereSqlSelectOne" />
 	</select>
-
+ 
 	<select id="selectTaskNo" resultType="JobAssignmentVO">
 		<include refid="selectSql" />
 		<include refid="whereSqlTaskNo" />
@@ -38,8 +36,8 @@
 
 	<insert id="insert">
 		insert into jobassignment
-		(pno,mno,taskno)
-		values(#{pno},#{mno},#{taskno})
+		(massno,taskno)
+		values(#{massno},#{taskno})
 	</insert>
  
 	<delete id="delete">
@@ -47,7 +45,7 @@
 		<include refid="whereSqlSelectOne" />
 	</delete>
  
-	<update id="update">
+	<update id="update"> 
 		update jobassignment set
 		taskno=#{taskno},
 		<include refid="whereSqlSelectOne" />
