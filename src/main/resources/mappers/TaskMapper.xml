@@ -35,15 +35,19 @@
 	</select>
 	<insert id="insert" useGeneratedKeys="true" keyProperty="taskno">
 		insert into task
-		(tlno,explanation,regDate,taskname,startDate,endDate,colorLabel,cycle)
-		values(#{tlno},#{explanation},now(),#{taskname},#{startDate},#{endDate},#{colorLabel},#{cycle})
-	</insert>
-
+		(tlno,explanation,regDate,taskname,writer,startDate,endDate,colorLabel,cycle)
+		values(#{tlno},#{explanation},now(),#{taskname},#{writer},#{startDate},#{endDate},#{colorLabel},#{cycle})
+	</insert>    
+    
 	<delete id="delete">
 	    delete from task
 		<include refid="whereSql" />
 	</delete>  
-	 
+	  
+	<delete id="deleteByTlno"> 
+	   delete from task where tlno = #{tlno};
+	</delete>  
+	
 	<update id="update">	    
 	    update task set
 	    tlno = #{tlno},
@@ -51,7 +55,7 @@
 	    taskname = #{taskname},
 	    startDate = #{startDate},
 	    endDate = #{endDate},
-	    workingtime = #{workingtime},
+	    workingtime = #{workingtime},  
 	    finishDate = #{finishDate},
 	    status = #{status},
 	    colorLabel = #{colorLabel},

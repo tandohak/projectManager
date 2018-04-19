@@ -26,6 +26,14 @@
 		<include refid="whereSqlSelectList" />
 	</select>
  
+ 	<select id="selectListByTaskno" resultType="MemAssignmentVO">
+		select * from memassignment
+		where massno in (
+			select massno from jobassignment
+			where taskno = #{taskno}
+		)
+	</select>
+	
 	<insert id="insert">
 		insert into memassignment 
 		(pno,mno,grade) 

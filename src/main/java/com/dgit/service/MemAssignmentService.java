@@ -10,4 +10,6 @@ public interface MemAssignmentService {
 	public int insert(MemAssignmentVO vo) throws Exception;
 	public int delete(MemAssignmentVO vo) throws Exception;
 	public int update(MemAssignmentVO vo) throws Exception;
+	public List<MemAssignmentVO> selectListByTaskno(int taskno) throws Exception;
+
 }

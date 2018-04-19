@@ -2,15 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="include/header.jsp"%>  
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=52222s2a2">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=5as222222">   
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=52s2a2222">     
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=2sa2a22225">  
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=52a22222"></script>      
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2222s22a7"></script>          
-<script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>             
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=5222s2a2">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=5as22222">   
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=52s2a222">     
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=2saa22225">  
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=52a2222"></script>      
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=222s22a7"></script>          
+<script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>           
 <script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?a=52a22222s7"></script>       
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=522a222s27"></script>  
+<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=522a22s27"></script>  
 <script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=a22s7222"></script>     
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>    
 <script>                
@@ -180,7 +180,8 @@
 			<div class="settingHeader">
 				<div class="set_title inputText">
 					<input type="text" value="프로젝트명" readonly="readonly"
-						id="project_name_InputText"> <span	class="glyphicon glyphicon-pencil"></span>
+						id="project_name_InputText"> <span
+						class="glyphicon glyphicon-pencil"></span>
 					<p class="head_cnt">#7 작성자 TE ST • 작성일 4월 11일 • 몇 초 전에 업데이트됨</p>
 				</div>
 	
@@ -399,15 +400,12 @@
 					<input type="text" value="업무명" readonly="readonly" id="task_name_InputText"> 
 					<span class="glyphicon glyphicon-pencil"></span>
 					<p class="head_cnt">#7 작성자 TE ST • 작성일 4월 11일 • 몇 초 전에 업데이트됨</p>
-					<a href="#" id="delete_task_btn"> 
-						<span class="glyphicon glyphicon-trash"></span>    
-					</a>   
-				</div>   
+				</div>
 	    
-				<ul class="toggleWrap">  
+				<ul class="toggleWrap">
 					<li class="selectSetting" ><a href="#">설정</a></li>  
 					<li ><a href="#"  >파일 & 링크</a></li>  
-				</ul>      
+				</ul>   
 			</div>
 			<div class="settingBody"> 
 				<div class="settingContent">
@@ -663,5 +661,5 @@
 			<a href="#" class="delMem" style="{{checkMemAssGrade memAssGrade}}">x</a>
 		</div>         
 	</script>
-</body>    
+</body>   
 </html>

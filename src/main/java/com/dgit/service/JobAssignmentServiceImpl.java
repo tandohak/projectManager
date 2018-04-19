@@ -55,4 +55,9 @@ public class JobAssignmentServiceImpl implements JobAssignmentService {
 		return dao.update(vo);
 	}
 
+	@Override
+	public int deleteByTaskno(int taskno) throws Exception {
+		return dao.deleteByTaskno(taskno);
+	}
+
 }

@@ -19,5 +19,5 @@ public interface MemberDAO {
 	public List<MemberVO> selectListByPno(int pno) throws Exception;
 	public MemberVO selectOneByPnoAndUno(int uno, int pno) throws Exception;
 	public List<MemberVO> selectListByPnoWithMemAssignment(int pno) throws Exception;
+	public List<MemberVO> selectListByTasknoWithMemAssignment(int taskno) throws Exception;
 }
- 

@@ -40,5 +40,9 @@ public class MemAssignmentDAOImpl implements MemAssignmentDAO {
 		return session.update(namespace+"update",vo);
 	}
 
+	@Override
+	public List<MemAssignmentVO> selectListByTaskno(int taskno) throws Exception {
+		return session.selectList(namespace+"selectListByTaskno",taskno);
+	}  
 
 }

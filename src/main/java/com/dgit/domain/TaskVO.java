@@ -23,7 +23,7 @@ public class TaskVO {
 
 	public void setWriter(String writer) {
 		this.writer = writer;
-	}
+	}  
 
 	public int getTaskno() {
 		return taskno;
@@ -58,10 +58,10 @@ public class TaskVO {
 	}
 
 	public Date getStartDate() {
-		return startDate;
+		return startDate; 
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(Date startDate) {  
 		this.startDate = startDate;
 	}
 

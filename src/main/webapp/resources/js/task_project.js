@@ -200,7 +200,7 @@ $(function() {
 			url: "/projectManager/project/select/"+pno,
 			type:"get",
 			dataType:"json",
-			success: function(res){ 
+			success: function(res){   
 				var project = res.project;
 				var member = res.member;     
 				console.log(project);   

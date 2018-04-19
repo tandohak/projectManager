@@ -240,7 +240,7 @@ $(function() {
 				});
 
 				$(this).parent(".addMem_item").remove();
-
+				
 				$.ajax({
 					url : "/projectManager/project/delete/memAssGrade/" + pno
 							+ "/" + delmno,
@@ -481,7 +481,7 @@ $(function() {
 			}
 		})
 	})
-
+		
 	/* 프로젝트 타이틀 설정 */
 	$("#project_name_InputText").click(function() {
 		$(this).removeAttr("readonly");
@@ -656,18 +656,35 @@ $(function() {
 		
 		var targetId = $target_set.attr("id");
 		console.log(targetId); 
-		var pno = $("#side_project_setting").attr("data-pno");
-		            
-		$.ajax({ 
-			url : "/projectManager/project/update/"+targetId+"/" + pno,
-			type : "put",  
-			data : "del",
-			dataType : "text",  
-			success : function(res) { 
-				console.log(res);
-			}       
-		})              
-	})                  
+		if(targetId != undefined){   
+			if(targetId.indexOf("task") <= -1){//프로젝트 설정
+				var pno = $("#side_project_setting").attr("data-pno");
+				$.ajax({ 
+					url : "/projectManager/project/update/"+targetId+"/" + pno,
+					type : "put",  
+					data : "del",
+					dataType : "text",  
+					success : function(res) { 
+						console.log(res);
+					}           
+				})       
+			}else if(targetId.indexOf("task") > -1){//task 설정 
+				var taskno = $("#side_task_setting").attr("data-taskno");
+				targetId = targetId.replace("task_","");
+				 
+				$.ajax({      
+					url : "/projectManager/taskList/update/"+targetId +"/"+ taskno,
+					type : "put",  
+					data : "del",
+					dataType : "text",  
+					success : function(res) { 
+						console.log(res);
+					}           
+				})  	
+			}              
+		}  
+		     
+	})                   
 })// 제워키리 끝     
 var $target_set = null; 
 var dropDatePicker = function($target) { 
@@ -675,7 +692,7 @@ var dropDatePicker = function($target) {
 	
 	$target_set = $target;
 	var targetId = $target.attr("id");
-	
+	console.log(targetId); 
 	if(targetId == "startDate")
 		$("#sandbox-container .datepicker_title strong").html("시작일 설정");
 	else if(targetId == "endDate")

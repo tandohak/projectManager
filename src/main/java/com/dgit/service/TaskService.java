@@ -11,5 +11,6 @@ public interface TaskService {
 	public int insert(TaskVO vo) throws Exception;
 	public int delete(int taskno) throws Exception;
 	public int update(TaskVO vo) throws Exception;
+	public int deleteByTlno(int tlno) throws Exception;
 	public List<TaskVO> selectListByPno(int pno) throws Exception;
 }

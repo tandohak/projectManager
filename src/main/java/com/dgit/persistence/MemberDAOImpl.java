@@ -88,6 +88,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<MemberVO> selectListByPnoWithMemAssignment(int pno) throws Exception {
 		return session.selectList(namespace+"selectListByPnoWithMemAssignment",pno);
+	}
+
+	@Override
+	public List<MemberVO> selectListByTasknoWithMemAssignment(int taskno) throws Exception {
+		return session.selectList(namespace+"selectListByTasknoWithMemAssignment",taskno);
 	} 
 	  
 }

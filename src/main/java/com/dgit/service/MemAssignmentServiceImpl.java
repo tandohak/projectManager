@@ -44,4 +44,9 @@ public class MemAssignmentServiceImpl implements MemAssignmentService {
 		return dao.update(vo);
 	}
 
+	@Override
+	public List<MemAssignmentVO> selectListByTaskno(int taskno) throws Exception {
+		return dao.selectListByTaskno(taskno);
+	}
+
 }

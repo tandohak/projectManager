@@ -49,5 +49,10 @@ public class TaskDAOImpl implements TaskDAO {
 	public List<TaskVO> selectListByPno(int pno) throws Exception {
 		return session.selectList(namespace + "selectListByPno", pno);
 	}
+
+	@Override
+	public int deleteByTlno(int tlno) throws Exception {
+		return session.delete(namespace + "deleteByTlno", tlno);
+	}
  
-}
+} 

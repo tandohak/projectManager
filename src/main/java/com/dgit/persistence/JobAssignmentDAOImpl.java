@@ -45,4 +45,9 @@ public class JobAssignmentDAOImpl implements JobAssignmentDAO {
 		return session.selectList(namespace+"selectList",taskno);
 	}
 
+	@Override
+	public int deleteByTaskno(int taskno) throws Exception {
+		return session.delete(namespace+"deleteByTaskno",taskno);
+	}
+
 }

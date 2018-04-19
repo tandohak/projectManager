@@ -47,4 +47,9 @@ public class TaskServiceImpl implements TaskService {
 	public List<TaskVO> selectListByPno(int pno) throws Exception {
 		return dao.selectListByPno(pno); 
 	}
+
+	@Override
+	public int deleteByTlno(int tlno) throws Exception {
+		return dao.deleteByTlno(tlno); 
+	}
 }

@@ -85,6 +85,14 @@
 		where  memassignment.pno = #{pno}
 	</select>
 	
+	<select id="selectListByTasknoWithMemAssignment" resultType="MemberVO">
+		select distinct(member.mno),massno, member.uno ,member.wcode, user.firstName, user.lastName,memGrade,user.photoPath,user.email, memassignment.grade  as memAssGrade
+		from member join user join memassignment
+		on member.uno = user.uno and member.mno = memassignment.mno
+		where  massno in 
+		(select massno from jobassignment where taskno = #{taskno});
+	</select>
+	
 	<insert id="insert"> 	
 		insert into member
 		(uno,wcode,memGrade)

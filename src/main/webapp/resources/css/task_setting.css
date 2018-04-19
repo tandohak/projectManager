@@ -62,8 +62,8 @@
 }   
 .inputText input[type='text']:hover+span{
 	display: block; 	
-}
-.inputText span{
+}  
+.inputText>span{
 	position: absolute !important; 
 	top:4px;  
 	right: 10px;  

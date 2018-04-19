@@ -11,5 +11,6 @@ public interface JobAssignmentDAO {
 	public List<JobAssignmentVO> selectTaskNo(int taskno) throws Exception;
 	public int insert(JobAssignmentVO vo) throws Exception;
 	public int delete(JobAssignmentVO vo) throws Exception;
+	public int deleteByTaskno(int taskno) throws Exception;
 	public int update(JobAssignmentVO vo) throws Exception;
 }
