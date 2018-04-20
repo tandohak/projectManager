@@ -46,11 +46,12 @@
 		<interceptor>
 			<mapping path="/task/*"/> 
 			<mapping path="/task/{wcode}/workspace"/> 
-			<mapping path="/task/{wcode}/project/*"/>   
+			<mapping path="/task/{wcode}/project/*"/>  
+			<mapping path="/task/{wcode}/project/{pno}/timeline"/>   
 			<beans:ref bean="authInterceptor"/> 
 		</interceptor>
 		
-		<interceptor>
+		<interceptor>   
 			<mapping path="/task/{wcode}/join"/> 
 			<beans:ref bean="taskJoinInterceptor"/> 
 		</interceptor>

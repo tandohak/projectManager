@@ -55,7 +55,7 @@
 			          	</a>
 			          </li>
 			           <li>  
-				        <div class="nav_innerBox"> 
+				        <div class="nav_innerBox">   
 				        	<div class="input-group">
 							    <input type="text" class="form-control" placeholder="워크스페이스 검색"> 
 					          	<div class="input-group-btn">  

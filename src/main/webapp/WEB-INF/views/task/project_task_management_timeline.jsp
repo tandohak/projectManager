@@ -80,17 +80,17 @@
 						  			<c:if test="${tasks != null }">   
 						  			<ul class="tasks">
 						  				<c:forEach var="task" items="${tasks }">
-						  					<c:if test="${item.tlno == task.tlno }">
-						  					<li><a href="#">${task.taskname }</a></li>
-						  					</c:if> 
+						  					<c:if test="${item.tlno == task.tlno }"> 
+						  					<li><a href="#" data-taskno="${task.taskno }" class="task_item">${task.taskname }</a></li>
+						  					</c:if>     
 						  				</c:forEach>
 						  			</ul> 
 						  			</c:if>    
 						  		</li>
-					  		</c:forEach> 
-				  		</c:if>
-				  	</ul>   
-			  	</li>    
+					  		</c:forEach>  
+				  		</c:if>  
+				  	</ul>    
+			  	</li>     
 			  </ul>
 			  </div>   
 			   <div class="timeline_body" id="timeline">

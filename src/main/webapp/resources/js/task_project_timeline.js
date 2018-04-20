@@ -192,21 +192,22 @@ $(function() {
 		var endDate = $("#task_endDate input").val();
 		var label = $(this).val();
 		var taskno =  $("#side_task_setting").attr("data-taskno"); 
-		console.log(node_id);
+		console.log(node_id);   
+		$(".tasks li a[data-taskno='"+taskno+"']").html(label);
+
 		$("#timeline").timeline('updateEvent', [ {
 			eventId : Number(node_id),
 			start : startDate,
 			end : endDate,
 			row : Number(node_id),
-			label : label,
+			label : label,  
 			extend:{'taskno':taskno},
 			callback:'$.openTaskSetting()'
 		/*
 		 * bgColor : '#aaaab0', color : '#d70035'
-		 */
+		 */  
 		}]);   
-	})   
-	  
+	})     
 	  
 	/*작업 삭제 버튼*/  
 	$("#delete_task_btn_timeline").click(function(){
@@ -217,13 +218,19 @@ $(function() {
 			dataType : "text",
 			success : function(res) {
 				console.log(res);  
-				console.log(node_id); 
+				console.log(node_id);   
 				if(res=="success"){    
 					$(".task_item[data-taskno='"+taskno+"']").remove();  
 					$("#timeline").timeline('removeEvent', [ Number(node_id) ]);
+					$(".tasks li a[data-taskno='"+taskno+"']").parent("li").remove();
+					
 				}  
 			}            
 		})   
 	})      
-	  
+	 $(".task_item").click(function(){
+		 var taskno = $(this).attr("data-taskno");
+		   
+		 $(".timeline-node[data-taskno='"+taskno+"']").trigger("click");
+	 })
 })
