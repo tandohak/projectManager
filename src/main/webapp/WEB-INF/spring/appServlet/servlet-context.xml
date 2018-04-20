@@ -57,11 +57,12 @@
 		
 		<interceptor>
 			<mapping path="/task/{wcode}"/> 
-			<mapping path="/task/{wcode}/workspace"/> 
+			<mapping path="/task/{wcode}/workspace"/>   
 			<mapping path="/task/{wcode}/project/*"/>  
+			<mapping path="/task/{wcode}/project/{pno}/timeline"/>  
 			<beans:ref bean="taskAuthInterceptor"/>
 		</interceptor>
-	</interceptors> 
+	</interceptors>     
 	
 	<context:component-scan base-package="com.dgit.controller" />
 	

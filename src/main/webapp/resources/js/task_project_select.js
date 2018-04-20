@@ -490,16 +490,16 @@ $(function() {
 	$("#side_task_setting .sideSettingClose").click(function(){
 		$("#side_task_setting").css("display","none"); 
 	})     
-	
+	 
 	/* 업무 클릭 : 설정 토글 */ 
 	$(".taskBox_wrap").on("click",".task_item",function(){
 		var taskno = $(this).attr("data-taskno");  
 		$.ajax({   
 			url: "/projectManager/taskList/select/task/"+taskno,
 			type:"get",
-			dataType:"json",
+			dataType:"json",  
 			success: function(res){ 
-				var task = res.task
+				var task = res.task 
 				var member = res.member;
 				
 				console.log(task);
@@ -534,7 +534,7 @@ $(function() {
 				     
 				$("#task_name_InputText").siblings(".head_cnt").html(p);
 				
-				var explanation = task.explanation;  
+				var explanation = task.explanation;   
 				if(explanation==null)
 					explanation = "";
 				 
@@ -598,7 +598,7 @@ $(function() {
 				console.log(res);
 			}  
 		})      
-	}) 
+	})  
 	$("#task_endDate input").change(function() {
 		$(this).css("display", "block");
 		$(this).siblings("button").addClass("insertDate");
@@ -851,5 +851,20 @@ $(function() {
 		}    
 	});      
 	
+	/*작업 삭제 버튼*/
+	$("#delete_task_btn").click(function(){
+		var taskno = $("#side_task_setting").attr("data-taskno");
+		$.ajax({ 
+			url : "/projectManager/taskList/delete/task/" + taskno,
+			type : "delete",  
+			dataType : "text",
+			success : function(res) {
+				console.log(res);
+				if(res=="success"){
+					$(".task_item[data-taskno='"+taskno+"']").remove();
+				}
+			}    
+		})
+	})
 	 
 })

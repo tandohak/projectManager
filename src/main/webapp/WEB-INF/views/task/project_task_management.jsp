@@ -2,16 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="include/header.jsp"%>  
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=52222s2a2">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=5as222222">   
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=52s2a2222">     
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=2sa2a22225">  
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=52a22222"></script>      
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2222s22a7"></script>          
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=5222">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=5as2">   
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=52s2">     
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=2sa25">  
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=52a"></script>      
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2222"></script>          
 <script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>             
-<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?a=52a22222s7"></script>       
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=522a222s27"></script>  
-<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=a22s7222"></script>     
+<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?a=52a22"></script>       
+<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=522a2"></script>  
+<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=a22"></script>     
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>    
 <script>                
 	var wcode = "${wcode}";            
@@ -19,7 +19,7 @@
 			 mno : ${loginMem.mno },       
 			 firstName : "${loginMem.firstName}" ,         
 			 lastName :  "${loginMem.lastName }" ,     
-			 photoPath : "${loginMem.photoPath}" ,  
+			 photoPath : "${loginMem.photoPath}" ,   
 			 memAssGrade : "${loginMem.memGrade}",
 			 memGrade : "${loginMem.memGrade}"
 	};         
@@ -37,31 +37,30 @@
 	   
 					<li class="navbar-text"><strong  id="pj_title" style="color: #333;">${projectVO.title }</strong>
 					</li>   
+				</ul>      
+	 			   
+				<ul class="nav navbar-nav navbar-left" id="nav_task_tabs" style="margin-left: 34.5%;">       
+					<li class="tab_active"><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}">업무 </a></li>
+					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}/timeline" > 타임라인 </a></li> 
+					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}" > 분석 </a></li>
+					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}" > 파일 </a></li>
 				</ul>  
-	 			 
-				<ul class="nav navbar-nav navbar-left" id="nav_task_tabs"
-					style="margin-left: 34.5%;">
-					<li class="tab_active"><a href="#" data-toggle="dropdown">업무 </a></li>
-					<li><a href="#" data-toggle="dropdown"> 타임라인 </a></li> 
-					<li><a href="#" data-toggle="dropdown"> 분석 </a></li>
-					<li><a href="#" data-toggle="dropdown"> 파일 </a></li>
-				</ul> 
-				
+				 
 				<ul class="nav navbar-nav navbar-right" style="margin-right: 0px;">
 					<li><a href="#" id='project_setting_btn' data-pno='${projectVO.pno }'> <span
 							class="glyphicon glyphicon-cog"></span>
-					</a></li>  
+					</a></li>   
 				</ul>
 			</div>  
 		</nav>    	
-	<div id="container">
+	<div id="container">  
 		<!-- 업무 리스트 시작 -->
 		<div class="contentBox"> 
 			<div class="taskBox_wrap"> 
 				<c:if test = "${taskList != null }">  
 				<c:forEach var="item" items="${taskList }">   
 			 	<div class="taskBox" data-order="${item.list_order}" data-tlno="${item.tlno}">
-			 		<div class="taskBox_header"> 
+			 		<div class="taskBox_header">  
 			 			<div class="taskBox_header_wrap">
 				 			<input type="text" readonly="readonly" value="${item.name }" class="taskList_name">	
 				 			<a href="#" class="add_task_btn"><span class="glyphicon glyphicon-plus"></span></a>  
@@ -395,22 +394,22 @@
 				class="glyphicon glyphicon-remove"></span></a>
 	
 			<div class="settingHeader">
-				<div class="set_title inputText">
-					<input type="text" value="업무명" readonly="readonly" id="task_name_InputText"> 
-					<span class="glyphicon glyphicon-pencil"></span>
+				<div class="set_title inputText">  
+					<input type="text" value="업무명" readonly="readonly" id="task_name_InputText" style="width: 90%;"> 
+					<span class="glyphicon glyphicon-pencil" style="right: 60px; "></span>
 					<p class="head_cnt">#7 작성자 TE ST • 작성일 4월 11일 • 몇 초 전에 업데이트됨</p>
-					<a href="#" id="delete_task_btn"> 
-						<span class="glyphicon glyphicon-trash"></span>    
+					<a href="#" id="delete_task_btn" style="position: absolute; top: 4px; right: 10px;"> 
+						<span class="glyphicon glyphicon-trash"></span>      
 					</a>   
 				</div>   
-	    
+	      
 				<ul class="toggleWrap">  
 					<li class="selectSetting" ><a href="#">설정</a></li>  
 					<li ><a href="#"  >파일 & 링크</a></li>  
 				</ul>      
 			</div>
-			<div class="settingBody"> 
-				<div class="settingContent">
+			<div class="settingBody">  
+				<div class="settingContent"> 
 					<div class="settingBlock">
 						<p>
 							<span class="glyphicon glyphicon-text-size"
@@ -547,9 +546,9 @@
     
 	<!-- handlerbars 템플릿 -->         
 	<script id="addTaskList_template" type="text/x-handlerbars-template">
-		<div class="taskBox" data-order="{{list_order}}">
+		<div class="taskBox" data-order="{{list_order}}" data-tlno="{{tlno}}">
 			 		<div class="taskBox_header"> 
-			 			<div class="taskBox_header_wrap">
+			 			<div class="taskBox_header_wrap">  
 				 			<input type="text" readonly="readonly" value="{{name }}" class="taskList_name">	
 				 			<a href="#" class="add_task_btn"><span class="glyphicon glyphicon-plus"></span></a>  
 				 			<div class="dropdown">

@@ -33,7 +33,7 @@
 		select count(pno) 
 		from tasklist join task
 		on tasklist.tlno = task.tlno  
-		where pno = #{pno} and status = 2;
+		where pno = #{pno} and status = 1;
 	</select> 
 	 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="tlno">

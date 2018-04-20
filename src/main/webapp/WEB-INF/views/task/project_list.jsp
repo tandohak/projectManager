@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="include/header.jsp"%> 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/task_project.css?a=28">
@@ -104,20 +105,20 @@
 										<p class="pj_item_state" data-pno="${item.pj.pno }"
 											style="background-color: #E0E0E0; color: #9E9E9E; border: none;">취소</p>
 									</c:if>
-									<div class="pj_item_progress">
-										<div class="pj_item_taskState">
-											<span class="percent">0% 완료</span> <span class="taskCnt">${item.countFinish}/${item.countAll}개
-												업무</span>
-										</div>
-										<div class="percentbar">
+									<div class="pj_item_progress"> 
+										<div class="pj_item_taskState">        
+											<span class="percent"> <fmt:formatNumber value="${item.countFinish>0?((item.countFinish/item.countAll)*100):0}" pattern="0"/>% 완료</span> <span class="taskCnt">${item.countFinish}/${item.countAll}개
+												업무</span>          
+										</div>       
+										<div class="percentbar">      
 											<div class="progressBar"
 												style="width: ${(item.countFinish/item.countAll)*100}%;"></div>
 										</div>
-									</div>
+									</div>  
 								</div>
 							</div>
 						</c:forEach>
-					</c:if>
+					</c:if> 
 					<div class="pj_item" id="addProjectBtn" data-toggle="modal"
 						data-target="#addProjectModal">
 						<p>

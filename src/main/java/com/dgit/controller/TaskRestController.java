@@ -327,4 +327,19 @@ public class TaskRestController {
 		}
 		return entity;  
 	} 
+	
+	@RequestMapping(value = "/delete/task/{taskno}", method = RequestMethod.DELETE)
+	public ResponseEntity<String> deletTask(@PathVariable int taskno) {
+		ResponseEntity<String> entity = null;    
+		try {       
+			jobAssignmentService.deleteByTaskno(taskno);
+			taskService.delete(taskno);
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) {     
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}
+	  
 }    
