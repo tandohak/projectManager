@@ -2,33 +2,33 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="include/header.jsp"%>  
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=5222">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=5as2">   
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=52s2">     
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=2sa25">  
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=52a"></script>      
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2222"></script>          
-<script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>             
-<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?a=52a22"></script>       
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=522a2"></script>  
-<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=a22"></script>     
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=52232222">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=5as23222">   
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=52a2a2">       
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=232sa25">  
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=2522a"></script>      
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?b=22a2222"></script>          
+<script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>                 
+<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa2222"></script>        
+<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=522a2a222"></script>  
+<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=a22a222"></script>     
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>    
 <script>                
-	var wcode = "${wcode}";            
+	var wcode = "${wcode}";                  
 	var loginMem = {                         
-			 mno : ${loginMem.mno },       
-			 firstName : "${loginMem.firstName}" ,         
+			 mno : ${loginMem.mno },        
+			 firstName : "${loginMem.firstName}" ,          
 			 lastName :  "${loginMem.lastName }" ,     
 			 photoPath : "${loginMem.photoPath}" ,   
 			 memAssGrade : "${loginMem.memGrade}",
-			 memGrade : "${loginMem.memGrade}"
-	};         
+			 memGrade : "${loginMem.memGrade}" 
+	};           
 	var pno = ${projectVO.pno};     
 </script>   
-<%@ include file="include/sideBar.jsp"%>       
+<%@ include file="include/sideBar.jsp"%>         
 <div id="contentWrap">      
 		<nav class="navbar navbar-default"     
-			style="border-radius: 0px; margin-bottom: 0px;">
+			style="border-radius: 0px; margin-bottom: 0px;"> 
 			<div class="container-fluid" style="padding: 0px;">
 				<ul class="nav navbar-nav navbar-left">
 					<li><a href="#" data-toggle="dropdown"> <span
@@ -42,7 +42,7 @@
 				<ul class="nav navbar-nav navbar-left" id="nav_task_tabs" style="margin-left: 34.5%;">       
 					<li class="tab_active"><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}">업무 </a></li>
 					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}/timeline" > 타임라인 </a></li> 
-					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}" > 분석 </a></li>
+					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}/analytics" > 분석 </a></li>
 					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}" > 파일 </a></li>
 				</ul>  
 				 
@@ -102,16 +102,48 @@
 			 			<c:if test="${task.tlno == item.tlno }">
 			 				<c:if test='${task.status == 0}'>
 			 					<% length++; %> 
-					 			<div class="task_item" data-taskno="${task.taskno }">        
+			 					<c:choose>
+			 						<c:when test="${task.colorLabel == 'purple' }">
+			 							<c:set var="labelColor" value="task_label_purple" />
+			 						</c:when>
+			 						<c:when test="${task.colorLabel == 'blue' }">
+			 							<c:set var="labelColor" value="task_label_blue" />
+			 						</c:when>
+			 						<c:when test="${task.colorLabel == 'skyblue' }">
+			 							<c:set var="labelColor" value="task_label_skyblue" />
+			 						</c:when>
+			 						<c:when test="${task.colorLabel == 'green' }">
+			 							<c:set var="labelColor" value="task_label_green" />
+			 						</c:when>
+			 						<c:when test="${task.colorLabel == 'amber' }">
+			 							<c:set var="labelColor" value="task_label_amber" />
+			 						</c:when>
+			 						<c:when test="${task.colorLabel == 'pink' }">
+			 							<c:set var="labelColor" value="task_label_pink" />
+			 						</c:when>
+			 						<c:when test="${task.colorLabel == 'red' }">
+			 							<c:set var="labelColor" value="task_label_red" />
+			 						</c:when>
+			 						<c:when test="${task.colorLabel == 'orange' }">
+			 							<c:set var="labelColor" value="task_label_orange" />
+			 						</c:when>
+			 						<c:when test="${task.colorLabel == 'brown' }">
+			 							<c:set var="labelColor" value="task_label_brown" />
+			 						</c:when>
+			 						<c:otherwise> 
+			 							<c:set var="labelColor" value="" />
+			 						</c:otherwise>
+			 					</c:choose>  
+					 			<div class="task_item ${labelColor }" data-taskno="${task.taskno }">        
 					 				<input type="checkbox" class="finish_task">
 					 				<span class="task_name">${task.taskname }</span>
 					 			</div>
 					 		</c:if>    
 					 		<c:if test="${task.status == 1 }">  
 					 			<% finished = true; %> 
-					 		</c:if>
-				 		</c:if>     
-				 		</c:forEach>      
+					 		</c:if> 
+				 		</c:if>         
+				 		</c:forEach>       
 				 		</div>         
 			 			<c:set var="finished" value="<%=finished %>"/>  
 				 		<div class="finish-title" data-taskno="${task.taskno }" 	<c:if test="${finished==true}"> style="display: block;"</c:if> >    
@@ -121,7 +153,39 @@
 					 		<c:forEach items="${tasks }" var="task">   
 				 			<c:if test="${task.tlno == item.tlno }">    
 				 				<c:if test='${task.status == 1}'>
-						 			<div class="task_item finished" data-taskno="${task.taskno }">    
+					 				<c:choose>
+				 						<c:when test="${task.colorLabel == 'purple' }">
+				 							<c:set var="labelColor" value="task_label_purple" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'blue' }">
+				 							<c:set var="labelColor" value="task_label_blue" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'skyblue' }">
+				 							<c:set var="labelColor" value="task_label_skyblue" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'green' }">
+				 							<c:set var="labelColor" value="task_label_green" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'amber' }">
+				 							<c:set var="labelColor" value="task_label_amber" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'pink' }">
+				 							<c:set var="labelColor" value="task_label_pink" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'red' }">
+				 							<c:set var="labelColor" value="task_label_red" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'orange' }">
+				 							<c:set var="labelColor" value="task_label_orange" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'brown' }">
+				 							<c:set var="labelColor" value="task_label_brown" />
+				 						</c:when>
+				 						<c:otherwise>    
+				 							<c:set var="labelColor" value="" />
+				 						</c:otherwise>
+				 					</c:choose>   
+						 			<div class="task_item finished ${labelColor }" data-taskno="${task.taskno }">    
 						 				<input type="checkbox" class="finish_task" checked="checked">  
 						 				<span class="task_name">${task.taskname }</span>
 						 			</div>     
@@ -465,20 +529,52 @@
 								</div>
 							</div>  
 						</div>
-						
-					</div> 		
-			</div>
+						<div class="settingInnerBox">
+							<div class="left_block_tit">
+								<p>색상 라벨</p>
+							</div>  
+							<div class="right_block_con" id="color-label">    
+								<div class="color_label_btn" >
+									<div class="color_label_picker color_label_purple"></div>
+								</div>
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_blue"></div>
+								</div>
+								<div class="color_label_btn">  
+									<div class="color_label_picker color_label_skyblue"></div>
+								</div>
+								<div class="color_label_btn">  
+									<div class="color_label_picker color_label_green"></div>
+								</div> 
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_amber"></div>
+								</div>
+								<div class="color_label_btn"> 
+									<div class="color_label_picker color_label_pink"></div>
+								</div>
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_red"></div>
+								</div>
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_orange"></div>
+								</div>
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_brown"></div>   
+								</div> 
+							</div>  
+						</div>
+					</div> 		 
+			</div> 
 			   
-			
+			 
 		</div> 
 		<!-- 업무 설정 end -->
-		
 		
 	</div>  
 	</div>   
 </div>   
 <!-- div end --> 
-<ul class="dropdown_menu_setting" id="addTask_member_setting_dropdown">
+<ul class="dropdown_menu_setting" id="addTask_member_setting_dropdown"> 
 		<li><span class="dropTit">멤버</span> 
 			<a href="#"	class="closeDropDownBtn">
 			<span class="glyphicon glyphicon-remove"></span></a></li>

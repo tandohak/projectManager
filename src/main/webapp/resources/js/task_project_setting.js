@@ -614,7 +614,7 @@ $(function() {
 		var selectDate = $("#sandbox-container .selectDate").text();
 		var hour = $("#sandbox-container .hour").val();
 		var minute = $("#sandbox-container .minute").val();
-
+		console.log($target_set.find("input").val());   
 		$target_set.find("input").val(selectDate + " " + hour + ":" + minute);
 		$target_set.find("input").change();
 		$("#sandbox-container").css("display", "none");
@@ -686,7 +686,7 @@ $(function() {
 		     
 	})                   
 })// 제워키리 끝     
-var $target_set = null; 
+var $target_set = null;   
 var dropDatePicker = function($target) { 
 	$("#sandbox-container div.datePicker_cst .clear").trigger("click");
 	

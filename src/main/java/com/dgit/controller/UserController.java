@@ -156,8 +156,8 @@ public class UserController {
 			Object dest = session.getAttribute("dest");    
 			String path = (dest != null) ? ((String) dest).substring(15) : "/task/" + wcode; 
 			session.removeAttribute("dest");   
-			return "redirect:"+path;
-		} else {
+			return "redirect:"+path;  
+		} else { 
 			UserVO user = new UserVO();
 			user.setEmail(person.getAccountEmail());
 			user.setFirstName(person.getFamilyName());

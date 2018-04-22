@@ -179,4 +179,24 @@ public class TaskController {
 		return "task/project_task_management_timeline";   
 	}
 	  
+	@RequestMapping(value = "/{wcode}/project/{pno}/analytics", method = RequestMethod.GET)
+	public String projectAnalytics(HttpSession session,Model model,@PathVariable("pno") int pno,@PathVariable("wcode") String wcode) throws Exception{
+		Object object = session.getAttribute("login");
+		LoginDTO login = (LoginDTO)object;  
+		
+		int uno = login.getUno();    
+		 
+		List<MemberVO> workMembers = memService.selectListByWcode(wcode);
+		MemberVO loginMem = memService.selectOneByPnoAndUno(uno, pno);
+		ProjectVO projectVO= projectService.selectOne(pno); 
+		List<TaskListVO> taskList =  taskListService.selectList(pno);
+		List<TaskVO> tasks = taskService.selectListByPno(pno);
+		
+		model.addAttribute("workMembers",workMembers);
+		model.addAttribute("loginMem",loginMem);  
+		model.addAttribute("projectVO",projectVO);      
+		model.addAttribute("taskList",taskList);      
+		model.addAttribute("tasks",tasks);     
+		return "task/project_task_management_analytics";    
+	}
 }  

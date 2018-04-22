@@ -54,7 +54,7 @@ public class TaskRestController {
 			String writer= (String)map.get("writer");
 			int tlno = (int)map.get("tlno");
 			    
-			TaskVO vo = new TaskVO();
+			TaskVO vo = new TaskVO(); 
 			vo.setTlno(tlno);  
 			vo.setTaskname(taskname);  
 			vo.setWriter(writer);  
@@ -178,7 +178,24 @@ public class TaskRestController {
 		} 
 		return entity;   
 	} 
-	
+	@RequestMapping(value = "/update/task/label/{taskno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
+	public ResponseEntity<String> updateColorLabel(@PathVariable int taskno,@RequestBody String colorLabel) {
+		ResponseEntity<String> entity = null;    
+		try {      
+			TaskVO vo = taskService.selectOne(taskno);
+			
+			vo.setColorLabel(colorLabel);   
+			
+			taskService.update(vo);            
+			     
+			entity = new ResponseEntity<>("success", HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
+			e.printStackTrace(); 
+		}
+		return entity;  
+	}        
+	  
 	@RequestMapping(value = "/update/startDate/{taskno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
 	public ResponseEntity<String> updateStartDate(@PathVariable int taskno,@RequestBody String startDate) {
 		ResponseEntity<String> entity = null;    

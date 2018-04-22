@@ -216,7 +216,6 @@
 	color: #777 !important;
 	background-color: #f7f7f7 !important;
 }          
-    
 .taskBox_body .task_item {
 	width: 100%;
 	min-height: 34px;
@@ -224,8 +223,38 @@
 	background: #fff;
 	margin-top: 4px;
 	color: #333;    
-	cursor: pointer;
-}  
+	cursor: pointer;  
+	border-left: 4px solid rgba(0,0,0,0);
+}     
+/*컬러 라벨*/    
+.task_label_purple{
+	border-color: #a876cc !important;
+}
+.task_label_blue{
+	border-color: #4882ab !important;
+} 
+.task_label_skyblue{
+	border-color: #3caee2 !important;
+}
+.task_label_green{
+	border-color: #62c276 !important;
+}
+.task_label_amber{
+	border-color: #ffb024 !important;
+}
+.task_label_pink{
+	border-color: #f75496 !important;
+}
+.task_label_red{
+	border-color: #e95e51 !important;
+}
+.task_label_orange{
+	border-color: #fa7f29!important;
+}
+.task_label_brown{
+	border-color: #a0744c !important;
+}     
+     
 .taskBox_body .finish-title{
 	width: 100%;
 	min-height: 34px;
@@ -238,4 +267,66 @@
 }
 .taskBox_body  .task_item:hover {
 	background-color: #f7f7f7;
+}
+
+/*컬러 라벨*/
+
+.color_label_purple{
+	background: #a876cc;
+}
+.color_label_blue{
+	background: #4882ab;
+}
+.color_label_skyblue{
+	background: #3caee2;
+}
+.color_label_green{
+	background: #62c276;
+}
+.color_label_amber{
+	background: #ffb024;
+}
+.color_label_pink{
+	background: #f75496;
+}
+.color_label_red{
+	background: #e95e51;
+}
+.color_label_orange{
+	background: #fa7f29;
+}
+.color_label_brown{
+	background: #a0744c;
+}    
+
+.color_label_btn{
+	width: 26px;
+	height: 26px; 
+	border-radius: 50%;  
+	float: left; 
+	padding:1.5px; 
+	margin-right:4px;   
+	cursor: pointer;   
+	border:2px solid rgba(0,0,0,0);  
+}  
+.color_label_btn:hover{
+	border-color:  #8d919a; 
+}
+.color_label_btn:hover .color_label_picker{
+	opacity: 1; 
+}
+.color_label_picker{ 
+	width:18px;   
+	height: 18px;
+	border-radius: 50%; 
+	opacity: 0.5; 
+	margin: 0px;
+}  
+
+.color_label_pick{
+	border-color:  #8d919a; 
+}
+    
+.color_label_pick .color_label_picker{
+	opacity: 1; 
 }

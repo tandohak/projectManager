@@ -64,7 +64,7 @@ $(function() {
 			
 			$(this).parent(".addMem_item").remove();
 		}
-	});
+	}); 
 	
 	
 	

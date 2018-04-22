@@ -147,10 +147,10 @@
 	border-radius: 12.5px;
 	background: #E0E0E0;
 	margin-left: 5px; 
-	margin-bottom: 5px;
+	margin-bottom: 2.5px;
 	color: #333; 
-}
-
+}       
+  
 .addMemberBox .addMem_item .delMem {  
 	display: inline-block;
 	width: 20px;

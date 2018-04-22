@@ -3,26 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="include/header.jsp"%>  
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=5222">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=5as2">   
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=52s2">     
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=2sa25">  
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/timeline.min.css?a=2sa25">   
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_timeline.css?a=122">     
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=asd">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=asd">     
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=asd">       
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=asd">  
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/timeline.min.css?a=asd">   
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_timeline.css?a=asd">     
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=52a"></script>      
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2222"></script>          
-<script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>             
-<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?a=52a22"></script>       
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=522a2"></script>    
-<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=a22"></script>     
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2222"></script>           
+<script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>              
+<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa22"></script>       
+<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=52a2a2"></script>    
+<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=aa22"></script>     
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>    
 <script src="${pageContext.request.contextPath}/resources/js/timeline.min.js"></script>    
-<script src="${pageContext.request.contextPath}/resources/js/task_project_timeline.js?a=122"></script>    
+<script src="${pageContext.request.contextPath}/resources/js/task_project_timeline.js?b=12a2"></script>      
      
 <script>                
-	var wcode = "${wcode}";            
+	var wcode = "${wcode}";                
 	var loginMem = {                         
-			 mno : ${loginMem.mno },       
+			 mno : ${loginMem.mno },        
 			 firstName : "${loginMem.firstName}" ,         
 			 lastName :  "${loginMem.lastName }" ,     
 			 photoPath : "${loginMem.photoPath}" ,     
@@ -30,7 +30,7 @@
 			 memGrade : "${loginMem.memGrade}"
 	};         
 	var pno = ${projectVO.pno};      
-</script>   
+</script>    
 <%@ include file="include/sideBar.jsp"%>       
 <div id="contentWrap">      
 		<nav class="navbar navbar-default"     
@@ -48,7 +48,7 @@
 				<ul class="nav navbar-nav navbar-left" id="nav_task_tabs" style="margin-left: 34.5%;">       
 					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}">업무 </a></li>
 					<li  class="tab_active"><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}/timeline" > 타임라인 </a></li> 
-					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}" > 분석 </a></li>
+					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}/analytics" > 분석 </a></li>
 					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}" > 파일 </a></li>
 				</ul>  
 				 
@@ -100,12 +100,44 @@
 				  		<c:forEach var="item" items="${taskList }">
 					  			<c:if test="${tasks != null }">
 					  				<c:forEach var="task" items="${tasks }">
-					  					<c:if test="${item.tlno == task.tlno }">     
+					  				<c:choose>
+				 						<c:when test="${task.colorLabel == 'purple' }">
+				 							<c:set var="labelColor" value="#a876cc" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'blue' }">
+				 							<c:set var="labelColor" value="#4882ab" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'skyblue' }">
+				 							<c:set var="labelColor" value="#3caee2" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'green' }">
+				 							<c:set var="labelColor" value="#62c276" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'amber' }">
+				 							<c:set var="labelColor" value="#ffb024" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'pink' }">
+				 							<c:set var="labelColor" value="#f75496" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'red' }">
+				 							<c:set var="labelColor" value="#e95e51" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'orange' }">
+				 							<c:set var="labelColor" value="#fa7f29" />
+				 						</c:when>
+				 						<c:when test="${task.colorLabel == 'brown' }">
+				 							<c:set var="labelColor" value="#a0744c" />
+				 						</c:when>
+				 						<c:otherwise>    
+				 							<c:set var="labelColor" value="#dddddd" />
+				 						</c:otherwise>
+				 					</c:choose>   
+					  					<c:if test="${item.tlno == task.tlno }">       
 					  					<% idx++; %>
-			   							<li data-timeline-node="{         
+			   							<li data-timeline-node="{           
 			   							start:'<fmt:formatDate value="${task.startDate != null ? task.startDate : task.regDate }" pattern="yyyy-MM-dd HH:mm" />'
 			   							,end:'<fmt:formatDate value="${task.endDate != null ? task.endDate : task.regDate }" pattern="yyyy-MM-dd HH:mm" />'  
-			   							,content:'${task.taskname }',row:'<%= idx %>'
+			   							,content:'${task.taskname }',row:'<%= idx %>',bgColor:'${labelColor }',color:'#ffffff'
 			   							, callback:'$.openTaskSetting()', extend:{'taskno':'${task.taskno }'}}">${task.taskname }</li>  
 					  					</c:if>                         
 					  				</c:forEach>           
@@ -412,7 +444,40 @@
 								</div>
 							</div>  
 						</div>
-						
+						<div class="settingInnerBox">
+							<div class="left_block_tit">
+								<p>색상 라벨</p>
+							</div>  
+							<div class="right_block_con" id="color-label-timeline">    
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_purple"></div>
+								</div>
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_blue"></div>
+								</div>
+								<div class="color_label_btn">  
+									<div class="color_label_picker color_label_skyblue"></div>
+								</div>
+								<div class="color_label_btn">  
+									<div class="color_label_picker color_label_green"></div>
+								</div> 
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_amber"></div>
+								</div>
+								<div class="color_label_btn"> 
+									<div class="color_label_picker color_label_pink"></div>
+								</div>
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_red"></div>
+								</div>
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_orange"></div>
+								</div>
+								<div class="color_label_btn">
+									<div class="color_label_picker color_label_brown"></div>   
+								</div> 
+							</div>  
+						</div> 
 					</div> 		
 			</div>
 			   
