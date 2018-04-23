@@ -544,7 +544,7 @@ $(function() {
 				console.log(res);
 			}
 		})
-	})
+	}) 
 
 	/* 프로젝트 설정 : 보관 버튼 */
 	$("#project_locker .setting_btn").click(
@@ -561,7 +561,7 @@ $(function() {
 						url : "/projectManager/project/update/locker/" + pno
 								+ "/true",
 						type : "put",
-						dataType : "text",
+						dataType : "text", 
 						success : function(res) {
 							console.log(res);
 						}
@@ -627,12 +627,14 @@ $(function() {
 	}).on("changeDate", function(e) {
 		var monthYear = $("#sandbox-container div.datePicker_cst .datepicker-switch").html();
 		console.log(monthYear);   
-	 
-		var month = monthYear.substring("0","1");
+		monthYear =  monthYear.split("월");
+		 
+		var month = monthYear[0];
+		console.log(month) 
 		if(month < 10){
 			month = "0" + month;
-		}
-		var year = monthYear.substring("2");
+		}  
+		var year = monthYear[1].trim();
 		            
 		var date = $("#sandbox-container div.datePicker_cst .active").html();
 		
@@ -653,40 +655,59 @@ $(function() {
 		$target_set.find("input").css("display","none");
 		$target_set.find("button").removeClass("insertDate"); 
 		$("#sandbox-container").css("display", "none");
-		
+		 
 		var targetId = $target_set.attr("id");
-		console.log(targetId); 
+		
 		if(targetId != undefined){   
 			if(targetId.indexOf("task") <= -1){//프로젝트 설정
+				if(targetId.indexOf("analytics_") > -1){
+					$target_set.find(".analytics_date_wrap").css("display","none");  
+					$target_set.find(".analytics_date_addBtn").css("display","inline-block");
+					
+					if(targetId.indexOf("analytics_endDate")>-1){
+						endDate = null;
+						elapsedTimeFun(); 
+					}else if(targetId.indexOf("analytics_startDate")>-1){
+						startDate = null;       
+						elapsedTimeFun();   
+					}  
+					 
+					targetId = targetId.replace("analytics_","");
+				}else{
+					$("#analytics_"+targetId).find(".analytics_date_wrap").css("display","none");  
+					$("#analytics_"+targetId).find(".analytics_date_addBtn").css("display","inline-block");
+				}  
+				
 				var pno = $("#side_project_setting").attr("data-pno");
 				$.ajax({ 
 					url : "/projectManager/project/update/"+targetId+"/" + pno,
 					type : "put",  
 					data : "del",
-					dataType : "text",  
-					success : function(res) { 
-						console.log(res);
-					}           
-				})       
+					dataType : "text",    
+					success : function(res) {  
+						console.log(res);  
+					} 
+				})         
 			}else if(targetId.indexOf("task") > -1){//task 설정 
 				var taskno = $("#side_task_setting").attr("data-taskno");
 				targetId = targetId.replace("task_","");
-				 
+				  
 				$.ajax({      
 					url : "/projectManager/taskList/update/"+targetId +"/"+ taskno,
-					type : "put",  
+					type : "put",
 					data : "del",
-					dataType : "text",  
+					dataType : "text",
 					success : function(res) { 
 						console.log(res);
 					}           
 				})  	
-			}              
+			}
 		}  
 		     
 	})                   
 })// 제워키리 끝     
 var $target_set = null;   
+
 var dropDatePicker = function($target) { 
 	$("#sandbox-container div.datePicker_cst .clear").trigger("click");
 	

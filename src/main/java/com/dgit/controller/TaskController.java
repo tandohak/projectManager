@@ -189,14 +189,52 @@ public class TaskController {
 		List<MemberVO> workMembers = memService.selectListByWcode(wcode);
 		MemberVO loginMem = memService.selectOneByPnoAndUno(uno, pno);
 		ProjectVO projectVO= projectService.selectOne(pno); 
-		List<TaskListVO> taskList =  taskListService.selectList(pno);
-		List<TaskVO> tasks = taskService.selectListByPno(pno);
+		//List<TaskListVO> taskList =  taskListService.selectList(pno);
+		//List<TaskVO> tasks = taskService.selectListByPno(pno);
+		
+		int massno = loginMem.getMassno();
+		
+		int finishTask= taskService.countFinishTaskByPno(pno);
+		int progressingTask= taskService.countProgressingTaskByPno(pno);
+		int passedTask= taskService.countPassedTaskByPno(pno);
+		int plannedTask= taskService.countPlannedTaskByPno(pno);
+		int noPlannedTask= taskService.countNoPlannendTaskByPno(pno);
+		
+		int makeMeFinishTask = taskService.makeMecountFinishTaskByPno(pno, massno);
+		int makeMeNoPlannedTask= taskService.makeMecountNoPlannendTaskByPno(pno, massno);
+		int makeMePlannedTask= taskService.makeMecountPlannedTaskByPno(pno, massno);
+		int makeMePassedTask= taskService.makeMecountPassedTaskByPno(pno, massno);
+		
+		int assignmentFinishTask = taskService.assignmentCountFinishTaskByPnoAndMassno(pno, massno);
+		int assignmentNoPlannedTask= taskService.assignmentCountPassedTaskByPnoAndMassno(pno, massno);
+		int assignmentPlannedTask= taskService.assignmentCountPlannedTaskByPnoAndMassno(pno, massno);
+		int assignmentPassedTask= taskService.assignmentCountNoPlannendTaskByPnoAndMassno(pno, massno);
 		
 		model.addAttribute("workMembers",workMembers);
 		model.addAttribute("loginMem",loginMem);  
-		model.addAttribute("projectVO",projectVO);      
-		model.addAttribute("taskList",taskList);      
-		model.addAttribute("tasks",tasks);     
-		return "task/project_task_management_analytics";    
-	}
-}  
+		model.addAttribute("projectVO",projectVO);         
+		model.addAttribute("finishTask",finishTask);        
+		model.addAttribute("progressingTask",progressingTask); 
+		model.addAttribute("passedTask",passedTask);  
+		model.addAttribute("plannedTask",plannedTask); 
+		model.addAttribute("noPlannedTask",noPlannedTask); 
+		 
+		int makeTaskAllCount = makeMeFinishTask+ makeMeNoPlannedTask+ makeMePlannedTask + makeMePassedTask;
+		
+		model.addAttribute("makeMeFinishTask",makeMeFinishTask); 
+		model.addAttribute("makeMeNoPlannedTask",makeMeNoPlannedTask); 
+		model.addAttribute("makeMePlannedTask",makeMePlannedTask);  
+		model.addAttribute("makeMePassedTask",makeMePassedTask); 
+		model.addAttribute("makeTaskAllCount",makeTaskAllCount);  
+		int assignmentTaskAllCout = assignmentFinishTask + assignmentNoPlannedTask+ assignmentPlannedTask + assignmentPassedTask;
+		
+		model.addAttribute("assignmentFinishTask",assignmentFinishTask); 
+		model.addAttribute("assignmentNoPlannedTask",assignmentNoPlannedTask); 
+		model.addAttribute("assignmentPlannedTask",assignmentPlannedTask);  
+		model.addAttribute("assignmentPassedTask",assignmentPassedTask); 
+		model.addAttribute("assignmentTaskAllCout",assignmentTaskAllCout);
+		 
+		return "task/project_task_management_analytics";       
+	}        
+}     
+ 

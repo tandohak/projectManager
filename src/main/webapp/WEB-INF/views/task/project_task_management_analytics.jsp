@@ -3,30 +3,75 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="include/header.jsp"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=52232222">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=asd">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/task_analytics.css?a=a2sd">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/modal.css?a=asd">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=asd">
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=52a"></script>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2222"></script>
-<script src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa22"></script>
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=52a2a2"></script>
-<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=aa22"></script>
-<script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/task_analytics.js"></script>
-<script>                 
-	var wcode = "${wcode}";                   
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=11a52232222">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=a11saasd">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/task_analytics.css?a=aaas112sd">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/modal.css?a=as1ad"> 
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=asd">
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=5a12a"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=aa22122"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=521aaaa22"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=52aa12aa2"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=a1aa22"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/task_analytics.js?a=as1s2asa"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>                        
+	var wcode = "${wcode}";                       
 	var loginMem = {                              
-			 mno : ${loginMem.mno },       
+			 mno : ${loginMem.mno },         
 			 firstName : "${loginMem.firstName}" ,         
 			 lastName :  "${loginMem.lastName }" ,      
 			 photoPath : "${loginMem.photoPath}" ,     
 			 memAssGrade : "${loginMem.memGrade}",
 			 memGrade : "${loginMem.memGrade}"  
-	};         
-	var pno = ${projectVO.pno};      
+	};           
+	var pno = ${projectVO.pno};  
+	<c:if test="${projectVO.startDate != null}">
+		var startDate = new Date(${projectVO.startDate.time}); 
+	</c:if> 
+	<c:if test="${projectVO.startDate == null}">
+		var startDate = null;
+	</c:if>    
+	     
+	var regDate = new Date(${projectVO.regDate.time});
+	 
+	<c:if test="${projectVO.endDate != null}">
+		var endDate = new Date(${projectVO.endDate.time}); 
+	</c:if> 
+	<c:if test="${projectVO.endDate == null}">
+		var endDate = null; 
+	</c:if>   
+	
+	var data_assignment = [
+	        ['나에게 배정된 업무', ''],
+	        ['완료됨', ${assignmentFinishTask}],
+	        ['마감일 지남',     ${assignmentPassedTask}],
+	        ['계획됨',     ${assignmentPlannedTask}],
+	        ['마감일 없음',     ${assignmentNoPlannedTask}]
+	      ]; 
+	
+	var data_makeMe = [
+	           	        ['내가 만든 업무', ''],
+	           	        ['완료됨', ${makeMeFinishTask}],
+	           	        ['마감일 지남',     ${makeMePassedTask}],
+	           	        ['계획됨',     ${makeMePlannedTask}],
+	           	        ['마감일 없음',     ${makeMeNoPlannedTask}]
+	           	      ];  
 </script>
 <%@ include file="include/sideBar.jsp"%>
 <div id="contentWrap">
@@ -65,69 +110,89 @@
 				</a></li>
 			</ul>
 		</div>
-	</nav>
-	<div id="container">
+	</nav>  
+	<div id="container" style="overflow: auto;"> 
 		<!-- 업무 리스트 시작 -->
 		<div class="analyticsWrap">
 			<div class="analytics_content" style="display: flex;">
 				<div class="analytics_block">
 					<div class="analytics_header_title">시작일</div>
 					<div class="analytics_header_content" id="analytics_startDate">
-						<div class="analytics_date_wrap">
-							<span class="analytics_date">4월 19일 </span> <a>×</a>
+						<div class="analytics_date_wrap"
+							style="${projectVO.startDate != null ? 'display:inline-block;' : ''}">
+							<span class="analytics_date"> <c:if
+									test='${projectVO.startDate != null}'>
+									<fmt:formatDate value="${projectVO.startDate}"
+										pattern="MM월 dd일" />
+								</c:if>
+							</span> <a class="analytics_date_delbtn">×</a>
 						</div>
-						<a href="#" class="analytics_date_addBtn">+</a>
-						<input type="hidden" >
+						<a href="#" class="analytics_date_addBtn"
+							style="${projectVO.startDate != null ? 'display:none;' : ''}">+</a>
+						<input type="hidden">
 					</div>
-				</div>    
-    
+				</div>
+ 
 				<div class="analytics_block">
 					<div class="analytics_header_title">마감일</div>
 					<div class="analytics_header_content" id="analytics_endDate">
-						<div class="analytics_date_wrap">
-							<span class="analytics_date">4월 19일 </span> <a>×</a>
+
+						<div class="analytics_date_wrap"
+							style="${projectVO.endDate != null ? 'display:inline-block;' : ''}">
+							<span class="analytics_date"> <c:if
+									test='${projectVO.endDate != null}'>
+									<fmt:formatDate value="${projectVO.endDate}" pattern="MM월 dd일" />
+								</c:if>
+							</span> <a class="analytics_date_delbtn">×</a>
 						</div>
-						<a href="#" class="analytics_date_addBtn">+</a>
-						<input type="hidden">
+						<a href="#" class="analytics_date_addBtn"
+							style="${projectVO.endDate != null ? 'display:none;' : ''}">+</a>
+						<input type="hidden"> 
 					</div>
 				</div>
 
 				<div class="analytics_block">
 					<div class="analytics_header_title">완료일</div>
 					<div class="analytics_header_content" id="analytics_finishDate">
-						<div class="analytics_date_wrap">
-							<span class="analytics_date">4월 19일 </span> <a>×</a>
+						<div class="analytics_date_wrap"
+							style="${projectVO.finishDate != null ? 'display:inline-block;' : ''}">
+							<span class="analytics_date"> <c:if
+									test='${projectVO.finishDate != null}'>
+									<fmt:formatDate value="${projectVO.finishDate}"
+										pattern="MM월 dd일" />
+								</c:if>
+							</span> <a class="analytics_date_delbtn">×</a>
 						</div>
-						<a href="#" class="analytics_date_addBtn">+</a>
+						<a href="#" class="analytics_date_addBtn"
+							style="${projectVO.finishDate != null ? 'display:none;' : ''}">+</a>
 						<input type="hidden">
 					</div>
 				</div>
 
 				<div class="analytics_block">
 					<div class="analytics_header_title">경과 시간</div>
-					<div class="analytics_header_content">
-						- 
-					</div>
+					<div class="analytics_header_content" id="elapsedTime">-</div>
+				</div>
+
+				<div class="analytics_block">
+					<div class="analytics_header_title">남은 시간</div>
+					<div class="analytics_header_content" id="timeRemaining">-</div>
 				</div>
 
 				<div class="analytics_block">
 					<div class="analytics_header_title">완료됨</div>
 					<div class="analytics_header_content">
-						<span>3일(10%)</span>
-					</div>
-				</div>
-
-				<div class="analytics_block">
-					<div class="analytics_header_title">남은 시간</div>
-					<div class="analytics_header_content">
-						<span>1일(10%)</span>
+						<span>${finishTask }개
+							업무(${Math.round((finishTask/(finishTask+progressingTask))*100) }%)</span>
 					</div>
 				</div>
 
 				<div class="analytics_block">
 					<div class="analytics_header_title">남은 업무</div>
 					<div class="analytics_header_content">
-						<span>10개 업무(83%) </span>
+						<span>${progressingTask }개
+							업무(${Math.round((progressingTask/(finishTask+progressingTask))*100) }%)
+						</span>
 					</div>
 				</div>
 			</div>
@@ -139,32 +204,39 @@
 						<div class="analytics_header_legend">
 							<div class="analytics_header_circle"
 								style="border-color: rgb(39, 182, 186);"></div>
-							<span class="analytics_header_legend_text">완료됨</span> <strong>25%</strong>&nbsp;
-							( <span>3개 업무</span> )
+							<span class="analytics_header_legend_text">완료됨</span> <strong>${Math.round((finishTask/(finishTask+progressingTask))*100) }%</strong>&nbsp;
+							( <span>${finishTask }개 업무</span> )
 						</div>
 						<div class="analytics_header_legend">
 							<div class="analytics_header_circle"
 								style="border-color: rgb(233, 94, 81);"></div>
-							<span class="analytics_header_legend_text">마감일 지남</span> <strong>25%</strong>&nbsp;
-							( <span>3개 업무</span> )
+							<span class="analytics_header_legend_text">마감일 지남</span> <strong>${Math.round((passedTask/(finishTask+progressingTask))*100) }%</strong>&nbsp;
+							( <span>${passedTask }개 업무</span> )
 						</div>
 						<div class="analytics_header_legend">
 							<div class="analytics_header_circle"
 								style="border-color: rgb(255, 176, 36);"></div>
-							<span class="analytics_header_legend_text">계획됨 </span> <strong>25%</strong>&nbsp;
-							( <span>3개 업무</span> )
+							<span class="analytics_header_legend_text">계획됨 </span> <strong>${Math.round((plannedTask/(finishTask+progressingTask))*100) }%</strong>&nbsp;
+							( <span>${plannedTask }개 업무</span> )
 						</div>
 
 						<div class="analytics_header_legend">
 							<div class="analytics_header_circle"
 								style="border-color: rgb(176, 180, 187);"></div>
-							<span class="analytics_header_legend_text">마감일 없음</span> <strong>25%</strong>&nbsp;
-							( <span>3개 업무</span> )
+							<span class="analytics_header_legend_text">마감일 없음</span> <strong>${Math.round((noPlannedTask/(finishTask+progressingTask))*100) }%</strong>&nbsp;
+							( <span>${noPlannedTask }개 업무</span> )
 						</div>
 					</div>
 				</div>
 				<div class="analytics_progress_bar">
-					<div style="width: 22%; background: rgb(255, 176, 36);"></div>
+					<div
+						style="width: ${Math.round((finishTask/(finishTask+progressingTask))*100) }%; background: rgb(39, 182, 186);"></div>
+					<div
+						style="width: ${Math.round((passedTask/(finishTask+progressingTask))*100) }%; background: rgb(233, 94, 81);"></div>
+					<div
+						style="width: ${Math.round((plannedTask/(finishTask+progressingTask))*100) }%; background: rgb(255, 176, 36);"></div>
+					<div
+						style="width: ${Math.round((noPlannedTask/(finishTask+progressingTask))*100) }%; background: rgb(176, 180, 187);"></div>
 				</div>
 			</div>
 			<!-- 프로젝트 개요 끝 -->
@@ -172,10 +244,10 @@
 			<div class="analytics_content"
 				style="width: 49.75%; margin-right: 0.5%;">
 				<!-- 내가 배정된 업무 시작 -->
-				<div class="analytics_header">
+				<div class="analytics_header" style="margin-bottom: 0px;">   
 					<h3 style="text-align: center; width: 100%;">나에게 배정된 업무</h3>
 				</div>
-				<div class="analytics_pie_chart"></div>
+				<div class="analytics_pie_chart" id="assignment_donut_chart"></div>
 				<div class="analytics_pie_chart_legend">
 					<div class="analytics_pie_chart_datas">
 						<div class="analytics_header_legend">
@@ -184,19 +256,19 @@
 							<span class="analytics_header_legend_text">완료됨</span>
 						</div>
 						<div class="analytics_header_legend_value">
-							<span>1</span> (<span>25%</span>)
+							<span>${assignmentFinishTask }</span> (<span>${Math.round((assignmentFinishTask/assignmentTaskAllCout)*100) }%</span>)
 						</div>
 					</div>
 
-					<div class="analytics_pie_chart_datas">
+					<div class="analytics_pie_chart_datas">    
 						<div class="analytics_header_legend">
 							<div class="analytics_header_circle"
-								style="border-color: rgb(233, 94, 81);"></div>
+								style="border-color: rgb(233, 94, 81);"></div>  
 							<span class="analytics_header_legend_text">마감일 지남</span>
 						</div>
 						<div class="analytics_header_legend_value">
-							<span>1</span> (<span>25%</span>)
-						</div>
+							<span>${assignmentPassedTask }</span> (<span>${Math.round((assignmentPassedTask/assignmentTaskAllCout)*100) }%</span>)
+						</div> 
 					</div>
 
 					<div class="analytics_pie_chart_datas">
@@ -206,10 +278,10 @@
 							<span class="analytics_header_legend_text">계획됨 </span>
 						</div>
 						<div class="analytics_header_legend_value">
-							<span>1</span> (<span>25%</span>)
+							<span>${assignmentPlannedTask }</span> (<span>${Math.round((assignmentPlannedTask/assignmentTaskAllCout)*100) }%</span>)
 						</div>
 					</div>
-
+ 
 					<div class="analytics_pie_chart_datas">
 						<div class="analytics_header_legend">
 							<div class="analytics_header_circle"
@@ -217,20 +289,20 @@
 							<span class="analytics_header_legend_text">마감일 없음</span>
 						</div>
 						<div class="analytics_header_legend_value">
-							<span>1</span> (<span>25%</span>)
+							<span>${assignmentNoPlannedTask }</span> (<span>${Math.round((assignmentNoPlannedTask/assignmentTaskAllCout)*100) }%</span>)
 						</div>
-					</div>
-				</div>
+					</div> 
+				</div> 
 			</div>
 			<!-- 내가 배정된 업무 끝 -->
 
 			<div class="analytics_content" style="width: 49.75%;">
 				<!-- 내가 작성한 업무 시작 -->
-				<div class="analytics_header">
-					<h3 style="text-align: center; width: 100%;">내가 작성한 업무</h3>
+				<div class="analytics_header" style="margin-bottom: 0px;">
+					<h3 style="text-align: center; width: 100%; ">내가 작성한 업무</h3>
 				</div>
-				<div class="analytics_pie_chart"></div>
-				<div class="analytics_pie_chart_legend"></div>
+				<div class="analytics_pie_chart" id="makeMe_donut_chart"></div>
+				<div class="analytics_pie_chart_legend"></div> 
 
 				<div class="analytics_pie_chart_legend">
 					<div class="analytics_pie_chart_datas">
@@ -240,7 +312,7 @@
 							<span class="analytics_header_legend_text">완료됨</span>
 						</div>
 						<div class="analytics_header_legend_value">
-							<span>1</span> (<span>25%</span>)
+							<span>${makeMeFinishTask }</span> (<span>${Math.round((makeMeFinishTask/makeTaskAllCount)*100) }%</span>)
 						</div>
 					</div>
 
@@ -251,7 +323,7 @@
 							<span class="analytics_header_legend_text">마감일 지남</span>
 						</div>
 						<div class="analytics_header_legend_value">
-							<span>1</span> (<span>25%</span>)
+							<span>${makeMePassedTask }</span> (<span>${Math.round((makeMePassedTask/makeTaskAllCount)*100) }%</span>)
 						</div>
 					</div>
 
@@ -262,7 +334,7 @@
 							<span class="analytics_header_legend_text">계획됨 </span>
 						</div>
 						<div class="analytics_header_legend_value">
-							<span>1</span> (<span>25%</span>)
+							<span>${makeMePlannedTask }</span> (<span>${Math.round((makeMePlannedTask/makeTaskAllCount)*100) }%</span>)
 						</div>
 					</div>
 
@@ -273,27 +345,31 @@
 							<span class="analytics_header_legend_text">마감일 없음</span>
 						</div>
 						<div class="analytics_header_legend_value">
-							<span>1</span> (<span>25%</span>)
+							<span>${makeMeNoPlannedTask }</span> (<span>${Math.round((makeMeNoPlannedTask/makeTaskAllCount)*100) }%</span>)
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- 내가 작성한 업무 끝 -->
-
-			<div class="analytics_content">
-				<div class="analytics_header"> 
-					<div class="dropdown"> 
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration: none; color: #464c59; font-size:18px; font-weight: bold; "> 
-							번 업 <span class="glyphicon glyphicon-menu-down" style="font-weight: normal; color: #696f7a; font-size: 14px; "></span>
-						</a>  
+			<!-- 내가 작성한 업무 끝 -->  
+			
+			<div class="analytics_content" style="display: none;">
+				<div class="analytics_header">
+					<div class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"
+							style="text-decoration: none; color: #464c59; font-size: 18px; font-weight: bold;">
+							번 업 <span class="glyphicon glyphicon-menu-down"
+							style="font-weight: normal; color: #696f7a; font-size: 14px;"></span>
+						</a>
 						<ul class="dropdown-menu">
 							<li><a href="#" data-tlno="1">번 업 </a></li>
 							<li><a href="#" data-tlno="1">번 다운</a></li>
 						</ul>
-					</div>   
-				</div>      
-			</div>  
-		</div> 
+						<div id="burnUp">
+						</div> 
+					</div>
+				</div> 
+			</div>
+		</div>   
 		<!-- 분석 끝 -->
 		<!-- 프로젝트 설정 -->
 		<div class="sideSetting" id="side_project_setting"

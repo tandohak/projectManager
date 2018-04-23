@@ -3,24 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="include/header.jsp"%>  
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=asd">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=asd">     
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=asd">       
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=asd">  
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/timeline.min.css?a=asd">   
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_timeline.css?a=asd">     
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=asad">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=aasd">     
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=asad">       
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=aasd">  
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/timeline.min.css?a=aasd">   
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_timeline.css?a=asad">     
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=52a"></script>      
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2222"></script>           
 <script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>              
 <script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa22"></script>       
 <script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=52a2a2"></script>    
-<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=aa22"></script>     
+<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=aa22"></script>       
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>    
 <script src="${pageContext.request.contextPath}/resources/js/timeline.min.js"></script>    
 <script src="${pageContext.request.contextPath}/resources/js/task_project_timeline.js?b=12a2"></script>      
      
 <script>                
-	var wcode = "${wcode}";                
+	var wcode = "${wcode}";                  
 	var loginMem = {                         
 			 mno : ${loginMem.mno },        
 			 firstName : "${loginMem.firstName}" ,         
@@ -31,15 +31,15 @@
 	};         
 	var pno = ${projectVO.pno};      
 </script>    
-<%@ include file="include/sideBar.jsp"%>       
-<div id="contentWrap">      
+<%@ include file="include/sideBar.jsp"%>
+<div id="contentWrap">        
 		<nav class="navbar navbar-default"     
 			style="border-radius: 0px; margin-bottom: 0px;">
 			<div class="container-fluid" style="padding: 0px;">
 				<ul class="nav navbar-nav navbar-left">
 					<li><a href="#" data-toggle="dropdown"> <span
 							class="glyphicon glyphicon-menu-left"></span>
-					</a></li>
+					</a></li> 
 	   
 					<li class="navbar-text"><strong  id="pj_title" style="color: #333;">${projectVO.title }</strong>
 					</li>   

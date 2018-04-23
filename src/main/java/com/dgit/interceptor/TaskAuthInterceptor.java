@@ -59,7 +59,7 @@ public class TaskAuthInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect(request.getContextPath()+"/err/unauthorizedPage");
 		}
 		
-		request.setAttribute("workVO", vo);
+		request.setAttribute("workVO", vo); 
 		request.setAttribute("memList",memList); 
 		request.setAttribute("memVo",memVo); 
 		

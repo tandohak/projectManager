@@ -33,17 +33,137 @@
 		select * from task
 		where task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})  
 	</select>
+	
+	<!-- 전체 업무 카운트 -->
+	   
+	<select id="countFinishTaskByPno" resultType="int">  
+		select count(taskno) from task
+		where status = 1 and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})  
+	</select>
+	  
+	<select id="countProgressingTaskByPno" resultType="int">  
+		select count(taskno) from task
+		where status = 0 and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})  
+	</select>
+	
+	<select id="countPassedTaskByPno" resultType="int">  
+		<![CDATA[
+		select count(taskno) from task 
+		where status = 0 
+		and endDate < now()
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno}) 
+		]]>   
+	</select>      
+	    
+	<select id="countPlannedTaskByPno" resultType="int">  
+		<![CDATA[
+		select count(taskno) from task   
+		where status = 0 and endDate >= now() and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno});
+		]]>   
+	</select>   
+	      
+	<select id="countNoPlannendTaskByPno" resultType="int">  
+		select count(taskno) from task
+		where status = 0 
+		and endDate is null 
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})  
+	</select>   
+	
+	<!-- 내가 만든 업무  카운트-->
+	<select id="makeMecountFinishTaskByPno" resultType="int">  
+		select count(taskno) from task
+		where status = 1 
+		and massno = #{massno}
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})  
+	</select>
+	  
+	<select id="makeMecountProgressingTaskByPno" resultType="int">  
+		select count(taskno) from task
+		where status = 0  
+		and massno = #{massno}
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})  
+	</select>
+	
+	<select id="makeMecountPassedTaskByPno" resultType="int">  
+		<![CDATA[
+		select count(taskno) from task 
+		where status = 0 
+		and massno = #{massno}
+		and endDate < now()
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno}) 
+		]]>   
+	</select>      
+	    
+	<select id="makeMecountPlannedTaskByPno" resultType="int">  
+		<![CDATA[
+		select count(taskno) from task   
+		where status = 0 
+		and massno = #{massno}
+		and endDate >= now() 
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno});
+		]]>   
+	</select>   
+	       
+	<select id="makeMecountNoPlannendTaskByPno" resultType="int">  
+		select count(taskno) from task
+		where status = 0 
+		and massno = #{massno}
+		and endDate is null 
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})  
+	</select> 
+	  
+	<!-- 배정 받은 업무  카운트-->
+	<select id="assignmentCountFinishTaskByPnoAndMassno" resultType="int">  
+		select count(taskno) from task
+		where status = 1 
+		and massno = #{massno}
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})
+		and task.taskno in (select jobassignment.taskno from jobassignment where massno = #{massno})  
+	</select>
+	
+	<select id="assignmentCountPassedTaskByPnoAndMassno" resultType="int">  
+		<![CDATA[
+		select count(taskno) from task 
+		where status = 0 
+		and massno = #{massno}
+		and endDate < now()
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno}) 
+		and task.taskno in (select jobassignment.taskno from jobassignment where massno = #{massno})
+		]]>   
+	</select>      
+	    
+	<select id="assignmentCountPlannedTaskByPnoAndMassno" resultType="int">  
+		<![CDATA[
+		select count(taskno) from task   
+		where status = 0 
+		and massno = #{massno}
+		and endDate >= now() 
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})
+		and task.taskno in (select jobassignment.taskno from jobassignment where massno = #{massno})
+		]]>   
+	</select>   
+	        
+	<select id="assignmentCountNoPlannendTaskByPnoAndMassno" resultType="int">  
+		select count(taskno) from task
+		where status = 0 
+		and massno = #{massno}
+		and endDate is null 
+		and task.tlno in (select tasklist.tlno from tasklist where pno = #{pno})
+		and task.taskno in (select jobassignment.taskno from jobassignment where massno = #{massno})  
+	</select>
+	<!-- 업무  카운트 끝-->
+	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="taskno">
 		insert into task
-		(tlno,explanation,regDate,taskname,writer,startDate,endDate,colorLabel,cycle)
-		values(#{tlno},#{explanation},now(),#{taskname},#{writer},#{startDate},#{endDate},#{colorLabel},#{cycle})
-	</insert>    
+		(tlno,explanation,massno,regDate,taskname,writer,startDate,endDate,colorLabel,cycle)
+		values(#{tlno},#{explanation},#{massno},now(),#{taskname},#{writer},#{startDate},#{endDate},#{colorLabel},#{cycle})
+	</insert>     
     
 	<delete id="delete">
 	    delete from task
 		<include refid="whereSql" />
 	</delete>  
-	  
+	   
 	<delete id="deleteByTlno"> 
 	   delete from task where tlno = #{tlno};
 	</delete>  

@@ -331,7 +331,7 @@ $(function() {
 		$(this).css("display", "inline-block");
 	});
 
-	// 테스크 추가
+	// 테스크 추가   
 	$(".taskBox_wrap").on(
 			"click",
 			".add_task_make",
@@ -341,6 +341,7 @@ $(function() {
 				var taskname = $parent.find("textarea").val();
 				var endDate = $parent.find(".task_endDate").val();
 				var tlno = Number($(this).attr("data-tlno"));
+				   
 				if (taskname == "" || taskname == null) {
 					alert("업무명을 입력하세요.")
 					return false;
@@ -352,9 +353,10 @@ $(function() {
 					"taskname" : taskname,
 					"endDate" : endDate,
 					"tlno" : tlno,
-					"writer" : loginMem.firstName + " " + loginMem.lastName
+					"writer" : loginMem.firstName + " " + loginMem.lastName,
+					"massno" : loginMem.massno
 				}
-
+ 
 				$.ajax({
 					url : "/projectManager/taskList/register/taskmake",
 					data : JSON.stringify(datas),
@@ -496,7 +498,7 @@ $(function() {
 														count - 1);
 											}
 										}
-									})
+									}) 
 						} else {
 							$
 									.ajax({

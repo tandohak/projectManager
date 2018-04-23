@@ -2,18 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="include/header.jsp"%>  
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=52232222">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=5as23222">   
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=52a2a2">       
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=232sa25">  
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=2522a"></script>      
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?b=22a2222"></script>          
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=xx">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=xx22">   
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=5xx">           
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=xx">  
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=xx"></script>      
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?b=xx"></script>          
 <script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>                 
-<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa2222"></script>        
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=522a2a222"></script>  
-<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=a22a222"></script>     
+<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa222a2"></script>        
+<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=522a2aa222"></script>  
+<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=a2a2a222"></script>     
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>    
-<script>                
+<script>                 
 	var wcode = "${wcode}";                  
 	var loginMem = {                         
 			 mno : ${loginMem.mno },        
@@ -21,11 +21,12 @@
 			 lastName :  "${loginMem.lastName }" ,     
 			 photoPath : "${loginMem.photoPath}" ,   
 			 memAssGrade : "${loginMem.memGrade}",
-			 memGrade : "${loginMem.memGrade}" 
-	};           
-	var pno = ${projectVO.pno};     
+			 memGrade : "${loginMem.memGrade}",
+			 massno : ${loginMem.massno }
+	};                 
+	var pno = ${projectVO.pno};      
 </script>   
-<%@ include file="include/sideBar.jsp"%>         
+<%@ include file="include/sideBar.jsp"%>           
 <div id="contentWrap">      
 		<nav class="navbar navbar-default"     
 			style="border-radius: 0px; margin-bottom: 0px;"> 
@@ -45,7 +46,7 @@
 					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}/analytics" > 분석 </a></li>
 					<li><a href="${pageContext.request.contextPath }/task/${wcode}/project/${projectVO.pno}" > 파일 </a></li>
 				</ul>  
-				 
+				  
 				<ul class="nav navbar-nav navbar-right" style="margin-right: 0px;">
 					<li><a href="#" id='project_setting_btn' data-pno='${projectVO.pno }'> <span
 							class="glyphicon glyphicon-cog"></span>
@@ -54,8 +55,8 @@
 			</div>  
 		</nav>    	
 	<div id="container">  
-		<!-- 업무 리스트 시작 -->
-		<div class="contentBox"> 
+		<!-- 업무 리스트 시작 --> 
+		<div class="contentBox">  
 			<div class="taskBox_wrap"> 
 				<c:if test = "${taskList != null }">  
 				<c:forEach var="item" items="${taskList }">   
@@ -398,7 +399,7 @@
 				<li class="custom_select_item" data-value="5">취소</li>
 				<li class="custom_select_item" data-value="0">상태 없음</li>
 			</ul>
-	
+			
 			<ul class="custom_select" id="select_project_authority">
 				<li class="custom_select_item " data-value="0">프로젝트 팀원은 전체 엑세스
 					권한을 가집니다.</li>

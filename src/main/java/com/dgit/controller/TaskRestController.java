@@ -53,17 +53,19 @@ public class TaskRestController {
 			String endDate= (String)map.get("endDate");
 			String writer= (String)map.get("writer");
 			int tlno = (int)map.get("tlno");
-			    
-			TaskVO vo = new TaskVO(); 
-			vo.setTlno(tlno);  
-			vo.setTaskname(taskname);  
-			vo.setWriter(writer);  
+			int massno_ = (int)map.get("massno");
 			
+			TaskVO vo = new TaskVO();   
+			vo.setTlno(tlno);  
+			vo.setTaskname(taskname);   
+			vo.setWriter(writer);   
+			vo.setMassno(massno_);
+			        
 			if(!endDate.equals("")){
 				SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 				Date date =formater.parse(endDate); 
 				vo.setEndDate(date);
-			}   
+			}     
 			
 			int res = taskService.insert(vo);
 			 
@@ -343,7 +345,7 @@ public class TaskRestController {
 			e.printStackTrace();
 		}
 		return entity;  
-	} 
+	}  
 	
 	@RequestMapping(value = "/delete/task/{taskno}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> deletTask(@PathVariable int taskno) {

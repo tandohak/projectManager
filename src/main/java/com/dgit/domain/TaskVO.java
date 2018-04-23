@@ -5,6 +5,7 @@ import java.util.Date;
 public class TaskVO {
 	private int taskno;
 	private int tlno;
+	private int massno;
 	private String explanation;
 	private String taskname;
 	private Date regDate;
@@ -53,13 +54,21 @@ public class TaskVO {
 		return taskname;
 	}
 
+	public int getMassno() {
+		return massno;
+	} 
+
+	public void setMassno(int massno) {
+		this.massno = massno;
+	}
+ 
 	public void setTaskname(String taskname) {
-		this.taskname = taskname;
+		this.taskname = taskname; 
 	}
 
 	public Date getStartDate() {
 		return startDate; 
-	}
+	} 
 
 	public void setStartDate(Date startDate) {  
 		this.startDate = startDate;

@@ -14,5 +14,24 @@ public interface TaskDAO {
 	public int deleteByTlno(int tlno) throws Exception;
 	public int update(TaskVO vo) throws Exception;
 	public List<TaskVO> selectListByPno(int pno) throws Exception;
-}
+	
+	public int countFinishTaskByPno(int pno)  throws Exception;
+	public int countProgressingTaskByPno(int pno)  throws Exception;
+	public int countPassedTaskByPno(int pno)  throws Exception;
+	public int countPlannedTaskByPno(int pno)  throws Exception;
+	public int countNoPlannendTaskByPno(int pno)  throws Exception;
+	
+	public int makeMecountFinishTaskByPno(int pno,int massno)  throws Exception;
+	public int makeMecountProgressingTaskByPno(int pno,int massno)  throws Exception;
+	public int makeMecountPassedTaskByPno(int pno,int massno)  throws Exception;
+	public int makeMecountPlannedTaskByPno(int pno,int massno)  throws Exception;
+	public int makeMecountNoPlannendTaskByPno(int pno,int massno)  throws Exception;
+	
+
+	public int assignmentCountFinishTaskByPnoAndMassno(int pno,int massno)  throws Exception;
+	public int assignmentCountPassedTaskByPnoAndMassno(int pno,int massno)  throws Exception;
+	public int assignmentCountPlannedTaskByPnoAndMassno(int pno,int massno)  throws Exception;
+	public int assignmentCountNoPlannendTaskByPnoAndMassno(int pno,int massno)  throws Exception;
+	
+}  
  
