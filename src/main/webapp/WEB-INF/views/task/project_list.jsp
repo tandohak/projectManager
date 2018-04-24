@@ -444,7 +444,7 @@
 								<img id="userPic" class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon_b.png" style="width: 25px; height: 25px;"/>
 							</c:if>      
 							<c:if test="${login.photoPath!=''}"> 
-								<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}" style="width: 25px; height: 25px;"/>
+								<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/${login.photoPath}" style="width: 25px; height: 25px;"/>
 							</c:if> 
 							<a href="#" class="delMem">x</a>
 						</div> --%>

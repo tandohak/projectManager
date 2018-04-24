@@ -90,8 +90,8 @@ public class UserController {
 
 		dto.setUsername(vo.getFirstName() + " " + vo.getLastName());
 		dto.setUno(vo.getUno());
-		dto.setPassword("");
-
+		dto.setPassword("");   
+		dto.setPhotoPath(vo.getPhotoPath());
 		model.addAttribute("loginDto", dto); 
 	}
 
@@ -105,7 +105,7 @@ public class UserController {
 			session.invalidate();
 		} 
 
-		return "redirect:/";
+		return "redirect:/user/login";
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
@@ -118,7 +118,7 @@ public class UserController {
 		model.addAttribute("googleSignIn", url);
 		return "user/join";
 	}  
-	
+	 
 	@RequestMapping("/googleSignInCallback")
 	public String doSessionAssignActionPage(HttpServletRequest request,HttpSession session, String code, Model model) throws Exception {
 		System.out.println("/member/googleSignInCallback");
@@ -162,8 +162,13 @@ public class UserController {
 			user.setEmail(person.getAccountEmail());
 			user.setFirstName(person.getFamilyName());
 			user.setLastName(person.getGivenName());
-			model.addAttribute("user", user);
+			 
+			String random = UUID.randomUUID().toString();
+			System.out.println("uuid" + random);
+			user.setPassword(random);
 			
+			model.addAttribute("user", user);
+			 
 			return "user/join/signUp";
 		}
 
@@ -200,10 +205,10 @@ public class UserController {
 			userTemp.setEmail(user_email);
 			model.addAttribute("user", userTemp);
 			model.addAttribute("key", key);
-		} else {
+		} /*else {
 			user.setPassword("fkdlsmi2m!3m4jh5h!");
 			model.addAttribute("user", user);
-		}
+		}*/
 
 		return "user/join/signUp";
 	}

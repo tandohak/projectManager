@@ -35,13 +35,13 @@
 						<input type="text" class="input half" name="lastName" id="lastName" placeholder="이름" value="${user.lastName}">
 					</div>
   					
-  					<c:if test="${key != null}">
-						<div class="row"> 
-							<span class="sTit">비밀번호</span> 
-							<input type="password" class="input full" name="password" id="password" placeholder="비밀번호"> 
-							<input	type="password" class="input full" name="rePassword" id="rePassword" placeholder="비밀번호 확인">
-						</div>
-					</c:if>  
+  					
+					<div class="row" <c:if test="${key == null}">style="display: none;"</c:if>  > 
+						<span class="sTit">비밀번호</span> 
+						<input type="password" class="input full" name="password" id="password" placeholder="비밀번호" value="${user.password!=null? user.password : ''}">   
+						<input	type="password" class="input full" name="rePassword" id="rePassword" placeholder="비밀번호 확인" value="${user.password!=null? user.password : ''}">
+					</div>
+					
 					<input type="button" value="다음 : 워크스페이스 만들기  >" class="btn" onclick="${key!=null ? 'proBtnEmail()' : 'proBtnGoogle()'}">
 					
 					<div class="row txtCenter">  

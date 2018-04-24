@@ -46,10 +46,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		Object object = modelAndView.getModel().get("loginDto");
 		
-		if(object != null){
+		if(object != null){  
 			LoginDTO dto = (LoginDTO)object;
 			logger.info("useremail : " + dto.getEmail()); 
 			logger.info("userename : " + dto.getUsername()); 
+			logger.info("photoPath : " + dto.getPhotoPath()); 
 			session.setAttribute("login", dto); 
 			List<MemberVO> memList = memService.selectListByUno(dto.getUno());
 			MemberVO mem = memList.get(0);

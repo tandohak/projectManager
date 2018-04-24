@@ -45,7 +45,7 @@
 						<span class="glyphicon glyphicon-chevron-down"></span> 
 					</a>  
 					<ul class="dropdown-menu">   
-			          <li>
+			          <li> 
 			          	<a href="${pageContext.request.contextPath}/task/${workVO.wcode}/workspace?memType=${memVo.memGrade}" class="nav_workspace">
 			          		<img class="pic" src="${pageContext.request.contextPath}/resources/img/workspace_icon.png"/>
 			          		<span class="nav_inner_wrap"> 
@@ -89,7 +89,7 @@
 							<img id="userPic" class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon.png"/>
 						</c:if>      
 						<c:if test="${login.photoPath!=''}">
-							<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}"/>
+							<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/${login.photoPath}"/>
 						</c:if>    
 					</a>   
 					<ul class="dropdown-menu">   
@@ -99,7 +99,7 @@
 								<img class="pic" src="${pageContext.request.contextPath}/resources/img/user_icon_b.png"/>
 							</c:if>      
 							<c:if test="${login.photoPath!=''}">
-								<img class="pic" src="${pageContext.request.contextPath}/displayFile?filename=${login.photoPath}"/>
+								<img class="pic" src="${pageContext.request.contextPath}/${login.photoPath}"/>
 							</c:if>  
 							<span class="nav_inner_wrap">
 				          		<span>${login.username}</span>    

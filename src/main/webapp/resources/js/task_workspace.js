@@ -12,7 +12,7 @@ $(function(){
 		}); 
 	}) 
 	 
-	$("#deletMember").on("click",".reinvite",function(e){
+	$("#inviteMember").on("click",".reinvite",function(e){
 		e.preventDefault();
 		
 		var emails = [];
@@ -28,7 +28,27 @@ $(function(){
 		reInviteEmail(datas);
 	})
 	
-	$(".delInvite").click(function(e){
+	$("#deletMember").on("click",".reinvite",function(e){
+		e.preventDefault();
+		
+		var emails = [];
+	
+		emails.push($(this).attr("data-target-email")); 	
+		 
+		var datas = {
+				"emails":emails,//이메일배열
+				"inviter":$(this).attr("data-inviter"),//초대자
+				"wcode":$(this).attr("data-wcode"),//초대 워크스페이스
+				"maker":$(this).attr("data-maker")
+		} 
+		reInviteEmail(datas); 
+		var emailTemp = $("#inviteMember .reinvite[data-target-email='"+datas.emails[0]+"']").attr("data-target-email");
+		  
+		if(emailTemp == "" || emailTemp == null || emailTemp == undefined)	
+			inviteMemAddList(datas);     
+	})
+	 
+	$("#inviteMember").on("click",".delInvite",function(e){  
 		e.preventDefault();
 		 
 		var invitee = $(this).attr("data-email");
@@ -167,7 +187,37 @@ function updateMember(datas){
 		}
 	});   
 }
- 
+
+function inviteMemAddList(datas){
+	var size = datas.emails.length;
+	for(var i =0; i<size; i++){ 
+		 
+		var $li = $("<li>");
+		var $div = $("<div>");
+		$div.append("<span class='glyphicon glyphicon-refresh invitePic'></span>");
+		$div.append("<span>"+datas.emails[i]+"</span>");
+		var $div2 = $("<div>");
+		var a = $("<a href='#' class='reinvite'>");
+		a.attr("data-target-email",datas.emails[i]);
+		a.attr("data-wcode",datas.wcode);
+		a.attr("data-inviter",datas.inviter);   
+		a.attr("data-maker",datas.maker);
+		
+		a.append('<span class="glyphicon glyphicon-refresh" style="font-size: 12px"></span> &nbsp;다시 초대하기');
+	
+		var dela = $('<a href="#" class="delInvite" data-email="'+datas.emails[i]+'">');
+		dela.append('<span class="glyphicon glyphicon-trash"></span>');
+		
+		$div2.append(a); 
+		$div2.append(dela);   
+		 
+		$li.append($div);
+		$li.append($div2); 
+		     
+		$("#inviteMember .mList").append($li);
+	}
+}
+
 function inviteEamilTrans(){
 	var emails = [];
 	var chck = true; 
@@ -221,6 +271,7 @@ function inviteEamilTrans(){
 						$(this).remove();
 					}
 				}); 
+				inviteMemAddList(datas);
 			} 
 		}  
 	}); 

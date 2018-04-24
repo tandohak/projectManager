@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -17,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,9 +28,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dgit.util.MediaUtils;
 import com.dgit.util.UploadFileUtils;
 
-@Controller
+@Controller 
 public class UploadController {
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
+	private String innerUploadPath = "resources/upload";
 
 	@Resource(name = "uploadPath")
 	private String outUploadPath;
@@ -54,8 +58,41 @@ public class UploadController {
 
 		return entity;
 	}
-
+	
 	@ResponseBody
+	@RequestMapping(value = "/uploadDrag", method = RequestMethod.POST)
+	public ResponseEntity<List<String>> uploadDragResult(HttpServletRequest request, String test, List<MultipartFile> files) {
+		logger.info("[uploadDrag] Result POST");
+		logger.info(test);
+		
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		File dirPath = new File(root_path + "/" + innerUploadPath);
+		 
+		if (!dirPath.exists()) {
+			dirPath.mkdirs();
+		}
+		 
+		ResponseEntity<List<String>> entity = null;
+		List<String> list = new ArrayList();
+		try {
+			for (MultipartFile file : files) {
+				UUID uid = UUID.randomUUID();// 중복방지를 위한 랜덤값 생성
+				String savedName = uid.toString() + "_" + file.getOriginalFilename();
+				File target = new File(root_path + "/" + innerUploadPath, savedName);
+
+				FileCopyUtils.copy(file.getBytes(), target);
+				list.add(innerUploadPath + "/" + savedName);
+			} 
+			entity = new ResponseEntity<List<String>>(list, HttpStatus.OK);
+		} catch (IOException e) {
+			entity = new ResponseEntity<List<String>>(list, HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+
+		return entity;
+	}
+	
+	/*@ResponseBody
 	@RequestMapping(value = "/uploadDrag", method = RequestMethod.POST)
 	public ResponseEntity<List<String>> uploadDragResult(String test, List<MultipartFile> files) {
 		logger.info("[uploadDrag] Result POST");
@@ -82,18 +119,20 @@ public class UploadController {
 		}
 
 		return entity;
-	}
+	}*/
 
 	// deleteFile
 	@ResponseBody
 	@RequestMapping(value = "deleteFile", method = RequestMethod.GET)
-	public ResponseEntity<String> deleteFile(String filename) {
+	public ResponseEntity<String> deleteFile(String filename,HttpServletRequest request) {
 		ResponseEntity<String> entity = null;
 		try {
 			System.gc();
-			File file = new File(outUploadPath + filename);
-			File file2 = new File(outUploadPath + filename.replaceFirst("s_", ""));
-			file2.delete();
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+
+			File file = new File(root_path + "/" + innerUploadPath + filename);
+			File file2 = new File(root_path + "/" + innerUploadPath + filename.replaceFirst("s_", ""));
+			file2.delete(); 
 			file.delete();
 			logger.info("[deleteFile] - original : " + filename.replaceFirst("s_", ""));
 

@@ -2,12 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="include/header.jsp" %>
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_workspace.css?a=8"> 
-<script src="${pageContext.request.contextPath}/resources/js/task_workspace.js?a=8"></script>
-<script src="${pageContext.request.contextPath}/resources/js/util.js?a=8"></script>
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_workspace.css?a=9"> 
+<script src="${pageContext.request.contextPath}/resources/js/task_workspace.js?a=9"></script>
+<script src="${pageContext.request.contextPath}/resources/js/util.js?a=9"></script>
 <%@ include file="include/sideBar.jsp" %>  
 		<script> 
-			var memType = ${memType};  
+			var memType = ${memType};     
 		</script>   
 			<div id="contentWrap"> 
 				<div class="contentBox">  
@@ -49,7 +49,7 @@
 								    				<img src="/projectManager/resources/img/user_icon_b.png"/>
 								    			</c:if> 
 								    			<c:if test="${mem.photoPath!=''}"> 
-													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${mem.photoPath}"/>
+													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/${mem.photoPath}"/>
 								    			</c:if>  
 								    			<span>${mem.firstName} ${mem.lastName }</span>
 								    			<span>관리자</span>   
@@ -67,7 +67,7 @@
 								    				<img src="/projectManager/resources/img/user_icon_b.png"/>
 								    			</c:if> 
 								    			<c:if test="${mem.photoPath!=''}">  
-													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${mem.photoPath}"/>
+													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/${mem.photoPath}"/>
 								    			</c:if>  
 								    			<span>${mem.firstName} ${mem.lastName }</span>
 								    			<span>관리자</span>   
@@ -98,7 +98,7 @@
 								    				<img src="/projectManager/resources/img/user_icon_b.png"/>
 								    			</c:if>
 								    			<c:if test="${mem.photoPath!=''}">
-													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${mem.photoPath}"/>
+													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/${mem.photoPath}"/>
 								    			</c:if> 
 								    			<span>${mem.firstName} ${mem.lastName }</span>
 								    			<span> 멤버 </span>   
@@ -130,7 +130,7 @@
 								    				<img src="/projectManager/resources/img/user_icon_b.png"/>
 								    			</c:if>
 								    			<c:if test="${mem.photoPath!=''}">
-													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/displayFile?filename=${mem.photoPath}"/>
+													<img id="userPic" class="pic"  src="${pageContext.request.contextPath}/${mem.photoPath}"/>
 								    			</c:if> 
 								    			<span>${mem.firstName} ${mem.lastName }</span>
 								    			<span> 가입대기 </span>   
