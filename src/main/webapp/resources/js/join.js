@@ -45,9 +45,9 @@ $(function() {
 				console.log(res);   
 				wvo = res.wvo;
 				if(res != "fail"){
-					$("#inviteLink").val("http://localhost:8080/projectManager/task/"+res.wvo.wcode+"/join");
+					$("#inviteLink").val("http://hongyoonpyo.cafe24.com/projectManager/task/"+res.wvo.wcode+"/join");
 					$("#wname").val(res.wvo.name);
-					$("#startTask").attr("href","http://localhost:8080/projectManager/task/"+res.wvo.wcode);
+					$("#startTask").attr("href","http://hongyoonpyo.cafe24.com/projectManager/task/"+res.wvo.wcode);
 				}else{
 					alert("워크스페이스 생성에 실패하였습니다.");
 					return;
