@@ -19,20 +19,20 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/task_project.js?a=19"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=19a"></script>
+	src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=119a"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=1a9"></script>
 <script>     
 	var wcode = "${wcode}";     
 	var loginMem = {           
-			 mno : ${loginMem.mno },   
+			 mno : ${loginMem.mno },    
 			 firstName : "${loginMem.firstName}" ,    
 			 lastName :  "${loginMem.lastName }" ,  
 			 photoPath : "${loginMem.photoPath}" ,  
 			 memGrade : "${loginMem.memGrade}"
 	};       
-</script>
-<%@ include file="include/sideBar.jsp"%>
+</script>    
+<%@ include file="include/sideBar.jsp"%> 
 <div id="contentWrap"> 
 	<nav class="navbar navbar-default"   
 		style="border-radius: 0px; margin-bottom: 0px; ">

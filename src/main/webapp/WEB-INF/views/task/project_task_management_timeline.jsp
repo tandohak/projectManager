@@ -13,7 +13,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2222"></script>           
 <script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>              
 <script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa22"></script>       
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=52a2a2"></script>    
+<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=52a21a2"></script>    
 <script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=aa22"></script>       
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>    
 <script src="${pageContext.request.contextPath}/resources/js/timeline.min.js"></script>    

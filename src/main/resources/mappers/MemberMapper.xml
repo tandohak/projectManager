@@ -35,7 +35,16 @@
 		<include refid="selectSql" />
 		<include refid="whereSqlUno" />
 	</select>
-	 
+	
+	<select id="searchListByUnoJoinWorkspace" resultType="MemberVO">
+		select mno, member.uno ,member.wcode, workspace.name
+		from member join workspace 
+		on member.wcode = workspace.wcode 
+		where member.uno = #{uno}
+		and workspace.name like concat('%',#{name},'%')
+		group by mno;  
+	</select>  
+	  
 	<select id="selectListByUnoJoinWorkspace" resultType="MemberVO">
 		select mno, member.uno ,member.wcode, workspace.name
 		from member join workspace 
@@ -83,6 +92,14 @@
 		from member join user join memassignment
 		on member.uno = user.uno and member.mno = memassignment.mno
 		where  memassignment.pno = #{pno}
+	</select>
+	
+	<select id="searchByPnoWithMemAssignment" resultType="MemberVO">
+		select distinct(member.mno),massno, member.uno ,member.wcode, user.firstName, user.lastName,memGrade,user.photoPath,user.email, memassignment.grade  as memAssGrade
+		from member join user join memassignment
+		on member.uno = user.uno and member.mno = memassignment.mno
+		where  memassignment.pno = #{pno}
+		and concat(user.firstName, " ", user.lastName) like concat('%',#{name},'%')
 	</select>
 	
 	<select id="selectListByTasknoWithMemAssignment" resultType="MemberVO">

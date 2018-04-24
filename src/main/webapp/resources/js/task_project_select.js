@@ -291,7 +291,23 @@ $(function() {
 		}
 
 	});
-
+	 // 드랍매뉴 검색  
+	$("#addTask_member_dropdown input[type='text']").keyup(
+			function() {
+				var name = $(this).val();
+				$.ajax({
+					url : "/projectManager/member/memAssList/search?pno="
+							+ pno + "&name=" + name,
+					type : "get",
+					dataType : "json",
+					success : function(res) {
+						var source = $("#addTask_member_member_template").html();
+						var t_fn = Handlebars.compile(source);
+						$("#addTask_member_dropdown .memList").html(t_fn(res));
+					}
+				})      
+			})
+			
 	$(".taskBox_wrap").on("click", ".addMemberDropMenu", function() {
 		$.ajax({
 			url : "/projectManager/member/memAssList/" + pno,
@@ -313,7 +329,7 @@ $(function() {
 		$("#addTask_member_dropdown").css("left", obj.left + "px");
 		$("#addTask_member_dropdown").toggle();
 
-	});
+	});  
 	// 테스크 생성 취소
 	$(".taskBox_wrap").on("click", ".add_task_cancle", function() {
 		$(".taskBox_header").removeAttr("style");

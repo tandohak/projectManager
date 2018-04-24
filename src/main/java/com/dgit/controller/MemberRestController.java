@@ -50,12 +50,43 @@ public class MemberRestController {
 		return entity; 
 	}
 	
+	
 	@RequestMapping(value="/memList/search",method = RequestMethod.GET)
 	public ResponseEntity<List<MemberVO>> memberListByWcodeSearch(String wcode,String name){
 		ResponseEntity<List<MemberVO>> entity = null;  
 		
 		try{
 			List<MemberVO> memList= memService.searchMemberByName(name, wcode);
+			entity = new ResponseEntity<>(memList,HttpStatus.OK);
+		}catch(Exception e) {
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}     
+		
+		return entity; 
+	}
+	
+	@RequestMapping(value="/memListWithWorkspace/search",method = RequestMethod.GET)
+	public ResponseEntity<List<MemberVO>> memListWithWorkspaceSearch(String name,int uno){
+		ResponseEntity<List<MemberVO>> entity = null;  
+		
+		try{
+			List<MemberVO> memList= memService.searchListByUnoJoinWorkspace(name, uno);
+			entity = new ResponseEntity<>(memList,HttpStatus.OK);
+		}catch(Exception e) {
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}     
+		
+		return entity; 
+	} 
+	
+	@RequestMapping(value="/memAssList/search",method = RequestMethod.GET)
+	public ResponseEntity<List<MemberVO>> memberAssListByWcodeSearch(int pno,String name){
+		ResponseEntity<List<MemberVO>> entity = null;  
+		
+		try{     
+			List<MemberVO> memList= memService.searchByPnoWithMemAssignment(name, pno);
 			entity = new ResponseEntity<>(memList,HttpStatus.OK);
 		}catch(Exception e) {
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

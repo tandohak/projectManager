@@ -20,4 +20,6 @@ public interface MemberDAO {
 	public MemberVO selectOneByPnoAndUno(int uno, int pno) throws Exception;
 	public List<MemberVO> selectListByPnoWithMemAssignment(int pno) throws Exception;
 	public List<MemberVO> selectListByTasknoWithMemAssignment(int taskno) throws Exception;
+	public List<MemberVO> searchByPnoWithMemAssignment(String name,int pno) throws Exception;
+	public List<MemberVO> searchListByUnoJoinWorkspace(String name, int uno);
 }

@@ -22,7 +22,7 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=521aaaa22"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=52aa12aa2"></script>
+	src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=52a1a12aa2"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=a1aa22"></script>
 <script

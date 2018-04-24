@@ -93,6 +93,24 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public List<MemberVO> selectListByTasknoWithMemAssignment(int taskno) throws Exception {
 		return session.selectList(namespace+"selectListByTasknoWithMemAssignment",taskno);
+	}
+
+	@Override
+	public List<MemberVO> searchByPnoWithMemAssignment(String name, int pno) throws Exception {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("name", name);
+		map.put("pno", pno);
+		
+		return session.selectList(namespace+"searchByPnoWithMemAssignment",map);
+
+	}
+
+	@Override
+	public List<MemberVO> searchListByUnoJoinWorkspace(String name, int uno) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("name", name);
+		map.put("uno", uno);
+		return session.selectList(namespace+"searchListByUnoJoinWorkspace",map);
 	} 
 	  
 }

@@ -83,6 +83,16 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> selectListByTasknoWithMemAssignment(int taskno) throws Exception {
 		return dao.selectListByTasknoWithMemAssignment(taskno);
 	}
+
+	@Override
+	public List<MemberVO> searchByPnoWithMemAssignment(String name, int pno) throws Exception {
+		return dao.searchByPnoWithMemAssignment(name, pno);
+	}
+
+	@Override
+	public List<MemberVO> searchListByUnoJoinWorkspace(String name, int uno) {
+		return dao.searchListByUnoJoinWorkspace(name, uno);
+	}
 	    
 } 
   

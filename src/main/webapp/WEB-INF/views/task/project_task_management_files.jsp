@@ -10,7 +10,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=52a"></script>      
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?a=2222"></script>           
 <script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>              
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=52a2a2"></script>    
+<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=52a12a2"></script>    
 <script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=aa22"></script>     
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>     
      

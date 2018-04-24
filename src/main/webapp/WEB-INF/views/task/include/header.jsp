@@ -13,8 +13,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script> 
-<script src="${pageContext.request.contextPath}/resources/js/util.js?a=1"></script>
-</head>  
+<script src="${pageContext.request.contextPath}/resources/js/util.js?a=2"></script>
+</head>   
 <body>    
 	<nav class="navbar navbar-light sticky-top flex-md-nowrap"  id="header"> 
 			<ul class="nav navbar-nav">
@@ -57,14 +57,14 @@
 			           <li>  
 				        <div class="nav_innerBox">   
 				        	<div class="input-group">
-							    <input type="text" class="form-control" placeholder="워크스페이스 검색"> 
+							    <input type="text" class="form-control" placeholder="워크스페이스 검색" id="searchWorkspace" data-uno="${login.uno}"> 
 					          	<div class="input-group-btn">  
 							      <button class="btn btn-default" type="submit">  
 							        <i class="glyphicon glyphicon-search"></i>
 							      </button>
 							    </div>
 							 </div>
-							 <ul class="nav_inner_resList">
+							 <ul class="nav_inner_resList" id="workspaceList">
 							 	<c:forEach var="item" items="${memList }"> 
 							 		<li> 
 							 			<a href="${pageContext.request.contextPath}/task/${item.wcode }" data-wcode="${item.wcode }">
@@ -76,7 +76,19 @@
 							 		</li>
 							 	</c:forEach>
 							 </ul>
-			          	</div>  
+			          	</div>     
+			          	<script id="workspaecSearhcResult"  type="text/x-handlerbars-template">
+				          {{#each.}}
+							<li> 
+				 			<a href="${pageContext.request.contextPath}/task/{{wcode }}" data-wcode="{{wcode }}">
+				          		<img class="pic" src="${pageContext.request.contextPath}/resources/img/workspace_icon.png"/>
+				          		<span>  
+				          			{{name}}
+				          		</span>
+				          	</a>  
+				 		</li>
+ 						{{/each}} 
+			          	</script>
 			          </li>
 			          <li> 
 			          	<a href="#" id="makeWorkspace" data-toggle="modal" data-target="#makeWorkspaceModal"><span></span>새 워크스페이스 만들기</a>

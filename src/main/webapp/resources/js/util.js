@@ -44,4 +44,23 @@ $(function(){
 			}
 		}) 
 	})
+	
+	//워크스페이스 검색
+	$("#searchWorkspace").keyup(  
+			function() {  
+				var name = $(this).val();
+				var uno = $(this).attr("data-uno");
+				$.ajax({
+					url : "/projectManager/member/memListWithWorkspace/search?uno="
+							+ uno + "&name=" + name,
+					type : "get",
+					dataType : "json",
+					success : function(res) {
+						console.log(res);    
+						var source = $("#workspaecSearhcResult").html();
+						var t_fn = Handlebars.compile(source);
+						$("#workspaceList").html(t_fn(res));
+					}
+				})      
+			})
 })

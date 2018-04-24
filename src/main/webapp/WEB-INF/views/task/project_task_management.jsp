@@ -9,12 +9,12 @@
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=axx"></script>      
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?b=xax"></script>          
 <script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>                  
-<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa22a2a2"></script>        
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=522a2aaa222"></script>  
+<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa22aasdf2a2"></script>        
+<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=522a21asdfaaa222"></script>  
 <script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=a2a2assa222"></script>     
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>    
 <script>                 
-	var wcode = "${wcode}";                  
+	var wcode = "${wcode}";                    
 	var loginMem = {                         
 			 mno : ${loginMem.mno },        
 			 firstName : "${loginMem.firstName}" ,          

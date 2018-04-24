@@ -593,8 +593,24 @@ $(function() {
 		e.preventDefault();
 		$(this).parents(".dropdown_menu_setting").toggle();
 	})
-    
-	$(".dropdown_menu_setting input[type='text']").keyup(
+    // 드랍매뉴 검색
+	$("#setting_drop_menu_admin input[type='text']").keyup(
+			function() {
+				var name = $(this).val();
+				$.ajax({
+					url : "/projectManager/member/memList/search?wcode="
+							+ wcode + "&name=" + name,
+					type : "get",
+					dataType : "json",
+					success : function(res) {
+						var source = $("#setting_admin_template").html();
+						var t_fn = Handlebars.compile(source);
+						$(".memList").html(t_fn(res));
+					}
+				})
+			})
+			  
+		$("#setting_drop_menu_member input[type='text']").keyup(
 			function() {
 				var name = $(this).val();
 				$.ajax({
@@ -659,7 +675,7 @@ $(function() {
 		var targetId = $target_set.attr("id");
 		
 		if(targetId != undefined){   
-			if(targetId.indexOf("task") <= -1){//프로젝트 설정
+			if(targetId.indexOf("task") <= -1){// 프로젝트 설정
 				if(targetId.indexOf("analytics_") > -1){
 					$target_set.find(".analytics_date_wrap").css("display","none");  
 					$target_set.find(".analytics_date_addBtn").css("display","inline-block");
@@ -688,7 +704,7 @@ $(function() {
 						console.log(res);  
 					} 
 				})         
-			}else if(targetId.indexOf("task") > -1){//task 설정 
+			}else if(targetId.indexOf("task") > -1){// task 설정
 				var taskno = $("#side_task_setting").attr("data-taskno");
 				targetId = targetId.replace("task_","");
 				  
@@ -705,7 +721,7 @@ $(function() {
 		}  
 		     
 	})                   
-})// 제워키리 끝     
+})// 제워키리 끝
 var $target_set = null;   
 
 var dropDatePicker = function($target) { 
@@ -807,9 +823,9 @@ var dropDatePicker = function($target) {
 	})  
 }       
 
-/* 세팅 드랍 매뉴 오픈 */
-var dropMenuOpen = function(type) {
-	$.ajax({
+/* 세팅 드랍 매뉴 오픈 */  
+var dropMenuOpen = function(type) { 
+	$.ajax({    
 		url : "/projectManager/member/memList?wcode=" + wcode,
 		type : "get",
 		dataType : "json",
