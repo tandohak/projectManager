@@ -19,12 +19,12 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/task_project.js?a=19"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=19"></script>
+	src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?a=19a"></script>
 <script
-	src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=19"></script>
+	src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?a=1a9"></script>
 <script>     
 	var wcode = "${wcode}";     
-	var loginMem = {         
+	var loginMem = {           
 			 mno : ${loginMem.mno },   
 			 firstName : "${loginMem.firstName}" ,    
 			 lastName :  "${loginMem.lastName }" ,  

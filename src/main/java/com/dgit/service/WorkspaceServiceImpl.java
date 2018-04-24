@@ -70,4 +70,10 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 		
 		return key;
 	}
+
+	@Override
+	public int update(WorkspaceVO vo) throws Exception {
+		
+		return dao.update(vo);
+	}
 }

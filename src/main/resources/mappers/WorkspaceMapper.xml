@@ -31,4 +31,10 @@
 		<include refid="whereSql" />
 	</delete>
 	
+	<update id="update">
+	    update workspace set 
+	    name = #{name}
+	    where wcode = #{wcode} 
+	</update>
+	
 </mapper>

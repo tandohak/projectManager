@@ -32,7 +32,7 @@ public class UserRestController {
 	@Autowired 
 	WorkspaceService WorkService;  
 	
-	@RequestMapping(value = "/create/{wname}", method = {RequestMethod.PUT,RequestMethod.PATCH,})
+	@RequestMapping(value = "/create/{wname}", method = RequestMethod.POST)
 	public ResponseEntity<HashMap<String, Object>> userCreate(@RequestBody UserVO vo,@PathVariable("wname") String wname) {
 		ResponseEntity<HashMap<String, Object>> entity = null;
 		logger.info("[user create]");   
@@ -67,6 +67,55 @@ public class UserRestController {
 		return entity; 
 	}
 	
+	@RequestMapping(value = "/create/workspace", method = RequestMethod.POST)
+	public ResponseEntity<WorkspaceVO> workspaceCreate(@RequestBody WorkspaceVO vo) {
+		ResponseEntity<WorkspaceVO> entity = null;
+		logger.info("[user create]");   
+		logger.info("[user create]" + vo.toString()); 
+		     
+		try {     
+			
+//			WorkspaceVO wvo = new WorkspaceVO();
+//			wvo.setName(wname);  
+//			wvo.setUno(vo.getUno()); 
+//			wvo.setMaker(vo.getFirstName() + " " + vo.getLastName());
+			
+			String res = WorkService.insert(vo);
+			
+			if(res.equals("fail")){
+				throw new Exception("WorkSpace make fail");
+			}
+			vo.setWcode(res);
+			
+			
+			entity = new ResponseEntity<>(vo,HttpStatus.OK);
+		} catch (Exception e) { 
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} 
+		
+		return entity; 
+	}
+	
+	@RequestMapping(value = "/update/workspace", method = RequestMethod.POST) 
+	public ResponseEntity<WorkspaceVO> workspaceUpdate(@RequestBody WorkspaceVO vo) {
+		ResponseEntity<WorkspaceVO> entity = null;
+		logger.info("[user create]");   
+		logger.info("[user create]" + vo.toString()); 
+		     
+		try {     
+			
+			int res = WorkService.update(vo);
+			
+			entity = new ResponseEntity<>(vo,HttpStatus.OK);
+		} catch (Exception e) { 
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} 
+		
+		return entity; 
+	}
+	
 	@RequestMapping(value = "/exists", method =RequestMethod.POST)
 	public ResponseEntity<String> userSelectOne(@RequestBody String email) {
 		ResponseEntity<String> entity = null;
@@ -86,6 +135,6 @@ public class UserRestController {
 			entity = new ResponseEntity<>("fail",HttpStatus.BAD_REQUEST);
 		}
 		
-		return entity; 
+		return entity;  
 	}
 }  

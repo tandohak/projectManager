@@ -34,5 +34,11 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
 		return session.delete(namespace+"delete",wcode);
 	}
 
+	@Override
+	public int update(WorkspaceVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.update(namespace+"update",vo);
+	}
+
 
 }

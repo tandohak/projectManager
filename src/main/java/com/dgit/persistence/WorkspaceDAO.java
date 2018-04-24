@@ -9,4 +9,5 @@ public interface WorkspaceDAO {
 	public List<WorkspaceVO> selectList() throws Exception;
 	public int insert(WorkspaceVO vo) throws Exception;
 	public int delete(String wcode) throws Exception;
+	public int update(WorkspaceVO vo) throws Exception;
 }

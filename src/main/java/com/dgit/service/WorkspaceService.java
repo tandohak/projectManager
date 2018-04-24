@@ -10,4 +10,5 @@ public interface WorkspaceService {
 	public List<WorkspaceVO> selectList() throws Exception;
 	public String insert(WorkspaceVO vo) throws Exception;
 	public int delete(String wcode) throws Exception;
+	public int update(WorkspaceVO vo) throws Exception;
 }

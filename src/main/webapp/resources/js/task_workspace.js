@@ -322,3 +322,32 @@ function addInput(e){
 	$("#inviteInputWrap").append($divWrap);
 }
  
+function workNameChange(){
+	var workname = $("#workName").val();
+	var wcode = $("#workName").attr("data-wcode");
+	if(workname==""){
+		alert("워크스페이스 명을 입력하세요.");
+		return false;
+	}
+	
+	$.ajax({ 
+		url : "/projectManager/register/update/workspace",
+		type:"post",
+		headers:{"Content-Type":"application/json"},
+		dataType:"json",  
+		async:false,
+		data : JSON.stringify({
+			"name" : workname,
+			"wcode" : wcode
+		}),       
+		success:function(res) {
+			console.log(res);    
+			if(res != "fail"){  
+				location.reload(); 
+			}else{ 
+				alert("워크스페이스 생성에 실패하였습니다.");
+				return;
+			}
+		}
+	}) 
+} 

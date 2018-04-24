@@ -2,8 +2,8 @@ Handlebars.registerHelper('checkPhotoPath', function(options) {
 	if (options == "" || options == null) {
 		return "resources/img/user_icon_b.png";
 	} else {
-		return "displayFile?filename=" + options;
-	}
+		return options;
+	} 
 });
    
 Handlebars.registerHelper('checkSelectMember', function(value) {

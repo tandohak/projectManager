@@ -2,16 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="include/header.jsp"%>  
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=xx">
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=xx22">   
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_project_select.css?a=axx">
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_setting.css?a=xxa22">   
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/modal.css?a=5xx">           
-<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=xx">  
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=xx"></script>      
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?b=xx"></script>          
-<script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>                 
-<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa222a2"></script>        
-<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=522a2aa222"></script>  
-<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=a2a2a222"></script>     
+<link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker3.min.css?a=xax">  
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.min.js?a=axx"></script>      
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.kr.min.js?b=xax"></script>          
+<script	src="${pageContext.request.contextPath}/resources/js/SimpleDateFormat.js"></script>                  
+<script src="${pageContext.request.contextPath}/resources/js/task_project_select.js?b=52aa22a2a2"></script>        
+<script src="${pageContext.request.contextPath}/resources/js/task_project_setting.js?b=522a2aaa222"></script>  
+<script src="${pageContext.request.contextPath}/resources/js/handlerbars_registerHelper.js?b=a2a2assa222"></script>     
 <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>    
 <script>                 
 	var wcode = "${wcode}";                  

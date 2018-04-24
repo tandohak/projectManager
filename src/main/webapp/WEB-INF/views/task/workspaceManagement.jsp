@@ -4,7 +4,6 @@
 <%@ include file="include/header.jsp" %>
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task_workspace.css?a=9"> 
 <script src="${pageContext.request.contextPath}/resources/js/task_workspace.js?a=9"></script>
-<script src="${pageContext.request.contextPath}/resources/js/util.js?a=9"></script>
 <%@ include file="include/sideBar.jsp" %>  
 		<script> 
 			var memType = ${memType};     
@@ -22,7 +21,7 @@
 					    	<h2 class="sub_cnt_tit">일반 설정</h2>
 					    	<div class="form-group">
 					    		 <label for="email" class='margin_bottom_15'>워크스페이스 명</label> 
-					    		<input type="text" class="form-control margin_bottom_15"  id="workName" value="${workVO.name}" style="width: 300px;">  
+					    		<input type="text" class="form-control margin_bottom_15"  id="workName" value="${workVO.name}" data-wcode="${workVO.wcode }" style="width: 300px;">  
 					    		<button class="btn btn_cst margin_bottom_15" onclick="workNameChange()">변경사항 저장</button>
 					    	</div>   
 					    </div>      

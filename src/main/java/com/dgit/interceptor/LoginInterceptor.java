@@ -45,7 +45,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		Object object = modelAndView.getModel().get("loginDto");
-		
+	
 		if(object != null){  
 			LoginDTO dto = (LoginDTO)object;
 			logger.info("useremail : " + dto.getEmail()); 

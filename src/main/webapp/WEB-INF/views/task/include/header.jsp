@@ -13,8 +13,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script> 
-<script src="${pageContext.request.contextPath}/resources/js/util.js"></script>
-</head>
+<script src="${pageContext.request.contextPath}/resources/js/util.js?a=1"></script>
+</head>  
 <body>    
 	<nav class="navbar navbar-light sticky-top flex-md-nowrap"  id="header"> 
 			<ul class="nav navbar-nav">
@@ -79,8 +79,8 @@
 			          	</div>  
 			          </li>
 			          <li> 
-			          	<a href="#"><span></span>새 워크스페이스 만들기</a>
-			          </li>
+			          	<a href="#" id="makeWorkspace" data-toggle="modal" data-target="#makeWorkspaceModal"><span></span>새 워크스페이스 만들기</a>
+			          </li> 
 			        </ul>
 				</li>
 				<li>     
@@ -112,3 +112,16 @@
 				</li>
 			</ul>
 	</nav>
+	 
+	 <div class="modal fade" id="makeWorkspaceModal" role="dialog"> 
+	    <div class="modal_inner_box">
+	    	<h2 class="tit_h2" >새 워크스페이스 만들기</h2> 
+			<div class="inn_row" style="margin: 75px auto;">
+				<span class="sTit">워크스페이스 명</span>
+				<input type="text" class="input full" placeholder="워크스페이스명을 입력해 주세요." id="makeWorkspace_name_input">				    
+			</div>       
+			<div class="inn_row">       
+					<a href="#" class="btnCtm" style="width: 25%; text-decoration: none; color: #fff;" id="makeWorkspaceBtn" data-maker="${login.username}" data-uno="${login.uno}">전송</a>    
+			</div>    
+	    </div>        
+  </div> 

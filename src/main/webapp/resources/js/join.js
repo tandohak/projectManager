@@ -28,9 +28,9 @@ $(function() {
 			photoPath = "";
 		}
 		
-		$.ajax({
+		$.ajax({ 
 			url : "/projectManager/register/create/"+workspaceName,
-			type:"put",
+			type:"post",
 			headers:{"Content-Type":"application/json"},
 			dataType:"json",  
 			async:false,
