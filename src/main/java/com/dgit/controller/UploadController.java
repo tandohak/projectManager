@@ -67,7 +67,7 @@ public class UploadController {
 		
 		String root_path = request.getSession().getServletContext().getRealPath("/");
 		File dirPath = new File(root_path + "/" + innerUploadPath);
-		 
+		
 		if (!dirPath.exists()) {
 			dirPath.mkdirs();
 		}

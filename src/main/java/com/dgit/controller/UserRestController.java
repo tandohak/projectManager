@@ -145,7 +145,7 @@ public class UserRestController {
 		
 		try{ 
 			UserVO vo= userService.selectOneByEmail(email);
-
+			vo.setPassword("");
 			entity = new ResponseEntity<>(vo,HttpStatus.OK);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -162,6 +162,7 @@ public class UserRestController {
 		
 		try{
 			UserVO vo = userService.readWithPw(dto.getEmail(), dto.getPassword());
+			vo.setPassword("");
 
 			entity = new ResponseEntity<>(vo,HttpStatus.OK);
 		}catch (Exception e) {
