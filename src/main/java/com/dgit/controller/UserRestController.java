@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dgit.domain.LoginDTO;
 import com.dgit.domain.UserVO;
 import com.dgit.domain.WorkspaceVO;
 import com.dgit.service.UserService;
@@ -137,4 +138,37 @@ public class UserRestController {
 		
 		return entity;  
 	}
+	
+	@RequestMapping(value = "/googleLogin", method =RequestMethod.POST)
+	public ResponseEntity<UserVO> userGoogleLogin(@RequestBody String email) {
+		ResponseEntity<UserVO> entity = null;
+		
+		try{ 
+			UserVO vo= userService.selectOneByEmail(email);
+
+			entity = new ResponseEntity<>(vo,HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;  
+	}
+	
+	
+	@RequestMapping(value = "/emailLogin", method =RequestMethod.POST)
+	public ResponseEntity<UserVO> userEmailLogin(@RequestBody LoginDTO dto) {
+		ResponseEntity<UserVO> entity = null;
+		
+		try{
+			UserVO vo = userService.readWithPw(dto.getEmail(), dto.getPassword());
+
+			entity = new ResponseEntity<>(vo,HttpStatus.OK);
+		}catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;  
+	} 
 }  
