@@ -155,15 +155,16 @@ public class UserRestController {
 		return entity;  
 	}
 	
-	
+	 
 	@RequestMapping(value = "/emailLogin", method =RequestMethod.POST)
 	public ResponseEntity<UserVO> userEmailLogin(@RequestBody LoginDTO dto) {
 		ResponseEntity<UserVO> entity = null;
 		
 		try{
+			logger.info("emailLogin---"+ dto.toString());
 			UserVO vo = userService.readWithPw(dto.getEmail(), dto.getPassword());
 			vo.setPassword("");
-
+			logger.info("emailLogin---"+ vo.toString());
 			entity = new ResponseEntity<>(vo,HttpStatus.OK);
 		}catch (Exception e) {
 			e.printStackTrace();

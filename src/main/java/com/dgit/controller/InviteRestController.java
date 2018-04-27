@@ -39,7 +39,7 @@ public class InviteRestController {
 	private static final Logger logger = LoggerFactory.getLogger(InviteRestController.class);
 
 	@RequestMapping(value = "/emailAuth", method = RequestMethod.POST)
-	public ResponseEntity<String> emailAuth(Model model, String email) {
+	public ResponseEntity<String> emailAuth(Model model,@RequestBody String email) {
 		ResponseEntity<String> entity = null;
 		
 		try {
