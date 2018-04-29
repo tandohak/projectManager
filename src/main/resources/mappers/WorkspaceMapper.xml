@@ -19,6 +19,10 @@
 	<select id="selectList" resultType="WorkspaceVO">
 		<include refid="selectSql" />
 	</select>
+	<select id="selectListByUno" resultType="WorkspaceVO">
+		<include refid="selectSql" />
+		where uno = #{uno}
+	</select>
 	
 	<insert id="insert" useGeneratedKeys="true" keyProperty="wcode">
 		insert into workspace

@@ -58,6 +58,36 @@ public class UploadController {
 
 		return entity;
 	}
+	@ResponseBody
+	@RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+	public ResponseEntity<String> uploadResult(HttpServletRequest request,MultipartFile file) {
+		logger.info("[uploadDrag] Result POST");
+		
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		File dirPath = new File(root_path + "/" + innerUploadPath);
+		
+		if (!dirPath.exists()) {  
+			dirPath.mkdirs();
+		}
+		 
+		ResponseEntity<String> entity = null;   
+		String filePath= "";
+		try {
+				UUID uid = UUID.randomUUID();// 중복방지를 위한 랜덤값 생성
+				String savedName = uid.toString() + "_" + file.getOriginalFilename();
+				File target = new File(root_path + "/" + innerUploadPath, savedName);
+				
+				FileCopyUtils.copy(file.getBytes(), target);
+				filePath = innerUploadPath + "/" + savedName;
+				
+			entity = new ResponseEntity<>(filePath, HttpStatus.OK);
+		} catch (Exception e) {
+			entity = new ResponseEntity<>("fail", HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		} 
+
+		return entity;
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/uploadDrag", method = RequestMethod.POST)

@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.dgit.domain.MemAssignmentVO;
 import com.dgit.domain.MemberVO;
@@ -358,8 +360,21 @@ public class ProjectRestController {
 			e.printStackTrace();
 		}
 		return entity;  
-	} 
-	  
+	}   
+	@RequestMapping(value = "/select/projectList/{wcode}",method = RequestMethod.GET)
+	public ResponseEntity<List<ProjectVO>> selectListProject(@PathVariable String wcode){
+		
+		ResponseEntity<List<ProjectVO>> entity = null; 
+		try {    
+			List<ProjectVO> projectList = projectService.selectListByWcode(wcode);
+			
+			entity = new ResponseEntity<>(projectList, HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;  
+	}  
 	
 	
 } 

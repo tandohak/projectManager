@@ -65,7 +65,8 @@
 		<!-- <property name="scope" value="https://www.googleapis.com/auth/plus.login" />    -->
 		<property name="scope" value="https://www.googleapis.com/auth/userinfo.email" />    
 		<!-- <property name="scope" value="https://www.googleapis.com/auth/plus.me"/> -->
-		<property name="redirectUri" value="http://hongyoonpyo.cafe24.com/projectManager/user/googleSignInCallback" />
+		<!-- <property name="redirectUri" value="http://hongyoonpyo.cafe24.com/projectManager/user/googleSignInCallback" /> -->
+		<property name="redirectUri" value="http://localhost:8080/projectManager/user/googleSignInCallback" />
 	</bean>
 	
 	<!-- 메일 보내기 -->
@@ -77,7 +78,7 @@
     
 	<!-- email 요청시는 SMTP -->
 		<property name="javaMailProperties">
-			<props>
+			<props>  
 				<prop key="mail.transport.protocol">smtp</prop>   
 				<prop key="mail.smtp.auth">true</prop> 
 				<prop key="mail.smtp.starttls.enable">true</prop>

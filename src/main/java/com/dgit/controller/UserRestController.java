@@ -1,6 +1,7 @@
 package com.dgit.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dgit.domain.LoginDTO;
+import com.dgit.domain.MemberVO;
 import com.dgit.domain.UserVO;
 import com.dgit.domain.WorkspaceVO;
+import com.dgit.service.MemberService;
 import com.dgit.service.UserService;
 import com.dgit.service.WorkspaceService;
 import com.dgit.util.TempKey;
@@ -31,7 +34,10 @@ public class UserRestController {
 	UserService userService;
 	   
 	@Autowired 
-	WorkspaceService WorkService;  
+	WorkspaceService WorkService;
+	
+	@Autowired 
+	MemberService memService;  
 	
 	@RequestMapping(value = "/create/{wname}", method = RequestMethod.POST)
 	public ResponseEntity<HashMap<String, Object>> userCreate(@RequestBody UserVO vo,@PathVariable("wname") String wname) {
@@ -47,7 +53,7 @@ public class UserRestController {
 			wvo.setName(wname);  
 			wvo.setUno(vo.getUno()); 
 			wvo.setMaker(vo.getFirstName() + " " + vo.getLastName());
-			
+			vo.setPassword("");
 			String res = WorkService.insert(wvo);
 			
 			if(res.equals("fail")){
@@ -58,7 +64,7 @@ public class UserRestController {
 			
 			map.put("email", vo.getEmail());
 			map.put("wvo", wvo);
-			
+			map.put("userVo", vo); 
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -140,13 +146,23 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(value = "/googleLogin", method =RequestMethod.POST)
-	public ResponseEntity<UserVO> userGoogleLogin(@RequestBody String email) {
-		ResponseEntity<UserVO> entity = null;
+	public ResponseEntity<HashMap<String, Object>> userGoogleLogin(@RequestBody String email) {
+		ResponseEntity<	HashMap<String, Object>> entity = null;
 		
 		try{ 
 			UserVO vo= userService.selectOneByEmail(email);
 			vo.setPassword("");
-			entity = new ResponseEntity<>(vo,HttpStatus.OK);
+			
+			List<MemberVO> memList = memService.selectListByUno(vo.getUno());
+			MemberVO mem = memList.get(0);	
+			
+			WorkspaceVO wvo = WorkService.selectOne(mem.getWcode());
+			
+			HashMap<String, Object> map = new HashMap<>();
+			
+			map.put("wvo", wvo);
+			map.put("userVo", vo); 
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		}catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -157,15 +173,22 @@ public class UserRestController {
 	
 	 
 	@RequestMapping(value = "/emailLogin", method =RequestMethod.POST)
-	public ResponseEntity<UserVO> userEmailLogin(@RequestBody LoginDTO dto) {
-		ResponseEntity<UserVO> entity = null;
+	public ResponseEntity<HashMap<String, Object>> userEmailLogin(@RequestBody LoginDTO dto) {
+		ResponseEntity<HashMap<String, Object>> entity = null;
 		
 		try{
-			logger.info("emailLogin---"+ dto.toString());
 			UserVO vo = userService.readWithPw(dto.getEmail(), dto.getPassword());
 			vo.setPassword("");
-			logger.info("emailLogin---"+ vo.toString());
-			entity = new ResponseEntity<>(vo,HttpStatus.OK);
+			
+			List<MemberVO> memList = memService.selectListByUno(vo.getUno());
+			MemberVO mem = memList.get(0);	
+			
+			WorkspaceVO wvo = WorkService.selectOne(mem.getWcode());
+			
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("wvo", wvo);
+			map.put("userVo", vo); 
+			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		}catch (Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

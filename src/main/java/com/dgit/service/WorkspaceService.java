@@ -8,6 +8,7 @@ import com.dgit.domain.WorkspaceVO;
 public interface WorkspaceService {
 	public WorkspaceVO selectOne(String wcode) throws Exception;
 	public List<WorkspaceVO> selectList() throws Exception;
+	public List<WorkspaceVO> selectListByUno(int uno) throws Exception;
 	public String insert(WorkspaceVO vo) throws Exception;
 	public int delete(String wcode) throws Exception;
 	public int update(WorkspaceVO vo) throws Exception;

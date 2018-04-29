@@ -76,4 +76,9 @@ public class WorkspaceServiceImpl implements WorkspaceService {
 		
 		return dao.update(vo);
 	}
+
+	@Override
+	public List<WorkspaceVO> selectListByUno(int uno) throws Exception {
+		return dao.selectListByUno(uno);
+	}
 }

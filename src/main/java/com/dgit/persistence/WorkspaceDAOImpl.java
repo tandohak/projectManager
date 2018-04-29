@@ -40,5 +40,11 @@ public class WorkspaceDAOImpl implements WorkspaceDAO {
 		return session.update(namespace+"update",vo);
 	}
 
+	@Override
+	public List<WorkspaceVO> selectListByUno(int uno) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+"selectListByUno",uno);
+	}
+
 
 }
