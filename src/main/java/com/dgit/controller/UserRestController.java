@@ -162,6 +162,7 @@ public class UserRestController {
 			
 			map.put("wvo", wvo);
 			map.put("userVo", vo); 
+			map.put("memVo", mem); 
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -188,6 +189,7 @@ public class UserRestController {
 			HashMap<String, Object> map = new HashMap<>();
 			map.put("wvo", wvo);
 			map.put("userVo", vo); 
+			map.put("memVo", mem); 
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		}catch (Exception e) {
 			e.printStackTrace();

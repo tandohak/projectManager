@@ -1,6 +1,7 @@
 package com.dgit.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -58,14 +59,28 @@ public class ProjectRestController {
 			    
 			vo.setWcode((String) map.get("wcode"));
 			vo.setMaker(makerMno);   
-			//1 = 공개 0 = 비공개
+			//1 = 공개 0 = 비공개  
 			if (((String) map.get("visibility")).equals("1")) {
 				vo.setVisibility(true); 
 			} else {
 				vo.setVisibility(false);
 			}
-  
-			List<Integer> memList = (List<Integer>) map.get("memList");
+			
+			List<Integer> memList = new ArrayList<>();
+			String memStrList = "";
+			try{
+				memList = (List<Integer>) map.get("memList");
+			}catch(Exception e){
+				memStrList = (String) map.get("memList");
+				System.out.println("memList - " + memStrList);
+				memStrList = memStrList.replace("[", "");
+				memStrList = memStrList.replace("]", ""); 
+				String[] arr = memStrList.split(",");
+				for(String num : arr){
+					memList.add(Integer.parseInt(num));
+				}
+			}  
+			  
 			int res = projectService.insert(vo, memList, makerMno);
 
 			if (res < 0) {

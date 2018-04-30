@@ -178,9 +178,31 @@ public class TaskRestController {
 		} catch (Exception e) { 
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
-		} 
+		}
 		return entity;   
 	} 
+	
+	@RequestMapping(value = "/select/taskList/{pno}", method = RequestMethod.GET)
+	public ResponseEntity<HashMap<String,Object>> selectTaskList(@PathVariable int pno) {
+		ResponseEntity<HashMap<String,Object>> entity = null;
+		try { 
+			List<TaskListVO> taskList =tasklistService.selectList(pno);
+			List<TaskVO> list= taskService.selectListByPno(pno);
+			List<MemberVO> member = memService.selectListByPnoWithMemAssignment(pno);
+			
+			HashMap<String,Object> map = new HashMap<>();
+			map.put("taskList", taskList); 
+			map.put("tasks", list); 
+			map.put("member", member);
+			
+			entity = new ResponseEntity<>(map, HttpStatus.OK);
+		} catch (Exception e) { 
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		return entity;   
+	} 
+	
 	@RequestMapping(value = "/update/task/label/{taskno}", method = {RequestMethod.PATCH,RequestMethod.PUT})
 	public ResponseEntity<String> updateColorLabel(@PathVariable int taskno,@RequestBody String colorLabel) {
 		ResponseEntity<String> entity = null;    
