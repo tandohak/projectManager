@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>TASK MANAGER</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">   
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/index.css?a=10">  
 <link rel="stylesheet"	href="${pageContext.request.contextPath}/resources/css/task.css?a=10">
