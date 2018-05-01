@@ -1,6 +1,7 @@
 package com.dgit.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +49,25 @@ public class TaskRestController {
 	public ResponseEntity<TaskVO> jobAssignment(@RequestBody HashMap<String,Object> map) {
 		ResponseEntity<TaskVO> entity = null;
 		try {     
-			List<String> jobAssList = (List<String>) map.get("jobAssList");
+			List<String> jobAssList = new ArrayList<>();
+			
+			try{
+				jobAssList = (List<String>) map.get("jobAssList");
+			}catch(Exception e){
+				String jobAssStr  = (String) map.get("jobAssList");
+				jobAssStr =jobAssStr.replace("[","");
+				jobAssStr = jobAssStr.replace("]","");
+				if(jobAssStr.indexOf(",")>0){
+					String[] arr = jobAssStr.split(",");
+					
+					for(String str : arr){
+						jobAssList.add(str);
+					}
+				}else{
+					jobAssList.add(jobAssStr);
+				}
+			}
+			
 			String taskname = (String) map.get("taskname");
 			String endDate= (String)map.get("endDate");
 			String writer= (String)map.get("writer");
