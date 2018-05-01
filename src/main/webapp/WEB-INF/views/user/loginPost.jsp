@@ -8,9 +8,9 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/index.css?A=3">
+	href="${pageContext.request.contextPath}/resources/css/index.css?A=a">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login.css?a=3">
+	href="${pageContext.request.contextPath}/resources/css/login.css?a=a">
 <script
   src="https://code.jquery.com/jquery-3.3.1.slim.js"
   integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
