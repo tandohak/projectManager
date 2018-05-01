@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>TASK MANAGER</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/index.css?A=a">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login.css?a=a">
+	href="${pageContext.request.contextPath}/resources/css/login.css?a=aa">
 <script
   src="https://code.jquery.com/jquery-3.3.1.slim.js"
   integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
@@ -27,7 +27,7 @@
 					<input type="submit" value="로그인" class="btn">
 				</form>  
 				
-				<c:if test="${res!=null }">  
+				<c:if test="${res!=null }">
 					<div class="row">
 						<c:if test="${res == 'notExtistId'}">
 							<span class="wranTxt">아이디/비밀번호를 확인하세요.</span>
@@ -46,10 +46,10 @@
 				<a href="${googleSignIn }" class="btn">Google로 로그인</a>
 				<div id="linkGroup" class="row">
 					<a href="join" class="link_a">회원가입</a> 
-					<a href="#" class="link_a">비밀번호 변경</a>
-				</div>    
+					<a href="#" class="link_a" style="display: none;">비밀번호 변경</a>
+				</div>      
 			</div>  
 		</div>
-	</div>     
+	</div>      
 </body>
 </html>

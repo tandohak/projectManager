@@ -2,9 +2,9 @@
 
 body{
 	background-image: url("/projectManager/resources/img/login_bg.jpg") !important;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; 
 }  
-
+  
 .loginBox {
 	margin-top: -205px;
 }  

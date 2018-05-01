@@ -10,7 +10,7 @@
 <link rel="stylesheet"  
 	href="${pageContext.request.contextPath}/resources/css/index.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login.css"> 
+	href="${pageContext.request.contextPath}/resources/css/login.css?a=a"> 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
  <script src="${pageContext.request.contextPath}/resources/js/join.js"></script>
 </head>  
