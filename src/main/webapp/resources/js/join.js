@@ -21,17 +21,22 @@ $(function() {
 		var workspaceName = $("#workspaceName").val();
 		console.log(workspaceName);  
 		
-		var photoPath = imgUpload();
-		console.log(photoPath);
-		 
+		    
+		var photoPath = "";
+		
+		if(formData !=null){  
+			photoPath = imgUpload();
+		}
+		
 		if(photoPath=="" || photoPath == null){
 			photoPath = "";
 		}
 		
 		$.ajax({ 
 			url : "/projectManager/register/create/"+workspaceName,
-			type:"post",
+			type:"POST",
 			headers:{"Content-Type":"application/json"},
+			contentType: "application/json",
 			dataType:"json",  
 			async:false,
 			data : JSON.stringify({
@@ -252,7 +257,7 @@ function proBtnEmail(e) {
 
 function proBtnGoogle(e) {
 	var checkInput = true;
-	$(".profileBox input[type]").each(function(i, obj) {
+	$(".profileBox input[type='text']").each(function(i, obj) {
 		if (!checkFrom($(this))) {
 			checkInput = false;
 			return false;

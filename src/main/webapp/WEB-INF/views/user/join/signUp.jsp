@@ -12,7 +12,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login.css?a=6"> 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
- <script src="${pageContext.request.contextPath}/resources/js/join.js?a=6"></script>
+ <script src="${pageContext.request.contextPath}/resources/js/join.js?a=7"></script>
 </head>  
 <body>
 	<div class="container">
@@ -23,7 +23,7 @@
 				
 				<div id="row">
 					<div id="photoBox">
-						<img src="#" id="photo"> <span>사진 업데이트</span>
+						<img src="${pageContext.request.contextPath }/resources/img/join_user_img.jpg" id="photo"> <span>사진 업데이트</span>
 					</div>
 				</div>
 					<input type="email" class="input" name="email" id="email"
@@ -38,8 +38,8 @@
   					
 					<div class="row" <c:if test="${key == null}">style="display: none;"</c:if>  > 
 						<span class="sTit">비밀번호</span> 
-						<input type="password" class="input full" name="password" id="password" placeholder="비밀번호" value="${user.password!=null? user.password : ''}">   
-						<input	type="password" class="input full" name="rePassword" id="rePassword" placeholder="비밀번호 확인" value="${user.password!=null? user.password : ''}">
+						<input type="password" class="input full" name="password" id="password" placeholder="비밀번호" value="">   
+						<input	type="password" class="input full" name="rePassword" id="rePassword" placeholder="비밀번호 확인" value="">
 					</div>
 					
 					<input type="button" value="다음 : 워크스페이스 만들기  >" class="btn" onclick="${key!=null ? 'proBtnEmail()' : 'proBtnGoogle()'}">

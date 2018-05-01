@@ -47,6 +47,12 @@ public class UserRestController {
 		logger.info("[user create]" + wname);      
 		     
 		try {    
+		     
+			if("" ==vo.getPassword()){
+				String key = new TempKey().getKey(20, false);
+				vo.setPassword(key);
+			}
+			
 			userService.insert(vo);
 			    
 			WorkspaceVO wvo = new WorkspaceVO();

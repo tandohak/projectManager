@@ -138,9 +138,15 @@ public class UserController {
 
 		PlusOperations plusOperations = google.plusOperations();
 		Person person = plusOperations.getGoogleProfile();
-
-		UserVO tempUser = service.selectOneByEmail(person.getAccountEmail());
-
+		
+		UserVO tempUser = null;
+		
+		try{
+			tempUser = service.selectOneByEmail(person.getAccountEmail());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		if (tempUser != null) {
 			LoginDTO dto = new LoginDTO();  
 			
@@ -163,9 +169,9 @@ public class UserController {
 			user.setFirstName(person.getFamilyName());
 			user.setLastName(person.getGivenName());
 			 
-			String random = UUID.randomUUID().toString();
+			/*String random = UUID.randomUUID().toString();
 			System.out.println("uuid" + random);
-			user.setPassword(random);
+			user.setPassword(random);*/
 			
 			model.addAttribute("user", user);
 			 
