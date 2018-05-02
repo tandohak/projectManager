@@ -68,9 +68,18 @@ public class UserRestController {
 			wvo.setWcode(res);
 			HashMap<String, Object> map = new HashMap<>();
 			
+			List<MemberVO> memList = memService.selectListByWcode(res);
+			MemberVO mem = null;	
+			
+			for(MemberVO memVo : memList){
+				if(memVo.getUno() == vo.getUno()){
+					mem = memVo;
+				}
+			}
 			map.put("email", vo.getEmail());
 			map.put("wvo", wvo);
 			map.put("userVo", vo); 
+			map.put("memVo", mem); 
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
