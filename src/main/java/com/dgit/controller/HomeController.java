@@ -30,7 +30,7 @@ public class HomeController {
 		/* 구글 로그인 인증 url 주소를 받아 넘겨준다.*/
 		System.out.println("/, url : " + url);  
 		model.addAttribute("googleSignIn",url);
-		return "index";
+		return "user/login";
 	}
 	
 }
