@@ -3,6 +3,8 @@ package com.dgit.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +42,7 @@ public class UserRestController {
 	MemberService memService;  
 	
 	@RequestMapping(value = "/create/{wname}", method = RequestMethod.POST)
-	public ResponseEntity<HashMap<String, Object>> userCreate(@RequestBody UserVO vo,@PathVariable("wname") String wname) {
+	public ResponseEntity<HashMap<String, Object>> userCreate(@RequestBody UserVO vo,@PathVariable("wname") String wname,HttpSession session) {
 		ResponseEntity<HashMap<String, Object>> entity = null;
 		logger.info("[user create]");   
 		logger.info("[user create]" + vo.toString()); 
@@ -80,6 +82,14 @@ public class UserRestController {
 			map.put("wvo", wvo);
 			map.put("userVo", vo); 
 			map.put("memVo", mem); 
+			
+			LoginDTO dto = new LoginDTO();
+			dto.setUno(vo.getUno());
+			dto.setEmail(vo.getEmail());
+			dto.setUsername(vo.getFirstName() + " "+ vo.getLastName());
+			dto.setPhotoPath(vo.getPhotoPath());
+			session.setAttribute("login", dto);
+			
 			entity = new ResponseEntity<>(map,HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

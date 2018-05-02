@@ -35,7 +35,7 @@ public class TaskAuthInterceptor extends HandlerInterceptorAdapter {
 		
 		String[] uri = request.getRequestURI().split("/");
 		String wcode = uri[3];
-
+		logger.info("[TaskAuthInterceptor] wcode -" + wcode);
 		WorkspaceVO vo = workService.selectOne(wcode);
 
 		// 존재하는 워크스페이스인지 검사후 존재하지 않을경우 error404 페이지로 이동
@@ -45,15 +45,18 @@ public class TaskAuthInterceptor extends HandlerInterceptorAdapter {
 		}
 		HttpSession session = request.getSession();
 		LoginDTO login = (LoginDTO)session.getAttribute("login");
+		logger.info("[TaskAuthInterceptor] LoginDTO -" + login.toString());
 
 		Object object = session.getAttribute("login");
 		
 		List<MemberVO> memList = memService.selectListByUnoJoinWorkspace(login.getUno());
-
+		logger.info("[TaskAuthInterceptor]  memList size -" + memList.size());
+		
 		MemberVO tempVO = new MemberVO();
 		tempVO.setUno(login.getUno());
 		tempVO.setWcode(wcode);
 		MemberVO memVo = memService.selectOneUnoAndwcode(tempVO);
+		logger.info("[TaskAuthInterceptor] 로그인 MemberVO -" + memList.size());
 		// memVo가 없을경우 에러페이지로 이동
 		if(memVo == null){
 			response.sendRedirect(request.getContextPath()+"/err/unauthorizedPage");

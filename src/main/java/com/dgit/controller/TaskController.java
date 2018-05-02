@@ -82,11 +82,15 @@ public class TaskController {
 	public String project(Model model,HttpSession session,@PathVariable("wcode") String wcode) throws Exception {
 		Object object = session.getAttribute("login");
 		LoginDTO login = (LoginDTO)object;
+		
+		logger.info("[workspace]-로그인 DTO:"+login.toString());
+		logger.info("[workspace]- WCODE:"+wcode);
 		MemberVO vo = new MemberVO();
 		vo.setUno(login.getUno());
 		vo.setWcode(wcode);
 		MemberVO loginMem = memService.selectOneUnoAndwcode(vo);
 		List<MemberVO> workMembers = memService.selectListByWcode(wcode);
+		logger.info("[workspace]-로그인 MemberVO:"+loginMem.toString());
 		
 		List<ProjectVO> projectList = projectService.selectListByWcode(wcode);
 		

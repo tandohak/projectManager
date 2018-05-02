@@ -22,9 +22,10 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/projectManager" />
-		<property name="username" value="root" />
-		<property name="password" value="rootroot" />
+		<!-- <property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/projectManager" /> -->
+		<property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/hongyoonpyo" />
+		<property name="username" value="hongyoonpyo" />
+		<property name="password" value="unrock147AB!" />
 	</bean>
    
 	<!-- sqlSession --> 
@@ -65,8 +66,8 @@
 		<!-- <property name="scope" value="https://www.googleapis.com/auth/plus.login" />    -->
 		<property name="scope" value="https://www.googleapis.com/auth/userinfo.email" />    
 		<!-- <property name="scope" value="https://www.googleapis.com/auth/plus.me"/> -->
-		<!-- <property name="redirectUri" value="http://hongyoonpyo.cafe24.com/projectManager/user/googleSignInCallback" /> -->
-		<property name="redirectUri" value="http://localhost:8080/projectManager/user/googleSignInCallback" />
+		<property name="redirectUri" value="http://hongyoonpyo.cafe24.com/projectManager/user/googleSignInCallback" />
+		<!-- <property name="redirectUri" value="http://localhost:8080/projectManager/user/googleSignInCallback" /> -->
 	</bean>
 	
 	<!-- 메일 보내기 -->
