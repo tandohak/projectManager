@@ -373,7 +373,7 @@ $(function() {
 					dataType : "text",
 					success : function(res) {
 						console.log(res);
-
+						location.replace();
 					}
 				})
 

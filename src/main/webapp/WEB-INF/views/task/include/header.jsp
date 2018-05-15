@@ -119,12 +119,16 @@
 			          		</span>    
 			          	</a>    
 			          </li>
-			          <li><a href="${pageContext.request.contextPath}/user/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			          <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			        </ul>
 				</li>
 			</ul>
 	</nav>
-	 
+	<script>
+	 var logout = function() {
+		    document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://hongyoonpyo.cafe24.com/projectManager/user/logout";
+		 }
+	</script>
 	 <div class="modal fade" id="makeWorkspaceModal" role="dialog"> 
 	    <div class="modal_inner_box">
 	    	<h2 class="tit_h2" >새 워크스페이스 만들기</h2> 

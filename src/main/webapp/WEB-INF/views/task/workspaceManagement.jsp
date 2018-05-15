@@ -208,7 +208,7 @@
 
 				<div class="inn_row"> 
 					<p class="cFont" style="margin:0; margin-bottom: 5px; color:rgba(0,0,0,0.6);">링크를 공유하여 <strong>${workVO.name }</strong>에 팀원을 초대하세요.</p>
-					<input type="text"	class="input full" name="inviteLink" id="inviteLink" value="http://localhost:8080${pageContext.request.contextPath }/task/${workVO.wcode}/join" readonly="readonly">
+					<input type="text"	class="input full" name="inviteLink" id="inviteLink" value="http://hongyoonpyo.cafe24.com${pageContext.request.contextPath }/task/${workVO.wcode}/join" readonly="readonly">
 				</div>    
 				
 				<div id="bar" class="inn_row"> 
